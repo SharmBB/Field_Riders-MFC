@@ -65,367 +65,376 @@ class _FieldScreenState extends State<FieldScreen> {
           return false;
         },
         child: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.all(20),
-              child: Text(
-                'List of assignment',
-                style: TextStyle(
-                  color: primaryColor,
-                  fontSize: 25.0,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.all(20),
+                child: Text(
+                  'List of assignment',
+                  style: TextStyle(
+                    color: primaryColor,
+                    fontSize: 25.0,
+                  ),
                 ),
               ),
-            ),
-    
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  width: screenWidth,
-                  height: 40,
-                  color: Colors.lightBlueAccent.shade100,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 20,
-                      top: 10.0,
-                      right: 20.0,
-                      bottom: 10,
-                    ),
-                    child: Text(
-                      '2021-12-13',
-                      style: TextStyle(
-                        color: kPrimaryGreyColor,
-                        fontSize: 15.0,
-                      ),
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(
-                    20.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(0.0),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          hintText: 'Domestric DR',
-                          hintStyle: TextStyle(
-                            color: kPrimaryGreyColor,
-                            fontSize: 15.0,
-                          ),
-                          labelText: 'Type',
-                          labelStyle: TextStyle(
-                            color: primaryColor,
-                            fontSize: 15.0,
-                          ),
-                        ),
-                        onSaved: (String? value) {
-                          // This optional block of code can be used to run
-                          // code when the user saves the form.
-                        },
-                      ),
-                      Divider(
-                        thickness: 2,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            width: 100,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(0.0),
-                                border: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                hintText: '2021-12-12',
-                                hintStyle: TextStyle(
-                                  color: kPrimaryGreyColor,
-                                  fontSize: 15.0,
-                                ),
-                                labelText: 'Created',
-                                labelStyle: TextStyle(
-                                  color: primaryColor,
-                                  fontSize: 15.0,
-                                ),
-                              ),
-                              onSaved: (String? value) {
-                                // This optional block of code can be used to run
-                                // code when the user saves the form.
-                              },
-                            ),
-                          ),
-                          SizedBox(
-                            height: 50,
-                            width: 100,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(0.0),
-                                border: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                hintText: '2021-12-12',
-                                hintStyle: TextStyle(
-                                  color: kPrimaryGreyColor,
-                                  fontSize: 15.0,
-                                ),
-                                labelText: 'Due',
-                                labelStyle: TextStyle(
-                                  color: primaryColor,
-                                  fontSize: 15.0,
-                                ),
-                              ),
-                              onSaved: (String? value) {
-                                // This optional block of code can be used to run
-                                // code when the user saves the form.
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      Divider(
-                        thickness: 2,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(0.0),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          hintText: '3',
-                          hintStyle: TextStyle(
-                            color: kPrimaryGreyColor,
-                            fontSize: 15.0,
-                          ),
-                          labelText: 'Text Align',
-                          labelStyle: TextStyle(
-                            color: primaryColor,
-                            fontSize: 15.0,
-                          ),
-                        ),
-                        onSaved: (String? value) {
-                          // This optional block of code can be used to run
-                          // code when the user saves the form.
-                        },
-                      ),
-                      Divider(
-                        thickness: 2,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(0.0),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          hintText: '10% Complete',
-                          hintStyle: TextStyle(
-                            color: kPrimaryGreyColor,
-                            fontSize: 15.0,
-                          ),
-                          labelText: 'Progress',
-                          labelStyle: TextStyle(
-                            color: primaryColor,
-                            fontSize: 15.0,
-                          ),
-                        ),
-                        onSaved: (String? value) {
-                          // This optional block of code can be used to run
-                          // code when the user saves the form.
-                        },
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.all(0),
-                          primary: kPrimaryBlueColor,
-                          textStyle: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
-                        ),
-                        onPressed: () {},
-                        child: const Text('Manage'),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(height: 20,),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                   Container(
-                  width: screenWidth,
-                  height: 40,
-                  color: Colors.lightBlueAccent.shade100,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                      left: 20,
-                      top: 10.0,
-                      right: 20.0,
-                      bottom: 10,
-                    ),
-                    child: Text(
-                      '2021-12-13',
-                      style: TextStyle(
-                        color: kPrimaryGreyColor,
-                        fontSize: 15.0,
+                    width: screenWidth,
+                    height: 40,
+                    color: Colors.lightBlueAccent.shade100,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: 20,
+                        top: 10.0,
+                        right: 20.0,
+                        bottom: 10,
                       ),
-                    ),
-                  ),
-                ),
-                   Padding(
-                  padding: EdgeInsets.all(
-                    20.0,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      TextFormField(
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(0.0),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          hintText: 'Domestric DR',
-                          hintStyle: TextStyle(
-                            color: kPrimaryGreyColor,
-                            fontSize: 15.0,
-                          ),
-                          labelText: 'Type',
-                          labelStyle: TextStyle(
-                            color: primaryColor,
-                            fontSize: 15.0,
-                          ),
+                      child: Text(
+                        '2021-12-13',
+                        style: TextStyle(
+                          color: kPrimaryGreyColor,
+                          fontSize: 15.0,
                         ),
-                        onSaved: (String? value) {
-                          // This optional block of code can be used to run
-                          // code when the user saves the form.
-                        },
                       ),
-                      Divider(
-                        thickness: 2,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 50,
-                            width: 100,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(0.0),
-                                border: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                hintText: '2021-12-12',
-                                hintStyle: TextStyle(
-                                  color: kPrimaryGreyColor,
-                                  fontSize: 15.0,
-                                ),
-                                labelText: 'Created',
-                                labelStyle: TextStyle(
-                                  color: primaryColor,
-                                  fontSize: 15.0,
-                                ),
-                              ),
-                              onSaved: (String? value) {
-                                // This optional block of code can be used to run
-                                // code when the user saves the form.
-                              },
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(
+                      20.0,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(0.0),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: 'Domestric DR',
+                            hintStyle: TextStyle(
+                              color: kPrimaryGreyColor,
+                              fontSize: 15.0,
+                            ),
+                            labelText: 'Type',
+                            labelStyle: TextStyle(
+                              color: primaryColor,
+                              fontSize: 15.0,
                             ),
                           ),
-                          SizedBox(
-                            height: 50,
-                            width: 100,
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                contentPadding: EdgeInsets.all(0.0),
-                                border: InputBorder.none,
-                                focusedBorder: InputBorder.none,
-                                hintText: '2021-12-12',
-                                hintStyle: TextStyle(
-                                  color: kPrimaryGreyColor,
-                                  fontSize: 15.0,
+                          onSaved: (String? value) {
+                            // This optional block of code can be used to run
+                            // code when the user saves the form.
+                          },
+                        ),
+                        Divider(
+                          thickness: 2,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 50,
+                              width: 100,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.all(0.0),
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  hintText: '2021-12-12',
+                                  hintStyle: TextStyle(
+                                    color: kPrimaryGreyColor,
+                                    fontSize: 15.0,
+                                  ),
+                                  labelText: 'Created',
+                                  labelStyle: TextStyle(
+                                    color: primaryColor,
+                                    fontSize: 15.0,
+                                  ),
                                 ),
-                                labelText: 'Due',
-                                labelStyle: TextStyle(
-                                  color: primaryColor,
-                                  fontSize: 15.0,
-                                ),
+                                onSaved: (String? value) {
+                                  // This optional block of code can be used to run
+                                  // code when the user saves the form.
+                                },
                               ),
-                              onSaved: (String? value) {
-                                // This optional block of code can be used to run
-                                // code when the user saves the form.
-                              },
+                            ),
+                            SizedBox(
+                              height: 50,
+                              width: 100,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.all(0.0),
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  hintText: '2021-12-12',
+                                  hintStyle: TextStyle(
+                                    color: kPrimaryGreyColor,
+                                    fontSize: 15.0,
+                                  ),
+                                  labelText: 'Due',
+                                  labelStyle: TextStyle(
+                                    color: primaryColor,
+                                    fontSize: 15.0,
+                                  ),
+                                ),
+                                onSaved: (String? value) {
+                                  // This optional block of code can be used to run
+                                  // code when the user saves the form.
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          thickness: 2,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(0.0),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: '3',
+                            hintStyle: TextStyle(
+                              color: kPrimaryGreyColor,
+                              fontSize: 15.0,
+                            ),
+                            labelText: 'Text Align',
+                            labelStyle: TextStyle(
+                              color: primaryColor,
+                              fontSize: 15.0,
                             ),
                           ),
-                        ],
-                      ),
-                      Divider(
-                        thickness: 2,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(0.0),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          hintText: '3',
-                          hintStyle: TextStyle(
-                            color: kPrimaryGreyColor,
-                            fontSize: 15.0,
-                          ),
-                          labelText: 'Text Align',
-                          labelStyle: TextStyle(
-                            color: primaryColor,
-                            fontSize: 15.0,
-                          ),
+                          onSaved: (String? value) {
+                            // This optional block of code can be used to run
+                            // code when the user saves the form.
+                          },
                         ),
-                        onSaved: (String? value) {
-                          // This optional block of code can be used to run
-                          // code when the user saves the form.
-                        },
-                      ),
-                      Divider(
-                        thickness: 2,
-                      ),
-                      TextFormField(
-                        decoration: InputDecoration(
-                          contentPadding: EdgeInsets.all(0.0),
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          hintText: '10% Complete',
-                          hintStyle: TextStyle(
-                            color: kPrimaryGreyColor,
-                            fontSize: 15.0,
-                          ),
-                          labelText: 'Progress',
-                          labelStyle: TextStyle(
-                            color: primaryColor,
-                            fontSize: 15.0,
-                          ),
+                        Divider(
+                          thickness: 2,
                         ),
-                        onSaved: (String? value) {
-                          // This optional block of code can be used to run
-                          // code when the user saves the form.
-                        },
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          padding: const EdgeInsets.all(0),
-                          primary: kPrimaryBlueColor,
-                          textStyle: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(0.0),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: '10% Complete',
+                            hintStyle: TextStyle(
+                              color: kPrimaryGreyColor,
+                              fontSize: 15.0,
+                            ),
+                            labelText: 'Progress',
+                            labelStyle: TextStyle(
+                              color: primaryColor,
+                              fontSize: 15.0,
+                            ),
+                          ),
+                          onSaved: (String? value) {
+                            // This optional block of code can be used to run
+                            // code when the user saves the form.
+                          },
                         ),
-                        onPressed: () {},
-                        child: const Text('Manage'),
-                      ),
-                    ],
+                        Divider(
+                          thickness: 2,
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.all(0),
+                            primary: kPrimaryBlueColor,
+                            textStyle: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: () {},
+                          child: const Text('Manage'),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                  SizedBox(
+                    height: 20,
+                  ),
+                  Container(
+                    width: screenWidth,
+                    height: 40,
+                    color: Colors.lightBlueAccent.shade100,
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        left: 20,
+                        top: 10.0,
+                        right: 20.0,
+                        bottom: 10,
+                      ),
+                      child: Text(
+                        '2021-12-13',
+                        style: TextStyle(
+                          color: kPrimaryGreyColor,
+                          fontSize: 15.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(
+                      20.0,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(0.0),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: 'Domestric DR',
+                            hintStyle: TextStyle(
+                              color: kPrimaryGreyColor,
+                              fontSize: 15.0,
+                            ),
+                            labelText: 'Type',
+                            labelStyle: TextStyle(
+                              color: primaryColor,
+                              fontSize: 15.0,
+                            ),
+                          ),
+                          onSaved: (String? value) {
+                            // This optional block of code can be used to run
+                            // code when the user saves the form.
+                          },
+                        ),
+                        Divider(
+                          thickness: 2,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SizedBox(
+                              height: 50,
+                              width: 100,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.all(0.0),
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  hintText: '2021-12-12',
+                                  hintStyle: TextStyle(
+                                    color: kPrimaryGreyColor,
+                                    fontSize: 15.0,
+                                  ),
+                                  labelText: 'Created',
+                                  labelStyle: TextStyle(
+                                    color: primaryColor,
+                                    fontSize: 15.0,
+                                  ),
+                                ),
+                                onSaved: (String? value) {
+                                  // This optional block of code can be used to run
+                                  // code when the user saves the form.
+                                },
+                              ),
+                            ),
+                            SizedBox(
+                              height: 50,
+                              width: 100,
+                              child: TextFormField(
+                                decoration: InputDecoration(
+                                  contentPadding: EdgeInsets.all(0.0),
+                                  border: InputBorder.none,
+                                  focusedBorder: InputBorder.none,
+                                  hintText: '2021-12-12',
+                                  hintStyle: TextStyle(
+                                    color: kPrimaryGreyColor,
+                                    fontSize: 15.0,
+                                  ),
+                                  labelText: 'Due',
+                                  labelStyle: TextStyle(
+                                    color: primaryColor,
+                                    fontSize: 15.0,
+                                  ),
+                                ),
+                                onSaved: (String? value) {
+                                  // This optional block of code can be used to run
+                                  // code when the user saves the form.
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        Divider(
+                          thickness: 2,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(0.0),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: '3',
+                            hintStyle: TextStyle(
+                              color: kPrimaryGreyColor,
+                              fontSize: 15.0,
+                            ),
+                            labelText: 'Text Align',
+                            labelStyle: TextStyle(
+                              color: primaryColor,
+                              fontSize: 15.0,
+                            ),
+                          ),
+                          onSaved: (String? value) {
+                            // This optional block of code can be used to run
+                            // code when the user saves the form.
+                          },
+                        ),
+                        Divider(
+                          thickness: 2,
+                        ),
+                        TextFormField(
+                          decoration: InputDecoration(
+                            contentPadding: EdgeInsets.all(0.0),
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            hintText: '10% Complete',
+                            hintStyle: TextStyle(
+                              color: kPrimaryGreyColor,
+                              fontSize: 15.0,
+                            ),
+                            labelText: 'Progress',
+                            labelStyle: TextStyle(
+                              color: primaryColor,
+                              fontSize: 15.0,
+                            ),
+                          ),
+                          onSaved: (String? value) {
+                            // This optional block of code can be used to run
+                            // code when the user saves the form.
+                          },
+                        ),
+                        Divider(
+                          thickness: 2,
+                        ),
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.all(0),
+                            primary: kPrimaryBlueColor,
+                            textStyle: const TextStyle(
+                                fontSize: 20, fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: () {},
+                          child: const Text('Manage'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
