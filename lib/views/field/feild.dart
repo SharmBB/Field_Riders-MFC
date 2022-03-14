@@ -111,6 +111,13 @@ class _FieldScreenState extends State<FieldScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text(
+                        'Type',
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 15.0,
+                        ),
+                      ),
                         TextFormField(
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(0.0),
@@ -121,11 +128,7 @@ class _FieldScreenState extends State<FieldScreen> {
                               color: kPrimaryGreyColor,
                               fontSize: 15.0,
                             ),
-                            labelText: 'Type',
-                            labelStyle: TextStyle(
-                              color: primaryColor,
-                              fontSize: 15.0,
-                            ),
+                           
                           ),
                           onSaved: (String? value) {
                             // This optional block of code can be used to run
@@ -139,6 +142,17 @@ class _FieldScreenState extends State<FieldScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                              Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                          Text(
+                        'Created',
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 15.0,
+                        ),
+                      ),
                             SizedBox(
                               height: 50,
                               width: 100,
@@ -152,11 +166,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                     color: kPrimaryGreyColor,
                                     fontSize: 15.0,
                                   ),
-                                  labelText: 'Created',
-                                  labelStyle: TextStyle(
-                                    color: primaryColor,
-                                    fontSize: 15.0,
-                                  ),
+                             
                                 ),
                                 onSaved: (String? value) {
                                   // This optional block of code can be used to run
@@ -164,6 +174,20 @@ class _FieldScreenState extends State<FieldScreen> {
                                 },
                               ),
                             ),
+                      ],
+                              ),
+
+                                       Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                          Text(
+                        'Due',
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 15.0,
+                        ),
+                      ),
                             SizedBox(
                               height: 50,
                               width: 100,
@@ -177,11 +201,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                     color: kPrimaryGreyColor,
                                     fontSize: 15.0,
                                   ),
-                                  labelText: 'Due',
-                                  labelStyle: TextStyle(
-                                    color: primaryColor,
-                                    fontSize: 15.0,
-                                  ),
+                                 
                                 ),
                                 onSaved: (String? value) {
                                   // This optional block of code can be used to run
@@ -189,11 +209,22 @@ class _FieldScreenState extends State<FieldScreen> {
                                 },
                               ),
                             ),
+                      ],
+                                       ),
                           ],
                         ),
+
+
                         Divider(
                           thickness: 2,
                         ),
+                          Text(
+                        'Text Align',
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 15.0,
+                        ),
+                      ),
                         TextFormField(
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(0.0),
@@ -204,11 +235,7 @@ class _FieldScreenState extends State<FieldScreen> {
                               color: kPrimaryGreyColor,
                               fontSize: 15.0,
                             ),
-                            labelText: 'Text Align',
-                            labelStyle: TextStyle(
-                              color: primaryColor,
-                              fontSize: 15.0,
-                            ),
+                            
                           ),
                           onSaved: (String? value) {
                             // This optional block of code can be used to run
@@ -218,6 +245,13 @@ class _FieldScreenState extends State<FieldScreen> {
                         Divider(
                           thickness: 2,
                         ),
+                           Text(
+                        'Progress',
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 15.0,
+                        ),
+                      ),
                         TextFormField(
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(0.0),
@@ -228,11 +262,7 @@ class _FieldScreenState extends State<FieldScreen> {
                               color: kPrimaryGreyColor,
                               fontSize: 15.0,
                             ),
-                            labelText: 'Progress',
-                            labelStyle: TextStyle(
-                              color: primaryColor,
-                              fontSize: 15.0,
-                            ),
+                          
                           ),
                           onSaved: (String? value) {
                             // This optional block of code can be used to run
@@ -278,7 +308,7 @@ class _FieldScreenState extends State<FieldScreen> {
                       ),
                     ),
                   ),
-                  Padding(
+                    Padding(
                     padding: EdgeInsets.all(
                       20.0,
                     ),
@@ -286,6 +316,13 @@ class _FieldScreenState extends State<FieldScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        Text(
+                        'Type',
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 15.0,
+                        ),
+                      ),
                         TextFormField(
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(0.0),
@@ -296,11 +333,7 @@ class _FieldScreenState extends State<FieldScreen> {
                               color: kPrimaryGreyColor,
                               fontSize: 15.0,
                             ),
-                            labelText: 'Type',
-                            labelStyle: TextStyle(
-                              color: primaryColor,
-                              fontSize: 15.0,
-                            ),
+                           
                           ),
                           onSaved: (String? value) {
                             // This optional block of code can be used to run
@@ -314,6 +347,17 @@ class _FieldScreenState extends State<FieldScreen> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                              Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                          Text(
+                        'Created',
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 15.0,
+                        ),
+                      ),
                             SizedBox(
                               height: 50,
                               width: 100,
@@ -327,11 +371,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                     color: kPrimaryGreyColor,
                                     fontSize: 15.0,
                                   ),
-                                  labelText: 'Created',
-                                  labelStyle: TextStyle(
-                                    color: primaryColor,
-                                    fontSize: 15.0,
-                                  ),
+                             
                                 ),
                                 onSaved: (String? value) {
                                   // This optional block of code can be used to run
@@ -339,6 +379,20 @@ class _FieldScreenState extends State<FieldScreen> {
                                 },
                               ),
                             ),
+                      ],
+                              ),
+
+                                       Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                          Text(
+                        'Due',
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 15.0,
+                        ),
+                      ),
                             SizedBox(
                               height: 50,
                               width: 100,
@@ -352,11 +406,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                     color: kPrimaryGreyColor,
                                     fontSize: 15.0,
                                   ),
-                                  labelText: 'Due',
-                                  labelStyle: TextStyle(
-                                    color: primaryColor,
-                                    fontSize: 15.0,
-                                  ),
+                                 
                                 ),
                                 onSaved: (String? value) {
                                   // This optional block of code can be used to run
@@ -364,11 +414,22 @@ class _FieldScreenState extends State<FieldScreen> {
                                 },
                               ),
                             ),
+                      ],
+                                       ),
                           ],
                         ),
+
+
                         Divider(
                           thickness: 2,
                         ),
+                          Text(
+                        'Text Align',
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 15.0,
+                        ),
+                      ),
                         TextFormField(
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(0.0),
@@ -379,11 +440,7 @@ class _FieldScreenState extends State<FieldScreen> {
                               color: kPrimaryGreyColor,
                               fontSize: 15.0,
                             ),
-                            labelText: 'Text Align',
-                            labelStyle: TextStyle(
-                              color: primaryColor,
-                              fontSize: 15.0,
-                            ),
+                            
                           ),
                           onSaved: (String? value) {
                             // This optional block of code can be used to run
@@ -393,6 +450,13 @@ class _FieldScreenState extends State<FieldScreen> {
                         Divider(
                           thickness: 2,
                         ),
+                           Text(
+                        'Progress',
+                        style: TextStyle(
+                          color: primaryColor,
+                          fontSize: 15.0,
+                        ),
+                      ),
                         TextFormField(
                           decoration: InputDecoration(
                             contentPadding: EdgeInsets.all(0.0),
@@ -403,11 +467,7 @@ class _FieldScreenState extends State<FieldScreen> {
                               color: kPrimaryGreyColor,
                               fontSize: 15.0,
                             ),
-                            labelText: 'Progress',
-                            labelStyle: TextStyle(
-                              color: primaryColor,
-                              fontSize: 15.0,
-                            ),
+                          
                           ),
                           onSaved: (String? value) {
                             // This optional block of code can be used to run
