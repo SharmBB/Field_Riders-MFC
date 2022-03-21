@@ -40,10 +40,9 @@ class _FieldScreenState extends State<FieldScreen> {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-     
           icon: Icon(
             Icons.arrow_back_rounded,
-            color: kPrimaryBlueColor,
+            color: kPrimaryPurpleColor,
             size: 30.0,
           ),
           onPressed: () {
@@ -95,7 +94,7 @@ class _FieldScreenState extends State<FieldScreen> {
                   style: TextStyle(
                     color: kPrimaryPurpleColor,
                     fontSize: 25.0,
-                     fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
@@ -121,7 +120,7 @@ class _FieldScreenState extends State<FieldScreen> {
                             style: TextStyle(
                               color: kPrimaryPurpleColor,
                               fontSize: 18.0,
-                               fontWeight: FontWeight.w600,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
                         ),
@@ -154,7 +153,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                   ),
                                 ],
                               ),
-                             SizedBox(
+                              SizedBox(
                                 height: 30,
                               ),
                               Row(
@@ -178,7 +177,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                   ),
                                 ],
                               ),
-                             SizedBox(
+                              SizedBox(
                                 height: 30,
                               ),
                               Row(
@@ -202,7 +201,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                   ),
                                 ],
                               ),
-                             SizedBox(
+                              SizedBox(
                                 height: 30,
                               ),
                               Row(
@@ -257,8 +256,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   SizedBox(
-          width: 130.0,
-          
+                                    width: 130.0,
                                     child: OutlinedButton(
                                       onPressed: () {},
                                       style: OutlinedButton.styleFrom(
@@ -277,7 +275,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                         style: TextStyle(
                                           color: kPrimaryPurpleColor,
                                           fontSize: 18.0,
-                                           fontWeight: FontWeight.w600,
+                                          fontWeight: FontWeight.w600,
                                         ),
                                       ),
                                     ),

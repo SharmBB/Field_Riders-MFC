@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/Components/HomePageButton.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/Login/login.dart';
+import 'package:riders_app/views/QR%20Screen/QR_scan.dart';
+
 import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,30 +21,29 @@ class _HomeScreenState extends State<HomeScreen> {
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back_rounded, color: kPrimaryPurpleColor),
-            onPressed: () {
-              Navigator.pop(
-                context,
-                MaterialPageRoute(builder: (context) => LoginScreen()),
-              );
-            },
-            
-          ),
-               actions: [
-          TextButton(
             onPressed: () {},
-            child:  Text(
-              'Scan',
-              style: TextStyle(color: Colors.deepPurple),
-            ),
           ),
-           Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Icon(
-              Icons.qr_code_scanner,
-              color: Colors.deepPurple,
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => QRScanPage()),
+                );
+              },
+              child: Text(
+                'Scan',
+                style: TextStyle(color: Colors.deepPurple),
+              ),
             ),
-          ),
-        ],
+            Padding(
+              padding: EdgeInsets.only(right: 10),
+              child: Icon(
+                Icons.qr_code_scanner,
+                color: Colors.deepPurple,
+              ),
+            ),
+          ],
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
@@ -54,12 +55,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     children: <Widget>[
               HomePageButyton(
                 text: "Assignments",
-                function: ()  {
-                    Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => TaskManagementScreen()),
-              );
-                  
+                function: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TaskManagementScreen()),
+                  );
                 },
               ),
               SizedBox(height: screenHeight * (1 / 20)),

@@ -238,6 +238,15 @@ class _LoginScreenState extends State<LoginScreen> {
       var body = json.decode(res.body);
       if (body["errorMessage"] == false) {
         if (body['message']['token'] != null) {
+          _scaffoldKey.currentState!.showSnackBar(
+            SnackBar(
+              content: Text(
+                "Login Sucessfully !!",
+                style: TextStyle(color: Colors.white),
+              ),
+              backgroundColor: kPrimaryPurpleColor,
+            ),
+          );
           print(body['message']);
 
           Navigator.of(context).pushReplacement(
