@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class FieldScreen extends StatefulWidget {
@@ -12,26 +13,44 @@ class FieldScreen extends StatefulWidget {
 }
 
 class _FieldScreenState extends State<FieldScreen> {
+  final List<Map> feild = [
+    {
+      'Name': '20-2021-D-F28-RCF24F25-LND (SELANGOR)',
+      'Type': 'Domestric DR',
+      "Created": '2021-12-12',
+      "Due": '2021-12-12',
+      "Task Assign": "3",
+      'Progress': '10% Complete'
+    },
+    {
+      'Name': '20-2021-D-F28-RCF24F25-LND (SELANGOR)',
+      'Type': 'Domestric DR',
+      "Created": '2021-12-12',
+      "Due": '2021-12-12',
+      "Task Assign": "3",
+      'Progress': '10% Complete'
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
-    var width = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
 
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          // ignore: prefer_const_constructors
+     
           icon: Icon(
             Icons.arrow_back_rounded,
             color: kPrimaryBlueColor,
             size: 30.0,
           ),
           onPressed: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => HomePage()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => TaskManagementScreen()),
+            );
           },
         ),
         leadingWidth: 60,
@@ -74,423 +93,207 @@ class _FieldScreenState extends State<FieldScreen> {
                 child: Text(
                   'List of assignment',
                   style: TextStyle(
-                    color: primaryColor,
+                    color: kPrimaryPurpleColor,
                     fontSize: 25.0,
+                     fontWeight: FontWeight.w600,
                   ),
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    width: screenWidth,
-                    height: 40,
-                    color: Colors.lightBlueAccent.shade100,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 20,
-                        top: 10.0,
-                        right: 20.0,
-                        bottom: 10,
-                      ),
-                      child: Text(
-                        '2021-12-13',
-                        style: TextStyle(
-                          color: kPrimaryGreyColor,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(
-                      20.0,
-                    ),
-                    child: Column(
+              SizedBox(
+                height: screenHeight * 0.8,
+                width: screenWidth,
+                child: ListView.builder(
+                  itemCount: feild.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                        'Type',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(0.0),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            hintText: 'Domestric DR',
-                            hintStyle: TextStyle(
-                              color: kPrimaryGreyColor,
-                              fontSize: 15.0,
-                            ),
-                           
+                        Padding(
+                          padding: EdgeInsets.only(
+                            left: 20,
+                            top: 10.0,
+                            right: 20.0,
+                            bottom: 10,
                           ),
-                          onSaved: (String? value) {
-                            // This optional block of code can be used to run
-                            // code when the user saves the form.
-                          },
+                          child: Text(
+                            feild[index]['Name'],
+                            style: TextStyle(
+                              color: kPrimaryPurpleColor,
+                              fontSize: 18.0,
+                               fontWeight: FontWeight.w600,
+                            ),
+                          ),
                         ),
-                        Divider(
-                          thickness: 2,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                              Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                          Text(
-                        'Created',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                            SizedBox(
-                              height: 50,
-                              width: 100,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(0.0),
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  hintText: '2021-12-12',
-                                  hintStyle: TextStyle(
-                                    color: kPrimaryGreyColor,
-                                    fontSize: 15.0,
+                        Padding(
+                          padding: EdgeInsets.all(
+                            20.0,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Type",
+                                    style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
-                             
-                                ),
-                                onSaved: (String? value) {
-                                  // This optional block of code can be used to run
-                                  // code when the user saves the form.
-                                },
-                              ),
-                            ),
-                      ],
-                              ),
-
-                                       Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                          Text(
-                        'Due',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                            SizedBox(
-                              height: 50,
-                              width: 100,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(0.0),
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  hintText: '2021-12-12',
-                                  hintStyle: TextStyle(
-                                    color: kPrimaryGreyColor,
-                                    fontSize: 15.0,
+                                  Text(
+                                    feild[index]['Type'],
+                                    style: TextStyle(
+                                      color: kPrimaryGreyColor,
+                                      fontSize: 15.0,
+                                    ),
                                   ),
-                                 
-                                ),
-                                onSaved: (String? value) {
-                                  // This optional block of code can be used to run
-                                  // code when the user saves the form.
-                                },
+                                ],
                               ),
-                            ),
-                      ],
-                                       ),
-                          ],
-                        ),
-
-
-                        Divider(
-                          thickness: 2,
-                        ),
-                          Text(
-                        'Text Align',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(0.0),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            hintText: '3',
-                            hintStyle: TextStyle(
-                              color: kPrimaryGreyColor,
-                              fontSize: 15.0,
-                            ),
-                            
-                          ),
-                          onSaved: (String? value) {
-                            // This optional block of code can be used to run
-                            // code when the user saves the form.
-                          },
-                        ),
-                        Divider(
-                          thickness: 2,
-                        ),
-                           Text(
-                        'Progress',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(0.0),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            hintText: '10% Complete',
-                            hintStyle: TextStyle(
-                              color: kPrimaryGreyColor,
-                              fontSize: 15.0,
-                            ),
-                          
-                          ),
-                          onSaved: (String? value) {
-                            // This optional block of code can be used to run
-                            // code when the user saves the form.
-                          },
-                        ),
-                        Divider(
-                          thickness: 2,
-                        ),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.all(0),
-                            primary: kPrimaryBlueColor,
-                            textStyle: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          onPressed: () {},
-                          child: const Text('Manage'),
-                        ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Container(
-                    width: screenWidth,
-                    height: 40,
-                    color: Colors.lightBlueAccent.shade100,
-                    child: Padding(
-                      padding: EdgeInsets.only(
-                        left: 20,
-                        top: 10.0,
-                        right: 20.0,
-                        bottom: 10,
-                      ),
-                      child: Text(
-                        '2021-12-13',
-                        style: TextStyle(
-                          color: kPrimaryGreyColor,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                    ),
-                  ),
-                    Padding(
-                    padding: EdgeInsets.all(
-                      20.0,
-                    ),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                        'Type',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(0.0),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            hintText: 'Domestric DR',
-                            hintStyle: TextStyle(
-                              color: kPrimaryGreyColor,
-                              fontSize: 15.0,
-                            ),
-                           
-                          ),
-                          onSaved: (String? value) {
-                            // This optional block of code can be used to run
-                            // code when the user saves the form.
-                          },
-                        ),
-                        Divider(
-                          thickness: 2,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                              Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                          Text(
-                        'Created',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                            SizedBox(
-                              height: 50,
-                              width: 100,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(0.0),
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  hintText: '2021-12-12',
-                                  hintStyle: TextStyle(
-                                    color: kPrimaryGreyColor,
-                                    fontSize: 15.0,
+                             SizedBox(
+                                height: 30,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Created date",
+                                    style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
-                             
-                                ),
-                                onSaved: (String? value) {
-                                  // This optional block of code can be used to run
-                                  // code when the user saves the form.
-                                },
-                              ),
-                            ),
-                      ],
-                              ),
-
-                                       Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                          Text(
-                        'Due',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                            SizedBox(
-                              height: 50,
-                              width: 100,
-                              child: TextFormField(
-                                decoration: InputDecoration(
-                                  contentPadding: EdgeInsets.all(0.0),
-                                  border: InputBorder.none,
-                                  focusedBorder: InputBorder.none,
-                                  hintText: '2021-12-12',
-                                  hintStyle: TextStyle(
-                                    color: kPrimaryGreyColor,
-                                    fontSize: 15.0,
+                                  Text(
+                                    feild[index]['Created'],
+                                    style: TextStyle(
+                                      color: kPrimaryGreyColor,
+                                      fontSize: 15.0,
+                                    ),
                                   ),
-                                 
-                                ),
-                                onSaved: (String? value) {
-                                  // This optional block of code can be used to run
-                                  // code when the user saves the form.
-                                },
+                                ],
                               ),
-                            ),
+                             SizedBox(
+                                height: 30,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Due date",
+                                    style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Text(
+                                    feild[index]['Due'],
+                                    style: TextStyle(
+                                      color: kPrimaryGreyColor,
+                                      fontSize: 15.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                             SizedBox(
+                                height: 30,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Task Assign",
+                                    style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Text(
+                                    feild[index]['Task Assign'],
+                                    style: TextStyle(
+                                      color: kPrimaryGreyColor,
+                                      fontSize: 15.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Progress",
+                                    style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  Text(
+                                    feild[index]['Progress'],
+                                    style: TextStyle(
+                                      color: kPrimaryGreyColor,
+                                      fontSize: 15.0,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 30,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  SizedBox(
+          width: 130.0,
+          
+                                    child: OutlinedButton(
+                                      onPressed: () {},
+                                      style: OutlinedButton.styleFrom(
+                                        side: BorderSide(
+                                          color: kPrimaryPurpleColor,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(30.0),
+                                          side: BorderSide(
+                                              color: kPrimaryPurpleColor),
+                                        ),
+                                      ),
+                                      child: Text(
+                                        "Manage",
+                                        style: TextStyle(
+                                          color: kPrimaryPurpleColor,
+                                          fontSize: 18.0,
+                                           fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 40,
+                              ),
+                            ],
+                          ),
+                        ),
                       ],
-                                       ),
-                          ],
-                        ),
-
-
-                        Divider(
-                          thickness: 2,
-                        ),
-                          Text(
-                        'Text Align',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(0.0),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            hintText: '3',
-                            hintStyle: TextStyle(
-                              color: kPrimaryGreyColor,
-                              fontSize: 15.0,
-                            ),
-                            
-                          ),
-                          onSaved: (String? value) {
-                            // This optional block of code can be used to run
-                            // code when the user saves the form.
-                          },
-                        ),
-                        Divider(
-                          thickness: 2,
-                        ),
-                           Text(
-                        'Progress',
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontSize: 15.0,
-                        ),
-                      ),
-                        TextFormField(
-                          decoration: InputDecoration(
-                            contentPadding: EdgeInsets.all(0.0),
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            hintText: '10% Complete',
-                            hintStyle: TextStyle(
-                              color: kPrimaryGreyColor,
-                              fontSize: 15.0,
-                            ),
-                          
-                          ),
-                          onSaved: (String? value) {
-                            // This optional block of code can be used to run
-                            // code when the user saves the form.
-                          },
-                        ),
-                        Divider(
-                          thickness: 2,
-                        ),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            padding: const EdgeInsets.all(0),
-                            primary: kPrimaryBlueColor,
-                            textStyle: const TextStyle(
-                                fontSize: 20, fontWeight: FontWeight.bold),
-                          ),
-                          onPressed: () {},
-                          child: const Text('Manage'),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
+                    );
+                  },
+                ),
               ),
             ],
           ),
