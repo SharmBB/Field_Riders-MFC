@@ -5,6 +5,7 @@ import 'package:riders_app/views/Login/login.dart';
 import 'package:riders_app/views/QR%20Screen/QR_scan.dart';
 
 import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
+import 'package:riders_app/views/deptAssignment/DeptAssignment.dart';
 import 'package:riders_app/views/field/feild.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -59,15 +60,20 @@ class _HomeScreenState extends State<HomeScreen> {
                 function: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => FieldScreen()),
+                    MaterialPageRoute(builder: (context) => FieldScreen()),
                   );
                 },
               ),
               SizedBox(height: screenHeight * (1 / 20)),
               HomePageButyton(
                 text: "Manage Tasks",
-                function: () async {},
+                function: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DeptAssignmentScreen()),
+                  );
+                },
               ),
             ]))));
   }
