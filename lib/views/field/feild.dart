@@ -3,6 +3,8 @@
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
+import 'package:riders_app/views/deptAssignment/DeptAssignID.dart';
+import 'package:riders_app/views/deptAssignment/deptAssignment.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
 class FieldScreen extends StatefulWidget {
@@ -24,7 +26,7 @@ class _FieldScreenState extends State<FieldScreen> {
     },
     {
       'Name': '20-2021-D-F28-RCF24F25-LND (SELANGOR)',
-      'Type': 'Domestric DR',
+      'Type': 'Vacant',
       "Created": '2021-12-12',
       "Due": '2021-12-12',
       "Task Assign": "3",
@@ -43,7 +45,7 @@ class _FieldScreenState extends State<FieldScreen> {
           icon: Icon(
             Icons.arrow_back_rounded,
             color: kPrimaryPurpleColor,
-            size: 30.0,
+            size: 25.0,
           ),
           onPressed: () {
             Navigator.push(
@@ -55,8 +57,8 @@ class _FieldScreenState extends State<FieldScreen> {
         leadingWidth: 60,
         centerTitle: true,
         title: ToggleSwitch(
-          minWidth: 70.0,
-          minHeight: 35.0,
+          minWidth: 60.0,
+          minHeight: 30.0,
           cornerRadius: 10.0,
           activeBgColors: [
             [kPrimaryWhiteColor],
@@ -93,7 +95,7 @@ class _FieldScreenState extends State<FieldScreen> {
                   'List of assignment',
                   style: TextStyle(
                     color: kPrimaryPurpleColor,
-                    fontSize: 25.0,
+                    fontSize: 22.0,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -119,7 +121,7 @@ class _FieldScreenState extends State<FieldScreen> {
                             feild[index]['Name'],
                             style: TextStyle(
                               color: kPrimaryPurpleColor,
-                              fontSize: 18.0,
+                              fontSize: 16.0,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -256,9 +258,15 @@ class _FieldScreenState extends State<FieldScreen> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   SizedBox(
-                                    width: 130.0,
+                                    width: 100.0,
                                     child: OutlinedButton(
-                                      onPressed: () {},
+                                      onPressed: () {
+                                         Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => DeptAssignID()),
+                  );
+                                      },
                                       style: OutlinedButton.styleFrom(
                                         side: BorderSide(
                                           color: kPrimaryPurpleColor,
@@ -274,7 +282,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                         "Manage",
                                         style: TextStyle(
                                           color: kPrimaryPurpleColor,
-                                          fontSize: 18.0,
+                                          fontSize: 16.0,
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
@@ -283,8 +291,10 @@ class _FieldScreenState extends State<FieldScreen> {
                                 ],
                               ),
                               SizedBox(
-                                height: 40,
+                                height: 20,
                               ),
+                              Divider(),
+                              
                             ],
                           ),
                         ),

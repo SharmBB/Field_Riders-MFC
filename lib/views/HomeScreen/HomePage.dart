@@ -5,6 +5,7 @@ import 'package:riders_app/views/Login/login.dart';
 import 'package:riders_app/views/QR%20Screen/QR_scan.dart';
 
 import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
+import 'package:riders_app/views/field/feild.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -59,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => TaskManagementScreen()),
+                        builder: (context) => FieldScreen()),
                   );
                 },
               ),
