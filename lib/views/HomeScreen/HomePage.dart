@@ -71,7 +71,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => DeptAssignmentScreen()),
+                        builder: (context) => TaskManagementScreen()),
                   );
                 },
               ),
