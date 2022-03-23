@@ -559,14 +559,15 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
                 ),
               ),
 
-              const SizedBox(
-                height: 30,
-              ),
+           
               // Drop Down DR code
               manageinitvalue == "DR Code"
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                           const SizedBox(
+                height: 30,
+              ),
                         const Text(
                           "DR Code",
                           style: TextStyle(color: Colors.grey, fontSize: 12),
@@ -611,6 +612,9 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                           const SizedBox(
+                height: 30,
+              ),
                         const Text(
                           "NOB Code",
                           style: TextStyle(color: Colors.grey, fontSize: 12),
@@ -655,6 +659,9 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                           const SizedBox(
+                height: 30,
+              ),
                         const Text(
                           "Type Of Property",
                           style: TextStyle(color: Colors.grey, fontSize: 12),
@@ -699,6 +706,9 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                           const SizedBox(
+                height: 30,
+              ),
                         const Text(
                           "Property Usage",
                           style: TextStyle(color: Colors.grey, fontSize: 12),
@@ -743,6 +753,9 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
                   ? Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                           const SizedBox(
+                height: 30,
+              ),
                         const Text(
                           "Visit Date",
                           style: TextStyle(color: Colors.grey, fontSize: 12),
@@ -862,6 +875,9 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  const SizedBox(
+                    height: 30,
+                  ),
                   Text(
                     "Remark",
                     style: const TextStyle(fontSize: 12, color: Colors.grey),
