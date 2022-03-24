@@ -1,4 +1,5 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
@@ -42,6 +43,222 @@ class __DeptAssignIDState extends State<DeptAssignID> {
     'IWK ID, Adress 3',
     'IWK ID, Adress 4',
   ];
+
+  bool tick1 = false;
+   bool tick2 = false;
+    bool tick3 = false;
+     bool tick4 = false;
+      bool tick5 = false;
+       bool tick6 = false;
+        bool tick7 = false;
+         bool tick8 = false;
+
+  actionsheetSearch(BuildContext context) {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setState) {
+            return CupertinoActionSheet(
+              actions: [
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    setState(() {
+                      if (tick1 == false) {
+                        tick1 = true;
+                      } else {
+                        tick1 = false;
+                      }
+                    });
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("#"),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 7 / 10,
+                      ),
+                      tick1 == true
+                          ? Icon(
+                             Icons.check,color: Colors.blue
+                            )
+                          : SizedBox(),
+                    ],
+                  ),
+                ),
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    setState(() {
+                      if (tick2 == false) {
+                        tick2 = true;
+                      } else {
+                        tick2 = false;
+                      }
+                    });
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("IWK ID"),
+                      tick2 == true
+                          ? Icon(
+                              Icons.check,color: Colors.blue
+                            )
+                          : SizedBox(),
+                    ],
+                  ),
+                ),
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    setState(() {
+                      if (tick3 == false) {
+                        tick3 = true;
+                      } else {
+                        tick3 = false;
+                      }
+                    });
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("San"),
+                      tick3 == true
+                          ? Icon(
+                        Icons.check,color: Colors.blue
+                            )
+                          : SizedBox(),
+                    ],
+                  ),
+                ),
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    setState(() {
+                      if (tick4 == false) {
+                        tick4 = true;
+                      } else {
+                        tick4 = false;
+                      }
+                    });
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("Owner 1"),
+                      tick4 == true
+                          ? Icon(
+                         Icons.check,color: Colors.blue
+                            )
+                          : SizedBox(),
+                    ],
+                  ),
+                ),
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    setState(() {
+                      if (tick5 == false) {
+                        tick5 = true;
+                      } else {
+                        tick5 = false;
+                      }
+                    });
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("Address"),
+                      tick5 == true
+                          ? Icon(
+                    Icons.check,color: Colors.blue
+                            )
+                          : SizedBox(),
+                    ],
+                  ),
+                ),
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    setState(() {
+                      if (tick6 == false) {
+                        tick6 = true;
+                      } else {
+                        tick6 = false;
+                      }
+                    });
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("Assign Date"),
+                      tick6 == true
+                          ? Icon(
+                          Icons.check,color: Colors.blue
+                            )
+                          : SizedBox(),
+                    ],
+                  ),
+                ),
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    setState(() {
+                      if (tick7 == false) {
+                        tick7 = true;
+                      } else {
+                        tick7 = false;
+                      }
+                    });
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("Payment Update"),
+                      tick7 == true
+                          ? Icon(
+                                 Icons.check,color: Colors.blue
+                            )
+                          : SizedBox(),
+                    ],
+                  ),
+                ),
+                CupertinoActionSheetAction(
+                  onPressed: () {
+                    setState(() {
+                      if (tick8 == false) {
+                        tick8 = true;
+                      } else {
+                        tick8 = false;
+                      }
+                    });
+                  },
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text("Status"),
+                      tick8 == true
+                          ? Icon(
+                                   Icons.check,color: Colors.blue
+                            )
+                          : SizedBox(),
+                    ],
+                  ),
+                ),
+              ],
+              cancelButton: CupertinoActionSheetAction(
+                child: const Text("Cancel"),
+                onPressed: () => Navigator.of(context).pop(),
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -135,34 +352,27 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     height: 10,
                   ),
                   Container(
-                    padding: EdgeInsets.only(left: 20, right: 20),
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.deepPurple),
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    height: 45,
-                    width: MediaQuery.of(context).size.width,
-                    child: DropdownButton<String>(
-                      underline: Container(),
-                      icon: const Icon(
-                        Icons.keyboard_arrow_down,
-                        color: Colors.deepPurple,
+                      padding: EdgeInsets.only(left: 20, right: 20),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.deepPurple),
+                        borderRadius: BorderRadius.circular(20),
                       ),
-                      value: imginitvalue,
-                      isExpanded: true,
-                      items: imgtype.map((String value) {
-                        return DropdownMenuItem<String>(
-                          value: value,
-                          child: Text(value),
-                        );
-                      }).toList(),
-                      onChanged: (String? value) {
-                        setState(() {
-                          imginitvalue = value!;
-                        });
-                      },
-                    ),
-                  ),
+                      height: 45,
+                      width: MediaQuery.of(context).size.width,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          IconButton(
+                            icon: const Icon(
+                              Icons.keyboard_arrow_down,
+                              color: kPrimaryPurpleColor,
+                            ),
+                            onPressed: () {
+                              actionsheetSearch(context);
+                            },
+                          ),
+                        ],
+                      )),
                   SizedBox(
                     height: 30,
                   ),

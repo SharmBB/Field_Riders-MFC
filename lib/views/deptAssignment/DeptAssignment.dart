@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/deptAssignment/reusabletextfield.dart';
 
-
 class DeptAssignmentScreen extends StatefulWidget {
   const DeptAssignmentScreen({Key? key}) : super(key: key);
 
@@ -136,82 +135,6 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
     );
   }
 
-  bool tick = false;
-
-  actionsheetSearch(BuildContext context) {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (context) {
-        return StatefulBuilder(
-          builder: (BuildContext context, StateSetter setState) {
-            return CupertinoActionSheet(
-              actions: [
-                CupertinoActionSheetAction(
-                  onPressed: () {
-                    setState(() {
-                      tick = true;
-                    });
-                  },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text("#"),
-                      SizedBox(
-                        width: MediaQuery.of(context).size.width * 7 / 10,
-                      ),
-                      tick == true
-                          ? Icon(
-                              Icons.arrow_right_alt,
-                            )
-                          : SizedBox(),
-                    ],
-                  ),
-                ),
-                CupertinoActionSheetAction(
-                    onPressed: () {
-                      print("Hello Wolrd");
-                    },
-                    child: const Align(
-                        alignment: Alignment.topLeft, child: Text("IWK ID"))),
-                CupertinoActionSheetAction(
-                    onPressed: () {},
-                    child: const Align(
-                        alignment: Alignment.topLeft, child: Text("San"))),
-                CupertinoActionSheetAction(
-                    onPressed: () {},
-                    child: const Align(
-                        alignment: Alignment.topLeft, child: Text("Owner 1"))),
-                CupertinoActionSheetAction(
-                    onPressed: () {},
-                    child: const Align(
-                        alignment: Alignment.topLeft, child: Text("Address"))),
-                CupertinoActionSheetAction(
-                    onPressed: () {},
-                    child: const Align(
-                        alignment: Alignment.topLeft,
-                        child: Text("Assign Date"))),
-                CupertinoActionSheetAction(
-                    onPressed: () {},
-                    child: const Align(
-                        alignment: Alignment.topLeft,
-                        child: Text("Payment Update"))),
-                CupertinoActionSheetAction(
-                    onPressed: () {},
-                    child: const Align(
-                        alignment: Alignment.topLeft, child: Text("Status"))),
-              ],
-              cancelButton: CupertinoActionSheetAction(
-                child: const Text("Cancel"),
-                onPressed: () => Navigator.of(context).pop(),
-              ),
-            );
-          },
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -235,9 +158,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
           IconButton(
             icon: const Icon(Icons.search_sharp),
             color: Colors.deepPurple,
-            onPressed: () {
-              actionsheetSearch(context);
-            },
+            onPressed: () {},
           ),
           IconButton(
             icon: const Icon(Icons.add_box),
@@ -614,8 +535,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                                 onPressed: () {},
-                                icon:
-                                    const Icon(Icons.calendar_today_rounded)),
+                                icon: const Icon(Icons.calendar_today_rounded)),
                             focusedBorder: const OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0)),
@@ -671,8 +591,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                                 onPressed: () {},
-                                icon:
-                                    const Icon(Icons.calendar_today_rounded)),
+                                icon: const Icon(Icons.calendar_today_rounded)),
                             focusedBorder: const OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0)),
