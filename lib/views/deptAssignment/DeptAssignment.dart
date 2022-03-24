@@ -535,7 +535,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                                 onPressed: () {},
-                                icon: const Icon(Icons.calendar_today_rounded)),
+                                icon: const Icon(Icons.calendar_today_rounded,color: kPrimaryPurpleColor,)),
                             focusedBorder: const OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0)),
@@ -591,7 +591,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                                 onPressed: () {},
-                                icon: const Icon(Icons.calendar_today_rounded)),
+                                icon: const Icon(Icons.calendar_today_rounded,color: kPrimaryPurpleColor)),
                             focusedBorder: const OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0)),
