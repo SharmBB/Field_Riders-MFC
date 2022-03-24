@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
+import 'package:riders_app/views/Verification%20Screen/taskVerification.dart';
 import 'package:riders_app/views/deptAssignment/deptAssignment.dart';
 import 'package:riders_app/views/field/feild.dart';
 
@@ -36,10 +38,9 @@ class __DeptAssignIDState extends State<DeptAssignID> {
   String imginitvalue = 'IWK ID, Adress';
   final imgtype = [
     'IWK ID, Adress',
-     'IWK ID, Adress 2',
-     'IWK ID, Adress 3',
+    'IWK ID, Adress 2',
+    'IWK ID, Adress 3',
     'IWK ID, Adress 4',
-    
   ];
 
   @override
@@ -79,7 +80,13 @@ class __DeptAssignIDState extends State<DeptAssignID> {
           IconButton(
             icon: const Icon(Icons.download_sharp),
             color: Colors.deepPurple,
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TaskVerificationScreen()),
+              );
+            },
           )
         ],
       ),
@@ -121,12 +128,12 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     height: 40,
                   ),
                   Text(
-                  "Column Visibility",
-                  style: TextStyle(color: Colors.grey, fontSize: 12),
-                ),
-               SizedBox(
-                  height: 10,
-                ),
+                    "Column Visibility",
+                    style: TextStyle(color: Colors.grey, fontSize: 12),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Container(
                     padding: EdgeInsets.only(left: 20, right: 20),
                     decoration: BoxDecoration(

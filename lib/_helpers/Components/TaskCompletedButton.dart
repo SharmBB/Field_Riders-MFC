@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
 
 
-class HomePageButyton extends StatelessWidget {
-  const HomePageButyton({Key? key, required this.text, required this.function})
+class TaskCompletedButton extends StatelessWidget {
+  const TaskCompletedButton({Key? key, required this.text, required this.function})
       : super(key: key);
   final String text;
   final Function() function;
@@ -13,7 +13,7 @@ class HomePageButyton extends StatelessWidget {
      var screenWidth = MediaQuery.of(context).size.width;
     return Container(
       margin: EdgeInsets.all(0),
-      height: 70.0,
+      height: 65.0,
       width: screenWidth*0.90,
       child: RaisedButton(
         shape: RoundedRectangleBorder(

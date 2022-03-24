@@ -129,7 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
 //Email Feils
   _email() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+      padding: EdgeInsets.fromLTRB(10, 0, 25, 0),
       child: TextFormField(
         style: TextStyle(fontSize: 16, color: primaryColor),
         cursorColor: kPrimaryPurpleColor,
@@ -149,7 +149,8 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         controller: _emailController,
         textInputAction: TextInputAction.done,
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
+          icon: new Icon(Icons.email,color: kPrimaryGreyColor,),
           hintText: 'Email Address',
           focusedBorder:
               UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
@@ -161,7 +162,7 @@ class _LoginScreenState extends State<LoginScreen> {
 //Password Feild
   _password() {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
+      padding: const EdgeInsets.fromLTRB(10, 0, 25, 0),
       child: TextFormField(
         style: TextStyle(fontSize: 16.0, color: primaryColor),
         cursorColor: kPrimaryPurpleColor,
@@ -183,6 +184,7 @@ class _LoginScreenState extends State<LoginScreen> {
         controller: _passwordController,
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
+          icon: new Icon(Icons.lock_open,color: kPrimaryGreyColor,),
           suffixIcon: IconButton(
             onPressed: () => setState(() => showPassword = !showPassword),
             icon: Icon(showPassword ? Icons.visibility_off : Icons.visibility),
@@ -200,12 +202,12 @@ class _LoginScreenState extends State<LoginScreen> {
   _signIn() {
     return Container(
       margin: EdgeInsets.all(0),
-      height: 50.0,
+      height: 65.0,
       width: double.infinity,
       child: RaisedButton(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(25.0),
-          side: BorderSide(color: kPrimaryPurpleColor),
+          borderRadius: BorderRadius.circular(30.0),
+          side: BorderSide(color: kPrimaryGreyColor),
         ),
         onPressed: () {
           if (_formKey.currentState!.validate()) {

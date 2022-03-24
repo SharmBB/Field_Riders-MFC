@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
-              SizedBox(height: screenHeight * (1 / 20)),
+              SizedBox(height: screenHeight * (0.5 / 20)),
               HomePageButyton(
                 text: "Manage Tasks",
                 function: () {
