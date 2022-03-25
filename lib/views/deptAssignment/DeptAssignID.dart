@@ -99,7 +99,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 7 / 10,
                       ),
-                      tick1 == true
+                      tick1 == true || type.contains("#")
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -125,7 +125,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("IWK ID"),
-                      tick2 == true
+                      tick2 == true || type.contains("IWK ID")
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -151,7 +151,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("San"),
-                      tick3 == true
+                      tick3 == true || type.contains("San")
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -177,7 +177,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Owner 1"),
-                      tick4 == true
+                      tick4 == true || type.contains("Owner 1")
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -203,7 +203,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Address"),
-                      tick5 == true
+                      tick5 == true || type.contains("Address")
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -229,7 +229,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Assign Date"),
-                      tick6 == true
+                      tick6 == true || type.contains("Assign Date")
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -255,7 +255,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Payment Update"),
-                      tick7 == true
+                      tick7 == true || type.contains("Payment Update")
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -280,7 +280,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text("Status"),
-                      tick8 == true
+                      tick8 == true || type.contains("Status")
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -305,7 +305,12 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                   CupertinoActionSheetAction(
                       child: const Text("Cancel"),
                       onPressed: () {
-                        Navigator.of(context).pop();
+                          Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DeptAssignID(type: '')),
+                        );
                       }),
                 ],
               ),
@@ -419,7 +424,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                         children: [
                           SizedBox(
                             width: screenWidth * 0.6,
-                            child: type == null
+                            child: type == []
                                 ? SizedBox()
                                 : Text(
                                     type,
