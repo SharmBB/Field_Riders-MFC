@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
+
 import 'package:riders_app/views/deptAssignment/reusabletextfield.dart';
 
 class DomesticScreen extends StatefulWidget {
@@ -10,6 +12,8 @@ class DomesticScreen extends StatefulWidget {
 }
 
 class _DomesticScreenState extends State<DomesticScreen> {
+  final _formKey = GlobalKey<FormState>();
+
   TextEditingController correctownernamecontroller = TextEditingController();
   TextEditingController ownertelnocontroller = TextEditingController();
   TextEditingController tenantnamecontroller = TextEditingController();
@@ -138,7 +142,32 @@ class _DomesticScreenState extends State<DomesticScreen> {
     '46 DR50 WELFARE SOCIETY-CANT AFFORD TO PAY',
   ];
 
-  String _selectedNationality = '';
+  actionsheetTakePhoto(BuildContext context) {
+    showCupertinoModalPopup(
+      context: context,
+      builder: (context) {
+        return CupertinoActionSheet(
+          actions: [
+            CupertinoActionSheetAction(
+                onPressed: () {},
+                child: const Align(
+                    alignment: Alignment.topLeft, child: Text("Camera"))),
+            CupertinoActionSheetAction(
+                onPressed: () {},
+                child: const Align(
+                    alignment: Alignment.topLeft, child: Text("Upload"))),
+          ],
+          cancelButton: CupertinoActionSheetAction(
+            child: const Text("Cancel"),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
+        );
+      },
+    );
+  }
+
+  String? _selectedNationality = '';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -186,493 +215,536 @@ class _DomesticScreenState extends State<DomesticScreen> {
             child: Padding(
               padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
               child: Form(
+                  key: _formKey,
                   child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "ID :1",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: kPrimaryPurpleColor),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "Bill:X6356185",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: kPrimaryPurpleColor),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "SAN:41898081",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: kPrimaryPurpleColor),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "Owner1:NEO HOO @ NEW HOW . (If Owner 2 is available show else don't need )",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: kPrimaryPurpleColor),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "(Add1,Add2,Add3,Add4) 4 JALAN TIMOR 12,TAMAN TIMOR,81300 JOHOR BAHRU,JOHOR",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: kPrimaryPurpleColor),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "Range5: >120 months",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: kPrimaryPurpleColor),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "Arrears:1,226.25",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: kPrimaryPurpleColor),
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Text(
-                    "Total Payable Amount:1,317.85",
-                    style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: kPrimaryPurpleColor),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  // Take Photo DropDown
-                  Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text(
-                        "Take Photo",
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
+                        "ID :1",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
-                      Container(
-                        height: 45,
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.deepPurple),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 30, bottom: 9),
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                                border: InputBorder.none,
-                                hintStyle: TextStyle(fontSize: 12),
-                                suffixIcon: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.keyboard_arrow_down,
-                                      color: kPrimaryPurpleColor,
-                                    ))),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // Occupier DropDown
-
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
                       const Text(
-                        "Occupier(Owner/Tenant )",
-                        style: TextStyle(color: Colors.grey, fontSize: 12),
+                        "Bill:X6356185",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(left: 20, right: 10),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.deepPurple),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        height: 45,
-                        width: MediaQuery.of(context).size.width,
-                        child: DropdownButton<String>(
-                          underline: Container(),
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.deepPurple,
-                          ),
-                          value: occupierinitvalue,
-                          isExpanded: true,
-                          items: occupiertype.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? value) {
-                            setState(() {
-                              occupierinitvalue = value!;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  // Occupier DropDown
-
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
                       const Text(
-                        "Owner Name Correct (Yes/No)",
-                        style: TextStyle(color: Colors.grey, fontSize: 12),
+                        "SAN:41898081",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(left: 20, right: 10),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.deepPurple),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        height: 45,
-                        width: MediaQuery.of(context).size.width,
-                        child: DropdownButton<String>(
-                          underline: Container(),
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.deepPurple,
-                          ),
-                          value: ownernamecorrectinitvalue,
-                          isExpanded: true,
-                          items: ownernamecorrect.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? value) {
-                            setState(() {
-                              ownernamecorrectinitvalue = value!;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  textField("Please specify correct ownername",
-                      correctownernamecontroller),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  textField("Owner's tel no", ownertelnocontroller),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  textField("Tenant's name", tenantnamecontroller),
-                  const SizedBox(
-                    height: 20,
-                  ),
-                  textField("Tenant's tel no", tenanttelnocontroller),
-
-                  SizedBox(
-                    height: 20,
-                  ),
-                  // Radio Button
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
                       const Text(
-                        'Occupier Nationality:',
-                        style:
-                            const TextStyle(fontSize: 12, color: Colors.grey),
-                      ),
-                      ListTile(
-                        leading: Radio<String>(
-                          value: 'Malaysian',
-                          groupValue: _selectedNationality,
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedNationality = value!;
-                            });
-                          },
-                        ),
-                        title: const Text('Malaysian'),
-                      ),
-                      ListTile(
-                        leading: Radio<String>(
-                          value: 'Foreigner',
-                          groupValue: _selectedNationality,
-                          onChanged: (value) {
-                            setState(() {
-                              _selectedNationality = value!;
-                            });
-                          },
-                        ),
-                        title: const Text('Foreigner'),
-                      ),
-                      const SizedBox(height: 20),
-                    ],
-                  ),
-                  // Property Usage DropDown
-
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Property usage (D or C)",
-                        style: TextStyle(color: Colors.grey, fontSize: 12),
+                        "Owner1:NEO HOO @ NEW HOW . (If Owner 2 is available show else don't need )",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
                       ),
                       const SizedBox(
-                        height: 10,
+                        height: 20,
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(left: 20, right: 10),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.deepPurple),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        height: 45,
-                        width: MediaQuery.of(context).size.width,
-                        child: DropdownButton<String>(
-                          underline: Container(),
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.deepPurple,
+                      const Text(
+                        "(Add1,Add2,Add3,Add4) 4 JALAN TIMOR 12,TAMAN TIMOR,81300 JOHOR BAHRU,JOHOR",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        "Range5: >120 months",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        "Arrears:1,226.25",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        "Total Payable Amount:1,317.85",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
+                      ),
+                      const SizedBox(
+                        height: 30,
+                      ),
+                      // Take Photo DropDown
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Take Photo",
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
                           ),
-                          value: ownernamecorrectinitvalue,
-                          isExpanded: true,
-                          items: ownernamecorrect.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? value) {
-                            setState(() {
-                              ownernamecorrectinitvalue = value!;
-                            });
-                          },
-                        ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: 45,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 30, bottom: 9),
+                              child: TextFormField(
+                                readOnly: true,
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    hintStyle: TextStyle(fontSize: 12),
+                                    suffixIcon: IconButton(
+                                        onPressed: () {
+                                          actionsheetTakePhoto(context);
+                                        },
+                                        icon: const Icon(
+                                          Icons.keyboard_arrow_down,
+                                          color: kPrimaryPurpleColor,
+                                        ))),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      // Occupier DropDown
 
-                  SizedBox(
-                    height: 20,
-                  ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Occupier(Owner/Tenant )",
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 20, right: 10),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            height: 45,
+                            width: MediaQuery.of(context).size.width,
+                            child: DropdownButton<String>(
+                              underline: Container(),
+                              icon: const Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.deepPurple,
+                              ),
+                              value: occupierinitvalue,
+                              isExpanded: true,
+                              items: occupiertype.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (String? value) {
+                                setState(() {
+                                  occupierinitvalue = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      // Occupier DropDown
+
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Owner Name Correct (Yes/No)",
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 20, right: 10),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            height: 45,
+                            width: MediaQuery.of(context).size.width,
+                            child: DropdownButton<String>(
+                              underline: Container(),
+                              icon: const Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.deepPurple,
+                              ),
+                              value: ownernamecorrectinitvalue,
+                              isExpanded: true,
+                              items: ownernamecorrect.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (String? value) {
+                                setState(() {
+                                  ownernamecorrectinitvalue = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      textField("Please specify correct ownername",
+                          correctownernamecontroller),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      textField("Owner's tel no", ownertelnocontroller),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      textField("Tenant's name", tenantnamecontroller),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      textField("Tenant's tel no", tenanttelnocontroller),
+
+                      SizedBox(
+                        height: 20,
+                      ),
+                      // Radio Button
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            'Occupier Nationality:',
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
+                          ),
+                          Row(
+                            children: [
+                              Radio<String>(
+                                  value: "Malaysian",
+                                  groupValue: _selectedNationality,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedNationality = value!;
+                                    });
+                                  }),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text("Malaysian")
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio<String>(
+                                  value: "Foreigner",
+                                  groupValue: _selectedNationality,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedNationality = value!;
+                                    });
+                                  }),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Text("Foreigner")
+                            ],
+                          )
+                          // const Text(
+                          //   'Occupier Nationality:',
+                          //   style: const TextStyle(
+                          //       fontSize: 12, color: Colors.grey),
+                          // ),
+                          // ListTile(
+                          //   leading: Radio<String>(
+                          //     value: 'Malaysian',
+                          //     groupValue: _selectedNationality,
+                          //     onChanged: (value) {
+                          //       setState(() {
+                          //         _selectedNationality = value!;
+                          //       });
+                          //     },
+                          //   ),
+                          //   title: const Text('Malaysian'),
+                          // ),
+                          // ListTile(
+                          //   leading: Radio<String>(
+                          //     value: 'Foreigner',
+                          //     groupValue: _selectedNationality,
+                          //     onChanged: (value) {
+                          //       setState(() {
+                          //         _selectedNationality = value!;
+                          //       });
+                          //     },
+                          //   ),
+                          //   title: const Text('Foreigner'),
+                          // ),
+                          // const SizedBox(height: 20),
+                        ],
+                      ),
+                      // Property Usage DropDown
+
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Property usage (D or C)",
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 20, right: 10),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            height: 45,
+                            width: MediaQuery.of(context).size.width,
+                            child: DropdownButton<String>(
+                              underline: Container(),
+                              icon: const Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.deepPurple,
+                              ),
+                              value: ownernamecorrectinitvalue,
+                              isExpanded: true,
+                              items: ownernamecorrect.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (String? value) {
+                                setState(() {
+                                  ownernamecorrectinitvalue = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(
+                        height: 20,
+                      ),
 // Drop Down
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Property Domestic",
-                        style: TextStyle(color: Colors.grey, fontSize: 12),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Property Domestic",
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 20, right: 10),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            height: 45,
+                            width: MediaQuery.of(context).size.width,
+                            child: DropdownButton<String>(
+                              underline: Container(),
+                              icon: const Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.deepPurple,
+                              ),
+                              value: propertydomestictypeinitvalue,
+                              isExpanded: true,
+                              items: propertydomestictype.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (String? value) {
+                                setState(() {
+                                  propertydomestictypeinitvalue = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
                       ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      // Drop Down
+
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text(
+                            "Dr Code",
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 20, right: 10),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            height: 45,
+                            width: MediaQuery.of(context).size.width,
+                            child: DropdownButton<String>(
+                              underline: Container(),
+                              icon: const Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.deepPurple,
+                              ),
+                              value: drcodeinitvalue,
+                              isExpanded: true,
+                              items: drcodetype.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (String? value) {
+                                setState(() {
+                                  drcodeinitvalue = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Remark",
+                            style: const TextStyle(
+                                fontSize: 12, color: Colors.grey),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextFormField(
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.black),
+                            cursorColor: kPrimaryPurpleColor,
+                            keyboardType: TextInputType.text,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Field Required';
+                              }
+                            },
+                            controller: remarkcontroller,
+                            textInputAction: TextInputAction.done,
+                            decoration: const InputDecoration(
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25.0)),
+                                  borderSide:
+                                      BorderSide(color: kPrimaryPurpleColor)),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(25, 10, 10, 80),
+                              fillColor: kPrimaryWhiteColor,
+                              filled: true,
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25.0)),
+                                  borderSide:
+                                      BorderSide(color: kPrimaryPurpleColor)),
+                              border: OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25.0)),
+                                borderSide:
+                                    BorderSide(color: kPrimaryPurpleColor),
+                                gapPadding: 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+
                       const SizedBox(
-                        height: 10,
+                        height: 50,
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(left: 20, right: 10),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.deepPurple),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        height: 45,
+                      SizedBox(
                         width: MediaQuery.of(context).size.width,
-                        child: DropdownButton<String>(
-                          underline: Container(),
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.deepPurple,
-                          ),
-                          value: propertydomestictypeinitvalue,
-                          isExpanded: true,
-                          items: propertydomestictype.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? value) {
-                            setState(() {
-                              propertydomestictypeinitvalue = value!;
-                            });
+                        height: 50,
+                        child: RaisedButton(
+                          color: Colors.deepPurple,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(30)),
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text('Submiting')),
+                              );
+                            }
                           },
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  // Drop Down
-
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      const Text(
-                        "Dr Code",
-                        style: TextStyle(color: Colors.grey, fontSize: 12),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Container(
-                        padding: const EdgeInsets.only(left: 20, right: 10),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.deepPurple),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        height: 45,
-                        width: MediaQuery.of(context).size.width,
-                        child: DropdownButton<String>(
-                          underline: Container(),
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.deepPurple,
-                          ),
-                          value: drcodeinitvalue,
-                          isExpanded: true,
-                          items: drcodetype.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (String? value) {
-                            setState(() {
-                              drcodeinitvalue = value!;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Remark",
-                        style:
-                            const TextStyle(fontSize: 12, color: Colors.grey),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      TextFormField(
-                        style:
-                            const TextStyle(fontSize: 16, color: Colors.black),
-                        cursorColor: kPrimaryPurpleColor,
-                        keyboardType: TextInputType.text,
-                        validator: (value) {
-                          if (value!.isEmpty) {
-                            return 'Field Required';
-                          }
-                        },
-                        controller: remarkcontroller,
-                        textInputAction: TextInputAction.done,
-                        decoration: const InputDecoration(
-                          focusedBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25.0)),
-                              borderSide:
-                                  BorderSide(color: kPrimaryPurpleColor)),
-                          contentPadding: EdgeInsets.fromLTRB(25, 10, 10, 80),
-                          fillColor: kPrimaryWhiteColor,
-                          filled: true,
-                          enabledBorder: OutlineInputBorder(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(25.0)),
-                              borderSide:
-                                  BorderSide(color: kPrimaryPurpleColor)),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(25.0)),
-                            borderSide: BorderSide(color: kPrimaryPurpleColor),
-                            gapPadding: 0,
+                          child: const Text(
+                            "Submit",
+                            style: TextStyle(color: Colors.white),
                           ),
                         ),
-                      )
-                    ],
-                  ),
-
-                  const SizedBox(
-                    height: 50,
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width,
-                    height: 50,
-                    child: RaisedButton(
-                      color: Colors.deepPurple,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30)),
-                      onPressed: () {
-                        // if (_formKey.currentState!.validate()) {
-                        //   ScaffoldMessenger.of(context).showSnackBar(
-                        //     const SnackBar(content: Text('Updating Data')),
-                        //   );
-                        // }
-                      },
-                      child: const Text(
-                        "Submit",
-                        style: TextStyle(color: Colors.white),
                       ),
-                    ),
-                  ),
-                ],
-              )),
+                    ],
+                  )),
             ),
           )),
     );
