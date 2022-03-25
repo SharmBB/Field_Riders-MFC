@@ -1,9 +1,11 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
-import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
+
 import 'package:riders_app/views/Verification%20Screen/taskVerification.dart';
+import 'package:riders_app/views/deptAssignment/DomesticScreen.dart';
 import 'package:riders_app/views/deptAssignment/deptAssignment.dart';
 import 'package:riders_app/views/field/feild.dart';
 
@@ -21,7 +23,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
   @override
   void initState() {
     type = widget.type;
-    print("Kithu" + type);
+
     super.initState();
   }
 
@@ -453,12 +455,19 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          DeptAssignmentScreen()),
-                                );
+                                if (feild[index]['Name'] == '1') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => DomesticScreen()),
+                                  );
+                                } else {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              DeptAssignmentScreen()));
+                                }
                               },
                               child: Row(
                                 mainAxisAlignment:
@@ -500,7 +509,6 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                             "56:04",
                                             textAlign: TextAlign.center,
                                             style: TextStyle(
-                                              
                                               color: kPrimaryWhiteColor,
                                               fontSize: 14.0,
                                             ),
