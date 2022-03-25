@@ -8,6 +8,7 @@ import 'package:riders_app/views/Verification%20Screen/taskVerification.dart';
 import 'package:riders_app/views/deptAssignment/DomesticScreen.dart';
 import 'package:riders_app/views/deptAssignment/deptAssignment.dart';
 import 'package:riders_app/views/field/feild.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class DeptAssignID extends StatefulWidget {
   final String type;
@@ -23,9 +24,48 @@ class __DeptAssignIDState extends State<DeptAssignID> {
   @override
   void initState() {
     type = widget.type;
-
+    // _bluetick();
+    //  _getUserDetails();
     super.initState();
   }
+
+  // String? coloumntype ='';
+
+  // void _getUserDetails() async {
+  //   SharedPreferences localStorage = await SharedPreferences.getInstance();
+  //   coloumntype = localStorage.getString("coloumntype")!;
+  //   print("homepagetoken" + coloumntype!);
+
+  // }
+
+  // void _bluetick() {
+
+  //   if (type.contains("#")) {
+  //     tick1 = true;
+  //   }
+  //   if (type.contains("IWK ID")) {
+  //     tick2 = true;
+  //   }
+  //   if (type.contains("San")) {
+  //     tick3 = true;
+  //   }
+  //   if (type.contains("Owner 1")) {
+  //     tick4 = true;
+  //   }
+  //   if (type.contains("Address")) {
+  //     tick5 = true;
+  //   }
+  //   if (type.contains("Assign Date")) {
+  //     tick6 = true;
+  //   }
+  //   if (type.contains("Payment Update")) {
+  //     tick7 = true;
+  //   }
+
+  //   if (type.contains("Status")) {
+  //     tick8 = true;
+  //   }
+  // }
 
   final List<Map> feild = [
     {
@@ -99,7 +139,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 7 / 10,
                       ),
-                      tick1 == true || type.contains("#")
+                      tick1 == true
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -125,7 +165,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("IWK ID"),
-                      tick2 == true || type.contains("IWK ID")
+                      tick2 == true
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -151,7 +191,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("San"),
-                      tick3 == true || type.contains("San")
+                      tick3 == true
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -177,7 +217,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Owner 1"),
-                      tick4 == true || type.contains("Owner 1")
+                      tick4 == true
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -203,7 +243,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Address"),
-                      tick5 == true || type.contains("Address")
+                      tick5 == true
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -229,7 +269,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Assign Date"),
-                      tick6 == true || type.contains("Assign Date")
+                      tick6 == true
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -255,7 +295,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text("Payment Update"),
-                      tick7 == true || type.contains("Payment Update")
+                      tick7 == true
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -280,7 +320,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       const Text("Status"),
-                      tick8 == true || type.contains("Status")
+                      tick8 == true
                           ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
@@ -291,12 +331,29 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                 children: [
                   CupertinoActionSheetAction(
                       child: const Text("Select"),
-                      onPressed: () {
+                      onPressed: () async {
+                        // SharedPreferences localStorage =
+                        //     await SharedPreferences.getInstance();
+
+                        // var value = Arr.reduce(
+                        //   (value, element) {
+                        //     return value + "," + element;
+                        //   },
+                        // );
+
+                        // localStorage.setString('coloumntype', value);
+                        
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  DeptAssignID(type: Arr.toString())),
+                            builder: (context) => DeptAssignID(
+                              type: Arr.reduce(
+                                (value, element) {
+                                  return value + "," + element;
+                                },
+                              ),
+                            ),
+                          ),
                         );
                       }),
                   Divider(
@@ -305,11 +362,10 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                   CupertinoActionSheetAction(
                       child: const Text("Cancel"),
                       onPressed: () {
-                          Navigator.push(
+                        Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) =>
-                                  DeptAssignID(type: '')),
+                              builder: (context) => DeptAssignID(type: '')),
                         );
                       }),
                 ],
@@ -424,7 +480,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                         children: [
                           SizedBox(
                             width: screenWidth * 0.6,
-                            child: type == []
+                            child: type == null
                                 ? SizedBox()
                                 : Text(
                                     type,
