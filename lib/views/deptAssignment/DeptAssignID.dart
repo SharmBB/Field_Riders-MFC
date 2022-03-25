@@ -8,15 +8,34 @@ import 'package:riders_app/views/deptAssignment/deptAssignment.dart';
 import 'package:riders_app/views/field/feild.dart';
 
 class DeptAssignID extends StatefulWidget {
-  const DeptAssignID({Key? key}) : super(key: key);
+  final String type;
+  const DeptAssignID({Key? key, required this.type}) : super(key: key);
 
   @override
   State<DeptAssignID> createState() => __DeptAssignIDState();
 }
 
 class __DeptAssignIDState extends State<DeptAssignID> {
+  late String type;
+
+  @override
+  void initState() {
+    type = widget.type;
+    print("Kithu" + type);
+    super.initState();
+  }
+
   final List<Map> feild = [
     {
+      'Name': '1',
+      'SAN': '27933712',
+      'Owner 1': 'ABIDEN BIN SABARI',
+      "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
+      "Date Assign": '22/02/2022',
+      "Payment Update": "-",
+      'Status': 'Outstanding'
+    },
+    {
       'Name': '10825',
       'SAN': '27933712',
       'Owner 1': 'ABIDEN BIN SABARI',
@@ -34,24 +53,18 @@ class __DeptAssignIDState extends State<DeptAssignID> {
       "Payment Update": "-",
       'Status': 'Outstanding'
     },
-  ];
-
-  String imginitvalue = 'IWK ID, Adress';
-  final imgtype = [
-    'IWK ID, Adress',
-    'IWK ID, Adress 2',
-    'IWK ID, Adress 3',
-    'IWK ID, Adress 4',
   ];
 
   bool tick1 = false;
-   bool tick2 = false;
-    bool tick3 = false;
-     bool tick4 = false;
-      bool tick5 = false;
-       bool tick6 = false;
-        bool tick7 = false;
-         bool tick8 = false;
+  bool tick2 = false;
+  bool tick3 = false;
+  bool tick4 = false;
+  bool tick5 = false;
+  bool tick6 = false;
+  bool tick7 = false;
+  bool tick8 = false;
+
+  List Arr = [];
 
   actionsheetSearch(BuildContext context) {
     showCupertinoModalPopup(
@@ -66,8 +79,13 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     setState(() {
                       if (tick1 == false) {
                         tick1 = true;
+
+                        Arr.add("#");
+                        print(Arr.toString());
                       } else {
                         tick1 = false;
+                        Arr.remove("#");
+                        print(Arr.toString());
                       }
                     });
                   },
@@ -75,14 +93,12 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("#"),
+                      Text("#"),
                       SizedBox(
                         width: MediaQuery.of(context).size.width * 7 / 10,
                       ),
                       tick1 == true
-                          ? Icon(
-                             Icons.check,color: Colors.blue
-                            )
+                          ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
                   ),
@@ -92,8 +108,13 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     setState(() {
                       if (tick2 == false) {
                         tick2 = true;
+
+                        Arr.add("IWK ID");
+                        print(Arr.toString());
                       } else {
                         tick2 = false;
+                        Arr.remove("IWK ID");
+                        print(Arr.toString());
                       }
                     });
                   },
@@ -101,11 +122,9 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("IWK ID"),
+                      Text("IWK ID"),
                       tick2 == true
-                          ? Icon(
-                              Icons.check,color: Colors.blue
-                            )
+                          ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
                   ),
@@ -115,8 +134,13 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     setState(() {
                       if (tick3 == false) {
                         tick3 = true;
+
+                        Arr.add("San");
+                        print(Arr.toString());
                       } else {
                         tick3 = false;
+                        Arr.remove("San");
+                        print(Arr.toString());
                       }
                     });
                   },
@@ -124,11 +148,9 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("San"),
+                      Text("San"),
                       tick3 == true
-                          ? Icon(
-                        Icons.check,color: Colors.blue
-                            )
+                          ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
                   ),
@@ -138,8 +160,13 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     setState(() {
                       if (tick4 == false) {
                         tick4 = true;
+
+                        Arr.add("Owner 1");
+                        print(Arr.toString());
                       } else {
                         tick4 = false;
+                        Arr.remove("Owner 1");
+                        print(Arr.toString());
                       }
                     });
                   },
@@ -147,11 +174,9 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Owner 1"),
+                      Text("Owner 1"),
                       tick4 == true
-                          ? Icon(
-                         Icons.check,color: Colors.blue
-                            )
+                          ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
                   ),
@@ -161,8 +186,13 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     setState(() {
                       if (tick5 == false) {
                         tick5 = true;
+
+                        Arr.add("Address");
+                        print(Arr.toString());
                       } else {
                         tick5 = false;
+                        Arr.remove("Owner 1");
+                        print(Arr.toString());
                       }
                     });
                   },
@@ -170,11 +200,9 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Address"),
+                      Text("Address"),
                       tick5 == true
-                          ? Icon(
-                    Icons.check,color: Colors.blue
-                            )
+                          ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
                   ),
@@ -184,8 +212,13 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     setState(() {
                       if (tick6 == false) {
                         tick6 = true;
+
+                        Arr.add("Assign Date");
+                        print(Arr.toString());
                       } else {
                         tick6 = false;
+                        Arr.remove("Owner 1");
+                        print(Arr.toString());
                       }
                     });
                   },
@@ -193,11 +226,9 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Assign Date"),
+                      Text("Assign Date"),
                       tick6 == true
-                          ? Icon(
-                          Icons.check,color: Colors.blue
-                            )
+                          ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
                   ),
@@ -207,8 +238,13 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     setState(() {
                       if (tick7 == false) {
                         tick7 = true;
+
+                        Arr.add("Payment Update");
+                        print(Arr.toString());
                       } else {
                         tick7 = false;
+                        Arr.remove("Payment Update");
+                        print(Arr.toString());
                       }
                     });
                   },
@@ -216,11 +252,9 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text("Payment Update"),
+                      Text("Payment Update"),
                       tick7 == true
-                          ? Icon(
-                                 Icons.check,color: Colors.blue
-                            )
+                          ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
                   ),
@@ -230,8 +264,12 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     setState(() {
                       if (tick8 == false) {
                         tick8 = true;
+
+                        Arr.add("Status");
+                        print(Arr.toString());
                       } else {
                         tick8 = false;
+                        Arr.remove("Status");
                       }
                     });
                   },
@@ -241,17 +279,33 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                     children: [
                       const Text("Status"),
                       tick8 == true
-                          ? Icon(
-                                   Icons.check,color: Colors.blue
-                            )
+                          ? Icon(Icons.check, color: Colors.blue)
                           : SizedBox(),
                     ],
                   ),
                 ),
               ],
-              cancelButton: CupertinoActionSheetAction(
-                child: const Text("Cancel"),
-                onPressed: () => Navigator.of(context).pop(),
+              cancelButton: Column(
+                children: [
+                  CupertinoActionSheetAction(
+                      child: const Text("Select"),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  DeptAssignID(type: Arr.toString())),
+                        );
+                      }),
+                  Divider(
+                    thickness: 5,
+                  ),
+                  CupertinoActionSheetAction(
+                      child: const Text("Cancel"),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      }),
+                ],
               ),
             );
           },
@@ -357,11 +411,22 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                         border: Border.all(color: Colors.deepPurple),
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      height: 45,
                       width: MediaQuery.of(context).size.width,
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          SizedBox(
+                            width: screenWidth * 0.6,
+                            child: type == null
+                                ? SizedBox()
+                                : Text(
+                                    type,
+                                    style: TextStyle(
+                                      color: primaryColor,
+                                      fontSize: 14.0,
+                                    ),
+                                  ),
+                          ),
                           IconButton(
                             icon: const Icon(
                               Icons.keyboard_arrow_down,
@@ -396,23 +461,60 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                 );
                               },
                               child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
-                                  Text(
-                                    "Idk Id:",
-                                    style: TextStyle(
-                                      color: kPrimaryPurpleColor,
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Idk Id: ",
+                                        style: TextStyle(
+                                          color: kPrimaryPurpleColor,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      Text(
+                                        feild[index]['Name'],
+                                        style: TextStyle(
+                                          color: kPrimaryPurpleColor,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                  Text(
-                                    feild[index]['Name'],
-                                    style: TextStyle(
-                                      color: kPrimaryPurpleColor,
-                                      fontSize: 18.0,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Container(
+                                        width: 70,
+                                        decoration: BoxDecoration(
+                                            color: kPrimaryPurpleColor,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(20))),
+                                        child: Padding(
+                                          padding: EdgeInsets.all(5),
+                                          child: Text(
+                                            "56:04",
+                                            textAlign: TextAlign.center,
+                                            style: TextStyle(
+                                              
+                                              color: kPrimaryWhiteColor,
+                                              fontSize: 14.0,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.timer_outlined,
+                                          color: kPrimaryPurpleColor,
+                                        ),
+                                        onPressed: () {},
+                                      ),
+                                    ],
                                   ),
                                 ],
                               ),

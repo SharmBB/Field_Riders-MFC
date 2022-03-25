@@ -3,6 +3,7 @@ import 'dart:ffi';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/views/deptAssignment/DeptAssignID.dart';
 import 'package:riders_app/views/deptAssignment/reusabletextfield.dart';
 
 class DeptAssignmentScreen extends StatefulWidget {
@@ -148,10 +149,10 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
             size: 25.0,
           ),
           onPressed: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => DeptAssignID()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DeptAssignID(type: '',)),
+            );
           },
         ),
         actions: [

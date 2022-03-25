@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/views/HomeScreen/HomePage.dart';
 import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
 import 'package:riders_app/views/deptAssignment/DeptAssignID.dart';
 import 'package:riders_app/views/deptAssignment/deptAssignment.dart';
@@ -50,7 +51,7 @@ class _FieldScreenState extends State<FieldScreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => TaskManagementScreen()),
+              MaterialPageRoute(builder: (context) => HomeScreen()),
             );
           },
         ),
@@ -258,14 +259,15 @@ class _FieldScreenState extends State<FieldScreen> {
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   SizedBox(
-                                    width: 100.0,
+                                    width: 120.0,
                                     child: OutlinedButton(
                                       onPressed: () {
-                                         Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => DeptAssignID()),
-                  );
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  TaskManagementScreen()),
+                                        );
                                       },
                                       style: OutlinedButton.styleFrom(
                                         side: BorderSide(
@@ -279,11 +281,43 @@ class _FieldScreenState extends State<FieldScreen> {
                                         ),
                                       ),
                                       child: Text(
-                                        "Manage",
+                                        "Bulk Update",
                                         style: TextStyle(
                                           color: kPrimaryPurpleColor,
                                           fontSize: 16.0,
                                           fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(width: 20),
+                                  SizedBox(
+                                    width: 100.0,
+                                    child: TextButton(
+                                      onPressed: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => DeptAssignID(
+                                              type: '',
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      style: ButtonStyle(
+                                          backgroundColor:
+                                              MaterialStateProperty.all(
+                                                  Colors.deepPurple),
+                                          shape: MaterialStateProperty.all(
+                                              RoundedRectangleBorder(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          20)))),
+                                      child: Text(
+                                        "Manage",
+                                        style: TextStyle(
+                                          color: kPrimaryWhiteColor,
+                                          fontSize: 16.0,
                                         ),
                                       ),
                                     ),
@@ -294,7 +328,6 @@ class _FieldScreenState extends State<FieldScreen> {
                                 height: 20,
                               ),
                               Divider(),
-                              
                             ],
                           ),
                         ),
