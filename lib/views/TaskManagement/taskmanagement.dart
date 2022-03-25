@@ -449,7 +449,13 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
         ],
       ),
       backgroundColor: Colors.white,
-      body: SingleChildScrollView(
+      body: NotificationListener<OverscrollIndicatorNotification>(
+          onNotification: (OverscrollIndicatorNotification overscroll) {
+            // ignore: deprecated_member_use
+            overscroll.disallowGlow();
+            return false;
+          }, 
+          child:SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 35),
           child: Column(
@@ -1029,6 +1035,8 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
           ),
         ),
       ),
+      ),
     );
+  
   }
 }
