@@ -1,7 +1,9 @@
 import 'dart:ffi';
+import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/deptAssignment/DeptAssignID.dart';
 import 'package:riders_app/views/deptAssignment/reusabletextfield.dart';
@@ -46,6 +48,8 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
   ];
   String drcodeinitvalue = 'code 1';
   final drcodetype = ['code 1', 'code 2', 'code 3', 'code 4', 'code 5'];
+
+    TextEditingController imagecontroller = TextEditingController();
 
   TextEditingController excludecontroller = TextEditingController();
   TextEditingController iwkspecialcontroller = TextEditingController();
@@ -111,6 +115,59 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
   TextEditingController businessclosecontroller = TextEditingController();
   TextEditingController remarkcontroller = TextEditingController();
 
+
+  File? _image;
+  late Future<String> fileurl;
+  bool image = false;
+
+
+  _getFromCamera() async {
+    PickedFile? pickedFile = await ImagePicker()
+        .getImage(source: ImageSource.camera, imageQuality: 50
+            // maxWidth: 1800,
+            // maxHeight: 1800,
+            );
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+        //uploadFile();
+        image = true;
+          //file path upload
+        if (_image != null) {
+          imagecontroller.text = "Sucessful Uploaded";
+        } else {
+          imagecontroller.text = "Unscessful Upload";
+        }
+
+      });
+    }
+  }
+
+  _getFromGallery() async {
+    PickedFile? pickedFile = await ImagePicker()
+        .getImage(source: ImageSource.gallery, imageQuality: 50
+            // maxWidth: 1800,
+            // maxHeight: 1800,
+            );
+    if (pickedFile != null) {
+      setState(() {
+        // _image = image;
+        _image = File(pickedFile.path);
+        print(_image);
+        print('------');
+        print(pickedFile);
+        //uploadFile();
+        image = true;
+                 //file path upload
+        if (_image != null) {
+          imagecontroller.text = "Sucessful Uploaded";
+        } else {
+          imagecontroller.text = "Unscessful Upload";
+        }
+      });
+    }
+  }
+
   bool click = true;
   actionsheetFile(BuildContext context) {
     showCupertinoModalPopup(
@@ -119,11 +176,16 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
         return CupertinoActionSheet(
           actions: [
             CupertinoActionSheetAction(
-                onPressed: () {},
+                onPressed: () {
+                  _getFromCamera();
+                  
+                },
                 child: const Align(
                     alignment: Alignment.topLeft, child: Text("Camera"))),
             CupertinoActionSheetAction(
-                onPressed: () {},
+                onPressed: () {
+                   _getFromGallery();
+                },
                 child: const Align(
                     alignment: Alignment.topLeft, child: Text("Upload"))),
           ],
@@ -283,8 +345,12 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                           child: Padding(
                             padding: const EdgeInsets.only(left: 30, bottom: 9),
                             child: TextFormField(
+                               readOnly: true,
+                               keyboardType: TextInputType.none,
+                               controller: imagecontroller,
                               decoration: InputDecoration(
                                   border: InputBorder.none,
+                                  
                                   hintStyle: TextStyle(fontSize: 12),
                                   suffixIcon: IconButton(
                                       onPressed: () {

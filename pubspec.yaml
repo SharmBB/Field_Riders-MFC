@@ -38,10 +38,14 @@ dependencies:
   toggle_switch: ^1.4.0
   shared_preferences: ^2.0.13
      # scan QR Code
-  flutter_barcode_scanner: ^1.0.1
+  flutter_barcode_scanner: ^2.0.0
+  
 
   # create QR Code
   barcode_widget: ^1.5.0
+  image_picker: ^0.8.2
+  intl: ^0.17.0
+  
   
 
 dev_dependencies:

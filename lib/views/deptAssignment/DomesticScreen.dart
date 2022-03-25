@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:riders_app/_helpers/constants.dart';
 
 import 'package:riders_app/views/deptAssignment/reusabletextfield.dart';
@@ -14,6 +17,7 @@ class DomesticScreen extends StatefulWidget {
 class _DomesticScreenState extends State<DomesticScreen> {
   final _formKey = GlobalKey<FormState>();
 
+  TextEditingController imagecontroller = TextEditingController();
   TextEditingController correctownernamecontroller = TextEditingController();
   TextEditingController ownertelnocontroller = TextEditingController();
   TextEditingController tenantnamecontroller = TextEditingController();
@@ -142,6 +146,57 @@ class _DomesticScreenState extends State<DomesticScreen> {
     '46 DR50 WELFARE SOCIETY-CANT AFFORD TO PAY',
   ];
 
+  File? _image;
+  late Future<String> fileurl;
+  bool image = false;
+
+
+  _getFromCamera() async {
+    PickedFile? pickedFile = await ImagePicker()
+        .getImage(source: ImageSource.camera, imageQuality: 50
+            // maxWidth: 1800,
+            // maxHeight: 1800,
+            );
+    if (pickedFile != null) {
+      setState(() {
+        _image = File(pickedFile.path);
+        //uploadFile();
+        image = true;
+          //file path upload
+        if (_image != null) {
+          imagecontroller.text = "Sucessful Uploaded";
+        } else {
+          imagecontroller.text = "Unscessful Upload";
+        }
+      });
+    }
+  }
+
+  _getFromGallery() async {
+    PickedFile? pickedFile = await ImagePicker()
+        .getImage(source: ImageSource.gallery, imageQuality: 50
+            // maxWidth: 1800,
+            // maxHeight: 1800,
+            );
+    if (pickedFile != null) {
+      setState(() {
+        // _image = image;
+        _image = File(pickedFile.path);
+        print(_image);
+        print('------');
+        print(pickedFile);
+        //uploadFile();
+        image = true;
+          //file path upload
+        if (_image != null) {
+          imagecontroller.text = "Sucessful Uploaded";
+        } else {
+          imagecontroller.text = "Unscessful Upload";
+        }
+      });
+    }
+  }
+
   actionsheetTakePhoto(BuildContext context) {
     showCupertinoModalPopup(
       context: context,
@@ -149,11 +204,15 @@ class _DomesticScreenState extends State<DomesticScreen> {
         return CupertinoActionSheet(
           actions: [
             CupertinoActionSheetAction(
-                onPressed: () {},
+                onPressed: () {
+                   _getFromCamera();
+                },
                 child: const Align(
                     alignment: Alignment.topLeft, child: Text("Camera"))),
             CupertinoActionSheetAction(
-                onPressed: () {},
+                onPressed: () {
+                   _getFromGallery();
+                },
                 child: const Align(
                     alignment: Alignment.topLeft, child: Text("Upload"))),
           ],
@@ -323,6 +382,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                   const EdgeInsets.only(left: 30, bottom: 9),
                               child: TextFormField(
                                 readOnly: true,
+                                 keyboardType: TextInputType.none,
+                                controller: imagecontroller,
                                 decoration: InputDecoration(
                                     border: InputBorder.none,
                                     hintStyle: TextStyle(fontSize: 12),
