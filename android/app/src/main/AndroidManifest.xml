@@ -1,5 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.riders_app">
+    <uses-permission android:name="android.permission.INTERNET"/>
    <application
         android:label="riders_app"
         android:name="${applicationName}"
