@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/views/deptAssignment/DeptAssignID.dart';
 
 import 'package:riders_app/views/deptAssignment/reusabletextfield.dart';
 
@@ -229,6 +230,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -240,10 +242,10 @@ class _DomesticScreenState extends State<DomesticScreen> {
             size: 25.0,
           ),
           onPressed: () {
-            // Navigator.push(
-            //   context,
-            //   MaterialPageRoute(builder: (context) => DeptAssignID()),
-            // );
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => DeptAssignID(type: '',)),
+            );
           },
         ),
         actions: [
