@@ -483,46 +483,46 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
                 "* Please Enter all required information to process task by batch ",
                 style: TextStyle(fontSize: 12, color: Colors.grey),
               ),
-              const SizedBox(
-                height: 20,
-              ),
+              // const SizedBox(
+              //   height: 20,
+              // ),
               // Drop Down Assignment
-              const Text(
-                "Assignment",
-                style: TextStyle(color: Colors.grey, fontSize: 12),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.deepPurple),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                height: 45,
-                width: MediaQuery.of(context).size.width,
-                child: DropdownButton<String>(
-                  underline: Container(),
-                  icon: const Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Colors.deepPurple,
-                  ),
-                  value: assigninitvalue,
-                  isExpanded: true,
-                  items: assignments.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (String? value) {
-                    setState(() {
-                      assigninitvalue = value!;
-                    });
-                  },
-                ),
-              ),
+              // const Text(
+              //   "Assignment",
+              //   style: TextStyle(color: Colors.grey, fontSize: 12),
+              // ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // Container(
+              //   padding: const EdgeInsets.only(left: 20, right: 20),
+              //   decoration: BoxDecoration(
+              //     border: Border.all(color: Colors.deepPurple),
+              //     borderRadius: BorderRadius.circular(20),
+              //   ),
+              //   height: 45,
+              //   width: MediaQuery.of(context).size.width,
+              //   child: DropdownButton<String>(
+              //     underline: Container(),
+              //     icon: const Icon(
+              //       Icons.keyboard_arrow_down,
+              //       color: Colors.deepPurple,
+              //     ),
+              //     value: assigninitvalue,
+              //     isExpanded: true,
+              //     items: assignments.map((String value) {
+              //       return DropdownMenuItem<String>(
+              //         value: value,
+              //         child: Text(value),
+              //       );
+              //     }).toList(),
+              //     onChanged: (String? value) {
+              //       setState(() {
+              //         assigninitvalue = value!;
+              //       });
+              //     },
+              //   ),
+              // ),
               const SizedBox(
                 height: 30,
               ),

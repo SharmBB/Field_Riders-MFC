@@ -4,14 +4,14 @@ import 'dart:math';
 
 import 'package:riders_app/_helpers/constants.dart';
 
-class LeaderBoard extends StatefulWidget {
-  const LeaderBoard({Key? key}) : super(key: key);
+class LeaderBoardScreen extends StatefulWidget {
+  const LeaderBoardScreen({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _LeaderBoardScreenState createState() => _LeaderBoardScreenState();
 }
 
-class _HomePageState extends State<LeaderBoard> {
+class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
   final List<Map<String, dynamic>> _LeaderBoard = [
     {"id": 01, "name": "Andy", "Scores": "1500 points"},
     {"id": 02, "name": "Aragon", "Scores": "1500 points"},

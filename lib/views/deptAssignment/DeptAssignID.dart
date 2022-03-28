@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
@@ -342,7 +343,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                         // );
 
                         // localStorage.setString('coloumntype', value);
-                        
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -566,13 +567,19 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                                 Radius.circular(20))),
                                         child: Padding(
                                           padding: EdgeInsets.all(5),
-                                          child: Text(
-                                            "56:04",
-                                            textAlign: TextAlign.center,
-                                            style: TextStyle(
-                                              color: kPrimaryWhiteColor,
-                                              fontSize: 14.0,
-                                            ),
+                                          child: CustomTimer(
+                                            from: Duration(minutes: 59),
+                                            to: Duration(hours: 0),
+                                            onBuildAction:
+                                                CustomTimerAction.auto_start,
+                                            builder: (CustomTimerRemainingTime
+                                                remaining) {
+                                              return Text(
+                                                "${remaining.minutes}:${remaining.seconds}",
+                                                style:
+                                                    TextStyle(fontSize: 14.0,color: kPrimaryWhiteColor),
+                                              );
+                                            },
                                           ),
                                         ),
                                       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/Components/HomePageButton.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/views/Leaderboard/Leaderboard.dart';
 import 'package:riders_app/views/Login/login.dart';
 import 'package:riders_app/views/QR%20Screen/QR_scan.dart';
 
@@ -66,12 +67,12 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(height: screenHeight * (0.5 / 20)),
               HomePageButyton(
-                text: "Manage Tasks",
+                text: "Score Board",
                 function: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => TaskManagementScreen()),
+                        builder: (context) => LeaderBoardScreen()),
                   );
                 },
               ),
