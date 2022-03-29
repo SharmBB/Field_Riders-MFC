@@ -539,7 +539,10 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                               DeptAssignmentScreen()));
                                 }
                               },
-                              child: Row(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                                 children: [
@@ -602,10 +605,10 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                   ),
                                 ],
                               ),
-                            ),
+                           
                             Padding(
                               padding: EdgeInsets.only(
-                                top: 40,
+                                top: 20,
                                 bottom: 20,
                               ),
                               child: Column(
@@ -762,6 +765,10 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                   SizedBox(
                                     height: 30,
                                   ),
+                                ],
+                              ),
+                              ),
+                
                                   Divider(),
                                 ],
                               ),
