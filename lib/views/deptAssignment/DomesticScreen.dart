@@ -437,7 +437,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               items: occupiertype.map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value),
+                                  child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
                                 );
                               }).toList(),
                               onChanged: (String? value) {
@@ -485,7 +485,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               items: ownernamecorrect.map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value),
+                                  child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
                                 );
                               }).toList(),
                               onChanged: (String? value) {
@@ -622,7 +622,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               items: ownernamecorrect.map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value),
+                                  child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
                                 );
                               }).toList(),
                               onChanged: (String? value) {
@@ -669,7 +669,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               items: propertydomestictype.map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value),
+                                  child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
                                 );
                               }).toList(),
                               onChanged: (String? value) {
@@ -716,7 +716,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               items: drcodetype.map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value),
+                                  child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
                                 );
                               }).toList(),
                               onChanged: (String? value) {

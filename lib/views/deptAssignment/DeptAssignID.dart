@@ -8,6 +8,7 @@ import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/Verification%20Screen/taskVerification.dart';
 import 'package:riders_app/views/deptAssignment/DomesticScreen.dart';
 import 'package:riders_app/views/deptAssignment/deptAssignment.dart';
+import 'package:riders_app/views/deptAssignment/feildTest.dart';
 import 'package:riders_app/views/field/feild.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -88,7 +89,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
       'Status': 'Outstanding'
     },
     {
-      'Name': '10825',
+      'Name': '99999',
       'SAN': '27933712',
       'Owner 1': 'ABIDEN BIN SABARI',
       "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
@@ -523,7 +524,14 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                     MaterialPageRoute(
                                         builder: (context) => DomesticScreen()),
                                   );
-                                } else {
+                                }  else if (feild[index]['Name'] == '99999') {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => FeildTest()),
+                                  );
+                                }
+                                else {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(

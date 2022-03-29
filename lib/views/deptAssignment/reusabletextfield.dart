@@ -15,7 +15,7 @@ Widget textField(title, controller) {
         height: 10,
       ),
       TextFormField(
-        style: const TextStyle(fontSize: 16, color: Colors.black),
+        style: const TextStyle(fontSize: 14, color: Colors.black),
         cursorColor: kPrimaryPurpleColor,
         keyboardType: TextInputType.text,
         validator: (value) {

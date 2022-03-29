@@ -309,7 +309,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         items: imgtype.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value),
+                            child: Text(value , style: TextStyle(fontSize: 14, color: primaryColor)),
                           );
                         }).toList(),
                         onChanged: (String? value) {
@@ -718,7 +718,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         items: ownertype.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value),
+                            child: Text(value , style: TextStyle(fontSize: 14, color: primaryColor)),
                           );
                         }).toList(),
                         onChanged: (String? value) {
@@ -832,7 +832,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         items: propertytype.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value),
+                            child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
                           );
                         }).toList(),
                         onChanged: (String? value) {
@@ -880,7 +880,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         items: businesstype.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value),
+                            child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
                           );
                         }).toList(),
                         onChanged: (String? value) {
@@ -922,7 +922,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         items: drcodetype.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value),
+                            child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
                           );
                         }).toList(),
                         onChanged: (String? value) {
