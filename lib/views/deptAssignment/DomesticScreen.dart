@@ -324,7 +324,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
                         height: 20,
                       ),
                       const Text(
-                        "Owner1:NEO HOO @ NEW HOW . (If Owner 2 is available show else don't need )",
+                        "Owner1:NEO HOO",
+                        // "@ NEW HOW . (If Owner 2 is available show else don't need )",
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
