@@ -331,16 +331,16 @@ class _DomesticScreenState extends State<DomesticScreen> {
                             fontWeight: FontWeight.w600,
                             color: kPrimaryPurpleColor),
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        "(Address1,Address2,Address3,Address4) 4 JALAN TIMOR 12,TAMAN TIMOR,81300 JOHOR BAHRU,JOHOR",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryPurpleColor),
-                      ),
+                      // const SizedBox(
+                      //   height: 20,
+                      // ),
+                      // const Text(
+                      //   "(Address1,Address2,Address3,Address4) 4 JALAN TIMOR 12,TAMAN TIMOR,81300 JOHOR BAHRU,JOHOR",
+                      //   style: TextStyle(
+                      //       fontSize: 15,
+                      //       fontWeight: FontWeight.w600,
+                      //       color: kPrimaryPurpleColor),
+                      // ),
                       const SizedBox(
                         height: 20,
                       ),
