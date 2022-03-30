@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 
 class CallApi {
   var baseurl = '';
-  var token = "";
+  var token ;
   // Auth Api
   var _urlAuth = 'http://mangakiku-api.moodfor.codes/api/';
 

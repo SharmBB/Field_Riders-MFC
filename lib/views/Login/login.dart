@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -5,6 +7,7 @@ import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/api/api.dart';
 import 'package:riders_app/views/HomeScreen/HomePage.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -239,22 +242,29 @@ class _LoginScreenState extends State<LoginScreen> {
       var res = await CallApi().authData(data, 'login');
       var body = json.decode(res.body);
       if (body["errorMessage"] == false) {
-        if (body['message']['token'] != null) {
-          _scaffoldKey.currentState!.showSnackBar(
-            SnackBar(
-              content: Text(
-                "Login Sucessfully !!",
-                style: TextStyle(color: Colors.white),
-              ),
-              backgroundColor: kPrimaryPurpleColor,
-            ),
-          );
+             SharedPreferences localStorage =
+              await SharedPreferences.getInstance();
+
+          var token = body['message']['token'];
+          print(token);
+
+          var userId = body['message']["user"]["id"];
+          print(userId);
+
+          print("------------------------------------");
+          localStorage.setString('token', token);
+          print(token);
+           print(userId);
+
+          localStorage.setInt('userId', userId);
+
           print(body['message']);
 
           Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
+            MaterialPageRoute(
+                builder: (BuildContext context) => HomeScreen()),
           );
-        }
+        
       } else {
         setState(() {
           bodyError = body['message'];

@@ -10,7 +10,7 @@ import 'package:riders_app/views/deptAssignment/DomesticScreen.dart';
 import 'package:riders_app/views/deptAssignment/deptAssignment.dart';
 import 'package:riders_app/views/deptAssignment/feildTest.dart';
 import 'package:riders_app/views/field/feild.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class DeptAssignID extends StatefulWidget {
   final String type;
@@ -26,48 +26,11 @@ class __DeptAssignIDState extends State<DeptAssignID> {
   @override
   void initState() {
     type = widget.type;
-    // _bluetick();
-    //  _getUserDetails();
+
     super.initState();
   }
 
-  // String? coloumntype ='';
 
-  // void _getUserDetails() async {
-  //   SharedPreferences localStorage = await SharedPreferences.getInstance();
-  //   coloumntype = localStorage.getString("coloumntype")!;
-  //   print("homepagetoken" + coloumntype!);
-
-  // }
-
-  // void _bluetick() {
-
-  //   if (type.contains("#")) {
-  //     tick1 = true;
-  //   }
-  //   if (type.contains("IWK ID")) {
-  //     tick2 = true;
-  //   }
-  //   if (type.contains("San")) {
-  //     tick3 = true;
-  //   }
-  //   if (type.contains("Owner 1")) {
-  //     tick4 = true;
-  //   }
-  //   if (type.contains("Address")) {
-  //     tick5 = true;
-  //   }
-  //   if (type.contains("Assign Date")) {
-  //     tick6 = true;
-  //   }
-  //   if (type.contains("Payment Update")) {
-  //     tick7 = true;
-  //   }
-
-  //   if (type.contains("Status")) {
-  //     tick8 = true;
-  //   }
-  // }
 
   final List<Map> feild = [
     {
@@ -333,18 +296,8 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                 children: [
                   CupertinoActionSheetAction(
                       child: const Text("Select"),
-                      onPressed: () async {
-                        // SharedPreferences localStorage =
-                        //     await SharedPreferences.getInstance();
-
-                        // var value = Arr.reduce(
-                        //   (value, element) {
-                        //     return value + "," + element;
-                        //   },
-                        // );
-
-                        // localStorage.setString('coloumntype', value);
-
+                      onPressed: ()  {
+                     
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -447,7 +400,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    "Dept Assignment",
+                    "Assignment",
                     style: TextStyle(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -550,7 +503,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
-                                        "Idk Id: ",
+                                        "IWK Id: ",
                                         style: TextStyle(
                                           color: kPrimaryPurpleColor,
                                           fontSize: 18.0,

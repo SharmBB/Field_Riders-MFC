@@ -1,4 +1,6 @@
-import 'dart:ffi';
+
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -141,6 +143,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
 
       });
     }
+      Navigator.of(context).pop();
   }
 
   _getFromGallery() async {
@@ -166,6 +169,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
         }
       });
     }
+      Navigator.of(context).pop();
   }
 
   bool click = true;
@@ -200,6 +204,8 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
 
   @override
   Widget build(BuildContext context) {
+        var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -336,34 +342,50 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          height: 45,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.deepPurple),
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 30, bottom: 9),
-                            child: TextFormField(
-                               readOnly: true,
-                               keyboardType: TextInputType.none,
-                               controller: imagecontroller,
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  
-                                  hintStyle: TextStyle(fontSize: 12),
-                                  suffixIcon: IconButton(
-                                      onPressed: () {
-                                        actionsheetFile(context);
-                                      },
-                                      icon: Icon(
-                                        Icons.keyboard_arrow_down,
-                                        color: kPrimaryPurpleColor,
-                                      ))),
+                              Container(
+                                height: 200,
+                    width: screenWidth,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(25),
                             ),
-                          ),
-                        ),
+                            child: Padding(
+                              padding: EdgeInsets.all(10),
+                              child:  GestureDetector(
+                onTap: () {
+                          actionsheetFile(context);
+                },
+                              child:    Container(
+                                    child: _image != null
+                                        ? ClipRRect(
+                                            // borderRadius: BorderRadius.circular(5),
+                                            child: Image.file(
+                                              _image!,
+                                                   width: screenWidth * (10 / 20),
+                                              height: screenHeight * (10 / 20),
+                                              fit: BoxFit.fitHeight,
+                                            ),
+                                          )
+                                        : Container(
+                                            decoration: BoxDecoration(
+                                              color: Colors.grey[100],
+                                              // borderRadius: BorderRadius.circular(50)
+                                            ),
+                                             width: screenWidth * (10 / 20),
+                                              height: screenHeight * (10 / 20),
+                                            child: Icon(
+                                              Icons.camera_alt,
+                                              color: Colors.grey[400],
+                                            ),
+                                          ),
+                                  ),
+                                
+                              ),
+                            ),
+                              ),
                       ],
+                            
+  
                     ),
 //
                     const SizedBox(

@@ -4,10 +4,8 @@ import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/Leaderboard/Leaderboard.dart';
 import 'package:riders_app/views/Login/login.dart';
 import 'package:riders_app/views/QR%20Screen/QR_scan.dart';
-
-import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
-import 'package:riders_app/views/deptAssignment/DeptAssignment.dart';
 import 'package:riders_app/views/field/feild.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -52,10 +50,20 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         backgroundColor: kPrimaryWhiteColor,
         body: Center(
-            child: Form(
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+              HomePageButyton(
+                text: "Profile",
+                function: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => LeaderBoardScreen()),
+                  // );
+                },
+              ),
+              SizedBox(height: screenHeight * (0.5 / 20)),
               HomePageButyton(
                 text: "Assignments",
                 function: () {
@@ -76,6 +84,35 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
-            ]))));
+              SizedBox(height: screenHeight * (0.5 / 20)),
+              HomePageButyton(
+                text: "myAttendance",
+                function: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => LeaderBoardScreen()),
+                  // );
+                },
+              ),
+              SizedBox(height: screenHeight * (3 / 20)),
+              HomePageButyton(
+                text: "Logout",
+                function: () async {
+                  try {
+                    SharedPreferences localStorage =
+                        await SharedPreferences.getInstance();
+                    localStorage.remove('token');
+                    localStorage.remove('userId');
+
+                    Navigator.pushReplacement(context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()));
+                  } catch (e) {
+                    print(e);
+                  }
+                },
+              ),
+              SizedBox(height: screenHeight * (0.5 / 20)),
+            ])));
   }
 }

@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -24,7 +26,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
   TextEditingController tenantnamecontroller = TextEditingController();
   TextEditingController remark = TextEditingController();
   TextEditingController remarkcontroller = TextEditingController();
-
+  TextEditingController waterMetercontroller = TextEditingController();
   TextEditingController tenanttelnocontroller = TextEditingController();
 
   String occupierinitvalue = 'Choose';
@@ -32,8 +34,11 @@ class _DomesticScreenState extends State<DomesticScreen> {
     'Choose',
     'Owner',
     'Tenant',
-    'Vacant**(please take photo for watermark)'
+    'Vacant**(please take photo for watermark)',
+    'Closed',
   ];
+
+  bool occupier = false;
 
   String ownernamecorrectinitvalue = 'Choose';
   final ownernamecorrect = ['Choose', 'Yes', 'No'];
@@ -151,7 +156,6 @@ class _DomesticScreenState extends State<DomesticScreen> {
   late Future<String> fileurl;
   bool image = false;
 
-
   _getFromCamera() async {
     PickedFile? pickedFile = await ImagePicker()
         .getImage(source: ImageSource.camera, imageQuality: 50
@@ -163,7 +167,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
         _image = File(pickedFile.path);
         //uploadFile();
         image = true;
-          //file path upload
+        //file path upload
         if (_image != null) {
           imagecontroller.text = "Sucessful Uploaded";
         } else {
@@ -171,6 +175,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
         }
       });
     }
+      Navigator.of(context).pop();
   }
 
   _getFromGallery() async {
@@ -188,7 +193,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
         print(pickedFile);
         //uploadFile();
         image = true;
-          //file path upload
+        //file path upload
         if (_image != null) {
           imagecontroller.text = "Sucessful Uploaded";
         } else {
@@ -196,6 +201,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
         }
       });
     }
+    Navigator.of(context).pop();
   }
 
   actionsheetTakePhoto(BuildContext context) {
@@ -206,13 +212,13 @@ class _DomesticScreenState extends State<DomesticScreen> {
           actions: [
             CupertinoActionSheetAction(
                 onPressed: () {
-                   _getFromCamera();
+                  _getFromCamera();
                 },
                 child: const Align(
                     alignment: Alignment.topLeft, child: Text("Camera"))),
             CupertinoActionSheetAction(
                 onPressed: () {
-                   _getFromGallery();
+                  _getFromGallery();
                 },
                 child: const Align(
                     alignment: Alignment.topLeft, child: Text("Upload"))),
@@ -227,10 +233,13 @@ class _DomesticScreenState extends State<DomesticScreen> {
   }
 
   String? _selectedNationality = '';
+  String? _selectedMeter = '';
 
   @override
   Widget build(BuildContext context) {
-    
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -244,7 +253,10 @@ class _DomesticScreenState extends State<DomesticScreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => DeptAssignID(type: '',)),
+              MaterialPageRoute(
+                  builder: (context) => DeptAssignID(
+                        type: '',
+                      )),
             );
           },
         ),
@@ -322,7 +334,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                         height: 20,
                       ),
                       const Text(
-                        "(Add1,Add2,Add3,Add4) 4 JALAN TIMOR 12,TAMAN TIMOR,81300 JOHOR BAHRU,JOHOR",
+                        "(Address1,Address2,Address3,Address4) 4 JALAN TIMOR 12,TAMAN TIMOR,81300 JOHOR BAHRU,JOHOR",
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
@@ -374,29 +386,42 @@ class _DomesticScreenState extends State<DomesticScreen> {
                             height: 10,
                           ),
                           Container(
-                            height: 45,
+                            height: 200,
+                            width: screenWidth,
                             decoration: BoxDecoration(
                               border: Border.all(color: Colors.deepPurple),
                               borderRadius: BorderRadius.circular(25),
                             ),
                             child: Padding(
-                              padding:
-                                  const EdgeInsets.only(left: 30, bottom: 9),
-                              child: TextFormField(
-                                readOnly: true,
-                                 keyboardType: TextInputType.none,
-                                controller: imagecontroller,
-                                decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintStyle: TextStyle(fontSize: 12),
-                                    suffixIcon: IconButton(
-                                        onPressed: () {
-                                          actionsheetTakePhoto(context);
-                                        },
-                                        icon: const Icon(
-                                          Icons.keyboard_arrow_down,
-                                          color: kPrimaryPurpleColor,
-                                        ))),
+                              padding: EdgeInsets.all(10),
+                              child: GestureDetector(
+                                onTap: () {
+                                  actionsheetTakePhoto(context);
+                                },
+                                child: Container(
+                                  child: _image != null
+                                      ? ClipRRect(
+                                          // borderRadius: BorderRadius.circular(5),
+                                          child: Image.file(
+                                            _image!,
+                                            width: screenWidth * (10 / 20),
+                                            height: screenHeight * (10 / 20),
+                                            fit: BoxFit.fitHeight,
+                                          ),
+                                        )
+                                      : Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[100],
+                                            // borderRadius: BorderRadius.circular(50)
+                                          ),
+                                          width: screenWidth * (10 / 20),
+                                          height: screenHeight * (10 / 20),
+                                          child: Icon(
+                                            Icons.camera_alt,
+                                            color: Colors.grey[400],
+                                          ),
+                                        ),
+                                ),
                               ),
                             ),
                           ),
@@ -437,12 +462,22 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               items: occupiertype.map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
+                                  child: Text(value,
+                                      style: TextStyle(
+                                          fontSize: 14, color: primaryColor)),
                                 );
                               }).toList(),
-                              onChanged: (String? value) {
+                              onChanged: (String? value) async {
                                 setState(() {
                                   occupierinitvalue = value!;
+                                  if (occupierinitvalue ==
+                                      'Vacant**(please take photo for watermark)') {
+                                    occupier = true;
+                                  } else if (occupierinitvalue == 'Closed') {
+                                    occupier = false;
+                                  } else {
+                                    return;
+                                  }
                                 });
                               },
                             ),
@@ -485,7 +520,9 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               items: ownernamecorrect.map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
+                                  child: Text(value,
+                                      style: TextStyle(
+                                          fontSize: 14, color: primaryColor)),
                                 );
                               }).toList(),
                               onChanged: (String? value) {
@@ -558,36 +595,6 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               const Text("Foreigner")
                             ],
                           )
-                          // const Text(
-                          //   'Occupier Nationality:',
-                          //   style: const TextStyle(
-                          //       fontSize: 12, color: Colors.grey),
-                          // ),
-                          // ListTile(
-                          //   leading: Radio<String>(
-                          //     value: 'Malaysian',
-                          //     groupValue: _selectedNationality,
-                          //     onChanged: (value) {
-                          //       setState(() {
-                          //         _selectedNationality = value!;
-                          //       });
-                          //     },
-                          //   ),
-                          //   title: const Text('Malaysian'),
-                          // ),
-                          // ListTile(
-                          //   leading: Radio<String>(
-                          //     value: 'Foreigner',
-                          //     groupValue: _selectedNationality,
-                          //     onChanged: (value) {
-                          //       setState(() {
-                          //         _selectedNationality = value!;
-                          //       });
-                          //     },
-                          //   ),
-                          //   title: const Text('Foreigner'),
-                          // ),
-                          // const SizedBox(height: 20),
                         ],
                       ),
                       // Property Usage DropDown
@@ -622,7 +629,9 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               items: ownernamecorrect.map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
+                                  child: Text(value,
+                                      style: TextStyle(
+                                          fontSize: 14, color: primaryColor)),
                                 );
                               }).toList(),
                               onChanged: (String? value) {
@@ -669,7 +678,9 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               items: propertydomestictype.map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
+                                  child: Text(value,
+                                      style: TextStyle(
+                                          fontSize: 14, color: primaryColor)),
                                 );
                               }).toList(),
                               onChanged: (String? value) {
@@ -716,7 +727,9 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               items: drcodetype.map((String value) {
                                 return DropdownMenuItem<String>(
                                   value: value,
-                                  child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
+                                  child: Text(value,
+                                      style: TextStyle(
+                                          fontSize: 14, color: primaryColor)),
                                 );
                               }).toList(),
                               onChanged: (String? value) {
@@ -782,6 +795,85 @@ class _DomesticScreenState extends State<DomesticScreen> {
                           )
                         ],
                       ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      // Radio Button
+                      occupier == true
+                          ? Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      'If DR05 (VACANT PREMISE), please select below.',
+                                      style: TextStyle(
+                                          fontSize: 12, color: Colors.grey),
+                                    ),
+                                    Row(
+                                      children: [
+                                        Radio<String>(
+                                            value: "Yes - Watermeter",
+                                            groupValue: _selectedMeter,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _selectedMeter = value!;
+                                              });
+                                            }),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        Text("Yes - Watermeter")
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Radio<String>(
+                                            value: "No - Watermeter",
+                                            groupValue: _selectedMeter,
+                                            onChanged: (value) {
+                                              setState(() {
+                                                _selectedMeter = value!;
+                                              });
+                                            }),
+                                        const SizedBox(
+                                          width: 10,
+                                        ),
+                                        const Text("No - Watermeter")
+                                      ],
+                                    )
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 20,
+                                ),
+                                Text(
+                                  "Meter Number",
+                                  style: const TextStyle(
+                                      fontSize: 12, color: Colors.grey),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                Align(
+                                  alignment: Alignment.topLeft,
+                                  child: Container(
+                                    width: 150,
+                                    height: 150,
+                                    decoration: BoxDecoration(
+                                        image: DecorationImage(
+                                          image: AssetImage("assets/meter.png"),
+                                          fit: BoxFit.cover,
+                                        ),
+                                        borderRadius: BorderRadius.all(
+                                            Radius.circular(20.0))),
+                                  ),
+                                ),
+                                textField("", waterMetercontroller),
+                              ],
+                            )
+                          : SizedBox(),
 
                       const SizedBox(
                         height: 50,
