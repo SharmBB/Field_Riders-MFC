@@ -1,6 +1,8 @@
+// ignore_for_file: prefer_const_constructors
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/views/deptAssignment/reusabletextfield.dart';
 
 class TaskManagementScreen extends StatefulWidget {
   const TaskManagementScreen({Key? key}) : super(key: key);
@@ -86,7 +88,7 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
   String NOBinitvalue = 'Select';
   final NOBvalue = [
     'Select',
-    '    NB01-Hardware Shop',
+    'NB01-Hardware Shop',
     'NB02-Tailor Shop',
     'NB03-Laundry / Dry Cleaning',
     'NB04-Malay Restaurant',
@@ -421,6 +423,13 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
 
   String propertyusageinitvalue = 'Select';
   final propertyusagepevalue = ['Select', 'C', 'D'];
+
+  TextEditingController visitdatecontroller = TextEditingController();
+  TextEditingController updatecontroller = TextEditingController();
+  TextEditingController remarkcontroller = TextEditingController();
+  TextEditingController fromcontroller = TextEditingController();
+  TextEditingController tocontroller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -450,593 +459,619 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
       ),
       backgroundColor: Colors.white,
       body: NotificationListener<OverscrollIndicatorNotification>(
-          onNotification: (OverscrollIndicatorNotification overscroll) {
-            // ignore: deprecated_member_use
-            overscroll.disallowGlow();
-            return false;
-          }, 
-          child:SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 35),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              const Text(
-                "Task Management",
-                style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.deepPurple),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const Text(
-                "Batch Process Management",
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              const Text(
-                "* Please Enter all required information to process task by batch ",
-                style: TextStyle(fontSize: 12, color: Colors.grey),
-              ),
-              // const SizedBox(
-              //   height: 20,
-              // ),
-              // Drop Down Assignment
-              // const Text(
-              //   "Assignment",
-              //   style: TextStyle(color: Colors.grey, fontSize: 12),
-              // ),
-              // const SizedBox(
-              //   height: 10,
-              // ),
-              // Container(
-              //   padding: const EdgeInsets.only(left: 20, right: 20),
-              //   decoration: BoxDecoration(
-              //     border: Border.all(color: Colors.deepPurple),
-              //     borderRadius: BorderRadius.circular(20),
-              //   ),
-              //   height: 45,
-              //   width: MediaQuery.of(context).size.width,
-              //   child: DropdownButton<String>(
-              //     underline: Container(),
-              //     icon: const Icon(
-              //       Icons.keyboard_arrow_down,
-              //       color: Colors.deepPurple,
-              //     ),
-              //     value: assigninitvalue,
-              //     isExpanded: true,
-              //     items: assignments.map((String value) {
-              //       return DropdownMenuItem<String>(
-              //         value: value,
-              //         child: Text(value),
-              //       );
-              //     }).toList(),
-              //     onChanged: (String? value) {
-              //       setState(() {
-              //         assigninitvalue = value!;
-              //       });
-              //     },
-              //   ),
-              // ),
-              const SizedBox(
-                height: 30,
-              ),
-              // Dropdown Type of Manage
-
-              const Text(
-                "Type Of Manage",
-                style: TextStyle(color: Colors.grey, fontSize: 12),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Container(
-                padding: EdgeInsets.only(left: 20, right: 20),
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.deepPurple),
-                  borderRadius: BorderRadius.circular(20),
+        onNotification: (OverscrollIndicatorNotification overscroll) {
+          // ignore: deprecated_member_use
+          overscroll.disallowGlow();
+          return false;
+        },
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 35),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                const Text(
+                  "Task Management",
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.deepPurple),
                 ),
-                height: 45,
-                width: MediaQuery.of(context).size.width,
-                child: DropdownButton<String>(
-                  underline: Container(),
-                  icon: const Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Colors.deepPurple,
+                const SizedBox(
+                  height: 15,
+                ),
+                const Text(
+                  "Batch Process Management",
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+                const SizedBox(
+                  height: 15,
+                ),
+                const Text(
+                  "* Please Enter all required information to process task by batch ",
+                  style: TextStyle(fontSize: 12, color: Colors.grey),
+                ),
+                // const SizedBox(
+                //   height: 20,
+                // ),
+                // Drop Down Assignment
+                // const Text(
+                //   "Assignment",
+                //   style: TextStyle(color: Colors.grey, fontSize: 12),
+                // ),
+                // const SizedBox(
+                //   height: 10,
+                // ),
+                // Container(
+                //   padding: const EdgeInsets.only(left: 20, right: 20),
+                //   decoration: BoxDecoration(
+                //     border: Border.all(color: Colors.deepPurple),
+                //     borderRadius: BorderRadius.circular(20),
+                //   ),
+                //   height: 45,
+                //   width: MediaQuery.of(context).size.width,
+                //   child: DropdownButton<String>(
+                //     underline: Container(),
+                //     icon: const Icon(
+                //       Icons.keyboard_arrow_down,
+                //       color: Colors.deepPurple,
+                //     ),
+                //     value: assigninitvalue,
+                //     isExpanded: true,
+                //     items: assignments.map((String value) {
+                //       return DropdownMenuItem<String>(
+                //         value: value,
+                //         child: Text(value),
+                //       );
+                //     }).toList(),
+                //     onChanged: (String? value) {
+                //       setState(() {
+                //         assigninitvalue = value!;
+                //       });
+                //     },
+                //   ),
+                // ),
+                const SizedBox(
+                  height: 30,
+                ),
+                // Dropdown Type of Manage
+
+                const Text(
+                  "Type Of Manage",
+                  style: TextStyle(color: Colors.grey, fontSize: 12),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  padding: EdgeInsets.only(left: 20, right: 20),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.deepPurple),
+                    borderRadius: BorderRadius.circular(20),
                   ),
-                  value: manageinitvalue,
-                  isExpanded: true,
-                  items: manage.map((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(value),
-                    );
-                  }).toList(),
-                  onChanged: (String? value) {
-                    setState(() {
-                      manageinitvalue = value!;
-                    });
-                  },
+                  height: 45,
+                  width: MediaQuery.of(context).size.width,
+                  child: DropdownButton<String>(
+                    underline: Container(),
+                    icon: const Icon(
+                      Icons.keyboard_arrow_down,
+                      color: Colors.deepPurple,
+                    ),
+                    value: manageinitvalue,
+                    isExpanded: true,
+                    items: manage.map((String value) {
+                      return DropdownMenuItem<String>(
+                        value: value,
+                        child: Text(value),
+                      );
+                    }).toList(),
+                    onChanged: (String? value) {
+                      setState(() {
+                        manageinitvalue = value!;
+                      });
+                    },
+                  ),
                 ),
-              ),
 
-           
-              // Drop Down DR code
-              manageinitvalue == "DR Code"
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                           const SizedBox(
-                height: 30,
-              ),
-                        const Text(
-                          "DR Code",
-                          style: TextStyle(color: Colors.grey, fontSize: 12),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(left: 20, right: 20),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.deepPurple),
-                            borderRadius: BorderRadius.circular(20),
+                // Drop Down DR code
+                manageinitvalue == "DR Code"
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 20,
                           ),
-                          height: 45,
-                          width: MediaQuery.of(context).size.width,
-                          child: DropdownButton<String>(
-                            underline: Container(),
-                            icon: const Icon(
-                              Icons.keyboard_arrow_down,
-                              color: Colors.deepPurple,
+                          const Text(
+                            "DR Code",
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            value: DRcodeinitvalue,
-                            isExpanded: true,
-                            items: DRcode.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (String? value) {
-                              setState(() {
-                                DRcodeinitvalue = value!;
-                              });
+                            height: 45,
+                            width: MediaQuery.of(context).size.width,
+                            child: DropdownButton<String>(
+                              underline: Container(),
+                              icon: const Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.deepPurple,
+                              ),
+                              value: DRcodeinitvalue,
+                              isExpanded: true,
+                              items: DRcode.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (String? value) {
+                                setState(() {
+                                  DRcodeinitvalue = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    : SizedBox(),
+                // Drop Down
+                manageinitvalue == "Nature of Business"
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Text(
+                            "NOB Code",
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            height: 45,
+                            width: MediaQuery.of(context).size.width,
+                            child: DropdownButton<String>(
+                              underline: Container(),
+                              icon: const Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.deepPurple,
+                              ),
+                              value: NOBinitvalue,
+                              isExpanded: true,
+                              items: NOBvalue.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (String? value) {
+                                setState(() {
+                                  NOBinitvalue = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    : SizedBox(),
+                // Drop Down
+                manageinitvalue == "Update Type of Property"
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Text(
+                            "Type Of Property",
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            height: 45,
+                            width: MediaQuery.of(context).size.width,
+                            child: DropdownButton<String>(
+                              underline: Container(),
+                              icon: const Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.deepPurple,
+                              ),
+                              value: updatetypeinitvalue,
+                              isExpanded: true,
+                              items: updatetypevalue.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (String? value) {
+                                setState(() {
+                                  updatetypeinitvalue = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    : SizedBox(),
+                // DropDown
+                manageinitvalue == "Property Usage"
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Text(
+                            "Property Usage",
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            height: 45,
+                            width: MediaQuery.of(context).size.width,
+                            child: DropdownButton<String>(
+                              underline: Container(),
+                              icon: const Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.deepPurple,
+                              ),
+                              value: propertyusageinitvalue,
+                              isExpanded: true,
+                              items: propertyusagepevalue.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (String? value) {
+                                setState(() {
+                                  propertyusageinitvalue = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    : SizedBox(),
+                // Date
+                manageinitvalue == "Visit Date"
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          const Text(
+                            "Visit Date",
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextFormField(
+                            readOnly: true,
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.black),
+                            cursorColor: kPrimaryPurpleColor,
+                            keyboardType: TextInputType.none,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Field Required';
+                              }
                             },
-                          ),
-                        ),
-                      ],
-                    )
-                  : SizedBox(),
-              // Drop Down
-              manageinitvalue == "Nature of Business"
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                           const SizedBox(
-                height: 30,
-              ),
-                        const Text(
-                          "NOB Code",
-                          style: TextStyle(color: Colors.grey, fontSize: 12),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(left: 20, right: 20),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.deepPurple),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          height: 45,
-                          width: MediaQuery.of(context).size.width,
-                          child: DropdownButton<String>(
-                            underline: Container(),
-                            icon: const Icon(
-                              Icons.keyboard_arrow_down,
-                              color: Colors.deepPurple,
+                            controller: visitdatecontroller,
+                            textInputAction: TextInputAction.none,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.calendar_today_rounded,
+                                    color: kPrimaryPurpleColor,
+                                  )),
+                              focusedBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25.0)),
+                                  borderSide:
+                                      BorderSide(color: kPrimaryPurpleColor)),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(25, 10, 10, 0),
+                              fillColor: kPrimaryWhiteColor,
+                              filled: true,
+                              enabledBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25.0)),
+                                  borderSide:
+                                      BorderSide(color: kPrimaryPurpleColor)),
+                              border: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25.0)),
+                                borderSide:
+                                    BorderSide(color: kPrimaryPurpleColor),
+                                gapPadding: 0,
+                              ),
                             ),
-                            value: NOBinitvalue,
-                            isExpanded: true,
-                            items: NOBvalue.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (String? value) {
-                              setState(() {
-                                NOBinitvalue = value!;
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    )
-                  : SizedBox(),
-              // Drop Down
-              manageinitvalue == "Update Type of Property"
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                           const SizedBox(
-                height: 30,
-              ),
-                        const Text(
-                          "Type Of Property",
-                          style: TextStyle(color: Colors.grey, fontSize: 12),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(left: 20, right: 20),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.deepPurple),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          height: 45,
-                          width: MediaQuery.of(context).size.width,
-                          child: DropdownButton<String>(
-                            underline: Container(),
-                            icon: const Icon(
-                              Icons.keyboard_arrow_down,
-                              color: Colors.deepPurple,
-                            ),
-                            value: updatetypeinitvalue,
-                            isExpanded: true,
-                            items: updatetypevalue.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (String? value) {
-                              setState(() {
-                                updatetypeinitvalue = value!;
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    )
-                  : SizedBox(),
-              // DropDown
-              manageinitvalue == "Property Usage"
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                           const SizedBox(
-                height: 30,
-              ),
-                        const Text(
-                          "Property Usage",
-                          style: TextStyle(color: Colors.grey, fontSize: 12),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(left: 20, right: 20),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.deepPurple),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          height: 45,
-                          width: MediaQuery.of(context).size.width,
-                          child: DropdownButton<String>(
-                            underline: Container(),
-                            icon: const Icon(
-                              Icons.keyboard_arrow_down,
-                              color: Colors.deepPurple,
-                            ),
-                            value: propertyusageinitvalue,
-                            isExpanded: true,
-                            items: propertyusagepevalue.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (String? value) {
-                              setState(() {
-                                propertyusageinitvalue = value!;
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    )
-                  : SizedBox(),
-              // Date
-              manageinitvalue == "Visit Date"
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                           const SizedBox(
-                height: 30,
-              ),
-                        const Text(
-                          "Visit Date",
-                          style: TextStyle(color: Colors.grey, fontSize: 12),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 45,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.deepPurple),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 30, bottom: 9),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'mm/dd/yyyy',
-                                  hintStyle: TextStyle(fontSize: 12),
-                                  suffixIcon: IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.calendar_today_rounded,
-                                        color: kPrimaryPurpleColor,
-                                      ))),
-                            ),
-                          ),
-                        ),
-                      ],
-                    )
-                  : SizedBox(),
+                          )
+                        ],
+                      )
+                    : SizedBox(),
 // date 2
-              manageinitvalue == "Update Reminder"
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Update Reminder",
-                          style: TextStyle(color: Colors.grey, fontSize: 12),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          height: 45,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.deepPurple),
-                            borderRadius: BorderRadius.circular(20),
+                manageinitvalue == "Update Reminder"
+                    ? Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 20,
                           ),
-                          child: Padding(
-                            padding: const EdgeInsets.only(left: 30, bottom: 9),
-                            child: TextFormField(
-                              decoration: InputDecoration(
-                                  border: InputBorder.none,
-                                  hintText: 'mm/dd/yyyy',
-                                  hintStyle: TextStyle(fontSize: 12),
-                                  suffixIcon: IconButton(
-                                      onPressed: () {},
-                                      icon: Icon(
-                                        Icons.calendar_today_rounded,
-                                        color: kPrimaryPurpleColor,
-                                      ))),
-                            ),
+                          const Text(
+                            "Update Reminder",
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
                           ),
-                        ),
-                      ],
-                    )
-                  : SizedBox(),
-              // DropDown
-              manageinitvalue == "Complete Status"
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text(
-                          "Complete Status",
-                          style: TextStyle(color: Colors.grey, fontSize: 12),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          padding: EdgeInsets.only(left: 20, right: 20),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.deepPurple),
-                            borderRadius: BorderRadius.circular(20),
+                          const SizedBox(
+                            height: 10,
                           ),
-                          height: 45,
-                          width: MediaQuery.of(context).size.width,
-                          child: DropdownButton<String>(
-                            underline: Container(),
-                            icon: const Icon(
-                              Icons.keyboard_arrow_down,
-                              color: Colors.deepPurple,
-                            ),
-                            value: statusinitvalue,
-                            isExpanded: true,
-                            items: statusvalue.map((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                            onChanged: (String? value) {
-                              setState(() {
-                                statusinitvalue = value!;
-                              });
+                          TextFormField(
+                            readOnly: true,
+                            style: const TextStyle(
+                                fontSize: 16, color: Colors.black),
+                            cursorColor: kPrimaryPurpleColor,
+                            keyboardType: TextInputType.none,
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Field Required';
+                              }
                             },
+                            controller: updatecontroller,
+                            textInputAction: TextInputAction.none,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.calendar_today_rounded,
+                                    color: kPrimaryPurpleColor,
+                                  )),
+                              focusedBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25.0)),
+                                  borderSide:
+                                      BorderSide(color: kPrimaryPurpleColor)),
+                              contentPadding:
+                                  EdgeInsets.fromLTRB(25, 10, 10, 0),
+                              fillColor: kPrimaryWhiteColor,
+                              filled: true,
+                              enabledBorder: const OutlineInputBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(25.0)),
+                                  borderSide:
+                                      BorderSide(color: kPrimaryPurpleColor)),
+                              border: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25.0)),
+                                borderSide:
+                                    BorderSide(color: kPrimaryPurpleColor),
+                                gapPadding: 0,
+                              ),
+                            ),
+                          )
+                        ],
+                      )
+                    : SizedBox(),
+                // DropDown
+                manageinitvalue == "Complete Status"
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const SizedBox(
+                            height: 20,
                           ),
+                          const Text(
+                            "Complete Status",
+                            style: TextStyle(color: Colors.grey, fontSize: 12),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(left: 20, right: 20),
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            height: 45,
+                            width: MediaQuery.of(context).size.width,
+                            child: DropdownButton<String>(
+                              underline: Container(),
+                              icon: const Icon(
+                                Icons.keyboard_arrow_down,
+                                color: Colors.deepPurple,
+                              ),
+                              value: statusinitvalue,
+                              isExpanded: true,
+                              items: statusvalue.map((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              }).toList(),
+                              onChanged: (String? value) {
+                                setState(() {
+                                  statusinitvalue = value!;
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      )
+                    : SizedBox(),
+                SizedBox(
+                  height: 20,
+                ),
+
+                ///Remark
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Remark",
+                      style: const TextStyle(fontSize: 12, color: Colors.grey),
+                    ),
+                    const SizedBox(
+                      height: 10,
+                    ),
+                    TextFormField(
+                      style: const TextStyle(fontSize: 16, color: Colors.black),
+                      cursorColor: kPrimaryPurpleColor,
+                      keyboardType: TextInputType.text,
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Field Required';
+                        }
+                      },
+                      controller: remarkcontroller,
+                      maxLines: 5,
+                      textInputAction: TextInputAction.done,
+                      decoration: InputDecoration(
+                        hintText: "Remark",
+                        focusedBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(25.0)),
+                            borderSide: BorderSide(color: kPrimaryPurpleColor)),
+                        contentPadding: EdgeInsets.fromLTRB(25, 10, 10, 10),
+                        fillColor: kPrimaryWhiteColor,
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(25.0)),
+                            borderSide: BorderSide(color: kPrimaryPurpleColor)),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                          borderSide: BorderSide(color: kPrimaryPurpleColor),
+                          gapPadding: 0,
                         ),
-                      ],
+                      ),
                     )
-                  : SizedBox(),
+                  ],
+                ),
 
-              ///Remark
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 30,
-                  ),
-                  Text(
-                    "Remark",
-                    style: const TextStyle(fontSize: 12, color: Colors.grey),
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    height: 130,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.deepPurple),
-                      borderRadius: BorderRadius.circular(20),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "Project Description",
+                  style: TextStyle(
+                      color: Colors.deepPurple, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Type",
+                      style: TextStyle(fontWeight: FontWeight.w600),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 30, bottom: 9),
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                            border: InputBorder.none,
-                            hintStyle: TextStyle(fontSize: 12)),
+                    Text(
+                      "Vacant",
+                      style: TextStyle(
+                        color: kPrimaryGreyColor,
+                        fontSize: 14.0,
                       ),
                     ),
-                  ),
-                ],
-              ),
-
-              const SizedBox(
-                height: 45,
-              ),
-              const Text(
-                "Project Description",
-                style: TextStyle(
-                    color: Colors.deepPurple, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              Row(
-                children: [
-                  const Expanded(
-                      child: Text(
-                    "Type",
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  )),
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(left: 135),
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          hintText: "Vacant",
-                          hintStyle: TextStyle(fontSize: 12),
-                          border: InputBorder.none,
-                        ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Date",
+                      style: TextStyle(fontWeight: FontWeight.w600),
+                    ),
+                    Text(
+                      "21-12-2021 - 16-02-2022",
+                      style: TextStyle(
+                        color: kPrimaryGreyColor,
+                        fontSize: 14.0,
                       ),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  "IWK ID",
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w800,
+                      color: Colors.deepPurple),
+                ),
+                SizedBox(
+                  height: 20,
+                ),
 
-              Row(
-                children: [
-                  const Expanded(
-                      child: Text(
-                    "Date",
-                    style: TextStyle(fontWeight: FontWeight.w600),
-                  )),
-                  Expanded(
-                      child: Padding(
-                    padding: const EdgeInsets.only(left: 45),
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        hintText: "21-12-2021-16-02-2022",
-                        hintStyle: TextStyle(fontSize: 12),
-                        border: InputBorder.none,
-                      ),
+                textField("From", fromcontroller),
+                const SizedBox(
+                  height: 10,
+                ),
+                textField("To", tocontroller),
+
+                const SizedBox(
+                  height: 30,
+                ),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 50,
+                  child: RaisedButton(
+                    color: Colors.deepPurple,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    onPressed: () {},
+                    child: const Text(
+                      "Processing",
+                      style: TextStyle(color: Colors.white),
                     ),
-                  )),
-                ],
-              ),
-              const SizedBox(
-                height: 28,
-              ),
-              const Text(
-                "IWK ID",
-                style: TextStyle(
-                    fontSize: 15,
-                    fontWeight: FontWeight.w800,
-                    color: Colors.deepPurple),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.deepPurple),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 30, bottom: 9),
-                  child: TextFormField(
-                    textAlign: TextAlign.justify,
-                    decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "From",
-                        hintStyle: TextStyle(fontSize: 12)),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-
-              Container(
-                height: 45,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.deepPurple),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 30, bottom: 9),
-                  child: TextFormField(
-                    textAlign: TextAlign.justify,
-                    decoration: const InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "To",
-                        hintStyle: TextStyle(fontSize: 12)),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 20,
-              ),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 50,
-                child: RaisedButton(
-                  color: Colors.deepPurple,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30)),
-                  onPressed: () {},
-                  child: const Text(
-                    "Processing",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
-      ),
     );
-  
   }
 }

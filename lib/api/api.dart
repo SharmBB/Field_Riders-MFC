@@ -1,9 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class CallApi {
   var baseurl = '';
-  var token ;
+  var token;
   // Auth Api
   var _urlAuth = 'http://mangakiku-api.moodfor.codes/api/';
 
@@ -32,4 +33,21 @@ class CallApi {
         'Accept': 'application/json',
         'Authorization': 'Bearer $token'
       };
+
+//Forget
+  updatePassword(data, apiUrl) async {
+    var fullUrl = Uri.parse(_urlAuth + apiUrl);
+    return await http.put(
+      fullUrl,
+      body: jsonEncode(data),
+      headers: _setHeaders(),
+    );
+  }
+
+//   _getToken() async {
+//     SharedPreferences localStorage = await SharedPreferences.getInstance();
+//     var token = localStorage.getString('token');
+//     return token;
+//   }
+
 }

@@ -20,12 +20,14 @@ Widget textField(title, controller) {
         keyboardType: TextInputType.text,
         validator: (value) {
           if (value!.isEmpty) {
-            return 'Field Required';
+            return title +' Required';
           }
         },
+        
         controller: controller,
         textInputAction: TextInputAction.done,
-        decoration: const InputDecoration(
+        decoration:  InputDecoration(
+          hintText: title,
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(25.0)),
               borderSide: BorderSide(color: kPrimaryPurpleColor)),

@@ -175,7 +175,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
         }
       });
     }
-      Navigator.of(context).pop();
+    Navigator.of(context).pop();
   }
 
   _getFromGallery() async {
@@ -769,15 +769,17 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               }
                             },
                             controller: remarkcontroller,
+                            maxLines: 5,
                             textInputAction: TextInputAction.done,
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
+                              hintText: "Remark",
                               focusedBorder: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(25.0)),
                                   borderSide:
                                       BorderSide(color: kPrimaryPurpleColor)),
                               contentPadding:
-                                  EdgeInsets.fromLTRB(25, 10, 10, 80),
+                                  EdgeInsets.fromLTRB(25, 10, 10, 10),
                               fillColor: kPrimaryWhiteColor,
                               filled: true,
                               enabledBorder: OutlineInputBorder(
@@ -796,6 +798,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                           )
                         ],
                       ),
+
                       SizedBox(
                         height: 20,
                       ),

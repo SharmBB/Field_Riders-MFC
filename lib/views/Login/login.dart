@@ -5,6 +5,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/api/api.dart';
+import 'package:riders_app/views/ForgetPassword/forgotPassword.dart';
+import 'package:riders_app/views/ForgetPassword/resetPassword.dart';
 import 'package:riders_app/views/HomeScreen/HomePage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -60,7 +62,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   SizedBox(
-                    height: 100,
+                    height: 60,
                   ),
                   Align(
                     alignment: Alignment.bottomCenter,
@@ -110,7 +112,13 @@ class _LoginScreenState extends State<LoginScreen> {
                   Align(
                       alignment: Alignment.centerRight,
                       child: FlatButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      ForgetPassword()),
+                            );
+                          },
                           child: Text(
                             "Forgot Your Password ?",
                             style: TextStyle(
@@ -122,6 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       : CupertinoActivityIndicator(
                           radius: 15,
                         ),
+                        
                 ],
               ),
             ),
@@ -153,7 +162,10 @@ class _LoginScreenState extends State<LoginScreen> {
         controller: _emailController,
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
-          icon: new Icon(Icons.email,color: kPrimaryGreyColor,),
+          icon: new Icon(
+            Icons.email,
+            color: kPrimaryGreyColor,
+          ),
           hintText: 'Email Address',
           focusedBorder:
               UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
@@ -187,7 +199,10 @@ class _LoginScreenState extends State<LoginScreen> {
         controller: _passwordController,
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
-          icon: new Icon(Icons.lock_open,color: kPrimaryGreyColor,),
+          icon: new Icon(
+            Icons.lock_open,
+            color: kPrimaryGreyColor,
+          ),
           suffixIcon: IconButton(
             onPressed: () => setState(() => showPassword = !showPassword),
             icon: Icon(showPassword ? Icons.visibility_off : Icons.visibility),
@@ -242,29 +257,26 @@ class _LoginScreenState extends State<LoginScreen> {
       var res = await CallApi().authData(data, 'login');
       var body = json.decode(res.body);
       if (body["errorMessage"] == false) {
-             SharedPreferences localStorage =
-              await SharedPreferences.getInstance();
+        SharedPreferences localStorage = await SharedPreferences.getInstance();
 
-          var token = body['message']['token'];
-          print(token);
+        var token = body['message']['token'];
+        print(token);
 
-          var userId = body['message']["user"]["id"];
-          print(userId);
+        var userId = body['message']["user"]["id"];
+        print(userId);
 
-          print("------------------------------------");
-          localStorage.setString('token', token);
-          print(token);
-           print(userId);
+        print("------------------------------------");
+        localStorage.setString('token', token);
+        print(token);
+        print(userId);
 
-          localStorage.setInt('userId', userId);
+        localStorage.setInt('userId', userId);
 
-          print(body['message']);
+        print(body['message']);
 
-          Navigator.of(context).pushReplacement(
-            MaterialPageRoute(
-                builder: (BuildContext context) => HomeScreen()),
-          );
-        
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
+        );
       } else {
         setState(() {
           bodyError = body['message'];

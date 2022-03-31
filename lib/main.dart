@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'POS',
+      title: 'field_Riders-MFC',
       // home: Home(),
       theme: ThemeData(
         fontFamily: 'ProductSans',
