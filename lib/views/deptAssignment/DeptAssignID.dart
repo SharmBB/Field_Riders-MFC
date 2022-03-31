@@ -532,7 +532,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                         child: Padding(
                                           padding: EdgeInsets.all(5),
                                           child: CustomTimer(
-                                            from: Duration(minutes: 59),
+                                            from: Duration(minutes: 05),
                                             to: Duration(hours: 0),
                                             onBuildAction:
                                                 CustomTimerAction.auto_start,

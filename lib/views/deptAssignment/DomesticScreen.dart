@@ -765,7 +765,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                             keyboardType: TextInputType.text,
                             validator: (value) {
                               if (value!.isEmpty) {
-                                return 'Field Required';
+                                return 'Remark Required';
                               }
                             },
                             controller: remarkcontroller,
@@ -773,6 +773,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
                             textInputAction: TextInputAction.done,
                             decoration: InputDecoration(
                               hintText: "Remark",
+                              hintStyle:
+                                  TextStyle(fontSize: 12, color: Colors.grey),
                               focusedBorder: OutlineInputBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(25.0)),

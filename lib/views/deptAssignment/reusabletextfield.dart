@@ -28,6 +28,7 @@ Widget textField(title, controller) {
         textInputAction: TextInputAction.done,
         decoration:  InputDecoration(
           hintText: title,
+          hintStyle: TextStyle(fontSize: 12, color: Colors.grey),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(25.0)),
               borderSide: BorderSide(color: kPrimaryPurpleColor)),
