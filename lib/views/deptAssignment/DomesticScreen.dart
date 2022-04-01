@@ -153,8 +153,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
   ];
 
   File? _image;
-  late Future<String> fileurl;
   bool image = false;
+  bool _camera = false;
 
   _getFromCamera() async {
     PickedFile? pickedFile = await ImagePicker()
@@ -178,31 +178,31 @@ class _DomesticScreenState extends State<DomesticScreen> {
     Navigator.of(context).pop();
   }
 
-  _getFromGallery() async {
-    PickedFile? pickedFile = await ImagePicker()
-        .getImage(source: ImageSource.gallery, imageQuality: 50
-            // maxWidth: 1800,
-            // maxHeight: 1800,
-            );
-    if (pickedFile != null) {
-      setState(() {
-        // _image = image;
-        _image = File(pickedFile.path);
-        print(_image);
-        print('------');
-        print(pickedFile);
-        //uploadFile();
-        image = true;
-        //file path upload
-        if (_image != null) {
-          imagecontroller.text = "Sucessful Uploaded";
-        } else {
-          imagecontroller.text = "Unscessful Upload";
-        }
-      });
-    }
-    Navigator.of(context).pop();
-  }
+  // _getFromGallery() async {
+  //   PickedFile? pickedFile = await ImagePicker()
+  //       .getImage(source: ImageSource.gallery, imageQuality: 50
+  //           // maxWidth: 1800,
+  //           // maxHeight: 1800,
+  //           );
+  //   if (pickedFile != null) {
+  //     setState(() {
+  //       // _image = image;
+  //       _image = File(pickedFile.path);
+  //       print(_image);
+  //       print('------');
+  //       print(pickedFile);
+  //       //uploadFile();
+  //       image = true;
+  //       //file path upload
+  //       if (_image != null) {
+  //         imagecontroller.text = "Sucessful Uploaded";
+  //       } else {
+  //         imagecontroller.text = "Unscessful Upload";
+  //       }
+  //     });
+  //   }
+  //   Navigator.of(context).pop();
+  // }
 
   actionsheetTakePhoto(BuildContext context) {
     showCupertinoModalPopup(
@@ -211,14 +211,17 @@ class _DomesticScreenState extends State<DomesticScreen> {
         return CupertinoActionSheet(
           actions: [
             CupertinoActionSheetAction(
-                onPressed: () {
+                onPressed: () async {
+                  _camera = true;
                   _getFromCamera();
                 },
                 child: const Align(
                     alignment: Alignment.topLeft, child: Text("Camera"))),
             CupertinoActionSheetAction(
-                onPressed: () {
-                  _getFromGallery();
+                onPressed: () async {
+                  // _getFromGallery();
+                  getMultiImages();
+                  Navigator.of(context).pop();
                 },
                 child: const Align(
                     alignment: Alignment.topLeft, child: Text("Upload"))),
@@ -230,6 +233,22 @@ class _DomesticScreenState extends State<DomesticScreen> {
         );
       },
     );
+  }
+
+  final multiPicker = ImagePicker();
+  List<XFile> images = [];
+
+  Future getMultiImages() async {
+    _camera = false;
+    images.clear();
+    final List<XFile>? selectedImages = await multiPicker.pickMultiImage();
+    setState(() {
+      if (selectedImages!.isNotEmpty) {
+        images.addAll(selectedImages);
+      } else {
+        print('No Images Selected ');
+      }
+    });
   }
 
   String? _selectedNationality = '';
@@ -331,7 +350,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                             fontWeight: FontWeight.w600,
                             color: kPrimaryPurpleColor),
                       ),
-                        const SizedBox(
+                      const SizedBox(
                         height: 20,
                       ),
                       const Text(
@@ -397,46 +416,85 @@ class _DomesticScreenState extends State<DomesticScreen> {
                           const SizedBox(
                             height: 10,
                           ),
-                          Container(
-                            height: 200,
-                            width: screenWidth,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.deepPurple),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(10),
-                              child: GestureDetector(
-                                onTap: () {
-                                  actionsheetTakePhoto(context);
-                                },
-                                child: Container(
-                                  child: _image != null
-                                      ? ClipRRect(
-                                          // borderRadius: BorderRadius.circular(5),
-                                          child: Image.file(
-                                            _image!,
-                                            width: screenWidth * (10 / 20),
-                                            height: screenHeight * (10 / 20),
-                                            fit: BoxFit.fitHeight,
-                                          ),
-                                        )
-                                      : Container(
-                                          decoration: BoxDecoration(
-                                            color: Colors.grey[100],
-                                            // borderRadius: BorderRadius.circular(50)
-                                          ),
-                                          width: screenWidth * (10 / 20),
-                                          height: screenHeight * (10 / 20),
-                                          child: Icon(
-                                            Icons.camera_alt,
-                                            color: Colors.grey[400],
-                                          ),
-                                        ),
-                                ),
-                              ),
+                         Container(
+                          height: 250,
+                          width: screenWidth,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.deepPurple),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: GestureDetector(
+                              onTap: () {
+                                actionsheetTakePhoto(context);
+                              },
+                              child: _camera == true
+                                  ? Container(
+                                      child: _image != null
+                                          ? ClipRRect(
+                                              // borderRadius: BorderRadius.circular(5),
+                                              child: Image.file(
+                                                _image!,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            )
+                                          : Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.grey[100],
+                                                // borderRadius: BorderRadius.circular(50)
+                                              ),
+                                              width: screenWidth * (10 / 20),
+                                              height: screenHeight * (10 / 20),
+                                              child: Icon(
+                                                Icons.camera_alt,
+                                                color: Colors.grey[400],
+                                              ),
+                                            ),
+                                    )
+                                  : Container(
+                                      child: images.isEmpty
+                                          ? Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.grey[100],
+                                                // borderRadius: BorderRadius.circular(50)
+                                              ),
+                                              width: screenWidth * (10 / 20),
+                                              height: screenHeight * (10 / 20),
+                                              child: Icon(
+                                                Icons.camera_alt,
+                                                color: Colors.grey[400],
+                                              ),
+                                            )
+                                          : GridView.builder(
+                                              itemCount: images.isEmpty
+                                                  ? 1
+                                                  : images.length,
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2,
+                                                mainAxisSpacing: 20,
+                                                crossAxisSpacing: 20,
+                                                // width / height: fixed for *all* items
+                                                childAspectRatio: 0.75,
+                                              ),
+                                              itemBuilder: (context, index) =>
+                                                  Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    border: Border.all(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.5))),
+                                                child: Image.file(
+                                                  File(images[index].path),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                    ),
                             ),
                           ),
+                        ),
                         ],
                       ),
                       const SizedBox(

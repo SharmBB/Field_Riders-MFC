@@ -408,7 +408,7 @@ class _FeildTestState extends State<FeildTest> {
                                   BorderRadius.all(Radius.circular(20.0))),
                         ),
                       ),
-                      textField("Meter Number", metercontroller),
+                      textField("", metercontroller),
                       const SizedBox(
                         height: 20,
                       ),

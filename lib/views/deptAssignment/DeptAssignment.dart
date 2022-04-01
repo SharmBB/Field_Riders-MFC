@@ -1,4 +1,3 @@
-
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:io';
@@ -51,7 +50,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
   String drcodeinitvalue = 'code 1';
   final drcodetype = ['code 1', 'code 2', 'code 3', 'code 4', 'code 5'];
 
-    TextEditingController imagecontroller = TextEditingController();
+  TextEditingController imagecontroller = TextEditingController();
 
   TextEditingController excludecontroller = TextEditingController();
   TextEditingController iwkspecialcontroller = TextEditingController();
@@ -117,11 +116,9 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
   TextEditingController businessclosecontroller = TextEditingController();
   TextEditingController remarkcontroller = TextEditingController();
 
-
   File? _image;
-  late Future<String> fileurl;
   bool image = false;
-
+  bool _camera = false;
 
   _getFromCamera() async {
     PickedFile? pickedFile = await ImagePicker()
@@ -134,34 +131,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
         _image = File(pickedFile.path);
         //uploadFile();
         image = true;
-          //file path upload
-        if (_image != null) {
-          imagecontroller.text = "Sucessful Uploaded";
-        } else {
-          imagecontroller.text = "Unscessful Upload";
-        }
-
-      });
-    }
-      Navigator.of(context).pop();
-  }
-
-  _getFromGallery() async {
-    PickedFile? pickedFile = await ImagePicker()
-        .getImage(source: ImageSource.gallery, imageQuality: 50
-            // maxWidth: 1800,
-            // maxHeight: 1800,
-            );
-    if (pickedFile != null) {
-      setState(() {
-        // _image = image;
-        _image = File(pickedFile.path);
-        print(_image);
-        print('------');
-        print(pickedFile);
-        //uploadFile();
-        image = true;
-                 //file path upload
+        //file path upload
         if (_image != null) {
           imagecontroller.text = "Sucessful Uploaded";
         } else {
@@ -169,26 +139,53 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
         }
       });
     }
-      Navigator.of(context).pop();
+    Navigator.of(context).pop();
   }
 
-  bool click = true;
-  actionsheetFile(BuildContext context) {
+  // _getFromGallery() async {
+  //   PickedFile? pickedFile = await ImagePicker()
+  //       .getImage(source: ImageSource.gallery, imageQuality: 50
+  //           // maxWidth: 1800,
+  //           // maxHeight: 1800,
+  //           );
+  //   if (pickedFile != null) {
+  //     setState(() {
+  //       // _image = image;
+  //       _image = File(pickedFile.path);
+  //       print(_image);
+  //       print('------');
+  //       print(pickedFile);
+  //       //uploadFile();
+  //       image = true;
+  //       //file path upload
+  //       if (_image != null) {
+  //         imagecontroller.text = "Sucessful Uploaded";
+  //       } else {
+  //         imagecontroller.text = "Unscessful Upload";
+  //       }
+  //     });
+  //   }
+  //   Navigator.of(context).pop();
+  // }
+
+  actionsheetTakePhoto(BuildContext context) {
     showCupertinoModalPopup(
       context: context,
       builder: (context) {
         return CupertinoActionSheet(
           actions: [
             CupertinoActionSheetAction(
-                onPressed: () {
+                onPressed: () async {
+                  _camera = true;
                   _getFromCamera();
-                  
                 },
                 child: const Align(
                     alignment: Alignment.topLeft, child: Text("Camera"))),
             CupertinoActionSheetAction(
-                onPressed: () {
-                   _getFromGallery();
+                onPressed: () async {
+                  // _getFromGallery();
+                  getMultiImages();
+                  Navigator.of(context).pop();
                 },
                 child: const Align(
                     alignment: Alignment.topLeft, child: Text("Upload"))),
@@ -202,9 +199,25 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
     );
   }
 
+  final multiPicker = ImagePicker();
+  List<XFile> images = [];
+
+  Future getMultiImages() async {
+    _camera = false;
+    images.clear();
+    final List<XFile>? selectedImages = await multiPicker.pickMultiImage();
+    setState(() {
+      if (selectedImages!.isNotEmpty) {
+        images.addAll(selectedImages);
+      } else {
+        print('No Images Selected ');
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-        var screenHeight = MediaQuery.of(context).size.height;
+    var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
@@ -219,7 +232,10 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => DeptAssignID(type: '',)),
+              MaterialPageRoute(
+                  builder: (context) => DeptAssignID(
+                        type: '',
+                      )),
             );
           },
         ),
@@ -315,7 +331,9 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         items: imgtype.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value , style: TextStyle(fontSize: 14, color: primaryColor)),
+                            child: Text(value,
+                                style: TextStyle(
+                                    fontSize: 14, color: primaryColor)),
                           );
                         }).toList(),
                         onChanged: (String? value) {
@@ -342,50 +360,86 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         const SizedBox(
                           height: 10,
                         ),
-                              Container(
-                                height: 200,
-                    width: screenWidth,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.deepPurple),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            child: Padding(
-                              padding: EdgeInsets.all(10),
-                              child:  GestureDetector(
-                onTap: () {
-                          actionsheetFile(context);
-                },
-                              child:    Container(
-                                    child: _image != null
-                                        ? ClipRRect(
-                                            // borderRadius: BorderRadius.circular(5),
-                                            child: Image.file(
-                                              _image!,
-                                                   width: screenWidth * (10 / 20),
+                        Container(
+                          height: 250,
+                          width: screenWidth,
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Colors.deepPurple),
+                            borderRadius: BorderRadius.circular(25),
+                          ),
+                          child: Padding(
+                            padding: EdgeInsets.all(10),
+                            child: GestureDetector(
+                              onTap: () {
+                                actionsheetTakePhoto(context);
+                              },
+                              child: _camera == true
+                                  ? Container(
+                                      child: _image != null
+                                          ? ClipRRect(
+                                              // borderRadius: BorderRadius.circular(5),
+                                              child: Image.file(
+                                                _image!,
+                                                fit: BoxFit.contain,
+                                              ),
+                                            )
+                                          : Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.grey[100],
+                                                // borderRadius: BorderRadius.circular(50)
+                                              ),
+                                              width: screenWidth * (10 / 20),
                                               height: screenHeight * (10 / 20),
-                                              fit: BoxFit.fitHeight,
+                                              child: Icon(
+                                                Icons.camera_alt,
+                                                color: Colors.grey[400],
+                                              ),
                                             ),
-                                          )
-                                        : Container(
-                                            decoration: BoxDecoration(
-                                              color: Colors.grey[100],
-                                              // borderRadius: BorderRadius.circular(50)
-                                            ),
-                                             width: screenWidth * (10 / 20),
+                                    )
+                                  : Container(
+                                      child: images.isEmpty
+                                          ? Container(
+                                              decoration: BoxDecoration(
+                                                color: Colors.grey[100],
+                                                // borderRadius: BorderRadius.circular(50)
+                                              ),
+                                              width: screenWidth * (10 / 20),
                                               height: screenHeight * (10 / 20),
-                                            child: Icon(
-                                              Icons.camera_alt,
-                                              color: Colors.grey[400],
+                                              child: Icon(
+                                                Icons.camera_alt,
+                                                color: Colors.grey[400],
+                                              ),
+                                            )
+                                          : GridView.builder(
+                                              itemCount: images.isEmpty
+                                                  ? 1
+                                                  : images.length,
+                                              gridDelegate:
+                                                  SliverGridDelegateWithFixedCrossAxisCount(
+                                                crossAxisCount: 2,
+                                                mainAxisSpacing: 20,
+                                                crossAxisSpacing: 20,
+                                                // width / height: fixed for *all* items
+                                                childAspectRatio: 0.75,
+                                              ),
+                                              itemBuilder: (context, index) =>
+                                                  Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    border: Border.all(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.5))),
+                                                child: Image.file(
+                                                  File(images[index].path),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             ),
-                                          ),
-                                  ),
-                                
-                              ),
+                                    ),
                             ),
-                              ),
+                          ),
+                        ),
                       ],
-                            
-  
                     ),
 //
                     const SizedBox(
@@ -624,7 +678,10 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                                 onPressed: () {},
-                                icon: const Icon(Icons.calendar_today_rounded,color: kPrimaryPurpleColor,)),
+                                icon: const Icon(
+                                  Icons.calendar_today_rounded,
+                                  color: kPrimaryPurpleColor,
+                                )),
                             focusedBorder: const OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0)),
@@ -680,7 +737,8 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                                 onPressed: () {},
-                                icon: const Icon(Icons.calendar_today_rounded,color: kPrimaryPurpleColor)),
+                                icon: const Icon(Icons.calendar_today_rounded,
+                                    color: kPrimaryPurpleColor)),
                             focusedBorder: const OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0)),
@@ -740,7 +798,9 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         items: ownertype.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value , style: TextStyle(fontSize: 14, color: primaryColor)),
+                            child: Text(value,
+                                style: TextStyle(
+                                    fontSize: 14, color: primaryColor)),
                           );
                         }).toList(),
                         onChanged: (String? value) {
@@ -854,7 +914,9 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         items: propertytype.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
+                            child: Text(value,
+                                style: TextStyle(
+                                    fontSize: 14, color: primaryColor)),
                           );
                         }).toList(),
                         onChanged: (String? value) {
@@ -902,7 +964,9 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         items: businesstype.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
+                            child: Text(value,
+                                style: TextStyle(
+                                    fontSize: 14, color: primaryColor)),
                           );
                         }).toList(),
                         onChanged: (String? value) {
@@ -944,7 +1008,9 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         items: drcodetype.map((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
-                            child: Text(value, style: TextStyle(fontSize: 14, color: primaryColor)),
+                            child: Text(value,
+                                style: TextStyle(
+                                    fontSize: 14, color: primaryColor)),
                           );
                         }).toList(),
                         onChanged: (String? value) {
