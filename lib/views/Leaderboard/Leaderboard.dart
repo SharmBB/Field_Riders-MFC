@@ -88,7 +88,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "LeaderBoard",
+                  "Scoreboard",
                   style: TextStyle(
                       fontSize: 22,
                       fontWeight: FontWeight.bold,

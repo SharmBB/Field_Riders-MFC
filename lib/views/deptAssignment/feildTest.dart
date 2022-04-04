@@ -5,6 +5,7 @@ import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/deptAssignment/DeptAssignID.dart';
 
 import 'package:riders_app/views/deptAssignment/reusabletextfield.dart';
+import 'package:riders_app/views/field/feild.dart';
 
 class FeildTest extends StatefulWidget {
   const FeildTest({Key? key}) : super(key: key);
@@ -41,18 +42,10 @@ class _FeildTestState extends State<FeildTest> {
     'Tempat ibadat',
   ];
 
-  bool isChecked1 = false;
-  bool isChecked2 = false;
-  bool isChecked3 = false;
-  bool isChecked4 = false;
-  bool isChecked5 = false;
-  bool isChecked6 = false;
-  String? DIDUDUKI;
-  String? KOSONG;
-  String? PENGGUNAAN_KOMERSIL;
-  String? Penggunaan_Domestik;
-  String? Adakah_Meter;
-  String? Tidak;
+  String? _selectedType='';
+  String? _selectedUsage='';
+  String? _selectedConnect='';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,9 +62,7 @@ class _FeildTestState extends State<FeildTest> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => DeptAssignID(
-                        type: '',
-                      )),
+                  builder: (context) => FieldScreen(),)
             );
           },
         ),
@@ -116,59 +107,50 @@ class _FeildTestState extends State<FeildTest> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
-                        'DIDUDUKI (OCCUPIED)',
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
-                      ),
-                      Row(
+
+
+                       Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Checkbox(
-                            value: isChecked1,
-                            onChanged: (bool? val) {
-                              setState(
-                                () {
-                                  isChecked1 = val!;
-                                  DIDUDUKI = "DIDUDUKI (OCCUPIED)";
-                                },
-                              );
-                            },
-                            activeColor: kPrimaryPurpleColor,
-                            checkColor: kPrimaryWhiteColor,
+                          const Text(
+                            'DIDUDUKI (OCCUPIED) OR KOSONG (VACANT )',
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
                           ),
-                          Text(
-                            "DIDUDUKI (OCCUPIED)",
-                            style: TextStyle(fontSize: 12, color: primaryColor),
+                          Row(
+                            children: [
+                              Radio<String>(
+                                  value: "DIDUDUKI (OCCUPIED)",
+                                  groupValue: _selectedType,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedType = value!;
+                                    });
+                                  }),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text("DIDUDUKI (OCCUPIED)",style: TextStyle(fontSize: 12, color: primaryColor),)
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio<String>(
+                                  value: "KOSONG (VACANT )",
+                                  groupValue: _selectedType,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedType = value!;
+                                    });
+                                  }),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Text("KOSONG (VACANT )",style: TextStyle(fontSize: 12, color: primaryColor),)
+                            ],
                           )
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'KOSONG (VACANT )',
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
-                      ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: isChecked2,
-                            onChanged: (bool? val) {
-                              setState(
-                                () {
-                                  isChecked2 = val!;
-                                  KOSONG = "KOSONG (VACANT )";
-                                },
-                              );
-                            },
-                            activeColor: kPrimaryPurpleColor,
-                            checkColor: kPrimaryWhiteColor,
-                          ),
-                          Text(
-                            "KOSONG (VACANT )",
-                            style: TextStyle(fontSize: 12, color: primaryColor),
-                          )
-                        ],
-                      ),
+                   
                       const SizedBox(
                         height: 20,
                       ),
@@ -221,61 +203,49 @@ class _FeildTestState extends State<FeildTest> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
-                        'PENGGUNAAN KOMERSIL (COMMERCIAL USAGE )',
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
-                      ),
-                      Row(
+                        Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Checkbox(
-                            value: isChecked3,
-                            onChanged: (bool? val) {
-                              setState(
-                                () {
-                                  isChecked3 = val!;
-                                  PENGGUNAAN_KOMERSIL =
-                                      "PENGGUNAAN KOMERSIL (COMMERCIAL USAGE )";
-                                },
-                              );
-                            },
-                            activeColor: kPrimaryPurpleColor,
-                            checkColor: kPrimaryWhiteColor,
+                          const Text(
+                            'PENGGUNAAN KOMERSIL (COMMERCIAL USAGE ) OR Penggunaan Domestik (DOMESTIC USAGE)',
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
                           ),
-                          Text(
-                            "PENGGUNAAN KOMERSIL (COMMERCIAL USAGE )",
-                            style: TextStyle(fontSize: 12, color: primaryColor),
+                          Row(
+                            children: [
+                              Radio<String>(
+                                  value: "PENGGUNAAN KOMERSIL (COMMERCIAL USAGE )",
+                                  groupValue: _selectedUsage,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedUsage = value!;
+                                    });
+                                  }),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text("PENGGUNAAN KOMERSIL (COMMERCIAL USAGE )",style: TextStyle(fontSize: 12, color: primaryColor),)
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio<String>(
+                                  value: "Penggunaan Domestik (DOMESTIC USAGE)",
+                                  groupValue: _selectedUsage,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedUsage = value!;
+                                    });
+                                  }),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Text("PENGUNAAN DOMESTIK (DOMESTIC USAGE)",style: TextStyle(fontSize: 12, color: primaryColor),)
+                            ],
                           )
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Penggunaan Domestik (DOMESTIC USAGE)',
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
-                      ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: isChecked4,
-                            onChanged: (bool? val) {
-                              setState(
-                                () {
-                                  isChecked4 = val!;
-                                  Penggunaan_Domestik =
-                                      "Penggunaan Domestik (DOMESTIC USAGE)";
-                                },
-                              );
-                            },
-                            activeColor: kPrimaryPurpleColor,
-                            checkColor: kPrimaryWhiteColor,
-                          ),
-                          Text(
-                            "Penggunaan Domestik (DOMESTIC USAGE)",
-                            style: TextStyle(fontSize: 12, color: primaryColor),
-                          )
-                        ],
-                      ),
+                   
+                  
                       const SizedBox(
                         height: 20,
                       ),
@@ -328,61 +298,49 @@ class _FeildTestState extends State<FeildTest> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
-                        'Adakah Meter air disambungkan jika (YA)',
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
-                      ),
-                      Row(
+                            Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Checkbox(
-                            value: isChecked5,
-                            onChanged: (bool? val) {
-                              setState(
-                                () {
-                                  isChecked5 = val!;
-                                  Adakah_Meter =
-                                      "Ya - Bersambung (Yes - Connected)";
-                                },
-                              );
-                            },
-                            activeColor: kPrimaryPurpleColor,
-                            checkColor: kPrimaryWhiteColor,
+                          const Text(
+                            'Adakah Meter air disambungkan jika (YA) OR Tidak - Terputus sambungan (No - Disconnected)',
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
                           ),
-                          Text(
-                            "Ya - Bersambung (Yes - Connected)",
-                            style: TextStyle(fontSize: 12, color: primaryColor),
+                          Row(
+                            children: [
+                              Radio<String>(
+                                  value: "Ya - Bersambung (Yes - Connected)",
+                                  groupValue: _selectedConnect,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedConnect = value!;
+                                    });
+                                  }),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text("Ya - Bersambung (Yes - Connected)",style: TextStyle(fontSize: 12, color: primaryColor),)
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Radio<String>(
+                                  value: "Tidak - Terputus sambungan (No - Disconnected)",
+                                  groupValue: _selectedConnect,
+                                  onChanged: (value) {
+                                    setState(() {
+                                      _selectedConnect = value!;
+                                    });
+                                  }),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              const Text("Tidak - Terputus sambungan (No - Disconnected)",style: TextStyle(fontSize: 12, color: primaryColor),)
+                            ],
                           )
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        'Jika Diputuskan (TIDAK)',
-                        style: TextStyle(fontSize: 12, color: Colors.grey),
-                      ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            value: isChecked6,
-                            onChanged: (bool? val) {
-                              setState(
-                                () {
-                                  isChecked6 = val!;
-                                  Tidak =
-                                      "Tidak - Terputus sambungan (No - Disconnected)";
-                                },
-                              );
-                            },
-                            activeColor: kPrimaryPurpleColor,
-                            checkColor: kPrimaryWhiteColor,
-                          ),
-                          Text(
-                            "Tidak - Terputus sambungan (No - Disconnected)",
-                            style: TextStyle(fontSize: 12, color: primaryColor),
-                          )
-                        ],
-                      ),
+                   
+                   
                       const SizedBox(
                         height: 20,
                       ),

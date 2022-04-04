@@ -39,6 +39,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
   ];
 
   bool occupier = false;
+  bool owner = false;
+  bool tenant = false;
 
   String ownernamecorrectinitvalue = 'Choose';
   final ownernamecorrect = ['Choose', 'Yes', 'No'];
@@ -154,7 +156,6 @@ class _DomesticScreenState extends State<DomesticScreen> {
 
   File? _image;
   bool image = false;
-  bool _camera = false;
 
   _getFromCamera() async {
     PickedFile? pickedFile = await ImagePicker()
@@ -167,42 +168,12 @@ class _DomesticScreenState extends State<DomesticScreen> {
         _image = File(pickedFile.path);
         //uploadFile();
         image = true;
-        //file path upload
-        if (_image != null) {
-          imagecontroller.text = "Sucessful Uploaded";
-        } else {
-          imagecontroller.text = "Unscessful Upload";
-        }
+
+   
       });
     }
-    Navigator.of(context).pop();
+    print(_imageCamera);
   }
-
-  // _getFromGallery() async {
-  //   PickedFile? pickedFile = await ImagePicker()
-  //       .getImage(source: ImageSource.gallery, imageQuality: 50
-  //           // maxWidth: 1800,
-  //           // maxHeight: 1800,
-  //           );
-  //   if (pickedFile != null) {
-  //     setState(() {
-  //       // _image = image;
-  //       _image = File(pickedFile.path);
-  //       print(_image);
-  //       print('------');
-  //       print(pickedFile);
-  //       //uploadFile();
-  //       image = true;
-  //       //file path upload
-  //       if (_image != null) {
-  //         imagecontroller.text = "Sucessful Uploaded";
-  //       } else {
-  //         imagecontroller.text = "Unscessful Upload";
-  //       }
-  //     });
-  //   }
-  //   Navigator.of(context).pop();
-  // }
 
   actionsheetTakePhoto(BuildContext context) {
     showCupertinoModalPopup(
@@ -213,7 +184,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
             CupertinoActionSheetAction(
                 onPressed: () async {
                   _camera = true;
-                  _getFromCamera();
+                  _getMultiFromCamera();
+                  Navigator.of(context).pop();
                 },
                 child: const Align(
                     alignment: Alignment.topLeft, child: Text("Camera"))),
@@ -235,19 +207,48 @@ class _DomesticScreenState extends State<DomesticScreen> {
     );
   }
 
+  File? _image1;
+  bool _camera = false;
+  List _imageCamera = [];
+
+  _getMultiFromCamera() async {
+        images.clear();
+    _camera = true;
+    PickedFile? pickedFile = await ImagePicker()
+        .getImage(source: ImageSource.camera, imageQuality: 50
+            // maxWidth: 1800,
+            // maxHeight: 1800,
+            );
+    if (pickedFile != null) {
+      setState(() {
+        _image1 = File(pickedFile.path);
+        //uploadFile();
+        _imageCamera.add(_image1);
+
+       
+       
+      });
+    }
+    print(_imageCamera);
+  }
+
   final multiPicker = ImagePicker();
   List<XFile> images = [];
 
   Future getMultiImages() async {
     _camera = false;
-    images.clear();
+
+    _imageCamera.clear();
+
     final List<XFile>? selectedImages = await multiPicker.pickMultiImage();
     setState(() {
       if (selectedImages!.isNotEmpty) {
         images.addAll(selectedImages);
+        
       } else {
         print('No Images Selected ');
       }
+      print(images);
     });
   }
 
@@ -416,85 +417,107 @@ class _DomesticScreenState extends State<DomesticScreen> {
                           const SizedBox(
                             height: 10,
                           ),
-                         Container(
-                          height: 250,
-                          width: screenWidth,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.deepPurple),
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Padding(
-                            padding: EdgeInsets.all(10),
-                            child: GestureDetector(
-                              onTap: () {
-                                actionsheetTakePhoto(context);
-                              },
-                              child: _camera == true
-                                  ? Container(
-                                      child: _image != null
-                                          ? ClipRRect(
-                                              // borderRadius: BorderRadius.circular(5),
-                                              child: Image.file(
-                                                _image!,
-                                                fit: BoxFit.contain,
-                                              ),
-                                            )
-                                          : Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey[100],
-                                                // borderRadius: BorderRadius.circular(50)
-                                              ),
-                                              width: screenWidth * (10 / 20),
-                                              height: screenHeight * (10 / 20),
-                                              child: Icon(
-                                                Icons.camera_alt,
-                                                color: Colors.grey[400],
-                                              ),
-                                            ),
-                                    )
-                                  : Container(
-                                      child: images.isEmpty
-                                          ? Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey[100],
-                                                // borderRadius: BorderRadius.circular(50)
-                                              ),
-                                              width: screenWidth * (10 / 20),
-                                              height: screenHeight * (10 / 20),
-                                              child: Icon(
-                                                Icons.camera_alt,
-                                                color: Colors.grey[400],
-                                              ),
-                                            )
-                                          : GridView.builder(
-                                              itemCount: images.isEmpty
-                                                  ? 1
-                                                  : images.length,
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                mainAxisSpacing: 20,
-                                                crossAxisSpacing: 20,
-                                                // width / height: fixed for *all* items
-                                                childAspectRatio: 0.75,
-                                              ),
-                                              itemBuilder: (context, index) =>
-                                                  Container(
+                          Container(
+                            height: 250,
+                            width: screenWidth,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(10),
+                              child: GestureDetector(
+                                onTap: () {
+                                  actionsheetTakePhoto(context);
+                                },
+                                child: _camera == true
+                                    ? Container(
+                                        child: _imageCamera.isEmpty
+                                            ? Container(
                                                 decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    border: Border.all(
-                                                        color: Colors.grey
-                                                            .withOpacity(0.5))),
-                                                child: Image.file(
-                                                  File(images[index].path),
-                                                  fit: BoxFit.cover,
+                                                  color: Colors.grey[100],
+                                                  // borderRadius: BorderRadius.circular(50)
+                                                ),
+                                                width: screenWidth * (10 / 20),
+                                                height:
+                                                    screenHeight * (10 / 20),
+                                                child: Icon(
+                                                  Icons.camera_alt,
+                                                  color: Colors.grey[400],
+                                                ),
+                                              )
+                                            : GridView.builder(
+                                                itemCount: _imageCamera.isEmpty
+                                                    ? 1
+                                                    : _imageCamera.length,
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: 2,
+                                                  mainAxisSpacing: 20,
+                                                  crossAxisSpacing: 20,
+                                                  // width / height: fixed for *all* items
+                                                  childAspectRatio: 0.75,
+                                                ),
+                                                itemBuilder: (context, index) =>
+                                                    Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      border: Border.all(
+                                                          color: Colors.grey
+                                                              .withOpacity(
+                                                                  0.5))),
+                                                  child: Image.file(
+                                                    File(_imageCamera[index].path),
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                    ),
+                                      )
+                                    : Container(
+                                        child: images.isEmpty
+                                            ? Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey[100],
+                                                  // borderRadius: BorderRadius.circular(50)
+                                                ),
+                                                width: screenWidth * (10 / 20),
+                                                height:
+                                                    screenHeight * (10 / 20),
+                                                child: Icon(
+                                                  Icons.camera_alt,
+                                                  color: Colors.grey[400],
+                                                ),
+                                              )
+                                            : GridView.builder(
+                                                itemCount: images.isEmpty
+                                                    ? 1
+                                                    : images.length,
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: 2,
+                                                  mainAxisSpacing: 20,
+                                                  crossAxisSpacing: 20,
+                                                  // width / height: fixed for *all* items
+                                                  childAspectRatio: 0.75,
+                                                ),
+                                                itemBuilder: (context, index) =>
+                                                    Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      border: Border.all(
+                                                          color: Colors.grey
+                                                              .withOpacity(
+                                                                  0.5))),
+                                                  child: Image.file(
+                                                    File(images[index].path),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                      ),
+                              ),
                             ),
                           ),
-                        ),
                         ],
                       ),
                       const SizedBox(
@@ -543,7 +566,19 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                   if (occupierinitvalue ==
                                       'Vacant**(please take photo for watermark)') {
                                     occupier = true;
+                                    tenant = false;
+                                    owner = false;
                                   } else if (occupierinitvalue == 'Closed') {
+                                    occupier = false;
+                                    tenant == false;
+                                    owner = false;
+                                  } else if (occupierinitvalue == 'Owner') {
+                                    owner = true;
+                                    tenant = false;
+                                    occupier = false;
+                                  } else if (occupierinitvalue == 'Tenant') {
+                                    tenant = true;
+                                    owner = false;
                                     occupier = false;
                                   } else {
                                     return;
@@ -555,72 +590,98 @@ class _DomesticScreenState extends State<DomesticScreen> {
                         ],
                       ),
 
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      // Occupier DropDown
+                      owner == true
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                // Occupier DropDown
 
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Owner Name Correct (Yes/No)",
-                            style: TextStyle(color: Colors.grey, fontSize: 12),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 20, right: 10),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.deepPurple),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            height: 45,
-                            width: MediaQuery.of(context).size.width,
-                            child: DropdownButton<String>(
-                              underline: Container(),
-                              icon: const Icon(
-                                Icons.keyboard_arrow_down,
-                                color: Colors.deepPurple,
-                              ),
-                              value: ownernamecorrectinitvalue,
-                              isExpanded: true,
-                              items: ownernamecorrect.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value,
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    const Text(
+                                      "Owner Name Correct (Yes/No)",
                                       style: TextStyle(
-                                          fontSize: 14, color: primaryColor)),
-                                );
-                              }).toList(),
-                              onChanged: (String? value) {
-                                setState(() {
-                                  ownernamecorrectinitvalue = value!;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      textField("Please specify correct ownername",
-                          correctownernamecontroller),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      textField("Owner's tel no", ownertelnocontroller),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      textField("Tenant's name", tenantnamecontroller),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      textField("Tenant's tel no", tenanttelnocontroller),
+                                          color: Colors.grey, fontSize: 12),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      padding: const EdgeInsets.only(
+                                          left: 20, right: 10),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.deepPurple),
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      height: 45,
+                                      width: MediaQuery.of(context).size.width,
+                                      child: DropdownButton<String>(
+                                        underline: Container(),
+                                        icon: const Icon(
+                                          Icons.keyboard_arrow_down,
+                                          color: Colors.deepPurple,
+                                        ),
+                                        value: ownernamecorrectinitvalue,
+                                        isExpanded: true,
+                                        items: ownernamecorrect
+                                            .map((String value) {
+                                          return DropdownMenuItem<String>(
+                                            value: value,
+                                            child: Text(value,
+                                                style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: primaryColor)),
+                                          );
+                                        }).toList(),
+                                        onChanged: (String? value) {
+                                          setState(() {
+                                            ownernamecorrectinitvalue = value!;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ],
+                                ),
+
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                textField("Please specify correct ownername",
+                                    correctownernamecontroller),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                textField(
+                                    "Owner's tel no", ownertelnocontroller),
+                              ],
+                            )
+                          : SizedBox(),
+
+                      tenant == true
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                textField(
+                                    "Tenant's name", tenantnamecontroller),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                                textField(
+                                    "Tenant's tel no", tenanttelnocontroller),
+                              ],
+                            )
+                          : SizedBox(),
 
                       SizedBox(
                         height: 20,
@@ -646,7 +707,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text("Malaysian")
+                              Text("Malaysian",style: TextStyle(fontSize: 14, color: primaryColor),)
                             ],
                           ),
                           Row(
@@ -662,218 +723,12 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              const Text("Foreigner")
+                              const Text("Foreigner",style: TextStyle(fontSize: 14, color: primaryColor),)
                             ],
                           )
                         ],
                       ),
                       // Property Usage DropDown
-
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Property usage (D or C)",
-                            style: TextStyle(color: Colors.grey, fontSize: 12),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 20, right: 10),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.deepPurple),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            height: 45,
-                            width: MediaQuery.of(context).size.width,
-                            child: DropdownButton<String>(
-                              underline: Container(),
-                              icon: const Icon(
-                                Icons.keyboard_arrow_down,
-                                color: Colors.deepPurple,
-                              ),
-                              value: ownernamecorrectinitvalue,
-                              isExpanded: true,
-                              items: ownernamecorrect.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value,
-                                      style: TextStyle(
-                                          fontSize: 14, color: primaryColor)),
-                                );
-                              }).toList(),
-                              onChanged: (String? value) {
-                                setState(() {
-                                  ownernamecorrectinitvalue = value!;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      SizedBox(
-                        height: 20,
-                      ),
-// Drop Down
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Property Domestic",
-                            style: TextStyle(color: Colors.grey, fontSize: 12),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 20, right: 10),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.deepPurple),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            height: 45,
-                            width: MediaQuery.of(context).size.width,
-                            child: DropdownButton<String>(
-                              underline: Container(),
-                              icon: const Icon(
-                                Icons.keyboard_arrow_down,
-                                color: Colors.deepPurple,
-                              ),
-                              value: propertydomestictypeinitvalue,
-                              isExpanded: true,
-                              items: propertydomestictype.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value,
-                                      style: TextStyle(
-                                          fontSize: 14, color: primaryColor)),
-                                );
-                              }).toList(),
-                              onChanged: (String? value) {
-                                setState(() {
-                                  propertydomestictypeinitvalue = value!;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      // Drop Down
-
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            "Dr Code",
-                            style: TextStyle(color: Colors.grey, fontSize: 12),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 20, right: 10),
-                            decoration: BoxDecoration(
-                              border: Border.all(color: Colors.deepPurple),
-                              borderRadius: BorderRadius.circular(25),
-                            ),
-                            height: 45,
-                            width: MediaQuery.of(context).size.width,
-                            child: DropdownButton<String>(
-                              underline: Container(),
-                              icon: const Icon(
-                                Icons.keyboard_arrow_down,
-                                color: Colors.deepPurple,
-                              ),
-                              value: drcodeinitvalue,
-                              isExpanded: true,
-                              items: drcodetype.map((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value,
-                                      style: TextStyle(
-                                          fontSize: 14, color: primaryColor)),
-                                );
-                              }).toList(),
-                              onChanged: (String? value) {
-                                setState(() {
-                                  drcodeinitvalue = value!;
-                                });
-                              },
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Remark",
-                            style: const TextStyle(
-                                fontSize: 12, color: Colors.grey),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextFormField(
-                            style: const TextStyle(
-                                fontSize: 16, color: Colors.black),
-                            cursorColor: kPrimaryPurpleColor,
-                            keyboardType: TextInputType.text,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Remark Required';
-                              }
-                            },
-                            controller: remarkcontroller,
-                            maxLines: 5,
-                            textInputAction: TextInputAction.done,
-                            decoration: InputDecoration(
-                              hintText: "Remark",
-                              hintStyle:
-                                  TextStyle(fontSize: 12, color: Colors.grey),
-                              focusedBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25.0)),
-                                  borderSide:
-                                      BorderSide(color: kPrimaryPurpleColor)),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(25, 10, 10, 10),
-                              fillColor: kPrimaryWhiteColor,
-                              filled: true,
-                              enabledBorder: OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25.0)),
-                                  borderSide:
-                                      BorderSide(color: kPrimaryPurpleColor)),
-                              border: OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(25.0)),
-                                borderSide:
-                                    BorderSide(color: kPrimaryPurpleColor),
-                                gapPadding: 0,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-
-                      SizedBox(
-                        height: 20,
-                      ),
-                      // Radio Button
                       occupier == true
                           ? Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -881,6 +736,248 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          "Property usage (D or C)",
+                                          style: TextStyle(
+                                              color: Colors.grey, fontSize: 12),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Container(
+                                          padding: const EdgeInsets.only(
+                                              left: 20, right: 10),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.deepPurple),
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
+                                          height: 45,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: DropdownButton<String>(
+                                            underline: Container(),
+                                            icon: const Icon(
+                                              Icons.keyboard_arrow_down,
+                                              color: Colors.deepPurple,
+                                            ),
+                                            value: ownernamecorrectinitvalue,
+                                            isExpanded: true,
+                                            items: ownernamecorrect
+                                                .map((String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value,
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: primaryColor)),
+                                              );
+                                            }).toList(),
+                                            onChanged: (String? value) {
+                                              setState(() {
+                                                ownernamecorrectinitvalue =
+                                                    value!;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+// Drop Down
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          "Property Domestic",
+                                          style: TextStyle(
+                                              color: Colors.grey, fontSize: 12),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Container(
+                                          padding: const EdgeInsets.only(
+                                              left: 20, right: 10),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.deepPurple),
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
+                                          height: 45,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: DropdownButton<String>(
+                                            underline: Container(),
+                                            icon: const Icon(
+                                              Icons.keyboard_arrow_down,
+                                              color: Colors.deepPurple,
+                                            ),
+                                            value:
+                                                propertydomestictypeinitvalue,
+                                            isExpanded: true,
+                                            items: propertydomestictype
+                                                .map((String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value,
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: primaryColor)),
+                                              );
+                                            }).toList(),
+                                            onChanged: (String? value) {
+                                              setState(() {
+                                                propertydomestictypeinitvalue =
+                                                    value!;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    // Drop Down
+
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text(
+                                          "Dr Code",
+                                          style: TextStyle(
+                                              color: Colors.grey, fontSize: 12),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        Container(
+                                          padding: const EdgeInsets.only(
+                                              left: 20, right: 10),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                                color: Colors.deepPurple),
+                                            borderRadius:
+                                                BorderRadius.circular(25),
+                                          ),
+                                          height: 45,
+                                          width:
+                                              MediaQuery.of(context).size.width,
+                                          child: DropdownButton<String>(
+                                            underline: Container(),
+                                            icon: const Icon(
+                                              Icons.keyboard_arrow_down,
+                                              color: Colors.deepPurple,
+                                            ),
+                                            value: drcodeinitvalue,
+                                            isExpanded: true,
+                                            items:
+                                                drcodetype.map((String value) {
+                                              return DropdownMenuItem<String>(
+                                                value: value,
+                                                child: Text(value,
+                                                    style: TextStyle(
+                                                        fontSize: 14,
+                                                        color: primaryColor)),
+                                              );
+                                            }).toList(),
+                                            onChanged: (String? value) {
+                                              setState(() {
+                                                drcodeinitvalue = value!;
+                                              });
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          "Remark",
+                                          style: const TextStyle(
+                                              fontSize: 12, color: Colors.grey),
+                                        ),
+                                        const SizedBox(
+                                          height: 10,
+                                        ),
+                                        TextFormField(
+                                          style: const TextStyle(
+                                              fontSize: 16,
+                                              color: Colors.black),
+                                          cursorColor: kPrimaryPurpleColor,
+                                          keyboardType: TextInputType.text,
+                                          validator: (value) {
+                                            if (value!.isEmpty) {
+                                              return 'Remark Required';
+                                            }
+                                          },
+                                          controller: remarkcontroller,
+                                          maxLines: 5,
+                                          textInputAction: TextInputAction.done,
+                                          decoration: InputDecoration(
+                                            hintText: "Remark",
+                                            hintStyle: TextStyle(
+                                                fontSize: 12,
+                                                color: Colors.grey),
+                                            focusedBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(25.0)),
+                                                borderSide: BorderSide(
+                                                    color:
+                                                        kPrimaryPurpleColor)),
+                                            contentPadding: EdgeInsets.fromLTRB(
+                                                25, 10, 10, 10),
+                                            fillColor: kPrimaryWhiteColor,
+                                            filled: true,
+                                            enabledBorder: OutlineInputBorder(
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(25.0)),
+                                                borderSide: BorderSide(
+                                                    color:
+                                                        kPrimaryPurpleColor)),
+                                            border: OutlineInputBorder(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(25.0)),
+                                              borderSide: BorderSide(
+                                                  color: kPrimaryPurpleColor),
+                                              gapPadding: 0,
+                                            ),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    // Radio Button
+
                                     const Text(
                                       'If DR05 (VACANT PREMISE), please select below.',
                                       style: TextStyle(
@@ -923,27 +1020,59 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                 SizedBox(
                                   height: 20,
                                 ),
-                                Text(
-                                  "Meter Number",
-                                  style: const TextStyle(
-                                      fontSize: 12, color: Colors.grey),
-                                ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Align(
-                                  alignment: Alignment.topLeft,
-                                  child: Container(
-                                    width: 150,
-                                    height: 150,
-                                    decoration: BoxDecoration(
-                                        image: DecorationImage(
-                                          image: AssetImage("assets/meter.png"),
-                                          fit: BoxFit.cover,
-                                        ),
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(20.0))),
-                                  ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      "Meter Number",
+                                      style: const TextStyle(
+                                          fontSize: 12, color: Colors.grey),
+                                    ),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    Container(
+                                      height: 250,
+                                      width: screenWidth,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: Colors.deepPurple),
+                                        borderRadius: BorderRadius.circular(25),
+                                      ),
+                                      child: Padding(
+                                        padding: EdgeInsets.all(10),
+                                        child: GestureDetector(
+                                            onTap: () {
+                                              _getFromCamera();
+                                            },
+                                            child: Container(
+                                              child: _image != null
+                                                  ? ClipRRect(
+                                                      // borderRadius: BorderRadius.circular(5),
+                                                      child: Image.file(
+                                                        _image!,
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                    )
+                                                  : Container(
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.grey[100],
+                                                        // borderRadius: BorderRadius.circular(50)
+                                                      ),
+                                                      width: screenWidth *
+                                                          (10 / 20),
+                                                      height: screenHeight *
+                                                          (10 / 20),
+                                                      child: Icon(
+                                                        Icons.camera_alt,
+                                                        color: Colors.grey[400],
+                                                      ),
+                                                    ),
+                                            )),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 textField("", waterMetercontroller),
                               ],

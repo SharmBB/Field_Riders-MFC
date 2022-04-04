@@ -5,6 +5,7 @@ import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/HomeScreen/HomePage.dart';
 import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
 import 'package:riders_app/views/deptAssignment/DeptAssignID.dart';
+import 'package:riders_app/views/deptAssignment/VacantID.dart';
 import 'package:riders_app/views/deptAssignment/deptAssignment.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -109,14 +110,25 @@ class _FieldScreenState extends State<FieldScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DeptAssignID(
-                              type: '',
+                        if (feild[index]['Type'] == 'Domestric DR') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DeptAssignID(
+                                type: '',
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        } else if (feild[index]['Type'] == 'Vacant') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => VacantID(
+                                type: '',
+                              ),
+                            ),
+                          );
+                        }
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -306,15 +318,28 @@ class _FieldScreenState extends State<FieldScreen> {
                                       width: 100.0,
                                       child: TextButton(
                                         onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DeptAssignID(
-                                                type: '',
+                                          if (feild[index]['Type'] ==
+                                              'Domestric DR') {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    DeptAssignID(
+                                                  type: '',
+                                                ),
                                               ),
-                                            ),
-                                          );
+                                            );
+                                          } else if (feild[index]['Type'] ==
+                                              'Vacant') {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) => VacantID(
+                                                  type: '',
+                                                ),
+                                              ),
+                                            );
+                                          }
                                         },
                                         style: ButtonStyle(
                                             backgroundColor:

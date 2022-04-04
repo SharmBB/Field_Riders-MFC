@@ -75,7 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               SizedBox(height: screenHeight * (0.5 / 20)),
               HomePageButyton(
-                text: "Score Board",
+                text: "Scoreboard",
                 function: () {
                   Navigator.push(
                     context,
