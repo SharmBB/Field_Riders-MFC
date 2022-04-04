@@ -51,15 +51,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
       "Payment Update": "-",
       'Status': 'Outstanding'
     },
-    {
-      'Name': '99999',
-      'SAN': '27933712',
-      'Owner 1': 'ABIDEN BIN SABARI',
-      "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
-      "Date Assign": '22/02/2022',
-      "Payment Update": "-",
-      'Status': 'Outstanding'
-    },
+
   ];
 
   bool tick1 = false;
@@ -477,13 +469,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                     MaterialPageRoute(
                                         builder: (context) => DomesticScreen()),
                                   );
-                                }  else if (feild[index]['Name'] == '99999') {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => FeildTest()),
-                                  );
-                                }
+                                } 
                                 else {
                                   Navigator.push(
                                       context,

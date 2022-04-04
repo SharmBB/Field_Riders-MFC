@@ -116,59 +116,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
   TextEditingController businessclosecontroller = TextEditingController();
   TextEditingController remarkcontroller = TextEditingController();
 
-  File? _image;
-  bool image = false;
-  bool _camera = false;
-
-  _getFromCamera() async {
-    PickedFile? pickedFile = await ImagePicker()
-        .getImage(source: ImageSource.camera, imageQuality: 50
-            // maxWidth: 1800,
-            // maxHeight: 1800,
-            );
-    if (pickedFile != null) {
-      setState(() {
-        _image = File(pickedFile.path);
-        //uploadFile();
-        image = true;
-        //file path upload
-        if (_image != null) {
-          imagecontroller.text = "Sucessful Uploaded";
-        } else {
-          imagecontroller.text = "Unscessful Upload";
-        }
-      });
-    }
-    Navigator.of(context).pop();
-  }
-
-  // _getFromGallery() async {
-  //   PickedFile? pickedFile = await ImagePicker()
-  //       .getImage(source: ImageSource.gallery, imageQuality: 50
-  //           // maxWidth: 1800,
-  //           // maxHeight: 1800,
-  //           );
-  //   if (pickedFile != null) {
-  //     setState(() {
-  //       // _image = image;
-  //       _image = File(pickedFile.path);
-  //       print(_image);
-  //       print('------');
-  //       print(pickedFile);
-  //       //uploadFile();
-  //       image = true;
-  //       //file path upload
-  //       if (_image != null) {
-  //         imagecontroller.text = "Sucessful Uploaded";
-  //       } else {
-  //         imagecontroller.text = "Unscessful Upload";
-  //       }
-  //     });
-  //   }
-  //   Navigator.of(context).pop();
-  // }
-
-  actionsheetTakePhoto(BuildContext context) {
+   actionsheetTakePhoto(BuildContext context) {
     showCupertinoModalPopup(
       context: context,
       builder: (context) {
@@ -177,7 +125,8 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
             CupertinoActionSheetAction(
                 onPressed: () async {
                   _camera = true;
-                  _getFromCamera();
+                  _getMultiFromCamera();
+                  Navigator.of(context).pop();
                 },
                 child: const Align(
                     alignment: Alignment.topLeft, child: Text("Camera"))),
@@ -199,22 +148,50 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
     );
   }
 
+  File? _image1;
+  bool _camera = false;
+  List _imageCamera = [];
+
+  _getMultiFromCamera() async {
+        images.clear();
+    _camera = true;
+    PickedFile? pickedFile = await ImagePicker()
+        .getImage(source: ImageSource.camera, imageQuality: 50
+            // maxWidth: 1800,
+            // maxHeight: 1800,
+            );
+    if (pickedFile != null) {
+      setState(() {
+        _image1 = File(pickedFile.path);
+        //uploadFile();
+        _imageCamera.add(_image1);
+
+       
+       
+      });
+    }
+    print(_imageCamera);
+  }
+
   final multiPicker = ImagePicker();
   List<XFile> images = [];
 
   Future getMultiImages() async {
     _camera = false;
-    images.clear();
+
+    _imageCamera.clear();
+
     final List<XFile>? selectedImages = await multiPicker.pickMultiImage();
     setState(() {
       if (selectedImages!.isNotEmpty) {
         images.addAll(selectedImages);
+        
       } else {
         print('No Images Selected ');
       }
+      print(images);
     });
   }
-
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -373,70 +350,92 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                               onTap: () {
                                 actionsheetTakePhoto(context);
                               },
-                              child: _camera == true
-                                  ? Container(
-                                      child: _image != null
-                                          ? ClipRRect(
-                                              // borderRadius: BorderRadius.circular(5),
-                                              child: Image.file(
-                                                _image!,
-                                                fit: BoxFit.contain,
-                                              ),
-                                            )
-                                          : Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey[100],
-                                                // borderRadius: BorderRadius.circular(50)
-                                              ),
-                                              width: screenWidth * (10 / 20),
-                                              height: screenHeight * (10 / 20),
-                                              child: Icon(
-                                                Icons.camera_alt,
-                                                color: Colors.grey[400],
-                                              ),
-                                            ),
-                                    )
-                                  : Container(
-                                      child: images.isEmpty
-                                          ? Container(
-                                              decoration: BoxDecoration(
-                                                color: Colors.grey[100],
-                                                // borderRadius: BorderRadius.circular(50)
-                                              ),
-                                              width: screenWidth * (10 / 20),
-                                              height: screenHeight * (10 / 20),
-                                              child: Icon(
-                                                Icons.camera_alt,
-                                                color: Colors.grey[400],
-                                              ),
-                                            )
-                                          : GridView.builder(
-                                              itemCount: images.isEmpty
-                                                  ? 1
-                                                  : images.length,
-                                              gridDelegate:
-                                                  SliverGridDelegateWithFixedCrossAxisCount(
-                                                crossAxisCount: 2,
-                                                mainAxisSpacing: 20,
-                                                crossAxisSpacing: 20,
-                                                // width / height: fixed for *all* items
-                                                childAspectRatio: 0.75,
-                                              ),
-                                              itemBuilder: (context, index) =>
-                                                  Container(
+                               child: _camera == true
+                                    ? Container(
+                                        child: _imageCamera.isEmpty
+                                            ? Container(
                                                 decoration: BoxDecoration(
-                                                    color: Colors.white,
-                                                    border: Border.all(
-                                                        color: Colors.grey
-                                                            .withOpacity(0.5))),
-                                                child: Image.file(
-                                                  File(images[index].path),
-                                                  fit: BoxFit.cover,
+                                                  color: Colors.grey[100],
+                                                  // borderRadius: BorderRadius.circular(50)
+                                                ),
+                                                width: screenWidth * (10 / 20),
+                                                height:
+                                                    screenHeight * (10 / 20),
+                                                child: Icon(
+                                                  Icons.camera_alt,
+                                                  color: Colors.grey[400],
+                                                ),
+                                              )
+                                            : GridView.builder(
+                                                itemCount: _imageCamera.isEmpty
+                                                    ? 1
+                                                    : _imageCamera.length,
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: 2,
+                                                  mainAxisSpacing: 20,
+                                                  crossAxisSpacing: 20,
+                                                  // width / height: fixed for *all* items
+                                                  childAspectRatio: 0.75,
+                                                ),
+                                                itemBuilder: (context, index) =>
+                                                    Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      border: Border.all(
+                                                          color: Colors.grey
+                                                              .withOpacity(
+                                                                  0.5))),
+                                                  child: Image.file(
+                                                    File(_imageCamera[index].path),
+                                                    fit: BoxFit.cover,
+                                                  ),
                                                 ),
                                               ),
-                                            ),
-                                    ),
-                            ),
+                                      )
+                                    : Container(
+                                        child: images.isEmpty
+                                            ? Container(
+                                                decoration: BoxDecoration(
+                                                  color: Colors.grey[100],
+                                                  // borderRadius: BorderRadius.circular(50)
+                                                ),
+                                                width: screenWidth * (10 / 20),
+                                                height:
+                                                    screenHeight * (10 / 20),
+                                                child: Icon(
+                                                  Icons.camera_alt,
+                                                  color: Colors.grey[400],
+                                                ),
+                                              )
+                                            : GridView.builder(
+                                                itemCount: images.isEmpty
+                                                    ? 1
+                                                    : images.length,
+                                                gridDelegate:
+                                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                                  crossAxisCount: 2,
+                                                  mainAxisSpacing: 20,
+                                                  crossAxisSpacing: 20,
+                                                  // width / height: fixed for *all* items
+                                                  childAspectRatio: 0.75,
+                                                ),
+                                                itemBuilder: (context, index) =>
+                                                    Container(
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white,
+                                                      border: Border.all(
+                                                          color: Colors.grey
+                                                              .withOpacity(
+                                                                  0.5))),
+                                                  child: Image.file(
+                                                    File(images[index].path),
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                      ),
+                              ),
                           ),
                         ),
                       ],
