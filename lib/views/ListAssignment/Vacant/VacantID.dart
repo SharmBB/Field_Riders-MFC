@@ -4,11 +4,13 @@ import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignment.dart';
+import 'package:riders_app/views/ListAssignment/Domestric/DomesticScreen.dart';
+import 'package:riders_app/views/ListAssignment/Vacant/feildTest.dart';
+
 
 import 'package:riders_app/views/Verification%20Screen/taskVerification.dart';
-import 'package:riders_app/views/deptAssignment/DomesticScreen.dart';
-import 'package:riders_app/views/deptAssignment/deptAssignment.dart';
-import 'package:riders_app/views/deptAssignment/feildTest.dart';
+
 import 'package:riders_app/views/field/feild.dart';
 
 class VacantID extends StatefulWidget {
@@ -449,25 +451,13 @@ class __VacantIDState extends State<VacantID> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                if (feild[index]['Name'] == '1') {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => DomesticScreen()),
-                                  );
-                                } else if (feild[index]['Name'] == '99999') {
+                                 if (feild[index]['Name'] == '99999') {
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => FeildTest()),
                                   );
-                                } else {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) =>
-                                              DeptAssignmentScreen()));
-                                }
+                                } 
                               },
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,

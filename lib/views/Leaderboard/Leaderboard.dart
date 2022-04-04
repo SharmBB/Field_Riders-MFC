@@ -1,4 +1,3 @@
-
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
@@ -51,7 +50,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
         leading: IconButton(
           icon: Icon(Icons.arrow_back_rounded, color: kPrimaryPurpleColor),
           onPressed: () {
-             Navigator.push(
+            Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => HomeScreen()),
             );
@@ -97,7 +96,6 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                 const SizedBox(
                   height: 15,
                 ),
-                
                 SizedBox(
                   width: screenWidth,
                   height: screenHeight * 0.8,
@@ -108,10 +106,9 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                       SizedBox(
-                  height: 20,
-                ),
-                
+                          SizedBox(
+                            height: 20,
+                          ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
@@ -125,7 +122,6 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                                       color: kPrimaryPurpleColor)),
                             ],
                           ),
-                 
                           Padding(
                             padding: const EdgeInsets.only(top: 20.0),
                             child: Row(
@@ -141,9 +137,9 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                               ],
                             ),
                           ),
-                                 SizedBox(
-                  height: 20,
-                ),
+                          SizedBox(
+                            height: 20,
+                          ),
                           Divider()
                         ],
                       );

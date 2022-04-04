@@ -6,9 +6,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riders_app/_helpers/constants.dart';
-import 'package:riders_app/views/deptAssignment/DeptAssignID.dart';
+import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignID.dart';
+import 'package:riders_app/views/ListAssignment/reusabletextfield.dart';
 
-import 'package:riders_app/views/deptAssignment/reusabletextfield.dart';
+
+
+
+
 
 class DomesticScreen extends StatefulWidget {
   const DomesticScreen({Key? key}) : super(key: key);

@@ -4,13 +4,12 @@ import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignment.dart';
+import 'package:riders_app/views/ListAssignment/Domestric/DomesticScreen.dart';
 
 import 'package:riders_app/views/Verification%20Screen/taskVerification.dart';
-import 'package:riders_app/views/deptAssignment/DomesticScreen.dart';
-import 'package:riders_app/views/deptAssignment/deptAssignment.dart';
-import 'package:riders_app/views/deptAssignment/feildTest.dart';
-import 'package:riders_app/views/field/feild.dart';
 
+import 'package:riders_app/views/field/feild.dart';
 
 class DeptAssignID extends StatefulWidget {
   final String type;
@@ -29,8 +28,6 @@ class __DeptAssignIDState extends State<DeptAssignID> {
 
     super.initState();
   }
-
-
 
   final List<Map> feild = [
     {
@@ -51,7 +48,6 @@ class __DeptAssignIDState extends State<DeptAssignID> {
       "Payment Update": "-",
       'Status': 'Outstanding'
     },
-
   ];
 
   bool tick1 = false;
@@ -288,8 +284,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                 children: [
                   CupertinoActionSheetAction(
                       child: const Text("Select"),
-                      onPressed: ()  {
-                     
+                      onPressed: () {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -469,8 +464,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                     MaterialPageRoute(
                                         builder: (context) => DomesticScreen()),
                                   );
-                                } 
-                                else {
+                                } else {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -481,233 +475,239 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "IWK Id: ",
-                                        style: TextStyle(
-                                          color: kPrimaryPurpleColor,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        feild[index]['Name'],
-                                        style: TextStyle(
-                                          color: kPrimaryPurpleColor,
-                                          fontSize: 18.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    children: [
-                                      Container(
-                                        width: 70,
-                                        decoration: BoxDecoration(
-                                            color: kPrimaryPurpleColor,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(20))),
-                                        child: Padding(
-                                          padding: EdgeInsets.all(5),
-                                          child: CustomTimer(
-                                            from: Duration(minutes: 05),
-                                            to: Duration(hours: 0),
-                                            onBuildAction:
-                                                CustomTimerAction.auto_start,
-                                            builder: (CustomTimerRemainingTime
-                                                remaining) {
-                                              return Text(
-                                                "${remaining.minutes}:${remaining.seconds}",
-                                                style:
-                                                    TextStyle(fontSize: 14.0,color: kPrimaryWhiteColor),
-                                              );
-                                            },
-                                          ),
-                                        ),
-                                      ),
-                                      IconButton(
-                                        icon: Icon(
-                                          Icons.timer_outlined,
-                                          color: kPrimaryPurpleColor,
-                                        ),
-                                        onPressed: () {},
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                           
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: 20,
-                                bottom: 20,
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Text(
-                                        "SAN",
-                                        style: TextStyle(
-                                          color: primaryColor,
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        feild[index]['SAN'],
-                                        style: TextStyle(
-                                          color: kPrimaryGreyColor,
-                                          fontSize: 14.0,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Owner 1",
-                                        style: TextStyle(
-                                          color: primaryColor,
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        feild[index]['Owner 1'],
-                                        style: TextStyle(
-                                          color: kPrimaryGreyColor,
-                                          fontSize: 14.0,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Text(
-                                        "Address",
-                                        style: TextStyle(
-                                          color: primaryColor,
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: 200,
-                                        child: Text(
-                                          feild[index]['Address'],
-                                          textAlign: TextAlign.right,
-                                          style: TextStyle(
-                                            color: kPrimaryGreyColor,
-                                            fontSize: 14.0,
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "IWK Id: ",
+                                            style: TextStyle(
+                                              color: kPrimaryPurpleColor,
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
-                                        ),
+                                          Text(
+                                            feild[index]['Name'],
+                                            style: TextStyle(
+                                              color: kPrimaryPurpleColor,
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Container(
+                                            width: 70,
+                                            decoration: BoxDecoration(
+                                                color: kPrimaryPurpleColor,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(20))),
+                                            child: Padding(
+                                              padding: EdgeInsets.all(5),
+                                              child: CustomTimer(
+                                                from: Duration(minutes: 05),
+                                                to: Duration(hours: 0),
+                                                onBuildAction: CustomTimerAction
+                                                    .auto_start,
+                                                builder:
+                                                    (CustomTimerRemainingTime
+                                                        remaining) {
+                                                  return Text(
+                                                    "${remaining.minutes}:${remaining.seconds}",
+                                                    style: TextStyle(
+                                                        fontSize: 14.0,
+                                                        color:
+                                                            kPrimaryWhiteColor),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ),
+                                          IconButton(
+                                            icon: Icon(
+                                              Icons.timer_outlined,
+                                              color: kPrimaryPurpleColor,
+                                            ),
+                                            onPressed: () {},
+                                          ),
+                                        ],
                                       ),
                                     ],
                                   ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Date Assign",
-                                        style: TextStyle(
-                                          color: primaryColor,
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.w600,
+                                  Padding(
+                                    padding: EdgeInsets.only(
+                                      top: 20,
+                                      bottom: 20,
+                                    ),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "SAN",
+                                              style: TextStyle(
+                                                color: primaryColor,
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Text(
+                                              feild[index]['SAN'],
+                                              style: TextStyle(
+                                                color: kPrimaryGreyColor,
+                                                fontSize: 14.0,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      Text(
-                                        feild[index]['Date Assign'],
-                                        style: TextStyle(
-                                          color: kPrimaryGreyColor,
-                                          fontSize: 14.0,
+                                        SizedBox(
+                                          height: 30,
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Payment Update",
-                                        style: TextStyle(
-                                          color: primaryColor,
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.w600,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Owner 1",
+                                              style: TextStyle(
+                                                color: primaryColor,
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Text(
+                                              feild[index]['Owner 1'],
+                                              style: TextStyle(
+                                                color: kPrimaryGreyColor,
+                                                fontSize: 14.0,
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      Text(
-                                        feild[index]['Payment Update'],
-                                        style: TextStyle(
-                                          color: kPrimaryGreyColor,
-                                          fontSize: 14.0,
+                                        SizedBox(
+                                          height: 30,
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Text(
-                                        "Status",
-                                        style: TextStyle(
-                                          color: primaryColor,
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.w600,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              "Address",
+                                              style: TextStyle(
+                                                color: primaryColor,
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 200,
+                                              child: Text(
+                                                feild[index]['Address'],
+                                                textAlign: TextAlign.right,
+                                                style: TextStyle(
+                                                  color: kPrimaryGreyColor,
+                                                  fontSize: 14.0,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
-                                      ),
-                                      Text(
-                                        feild[index]['Status'],
-                                        style: TextStyle(
-                                          color: kPrimaryGreyColor,
-                                          fontSize: 14.0,
+                                        SizedBox(
+                                          height: 30,
                                         ),
-                                      ),
-                                    ],
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Date Assign",
+                                              style: TextStyle(
+                                                color: primaryColor,
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Text(
+                                              feild[index]['Date Assign'],
+                                              style: TextStyle(
+                                                color: kPrimaryGreyColor,
+                                                fontSize: 14.0,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Payment Update",
+                                              style: TextStyle(
+                                                color: primaryColor,
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Text(
+                                              feild[index]['Payment Update'],
+                                              style: TextStyle(
+                                                color: kPrimaryGreyColor,
+                                                fontSize: 14.0,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                        ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Text(
+                                              "Status",
+                                              style: TextStyle(
+                                                color: primaryColor,
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                            Text(
+                                              feild[index]['Status'],
+                                              style: TextStyle(
+                                                color: kPrimaryGreyColor,
+                                                fontSize: 14.0,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 30,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  SizedBox(
-                                    height: 30,
-                                  ),
-                                ],
-                              ),
-                              ),
-                
                                   Divider(),
                                 ],
                               ),
