@@ -108,7 +108,7 @@ class _ResetPasswordState extends State<ForgetPassword> {
           controller: _emailController,
           textInputAction: TextInputAction.done,
         decoration: InputDecoration(
-          hintText: 'Password',
+          hintText: 'Forget Password',
           focusedBorder:
               UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
         ),
