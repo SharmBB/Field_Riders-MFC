@@ -9,11 +9,6 @@ import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignID.dart';
 import 'package:riders_app/views/ListAssignment/reusabletextfield.dart';
 
-
-
-
-
-
 class DomesticScreen extends StatefulWidget {
   const DomesticScreen({Key? key}) : super(key: key);
 
@@ -172,14 +167,11 @@ class _DomesticScreenState extends State<DomesticScreen> {
         _image = File(pickedFile.path);
         //uploadFile();
         image = true;
-
-   
       });
     }
-
   }
 
-    actionsheetTakePhoto(BuildContext context) {
+  actionsheetTakePhoto(BuildContext context) {
     showCupertinoModalPopup(
       context: context,
       builder: (context) {
@@ -214,9 +206,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
   File? _image1;
   bool _camera = false;
 
-
   _getMultiFromCamera() async {
-       
     _camera = true;
     PickedFile? pickedFile = await ImagePicker()
         .getImage(source: ImageSource.camera, imageQuality: 50
@@ -228,9 +218,6 @@ class _DomesticScreenState extends State<DomesticScreen> {
         _image1 = File(pickedFile.path);
         //uploadFile();
         imageFileList!.add(_image1!);
-
-       
-       
       });
     }
     print(imageFileList);
@@ -245,10 +232,10 @@ class _DomesticScreenState extends State<DomesticScreen> {
     // _imageCamera.clear();
 
     final List<XFile>? selectedImages = await multiPicker.pickMultiImage();
-     selectedImages!.forEach((image) {
-     setState(() {
-       imageFileList!.add(File(image.path));
-     });
+    selectedImages!.forEach((image) {
+      setState(() {
+        imageFileList!.add(File(image.path));
+      });
 
       print(imageFileList);
     });
@@ -412,28 +399,32 @@ class _DomesticScreenState extends State<DomesticScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-
-                             Row(
-                     
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                               "Take Photo",
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.grey),
-                            ),
-                            IconButton(
-                              icon: Icon(Icons.delete_forever,
-                                  color: Colors.red, size: 30),
-                              onPressed: () {
-                                setState(() {
-                                  imageFileList!.clear();
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                        
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              const Text(
+                                "Take Photo",
+                                style:
+                                    TextStyle(fontSize: 12, color: Colors.grey),
+                              ),
+                              imageFileList!.isNotEmpty
+                                  ? IconButton(
+                                      icon: Icon(Icons.delete_forever,
+                                          color: Colors.red, size: 30),
+                                      onPressed: () {
+                                        setState(() {
+                                          imageFileList!.clear();
+                                        });
+                                      },
+                                    )
+                                  : SizedBox(),
+                            ],
+                          ),
+                          imageFileList!.isEmpty
+                              ? SizedBox(
+                                  height: 10,
+                                )
+                              : SizedBox(),
                           Container(
                             height: 250,
                             width: screenWidth,
@@ -447,48 +438,46 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                 onTap: () {
                                   actionsheetTakePhoto(context);
                                 },
-                                        child:  Container(
-                                        child: imageFileList!.isEmpty
-                                            ? Container(
-                                                decoration: BoxDecoration(
-                                                  color: Colors.grey[100],
-                                                  // borderRadius: BorderRadius.circular(50)
-                                                ),
-                                                width: screenWidth * (10 / 20),
-                                                height:
-                                                    screenHeight * (10 / 20),
-                                                child: Icon(
-                                                  Icons.camera_alt,
-                                                  color: Colors.grey[400],
-                                                ),
-                                              )
-                                            : GridView.builder(
-                                                itemCount: imageFileList!.isEmpty
-                                                    ? 1
-                                                    : imageFileList!.length,
-                                                gridDelegate:
-                                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  mainAxisSpacing: 20,
-                                                  crossAxisSpacing: 20,
-                                                  // width / height: fixed for *all* items
-                                                  childAspectRatio: 0.75,
-                                                ),
-                                                itemBuilder: (context, index) =>
-                                                    Container(
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      border: Border.all(
-                                                          color: Colors.grey
-                                                              .withOpacity(
-                                                                  0.5))),
-                                                  child: Image.file(
-                                                    File(imageFileList![index].path),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                      ),
+                                child: Container(
+                                  child: imageFileList!.isEmpty
+                                      ? Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[100],
+                                            // borderRadius: BorderRadius.circular(50)
+                                          ),
+                                          width: screenWidth * (10 / 20),
+                                          height: screenHeight * (10 / 20),
+                                          child: Icon(
+                                            Icons.camera_alt,
+                                            color: Colors.grey[400],
+                                          ),
+                                        )
+                                      : GridView.builder(
+                                          itemCount: imageFileList!.isEmpty
+                                              ? 1
+                                              : imageFileList!.length,
+                                          gridDelegate:
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            mainAxisSpacing: 20,
+                                            crossAxisSpacing: 20,
+                                            // width / height: fixed for *all* items
+                                            childAspectRatio: 0.75,
+                                          ),
+                                          itemBuilder: (context, index) =>
+                                              Container(
+                                            decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                border: Border.all(
+                                                    color: Colors.grey
+                                                        .withOpacity(0.5))),
+                                            child: Image.file(
+                                              File(imageFileList![index].path),
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
+                                        ),
+                                ),
                               ),
                             ),
                           ),
@@ -681,7 +670,11 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text("Malaysian",style: TextStyle(fontSize: 14, color: primaryColor),)
+                              Text(
+                                "Malaysian",
+                                style: TextStyle(
+                                    fontSize: 14, color: primaryColor),
+                              )
                             ],
                           ),
                           Row(
@@ -697,7 +690,11 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              const Text("Foreigner",style: TextStyle(fontSize: 14, color: primaryColor),)
+                              const Text(
+                                "Foreigner",
+                                style: TextStyle(
+                                    fontSize: 14, color: primaryColor),
+                              )
                             ],
                           )
                         ],

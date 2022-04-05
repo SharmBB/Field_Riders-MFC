@@ -316,7 +316,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                     ),
 
                     const SizedBox(
-                      height: 15,
+                      height: 20,
                     ),
                     // Drop Down
 
@@ -324,27 +324,33 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                     
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text(
-                              "Input File",
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.grey),
-                            ),
-                            IconButton(
-                              icon: Icon(Icons.delete_forever,
-                                  color: Colors.red, size: 30),
-                              onPressed: () {
-                                setState(() {
-                                  imageFileList!.clear();
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                     
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                         Text(
+                            "Input File",
+                                style:
+                                    TextStyle(fontSize: 12, color: Colors.grey),
+                              ),
+                              imageFileList!.isNotEmpty
+                                  ? IconButton(
+                                      icon: Icon(Icons.delete_forever,
+                                          color: Colors.red, size: 30),
+                                      onPressed: () {
+                                        setState(() {
+                                          imageFileList!.clear();
+                                        });
+                                      },
+                                    )
+                                  : SizedBox(),
+                            ],
+                          ),
+                          imageFileList!.isEmpty
+                              ? SizedBox(
+                                  height: 10,
+                                )
+                              : SizedBox(),
+                      
                         Container(
                           height: 250,
                           width: screenWidth,
@@ -405,7 +411,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                     ),
 //
                     const SizedBox(
-                      height: 45,
+                      height: 40,
                     ),
                     const Text(
                       "Task Info",
