@@ -176,10 +176,10 @@ class _DomesticScreenState extends State<DomesticScreen> {
    
       });
     }
-    print(_imageCamera);
+
   }
 
-  actionsheetTakePhoto(BuildContext context) {
+    actionsheetTakePhoto(BuildContext context) {
     showCupertinoModalPopup(
       context: context,
       builder: (context) {
@@ -213,10 +213,10 @@ class _DomesticScreenState extends State<DomesticScreen> {
 
   File? _image1;
   bool _camera = false;
-  List _imageCamera = [];
+
 
   _getMultiFromCamera() async {
-        images.clear();
+       
     _camera = true;
     PickedFile? pickedFile = await ImagePicker()
         .getImage(source: ImageSource.camera, imageQuality: 50
@@ -227,32 +227,30 @@ class _DomesticScreenState extends State<DomesticScreen> {
       setState(() {
         _image1 = File(pickedFile.path);
         //uploadFile();
-        _imageCamera.add(_image1);
+        imageFileList!.add(_image1!);
 
        
        
       });
     }
-    print(_imageCamera);
+    print(imageFileList);
   }
 
   final multiPicker = ImagePicker();
-  List<XFile> images = [];
+  List<File>? imageFileList = [];
 
   Future getMultiImages() async {
     _camera = false;
 
-    _imageCamera.clear();
+    // _imageCamera.clear();
 
     final List<XFile>? selectedImages = await multiPicker.pickMultiImage();
-    setState(() {
-      if (selectedImages!.isNotEmpty) {
-        images.addAll(selectedImages);
-        
-      } else {
-        print('No Images Selected ');
-      }
-      print(images);
+     selectedImages!.forEach((image) {
+     setState(() {
+       imageFileList!.add(File(image.path));
+     });
+
+      print(imageFileList);
     });
   }
 
@@ -414,13 +412,28 @@ class _DomesticScreenState extends State<DomesticScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            "Take Photo",
-                            style: TextStyle(fontSize: 12, color: Colors.grey),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
+
+                             Row(
+                     
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text(
+                               "Take Photo",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.grey),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.delete_forever,
+                                  color: Colors.red, size: 30),
+                              onPressed: () {
+                                setState(() {
+                                  imageFileList!.clear();
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                        
                           Container(
                             height: 250,
                             width: screenWidth,
@@ -434,9 +447,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                 onTap: () {
                                   actionsheetTakePhoto(context);
                                 },
-                                child: _camera == true
-                                    ? Container(
-                                        child: _imageCamera.isEmpty
+                                        child:  Container(
+                                        child: imageFileList!.isEmpty
                                             ? Container(
                                                 decoration: BoxDecoration(
                                                   color: Colors.grey[100],
@@ -451,9 +463,9 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                                 ),
                                               )
                                             : GridView.builder(
-                                                itemCount: _imageCamera.isEmpty
+                                                itemCount: imageFileList!.isEmpty
                                                     ? 1
-                                                    : _imageCamera.length,
+                                                    : imageFileList!.length,
                                                 gridDelegate:
                                                     SliverGridDelegateWithFixedCrossAxisCount(
                                                   crossAxisCount: 2,
@@ -471,49 +483,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                                               .withOpacity(
                                                                   0.5))),
                                                   child: Image.file(
-                                                    File(_imageCamera[index].path),
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                      )
-                                    : Container(
-                                        child: images.isEmpty
-                                            ? Container(
-                                                decoration: BoxDecoration(
-                                                  color: Colors.grey[100],
-                                                  // borderRadius: BorderRadius.circular(50)
-                                                ),
-                                                width: screenWidth * (10 / 20),
-                                                height:
-                                                    screenHeight * (10 / 20),
-                                                child: Icon(
-                                                  Icons.camera_alt,
-                                                  color: Colors.grey[400],
-                                                ),
-                                              )
-                                            : GridView.builder(
-                                                itemCount: images.isEmpty
-                                                    ? 1
-                                                    : images.length,
-                                                gridDelegate:
-                                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                                  crossAxisCount: 2,
-                                                  mainAxisSpacing: 20,
-                                                  crossAxisSpacing: 20,
-                                                  // width / height: fixed for *all* items
-                                                  childAspectRatio: 0.75,
-                                                ),
-                                                itemBuilder: (context, index) =>
-                                                    Container(
-                                                  decoration: BoxDecoration(
-                                                      color: Colors.white,
-                                                      border: Border.all(
-                                                          color: Colors.grey
-                                                              .withOpacity(
-                                                                  0.5))),
-                                                  child: Image.file(
-                                                    File(images[index].path),
+                                                    File(imageFileList![index].path),
                                                     fit: BoxFit.cover,
                                                   ),
                                                 ),
