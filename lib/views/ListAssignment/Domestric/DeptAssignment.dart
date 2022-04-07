@@ -1,11 +1,14 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures
 
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:riders_app/_helpers/constants.dart';
+
 import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignID.dart';
 import 'package:riders_app/views/ListAssignment/reusabletextfield.dart';
 
@@ -324,33 +327,32 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                         Text(
-                            "Input File",
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.grey),
-                              ),
-                              imageFileList!.isNotEmpty
-                                  ? IconButton(
-                                      icon: Icon(Icons.delete_forever,
-                                          color: Colors.red, size: 30),
-                                      onPressed: () {
-                                        setState(() {
-                                          imageFileList!.clear();
-                                        });
-                                      },
-                                    )
-                                  : SizedBox(),
-                            ],
-                          ),
-                          imageFileList!.isEmpty
-                              ? SizedBox(
-                                  height: 10,
-                                )
-                              : SizedBox(),
-                      
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "Input File",
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.grey),
+                            ),
+                            imageFileList!.isNotEmpty
+                                ? IconButton(
+                                    icon: Icon(Icons.delete_forever,
+                                        color: Colors.red, size: 30),
+                                    onPressed: () {
+                                      setState(() {
+                                        imageFileList!.clear();
+                                      });
+                                    },
+                                  )
+                                : SizedBox(),
+                          ],
+                        ),
+                        imageFileList!.isEmpty
+                            ? SizedBox(
+                                height: 10,
+                              )
+                            : SizedBox(),
                         Container(
                           height: 250,
                           width: screenWidth,
@@ -624,29 +626,34 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           "Visit Date",
                           style: TextStyle(fontSize: 12, color: Colors.grey),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 10,
                         ),
                         TextFormField(
-                          style: const TextStyle(
-                              fontSize: 16, color: Colors.black),
+                          style: TextStyle(fontSize: 16, color: Colors.black),
                           cursorColor: kPrimaryPurpleColor,
-                          keyboardType: TextInputType.text,
+                          keyboardType: TextInputType.none,
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Field Required';
                             }
                           },
+                          showCursor: false,
                           controller: visitdatecontroller,
-                          textInputAction: TextInputAction.done,
+                          textInputAction: TextInputAction.none,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(
+                                onPressed: () async {
+                                  await openDate(context);
+                                  // showPicker(context);
+                                  visitdatecontroller.text =
+                                      customFormat.format(selectedDate);
+                                },
+                                icon: Icon(
                                   Icons.calendar_today_rounded,
                                   color: kPrimaryPurpleColor,
                                 )),
@@ -683,16 +690,15 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                        Text(
                           "Update Reminder",
                           style: TextStyle(fontSize: 12, color: Colors.grey),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 10,
                         ),
                         TextFormField(
-                          style: const TextStyle(
-                              fontSize: 16, color: Colors.black),
+                          style: TextStyle(fontSize: 16, color: Colors.black),
                           cursorColor: kPrimaryPurpleColor,
                           keyboardType: TextInputType.text,
                           validator: (value) {
@@ -701,13 +707,18 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                             }
                           },
                           controller: updateremindercontroller,
-                          textInputAction: TextInputAction.done,
+                          textInputAction: TextInputAction.none,
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
-                                onPressed: () {},
-                                icon: const Icon(Icons.calendar_today_rounded,
+                                onPressed: () async {
+                                  await openDate(context);
+                                  // showPicker(context);
+                                  updateremindercontroller.text =
+                                      customFormat.format(selectedDate);
+                                },
+                                icon: Icon(Icons.calendar_today_rounded,
                                     color: kPrimaryPurpleColor)),
-                            focusedBorder: const OutlineInputBorder(
+                            focusedBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0)),
                                 borderSide:
@@ -715,7 +726,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                             contentPadding: EdgeInsets.fromLTRB(25, 10, 10, 0),
                             fillColor: kPrimaryWhiteColor,
                             filled: true,
-                            enabledBorder: const OutlineInputBorder(
+                            enabledBorder: OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0)),
                                 borderSide:
@@ -1089,6 +1100,95 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
       ),
     );
   }
+
+  @override
+  initState() {
+    selectedDate;
+    super.initState();
+  }
+
+  DateTime selectedDate = DateTime.now();
+
+  var customFormat = DateFormat('dd-MM-yyyy');
+
+  Future openDate(BuildContext context) async {
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+          return AlertDialog(
+            insetPadding: EdgeInsets.symmetric(horizontal: 10),
+            backgroundColor: Colors.transparent,
+            content: Container(
+              // margin: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 60),
+              height: MediaQuery.of(context).size.height * 0.4,
+              width: MediaQuery.of(context).size.width * 1,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(20)),
+              ),
+              child: CalendarDatePicker(
+                
+                initialDate: DateTime.now(),
+                firstDate: DateTime(DateTime.now().year - 10),
+                lastDate: DateTime(DateTime.now().year + 10),
+                onDateChanged: (DateTime picked) async {
+                  
+                  if (picked != null && picked != selectedDate)
+                    setState(() {
+                      selectedDate = picked;
+                      print(selectedDate);
+                    });
+                  // Navigator.of(context).pop();
+                },
+              ),
+            ),
+          );
+        });
+      },
+    );
+  }
+
+  // Future showPicker(BuildContext context) async {
+  //   var screenHeight = MediaQuery.of(context).size.height;
+  //   var screenWidth = MediaQuery.of(context).size.width;
+  //   final DateTime? picked = await showRoundedDatePicker(
+  //     context: context,
+  //     initialDate: DateTime.now(),
+  //     firstDate: DateTime(DateTime.now().year - 10),
+  //     lastDate: DateTime(DateTime.now().year + 10),
+  //     borderRadius: 20,
+  //     height: screenHeight * 0.4,
+  //     background: Colors.transparent,
+
+  //     theme: ThemeData(primarySwatch: Colors.purple),
+
+  //     styleDatePicker: MaterialRoundedDatePickerStyle(
+
+  //       textStyleDayOnCalendarDisabled: TextStyle(
+  //         fontSize: 15,
+  //         color: Colors.white,
+  //       ),
+  //       backgroundActionBar: Colors.white,
+  //       paddingMonthHeader: EdgeInsets.only(top: 15, bottom: 20),
+
+  //     ),
+
+  //   );
+  //   // final DateTime? picked = await CalendarDatePicker(
+  //   //     context: context,
+  //   //     initialDate: DateTime.now(),r
+  //   //     firstDate: DateTime(DateTime.now().year - 25),
+  //   //     lastDate: DateTime(DateTime.now().year + 25),
+
+  //   //     );
+
+  //   if (picked != null && picked != selectedDate)
+  //     setState(() {
+  //       selectedDate = picked;
+  //     });
+  // }
 
   Future openDialog(BuildContext context) => showDialog(
         context: context,
