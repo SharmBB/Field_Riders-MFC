@@ -1140,7 +1140,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                       selectedDate = picked;
                       print(selectedDate);
                     });
-                  // Navigator.of(context).pop();
+                  Navigator.of(context).pop();
                 },
               ),
             ),
