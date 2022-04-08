@@ -8,6 +8,7 @@ import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/views/Calendar/Calendar.dart';
 
 import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignID.dart';
 import 'package:riders_app/views/ListAssignment/reusabletextfield.dart';
@@ -119,43 +120,42 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
   TextEditingController businessclosecontroller = TextEditingController();
   TextEditingController remarkcontroller = TextEditingController();
 
-  actionsheetTakePhoto(BuildContext context) {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (context) {
-        return CupertinoActionSheet(
-          actions: [
-            CupertinoActionSheetAction(
-                onPressed: () async {
-                  _camera = true;
-                  _getMultiFromCamera();
-                  Navigator.of(context).pop();
-                },
-                child: const Align(
-                    alignment: Alignment.topLeft, child: Text("Camera"))),
-            CupertinoActionSheetAction(
-                onPressed: () async {
-                  // _getFromGallery();
-                  getMultiImages();
-                  Navigator.of(context).pop();
-                },
-                child: const Align(
-                    alignment: Alignment.topLeft, child: Text("Upload"))),
-          ],
-          cancelButton: CupertinoActionSheetAction(
-            child: const Text("Cancel"),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        );
-      },
-    );
-  }
+  // actionsheetTakePhoto(BuildContext context) {
+  //   showCupertinoModalPopup(
+  //     context: context,
+  //     builder: (context) {
+  //       return CupertinoActionSheet(
+  //         actions: [
+  //           CupertinoActionSheetAction(
+  //               onPressed: () async {
+  //                 _camera = true;
+  //                 _getMultiFromCamera();
+  //                 Navigator.of(context).pop();
+  //               },
+  //               child: const Align(
+  //                   alignment: Alignment.topLeft, child: Text("Camera"))),
+  //           CupertinoActionSheetAction(
+  //               onPressed: () async {
+  //                 // _getFromGallery();
+  //                 getMultiImages();
+  //                 Navigator.of(context).pop();
+  //               },
+  //               child: const Align(
+  //                   alignment: Alignment.topLeft, child: Text("Upload"))),
+  //         ],
+  //         cancelButton: CupertinoActionSheetAction(
+  //           child: const Text("Cancel"),
+  //           onPressed: () => Navigator.of(context).pop(),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   File? _image1;
-  bool _camera = false;
+  List<File>? imageFileList = [];
 
   _getMultiFromCamera() async {
-    _camera = true;
     PickedFile? pickedFile = await ImagePicker()
         .getImage(source: ImageSource.camera, imageQuality: 50
             // maxWidth: 1800,
@@ -171,23 +171,27 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
     print(imageFileList);
   }
 
-  final multiPicker = ImagePicker();
-  List<File>? imageFileList = [];
+  // final multiPicker = ImagePicker();
+  //
 
-  Future getMultiImages() async {
-    _camera = false;
+  // Future getMultiImages() async {
+  //   _camera = false;
 
-    // _imageCamera.clear();
+  //   // _imageCamera.clear();
 
-    final List<XFile>? selectedImages = await multiPicker.pickMultiImage();
-    selectedImages!.forEach((image) {
-      setState(() {
-        imageFileList!.add(File(image.path));
-      });
+  //   final List<XFile>? selectedImages = await multiPicker.pickMultiImage();
+  //   selectedImages!.forEach((image) {
+  //     setState(() {
+  //       imageFileList!.add(File(image.path));
+  //     });
 
-      print(imageFileList);
-    });
-  }
+  //     print(imageFileList);
+  //   });
+  // }
+
+  DateTime selectedDate = DateTime.now();
+
+  var customFormat = DateFormat('dd-MM-yyyy');
 
   @override
   Widget build(BuildContext context) {
@@ -327,32 +331,13 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Text(
-                              "Input File",
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.grey),
-                            ),
-                            imageFileList!.isNotEmpty
-                                ? IconButton(
-                                    icon: Icon(Icons.delete_forever,
-                                        color: Colors.red, size: 30),
-                                    onPressed: () {
-                                      setState(() {
-                                        imageFileList!.clear();
-                                      });
-                                    },
-                                  )
-                                : SizedBox(),
-                          ],
+                        Text(
+                          "Input File",
+                          style: TextStyle(fontSize: 12, color: Colors.grey),
                         ),
-                        imageFileList!.isEmpty
-                            ? SizedBox(
-                                height: 10,
-                              )
-                            : SizedBox(),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Container(
                           height: 250,
                           width: screenWidth,
@@ -364,7 +349,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                             padding: EdgeInsets.all(10),
                             child: GestureDetector(
                               onTap: () {
-                                actionsheetTakePhoto(context);
+                                _getMultiFromCamera();
                               },
                               child: Container(
                                 child: imageFileList!.isEmpty
@@ -392,17 +377,47 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                                           // width / height: fixed for *all* items
                                           childAspectRatio: 0.75,
                                         ),
-                                        itemBuilder: (context, index) =>
+                                        itemBuilder: (context, index) => Stack(
+                                          children: <Widget>[
                                             Container(
-                                          decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              border: Border.all(
-                                                  color: Colors.grey
-                                                      .withOpacity(0.5))),
-                                          child: Image.file(
-                                            File(imageFileList![index].path),
-                                            fit: BoxFit.cover,
-                                          ),
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white,
+                                                  border: Border.all(
+                                                      color: Colors.grey
+                                                          .withOpacity(0.5))),
+                                              child: Image.file(
+                                                File(
+                                                    imageFileList![index].path),
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                            Positioned(
+                                              right: -10,
+                                              top: -10,
+                                              child: GestureDetector(
+                                                onTap: () {
+                                                    setState(() {
+                                                       imageFileList!
+                                                        .removeAt(index);
+                                                    });
+                                                   
+                                                },
+                                                child: Container(
+                                                  decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            100),
+                                                  ),
+                                                  child: Icon(
+                                                    Icons.cancel,
+                                                    color:
+                                                        Colors.redAccent[400],
+                                                    size: 40,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
                                         ),
                                       ),
                               ),
@@ -648,7 +663,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                                 onPressed: () async {
-                                  await openDate(context);
+                                  await openDate(context, selectedDate);
                                   // showPicker(context);
                                   visitdatecontroller.text =
                                       customFormat.format(selectedDate);
@@ -711,7 +726,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                                 onPressed: () async {
-                                  await openDate(context);
+                                  await openDate(context, selectedDate);
                                   // showPicker(context);
                                   updateremindercontroller.text =
                                       customFormat.format(selectedDate);
@@ -1101,93 +1116,43 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
     );
   }
 
-  @override
-  initState() {
-    selectedDate;
-    super.initState();
-  }
-
-  DateTime selectedDate = DateTime.now();
-
-  var customFormat = DateFormat('dd-MM-yyyy');
-
-  Future openDate(BuildContext context) async {
-    return showDialog(
-      context: context,
-      builder: (context) {
-        return StatefulBuilder(
-            builder: (BuildContext context, StateSetter setState) {
-          return AlertDialog(
-            insetPadding: EdgeInsets.symmetric(horizontal: 10),
-            backgroundColor: Colors.transparent,
-            content: Container(
-              // margin: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 60),
-              height: MediaQuery.of(context).size.height * 0.4,
-              width: MediaQuery.of(context).size.width * 1,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-              ),
-              child: CalendarDatePicker(
-                
-                initialDate: DateTime.now(),
-                firstDate: DateTime(DateTime.now().year - 10),
-                lastDate: DateTime(DateTime.now().year + 10),
-                onDateChanged: (DateTime picked) async {
-                  
-                  if (picked != null && picked != selectedDate)
-                    setState(() {
-                      selectedDate = picked;
-                      print(selectedDate);
-                    });
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
-          );
-        });
-      },
-    );
-  }
-
-  // Future showPicker(BuildContext context) async {
-  //   var screenHeight = MediaQuery.of(context).size.height;
-  //   var screenWidth = MediaQuery.of(context).size.width;
-  //   final DateTime? picked = await showRoundedDatePicker(
+  // Future openDate(BuildContext context) async {
+  //   return showDialog(
   //     context: context,
-  //     initialDate: DateTime.now(),
-  //     firstDate: DateTime(DateTime.now().year - 10),
-  //     lastDate: DateTime(DateTime.now().year + 10),
-  //     borderRadius: 20,
-  //     height: screenHeight * 0.4,
-  //     background: Colors.transparent,
+  //     builder: (context) {
+  //       return StatefulBuilder(
+  //           builder: (BuildContext context, StateSetter setState) {
+  //         return AlertDialog(
+  //           insetPadding: EdgeInsets.symmetric(horizontal: 10),
+  //           backgroundColor: Colors.transparent,
+  //           content: Container(
+  //             // margin: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 60),
+  //             height: MediaQuery.of(context).size.height * 0.4,
+  //             width: MediaQuery.of(context).size.width * 1,
+  //             decoration: BoxDecoration(
+  //               color: Colors.white,
+  //               borderRadius: BorderRadius.all(Radius.circular(20)),
+  //             ),
+  //             child: CalendarDatePicker(
 
-  //     theme: ThemeData(primarySwatch: Colors.purple),
+  //               initialDate: DateTime.now(),
+  //               firstDate: DateTime(DateTime.now().year - 10),
+  //               lastDate: DateTime(DateTime.now().year + 10),
+  //               onDateChanged: (DateTime picked) async {
 
-  //     styleDatePicker: MaterialRoundedDatePickerStyle(
-
-  //       textStyleDayOnCalendarDisabled: TextStyle(
-  //         fontSize: 15,
-  //         color: Colors.white,
-  //       ),
-  //       backgroundActionBar: Colors.white,
-  //       paddingMonthHeader: EdgeInsets.only(top: 15, bottom: 20),
-
-  //     ),
-
+  //                 if (picked != null && picked != selectedDate)
+  //                   setState(() {
+  //                     selectedDate = picked;
+  //                     print(selectedDate);
+  //                   });
+  //                 Navigator.of(context).pop();
+  //               },
+  //             ),
+  //           ),
+  //         );
+  //       });
+  //     },
   //   );
-  //   // final DateTime? picked = await CalendarDatePicker(
-  //   //     context: context,
-  //   //     initialDate: DateTime.now(),r
-  //   //     firstDate: DateTime(DateTime.now().year - 25),
-  //   //     lastDate: DateTime(DateTime.now().year + 25),
-
-  //   //     );
-
-  //   if (picked != null && picked != selectedDate)
-  //     setState(() {
-  //       selectedDate = picked;
-  //     });
   // }
 
   Future openDialog(BuildContext context) => showDialog(

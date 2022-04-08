@@ -171,43 +171,42 @@ class _DomesticScreenState extends State<DomesticScreen> {
     }
   }
 
-  actionsheetTakePhoto(BuildContext context) {
-    showCupertinoModalPopup(
-      context: context,
-      builder: (context) {
-        return CupertinoActionSheet(
-          actions: [
-            CupertinoActionSheetAction(
-                onPressed: () async {
-                  _camera = true;
-                  _getMultiFromCamera();
-                  Navigator.of(context).pop();
-                },
-                child: const Align(
-                    alignment: Alignment.topLeft, child: Text("Camera"))),
-            CupertinoActionSheetAction(
-                onPressed: () async {
-                  // _getFromGallery();
-                  getMultiImages();
-                  Navigator.of(context).pop();
-                },
-                child: const Align(
-                    alignment: Alignment.topLeft, child: Text("Upload"))),
-          ],
-          cancelButton: CupertinoActionSheetAction(
-            child: const Text("Cancel"),
-            onPressed: () => Navigator.of(context).pop(),
-          ),
-        );
-      },
-    );
-  }
+  // actionsheetTakePhoto(BuildContext context) {
+  //   showCupertinoModalPopup(
+  //     context: context,
+  //     builder: (context) {
+  //       return CupertinoActionSheet(
+  //         actions: [
+  //           CupertinoActionSheetAction(
+  //               onPressed: () async {
+  //                 _camera = true;
+  //                 _getMultiFromCamera();
+  //                 Navigator.of(context).pop();
+  //               },
+  //               child: const Align(
+  //                   alignment: Alignment.topLeft, child: Text("Camera"))),
+  //           CupertinoActionSheetAction(
+  //               onPressed: () async {
+  //                 // _getFromGallery();
+  //                 getMultiImages();
+  //                 Navigator.of(context).pop();
+  //               },
+  //               child: const Align(
+  //                   alignment: Alignment.topLeft, child: Text("Upload"))),
+  //         ],
+  //         cancelButton: CupertinoActionSheetAction(
+  //           child: const Text("Cancel"),
+  //           onPressed: () => Navigator.of(context).pop(),
+  //         ),
+  //       );
+  //     },
+  //   );
+  // }
 
   File? _image1;
-  bool _camera = false;
+  List<File>? imageFileList = [];
 
   _getMultiFromCamera() async {
-    _camera = true;
     PickedFile? pickedFile = await ImagePicker()
         .getImage(source: ImageSource.camera, imageQuality: 50
             // maxWidth: 1800,
@@ -223,23 +222,23 @@ class _DomesticScreenState extends State<DomesticScreen> {
     print(imageFileList);
   }
 
-  final multiPicker = ImagePicker();
-  List<File>? imageFileList = [];
+  // final multiPicker = ImagePicker();
+  // List<File>? imageFileList = [];
 
-  Future getMultiImages() async {
-    _camera = false;
+  // Future getMultiImages() async {
+  //   _camera = false;
 
-    // _imageCamera.clear();
+  //   // _imageCamera.clear();
 
-    final List<XFile>? selectedImages = await multiPicker.pickMultiImage();
-    selectedImages!.forEach((image) {
-      setState(() {
-        imageFileList!.add(File(image.path));
-      });
+  //   final List<XFile>? selectedImages = await multiPicker.pickMultiImage();
+  //   selectedImages!.forEach((image) {
+  //     setState(() {
+  //       imageFileList!.add(File(image.path));
+  //     });
 
-      print(imageFileList);
-    });
-  }
+  //     print(imageFileList);
+  //   });
+  // }
 
   String? _selectedNationality = '';
   String? _selectedMeter = '';
@@ -399,32 +398,10 @@ class _DomesticScreenState extends State<DomesticScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text(
-                                "Take Photo",
-                                style:
-                                    TextStyle(fontSize: 12, color: Colors.grey),
-                              ),
-                              imageFileList!.isNotEmpty
-                                  ? IconButton(
-                                      icon: Icon(Icons.delete_forever,
-                                          color: Colors.red, size: 30),
-                                      onPressed: () {
-                                        setState(() {
-                                          imageFileList!.clear();
-                                        });
-                                      },
-                                    )
-                                  : SizedBox(),
-                            ],
+                          Text(
+                            "Take Photo",
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
                           ),
-                          imageFileList!.isEmpty
-                              ? SizedBox(
-                                  height: 10,
-                                )
-                              : SizedBox(),
                           Container(
                             height: 250,
                             width: screenWidth,
@@ -436,7 +413,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               padding: EdgeInsets.all(10),
                               child: GestureDetector(
                                 onTap: () {
-                                  actionsheetTakePhoto(context);
+                                  _getMultiFromCamera();
                                 },
                                 child: Container(
                                   child: imageFileList!.isEmpty
@@ -465,21 +442,55 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                             childAspectRatio: 0.75,
                                           ),
                                           itemBuilder: (context, index) =>
+                                              Stack(
+                                            children: <Widget>[
                                               Container(
-                                            decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                border: Border.all(
-                                                    color: Colors.grey
-                                                        .withOpacity(0.5))),
-                                            child: Image.file(
-                                              File(imageFileList![index].path),
-                                              fit: BoxFit.cover,
-                                            ),
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    border: Border.all(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.5))),
+                                                child: Image.file(
+                                                  File(imageFileList![index]
+                                                      .path),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              Positioned(
+                                                right: -10,
+                                                top: -10,
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    setState(() {
+                                                       imageFileList!
+                                                        .removeAt(index);
+                                                    });
+                                                   
+                                                  },
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                    ),
+                                                    child: Icon(
+                                                      Icons.cancel,
+                                                      color:
+                                                          Colors.redAccent[400],
+                                                      size: 40,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                 ),
                               ),
                             ),
+                          ),
+                          SizedBox(
+                            height: 10,
                           ),
                         ],
                       ),
