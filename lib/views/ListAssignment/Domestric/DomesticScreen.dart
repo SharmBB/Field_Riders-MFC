@@ -480,7 +480,10 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                     occupier = false;
                                     close = false;
                                   } else {
-                                    return;
+                                    tenant = false;
+                                     owner = false;
+                                    occupier = false;
+                                    close = false;
                                   }
                                 });
                               },
