@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
-import 'package:riders_app/views/ListAssignment/reusabletextfield.dart';
 
-String propertyusageinitvalueOwner = 'Choose';
+
+
 final propertyusagetypeOwner = [
   'Choose',
   '(D)Domestic',
@@ -14,7 +14,7 @@ final propertyusagetypeOwner = [
 
 
 
-String propertyusageinitvalue = 'Choose';
+
 final propertyusagetype = [
   'Choose',
   '(D)Domestic',
@@ -24,7 +24,7 @@ final propertyusagetype = [
   '(GP)Government Premise'
 ];
 
-String propertydomestictypeinitvalue = 'Choose';
+
 final propertydomestictype = [
   'Choose',
   'D1 LC Single Storey Terrace House',
@@ -71,22 +71,66 @@ final propertydomestictype = [
   'D44 One and Half Storey Bungalow'
 ];
 
-String drcodeinitvalue =
-    '22 DR22 CLOSED (PLEASE INSERT TOTAL OF VISITATION INTO COLUMN "NUMBER OF VISITATION")';
+
 
 final drcodetype = [
   '22 DR22 CLOSED (PLEASE INSERT TOTAL OF VISITATION INTO COLUMN "NUMBER OF VISITATION")',
  
 ];
 
-TextEditingController remarkcontroller = TextEditingController();
 
-Widget Close(context) {
+
+Widget Close(context,closepropertyusageinitvalue,closepropertydomestictypeinitvalue,closedrcodeinitvalue,closeremarkcontroller) {
   return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        SizedBox(
+          height: 20,
+        ),
+                Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Property usage",
+              style: TextStyle(color: Colors.grey, fontSize: 12),
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Container(
+              padding: const EdgeInsets.only(left: 20, right: 10),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.deepPurple),
+                borderRadius: BorderRadius.circular(25),
+              ),
+              width: MediaQuery.of(context).size.width,
+              child: DropdownButton<String>(
+                underline: Container(),
+                icon: const Icon(
+                  Icons.keyboard_arrow_down,
+                  color: Colors.deepPurple,
+                ),
+                value: closepropertyusageinitvalue,
+                isExpanded: true,
+                items: propertyusagetype.map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value,
+                        style: TextStyle(fontSize: 14, color: primaryColor)),
+                  );
+                }).toList(),
+                onChanged: (String? value) {
+                  setState(() {
+                    closepropertyusageinitvalue = value!;
+                  });
+                },
+              ),
+            ),
+          ],
+        ),
         SizedBox(
           height: 20,
         ),
@@ -115,7 +159,7 @@ Widget Close(context) {
                   Icons.keyboard_arrow_down,
                   color: Colors.deepPurple,
                 ),
-                value: propertydomestictypeinitvalue,
+                value: closepropertydomestictypeinitvalue,
                 isExpanded: true,
                 items: propertydomestictype.map((String value) {
                   return DropdownMenuItem<String>(
@@ -126,7 +170,7 @@ Widget Close(context) {
                 }).toList(),
                 onChanged: (String? value) {
                   setState(() {
-                    propertydomestictypeinitvalue = value!;
+                    closepropertydomestictypeinitvalue = value!;
                   });
                 },
               ),
@@ -162,7 +206,7 @@ Widget Close(context) {
                   Icons.keyboard_arrow_down,
                   color: Colors.deepPurple,
                 ),
-                value: drcodeinitvalue,
+                value: closedrcodeinitvalue,
                 isExpanded: true,
                 items: drcodetype.map((String value) {
                   return DropdownMenuItem<String>(
@@ -173,7 +217,7 @@ Widget Close(context) {
                 }).toList(),
                 onChanged: (String? value) {
                   setState(() {
-                    drcodeinitvalue = value!;
+                    closedrcodeinitvalue = value!;
                   });
                 },
               ),
@@ -204,7 +248,7 @@ Widget Close(context) {
                   return 'Remark Required';
                 }
               },
-              controller: remarkcontroller,
+              controller: closeremarkcontroller,
               maxLines: 5,
               textInputAction: TextInputAction.done,
               decoration: InputDecoration(

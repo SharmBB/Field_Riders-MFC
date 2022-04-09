@@ -1,12 +1,11 @@
 import 'dart:io';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/ListAssignment/reusabletextfield.dart';
 
-String propertyusageinitvalueOwner = 'Choose';
+
 final propertyusagetypeOwner = [
   'Choose',
   '(D)Domestic',
@@ -15,10 +14,10 @@ final propertyusagetypeOwner = [
   '(GQ)Government Quaters',
   '(GP)Government Premise'
 ];
-String? _selectedNationality = '';
-String? _selectedMeter = '';
 
-String propertyusageinitvalue = 'Choose';
+
+
+
 final propertyusagetype = [
   'Choose',
   '(D)Domestic',
@@ -28,7 +27,7 @@ final propertyusagetype = [
   '(GP)Government Premise'
 ];
 
-String propertydomestictypeinitvalue = 'Choose';
+
 final propertydomestictype = [
   'Choose',
   'D1 LC Single Storey Terrace House',
@@ -75,17 +74,16 @@ final propertydomestictype = [
   'D44 One and Half Storey Bungalow'
 ];
 
-String drcodeinitvalue = '5 DR05 VACANT PREMISE';
+
 
 final drcodetype = [
   '5 DR05 VACANT PREMISE',
 ];
 
-TextEditingController remarkcontroller = TextEditingController();
-TextEditingController waterMetercontroller = TextEditingController();
 
-File? _image;
-bool image = false;
+
+
+
 
 // _getFromCamera() async {
 //   PickedFile? pickedFile =
@@ -102,7 +100,7 @@ bool image = false;
 //   }
 // }
 
-Widget Vacant(context) {
+Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeinitvalue,vacantdrcodeinitvalue,vacantremarkcontroller,vacantselectedMeter,vacantimage,vacantwaterMetercontroller) {
   return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -137,7 +135,7 @@ Widget Vacant(context) {
                       Icons.keyboard_arrow_down,
                       color: Colors.deepPurple,
                     ),
-                    value: propertyusageinitvalue,
+                    value: vacantpropertyusageinitvalue,
                     isExpanded: true,
                     items: propertyusagetype.map((String value) {
                       return DropdownMenuItem<String>(
@@ -149,7 +147,7 @@ Widget Vacant(context) {
                     }).toList(),
                     onChanged: (String? value) {
                       setState(() {
-                        propertyusageinitvalue = value!;
+                        vacantpropertyusageinitvalue = value!;
                       });
                     },
                   ),
@@ -185,7 +183,7 @@ Widget Vacant(context) {
                       Icons.keyboard_arrow_down,
                       color: Colors.deepPurple,
                     ),
-                    value: propertydomestictypeinitvalue,
+                    value: vacantpropertydomestictypeinitvalue,
                     isExpanded: true,
                     items: propertydomestictype.map((String value) {
                       return DropdownMenuItem<String>(
@@ -197,7 +195,7 @@ Widget Vacant(context) {
                     }).toList(),
                     onChanged: (String? value) {
                       setState(() {
-                        propertydomestictypeinitvalue = value!;
+                        vacantpropertydomestictypeinitvalue = value!;
                       });
                     },
                   ),
@@ -233,7 +231,7 @@ Widget Vacant(context) {
                       Icons.keyboard_arrow_down,
                       color: Colors.deepPurple,
                     ),
-                    value: drcodeinitvalue,
+                    value: vacantdrcodeinitvalue,
                     isExpanded: true,
                     items: drcodetype.map((String value) {
                       return DropdownMenuItem<String>(
@@ -245,7 +243,7 @@ Widget Vacant(context) {
                     }).toList(),
                     onChanged: (String? value) {
                       setState(() {
-                        drcodeinitvalue = value!;
+                        vacantdrcodeinitvalue = value!;
                       });
                     },
                   ),
@@ -276,7 +274,7 @@ Widget Vacant(context) {
                       return 'Remark Required';
                     }
                   },
-                  controller: remarkcontroller,
+                  controller: vacantremarkcontroller,
                   maxLines: 5,
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
@@ -314,10 +312,10 @@ Widget Vacant(context) {
               children: [
                 Radio<String>(
                     value: "Yes - Watermeter",
-                    groupValue: _selectedMeter,
+                    groupValue: vacantselectedMeter,
                     onChanged: (value) {
                       setState(() {
-                        _selectedMeter = value!;
+                        vacantselectedMeter = value!;
                       });
                     }),
                 const SizedBox(
@@ -330,10 +328,10 @@ Widget Vacant(context) {
               children: [
                 Radio<String>(
                     value: "No - Watermeter",
-                    groupValue: _selectedMeter,
+                    groupValue: vacantselectedMeter,
                     onChanged: (value) {
                       setState(() {
-                        _selectedMeter = value!;
+                        vacantselectedMeter = value!;
                       });
                     }),
                 const SizedBox(
@@ -377,19 +375,19 @@ Widget Vacant(context) {
                             );
                         if (pickedFile != null) {
                           setState(() {
-                            _image = File(pickedFile.path);
-                            //uploadFile();
-                            image = true;
+                            vacantimage = File(pickedFile.path);
+                       
+                          
                           });
                         }
                       });
                     },
                     child: Container(
-                      child: _image != null
+                      child: vacantimage != null
                           ? ClipRRect(
                               // borderRadius: BorderRadius.circular(5),
                               child: Image.file(
-                                _image!,
+                                vacantimage!,
                                 fit: BoxFit.contain,
                               ),
                             )
@@ -412,7 +410,7 @@ Widget Vacant(context) {
             ),
           ],
         ),
-        textField("", waterMetercontroller),
+        textField("", vacantwaterMetercontroller),
       ],
     );
   });

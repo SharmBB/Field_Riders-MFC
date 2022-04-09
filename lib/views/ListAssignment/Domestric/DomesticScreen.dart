@@ -39,6 +39,43 @@ class _DomesticScreenState extends State<DomesticScreen> {
   bool tenant = false;
   bool close = false;
 
+  //OWNER INPUTS
+  String ownernamecorrectinitvalue = 'Yes';
+  TextEditingController correctownernamecontroller = TextEditingController();
+  TextEditingController ownertelnocontroller = TextEditingController();
+  String ownerpropertyusageinitvalue = 'Choose';
+  String? ownerselectedNationality = '';
+  String ownerpropertydomestictypeinitvalue = 'Choose';
+  String ownerdrcodeinitvalue = 'Choose';
+  TextEditingController ownerremarkcontroller = TextEditingController();
+
+  //Tenant Inputs
+  String tenantpropertyusageinitvalueOwner = 'Choose';
+  String? tenantselectedNationality = '';
+  String tenantpropertyusageinitvalue = 'Choose';
+  String tenantpropertydomestictypeinitvalue = 'Choose';
+  String tenantdrcodeinitvalue = 'Choose';
+  TextEditingController tenantnamecontroller = TextEditingController();
+  TextEditingController tenanttelnocontroller = TextEditingController();
+  TextEditingController tenantremarkcontroller = TextEditingController();
+
+  //Vacant Inputs
+  String? vacantselectedMeter = '';
+  String vacantpropertyusageinitvalue = 'Choose';
+  String vacantpropertydomestictypeinitvalue = 'Choose';
+  String vacantdrcodeinitvalue = '5 DR05 VACANT PREMISE';
+  TextEditingController vacantremarkcontroller = TextEditingController();
+  TextEditingController vacantwaterMetercontroller = TextEditingController();
+  File? vacantimage;
+
+  //Close Inputs
+  String closepropertyusageinitvalueOwner = 'Choose';
+  String closepropertyusageinitvalue = 'Choose';
+  String closepropertydomestictypeinitvalue = 'Choose';
+  String closedrcodeinitvalue =
+      '22 DR22 CLOSED (PLEASE INSERT TOTAL OF VISITATION INTO COLUMN "NUMBER OF VISITATION")';
+  TextEditingController closeremarkcontroller = TextEditingController();
+
   // File? _image;
   // bool image = false;
 
@@ -125,9 +162,6 @@ class _DomesticScreenState extends State<DomesticScreen> {
   //     print(imageFileList);
   //   });
   // }
-
-  String? _selectedNationality = '';
-  String? _selectedMeter = '';
 
   @override
   Widget build(BuildContext context) {
@@ -421,15 +455,17 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               }).toList(),
                               onChanged: (String? value) async {
                                 setState(() {
+                                  //  print( ownernamecorrectinitvalue, ownertelnocontroller, correctownernamecontroller, _selectedNationality, propertydomestictypeinitvalue, drcodeinitvalue, remarkcontroller);
+
                                   occupierinitvalue = value!;
                                   if (occupierinitvalue ==
                                       'Vacant**(please take photo for watermark)') {
-                                        close = false;
+                                    close = false;
                                     occupier = true;
                                     tenant = false;
                                     owner = false;
                                   } else if (occupierinitvalue == 'Closed') {
-                                      close = true;
+                                    close = true;
                                     occupier = false;
                                     tenant == false;
                                     owner = false;
@@ -437,12 +473,12 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                     owner = true;
                                     tenant = false;
                                     occupier = false;
-                                      close = false;
+                                    close = false;
                                   } else if (occupierinitvalue == 'Tenant') {
                                     tenant = true;
                                     owner = false;
                                     occupier = false;
-                                      close = false;
+                                    close = false;
                                   } else {
                                     return;
                                   }
@@ -453,14 +489,47 @@ class _DomesticScreenState extends State<DomesticScreen> {
                         ],
                       ),
 
-                      owner == true ? Owner(context) : SizedBox(),
+                      owner == true
+                          ? Owner(
+                              context,
+                              ownernamecorrectinitvalue,
+                              ownertelnocontroller,
+                              correctownernamecontroller,
+                              ownerselectedNationality,
+                              ownerpropertyusageinitvalue,
+                              ownerpropertydomestictypeinitvalue,
+                              ownerdrcodeinitvalue,
+                              ownerremarkcontroller)
+                          : SizedBox(),
 
-                      tenant == true ? Tenant(context) : SizedBox(),
+                      tenant == true
+                          ? Tenant(
+                              context,
+                              tenantnamecontroller,
+                              tenanttelnocontroller,
+                              tenantselectedNationality,
+                              tenantpropertyusageinitvalue,
+                              tenantpropertydomestictypeinitvalue,
+                              tenantdrcodeinitvalue,
+                              tenantremarkcontroller)
+                          : SizedBox(),
 
                       // Property Usage DropDown
-                      occupier == true ? Vacant(context) : SizedBox(),
+                      occupier == true
+                          ? Vacant(
+                              context,
+                              vacantpropertyusageinitvalue,
+                              vacantpropertydomestictypeinitvalue,
+                              vacantdrcodeinitvalue,
+                              vacantremarkcontroller,
+                              vacantselectedMeter,
+                              vacantimage,
+                              vacantwaterMetercontroller)
+                          : SizedBox(),
 
-                      close == true ? Close(context) : SizedBox(),
+                      close == true
+                          ? Close(context, closepropertyusageinitvalue, closepropertydomestictypeinitvalue, closedrcodeinitvalue, closeremarkcontroller)
+                          : SizedBox(),
 
                       const SizedBox(
                         height: 50,
