@@ -54,14 +54,7 @@ class _HomeScreenState extends State<HomeScreen> {
           elevation: 0,
         ),
         backgroundColor: kPrimaryWhiteColor,
-        body: NotificationListener<OverscrollIndicatorNotification>(
-        onNotification: (OverscrollIndicatorNotification overscroll) {
-          // ignore: deprecated_member_use
-          overscroll.disallowGlow();
-          return false;
-        },
-        child:SingleChildScrollView(
-          child: Center(
+        body: Center(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: <Widget>[
@@ -125,6 +118,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 },
               ),
               SizedBox(height: screenHeight * (1 / 20)),
-            ])))));
+            ])));
   }
 }
