@@ -13,6 +13,18 @@ class LeaderBoardScreen extends StatefulWidget {
 }
 
 class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
+
+
+
+    @override
+  void initState() {
+ 
+    _foundUsers = _LeaderBoard;
+    super.initState();
+  }
+
+
+
   final List<Map<String, dynamic>> _LeaderBoard = [
     {"id": "01", "name": "Andy", "Scores": "1500 points"},
     {"id": "02", "name": "Aragon", "Scores": "1500 points"},
@@ -22,24 +34,25 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
     {"id": "06", "name": "Colin", "Scores": "1500 points"},
   ];
 
-  // // Item of the ListView re usable
-  // Widget _listItem(index) {
-  //   return Container(
-  //     padding: const EdgeInsets.all(10),
-  //     child: ListTile(
-  //       leading: Text(_peopleData[index]['name'].toString(),
-  //           style: const TextStyle(fontSize: 18)),
-  //       // title: Text(
-  //       //   _peopleData[index]['name'].toString(),
-  //       //   style: const TextStyle(fontSize: 18),
-  //       // ),
-  //       trailing: Text(index.toString(),
-  //           style: const TextStyle(fontSize: 18, color: Colors.purple)),
-  //     ),
-  //     decoration: const BoxDecoration(
-  //         border: Border(bottom: BorderSide(width: 1, color: Colors.black26))),
-  //   );
-  // }
+ List<Map<String, dynamic>> _foundUsers = [];
+
+  void _runFilter(String enteredKeyword) {
+    List<Map<String, dynamic>> results = [];
+    if (enteredKeyword.isEmpty) {
+      results = _LeaderBoard;
+    } else {
+      results = _LeaderBoard
+          .where((user) =>
+              user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
+          .toList();
+    }
+
+    // Refresh the UI
+    setState(() {
+      _foundUsers = results;
+    });
+  }
+  bool search = false;
 
   @override
   Widget build(BuildContext context) {
@@ -57,13 +70,38 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
           },
         ),
         actions: [
-          Padding(
-            padding: EdgeInsets.only(right: 10),
-            child: Icon(
-              Icons.search,
-              color: kPrimaryPurpleColor,
-            ),
-          ),
+           search == true
+              ? Container(
+                  width: 300.0,
+                  child: TextField(
+                    cursorColor: kPrimaryPurpleColor,
+                    onChanged: (value) => _runFilter(value),
+                    decoration: InputDecoration(
+                      labelText: 'Search',
+                      labelStyle: TextStyle(
+                        color: kPrimaryPurpleColor,
+                      ),
+                      suffixIcon: IconButton(
+                        icon: Icon(Icons.search),
+                        color: kPrimaryPurpleColor,
+                        onPressed: () {
+                          setState(() {
+                            search = false;
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                )
+              : IconButton(
+                  icon: const Icon(Icons.search_sharp),
+                  color: Colors.deepPurple,
+                  onPressed: () {
+                    setState(() {
+                      search = true;
+                    });
+                  },
+                ),
         ],
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -99,8 +137,9 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                 SizedBox(
                   width: screenWidth,
                   height: screenHeight * 0.8,
-                  child: ListView.builder(
-                    itemCount: _LeaderBoard.length,
+                  child: _foundUsers.isNotEmpty
+                        ? ListView.builder(
+                    itemCount: _foundUsers.length,
                     itemBuilder: (context, index) {
                       return Column(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -112,11 +151,11 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text(_LeaderBoard[index]["name"],
+                              Text(_foundUsers[index]["name"],
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: kPrimaryPurpleColor)),
-                              Text(_LeaderBoard[index]["id"].toString(),
+                              Text(_foundUsers[index]["id"].toString(),
                                   style: TextStyle(
                                       fontSize: 18,
                                       color: kPrimaryPurpleColor)),
@@ -130,7 +169,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                                 Text("Scores",
                                     style: TextStyle(
                                         fontSize: 14, color: primaryColor)),
-                                Text(_LeaderBoard[index]["Scores"],
+                                Text(_foundUsers[index]["Scores"],
                                     style: TextStyle(
                                         fontSize: 12,
                                         color: kPrimaryGreyColor)),
@@ -144,7 +183,10 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                         ],
                       );
                     },
-                  ),
+                  ):  Text(
+                            'No search results found',
+                            style: TextStyle(fontSize: 16),
+                          ),
                 ),
               ],
             ),

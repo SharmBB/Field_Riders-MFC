@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
@@ -218,11 +219,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
           },
         ),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.search_sharp),
-            color: Colors.deepPurple,
-            onPressed: () {},
-          ),
+         
           IconButton(
             icon: const Icon(Icons.add_box),
             color: Colors.deepPurple,
@@ -244,28 +241,64 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
           return false;
         },
         child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+          child:   Padding(
+                padding: EdgeInsets.all(
+                  20,
+                ),
             child: Form(
               key: _formKey,
-              child: Padding(
-                padding: EdgeInsets.only(
-                  left: 10,
-                  top: 10.0,
-                  right: 20.0,
-                  bottom: 10,
-                ),
+             
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                            const Text(
                       "Dept Assignment",
                       style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.deepPurple),
                     ),
+                    Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            width: 70,
+                            decoration: BoxDecoration(
+                                color: kPrimaryPurpleColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
+                            child: Padding(
+                              padding: EdgeInsets.all(5),
+                              child: CustomTimer(
+                                from: Duration(minutes: 05),
+                                to: Duration(hours: 0),
+                                onBuildAction: CustomTimerAction.auto_start,
+                                builder: (CustomTimerRemainingTime remaining) {
+                                  return Text(
+                                    "${remaining.minutes}:${remaining.seconds}",
+                                    style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: kPrimaryWhiteColor),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                                                icon: Icon(
+                                                  Icons.timer_outlined,
+                                                  color: kPrimaryPurpleColor,
+                                                ),
+                                                onPressed: () {},
+                                              ),
+                        ],
+                      ), 
+                        ],),
+                  
                     const SizedBox(
                       height: 15,
                     ),
@@ -1111,7 +1144,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
               ),
             ),
           ),
-        ),
+        
       ),
     );
   }

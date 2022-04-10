@@ -2,6 +2,7 @@
 
 import 'dart:io';
 
+import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
@@ -190,11 +191,6 @@ class _DomesticScreenState extends State<DomesticScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search_sharp),
-            color: Colors.deepPurple,
-            onPressed: () {},
-          ),
-          IconButton(
             icon: const Icon(Icons.add_box),
             color: Colors.deepPurple,
             onPressed: () {},
@@ -214,13 +210,57 @@ class _DomesticScreenState extends State<DomesticScreen> {
           },
           child: SingleChildScrollView(
             child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+              padding: EdgeInsets.only(
+                left: 20,
+                right: 20.0,
+                bottom: 20,
+                top:10,
+              ),
               child: Form(
                   key: _formKey,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            width: 70,
+                            decoration: BoxDecoration(
+                                color: kPrimaryPurpleColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
+                            child: Padding(
+                              padding: EdgeInsets.all(5),
+                              child: CustomTimer(
+                                from: Duration(minutes: 05),
+                                to: Duration(hours: 0),
+                                onBuildAction: CustomTimerAction.auto_start,
+                                builder: (CustomTimerRemainingTime remaining) {
+                                  return Text(
+                                    "${remaining.minutes}:${remaining.seconds}",
+                                    style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: kPrimaryWhiteColor),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.timer_outlined,
+                              color: kPrimaryPurpleColor,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+
                       const Text(
                         "ID :1",
                         style: TextStyle(
@@ -322,6 +362,9 @@ class _DomesticScreenState extends State<DomesticScreen> {
                             "Take Photo",
                             style: TextStyle(fontSize: 12, color: Colors.grey),
                           ),
+                          SizedBox(
+                        height: 10,
+                      ),
                           Container(
                             height: 250,
                             width: screenWidth,
@@ -481,7 +524,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                     close = false;
                                   } else {
                                     tenant = false;
-                                     owner = false;
+                                    owner = false;
                                     occupier = false;
                                     close = false;
                                   }
@@ -531,7 +574,12 @@ class _DomesticScreenState extends State<DomesticScreen> {
                           : SizedBox(),
 
                       close == true
-                          ? Close(context, closepropertyusageinitvalue, closepropertydomestictypeinitvalue, closedrcodeinitvalue, closeremarkcontroller)
+                          ? Close(
+                              context,
+                              closepropertyusageinitvalue,
+                              closepropertydomestictypeinitvalue,
+                              closedrcodeinitvalue,
+                              closeremarkcontroller)
                           : SizedBox(),
 
                       const SizedBox(
