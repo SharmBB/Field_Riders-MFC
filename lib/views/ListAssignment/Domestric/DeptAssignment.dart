@@ -1127,9 +1127,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                             borderRadius: BorderRadius.circular(30)),
                         onPressed: () {
                           if (_formKey.currentState!.validate()) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Updating Data')),
-                            );
+                          openSubmit(context);
                           }
                         },
                         child: const Text(
@@ -1148,45 +1146,73 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
       ),
     );
   }
-
-  // Future openDate(BuildContext context) async {
-  //   return showDialog(
-  //     context: context,
-  //     builder: (context) {
-  //       return StatefulBuilder(
-  //           builder: (BuildContext context, StateSetter setState) {
-  //         return AlertDialog(
-  //           insetPadding: EdgeInsets.symmetric(horizontal: 10),
-  //           backgroundColor: Colors.transparent,
-  //           content: Container(
-  //             // margin: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 60),
-  //             height: MediaQuery.of(context).size.height * 0.4,
-  //             width: MediaQuery.of(context).size.width * 1,
-  //             decoration: BoxDecoration(
-  //               color: Colors.white,
-  //               borderRadius: BorderRadius.all(Radius.circular(20)),
-  //             ),
-  //             child: CalendarDatePicker(
-
-  //               initialDate: DateTime.now(),
-  //               firstDate: DateTime(DateTime.now().year - 10),
-  //               lastDate: DateTime(DateTime.now().year + 10),
-  //               onDateChanged: (DateTime picked) async {
-
-  //                 if (picked != null && picked != selectedDate)
-  //                   setState(() {
-  //                     selectedDate = picked;
-  //                     print(selectedDate);
-  //                   });
-  //                 Navigator.of(context).pop();
-  //               },
-  //             ),
-  //           ),
-  //         );
-  //       });
-  //     },
-  //   );
-  // }
+ Future openSubmit(BuildContext context) => showDialog(
+        context: context,
+        builder: (context) => StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+          return Center(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.27,
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                backgroundColor: Colors.white,
+                content: Column(
+                  children: [
+                    Text(
+                      "Sucessfull Added",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: kPrimaryPurpleColor),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("All Records Inserted",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey,
+                        )),
+                  ],
+                ),
+                actions: [
+                  Center(
+                    child: SizedBox(
+                      width: 80,
+                      height: 40,
+                      child: TextButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(kPrimaryPurpleColor),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)))),
+                        child: Text(
+                          "OK",
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+          );
+        }),
+      );
 
   Future openDialog(BuildContext context) => showDialog(
         context: context,

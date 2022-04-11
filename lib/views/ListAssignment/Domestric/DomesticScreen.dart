@@ -214,7 +214,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                 left: 20,
                 right: 20.0,
                 bottom: 20,
-                top:10,
+                top: 10,
               ),
               child: Form(
                   key: _formKey,
@@ -363,8 +363,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
                             style: TextStyle(fontSize: 12, color: Colors.grey),
                           ),
                           SizedBox(
-                        height: 10,
-                      ),
+                            height: 10,
+                          ),
                           Container(
                             height: 250,
                             width: screenWidth,
@@ -594,9 +594,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               borderRadius: BorderRadius.circular(30)),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text('Submiting')),
-                              );
+                            openSubmit(context);
                             }
                           },
                           child: const Text(
@@ -611,4 +609,72 @@ class _DomesticScreenState extends State<DomesticScreen> {
           )),
     );
   }
+
+  Future  openSubmit(BuildContext context) => showDialog(
+        context: context,
+        builder: (context) => StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+          return Center(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.27,
+              width: MediaQuery.of(context).size.width * 0.9,
+              child: AlertDialog(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                backgroundColor: Colors.white,
+                content: Column(
+                  children: [
+                    Text(
+                      "Sucessfull Added",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: kPrimaryPurpleColor),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Text("All Records Inserted",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16,
+                          color: Colors.grey,
+                        )),
+                  ],
+                ),
+                actions: [
+                  Center(
+                    child: SizedBox(
+                      width: 80,
+                      height: 40,
+                      child: TextButton(
+                        style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.all(kPrimaryPurpleColor),
+                            shape: MaterialStateProperty.all(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)))),
+                        child: Text(
+                          "OK",
+                          style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500),
+                        ),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
+          );
+        }),
+      );
 }
