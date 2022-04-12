@@ -77,27 +77,26 @@ class _ForgetOTPPageState extends State<OTPPage> {
       child: Scaffold(
           resizeToAvoidBottomInset: false,
           key: _scaffoldkey,
-            appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_rounded, color: kPrimaryPurpleColor),
-            onPressed: () {
-                 Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => ForgetPassword()),
-            );
-            },
-          ),
-            backgroundColor: Colors.transparent,
-          elevation: 0,
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back_rounded, color: kPrimaryPurpleColor),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ForgetPassword()),
+                );
+              },
             ),
-         
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
           body: SingleChildScrollView(
             child: Center(
               child: Form(
                 key: formKey,
                 // ignore: unnecessary_new
                 child: new Column(children: <Widget>[
-                  SizedBox(height:20),
+                  SizedBox(height: 20),
                   Align(
                     alignment: Alignment.centerLeft,
                     child: Padding(
@@ -137,7 +136,6 @@ class _ForgetOTPPageState extends State<OTPPage> {
                         SizedBox(
                           height: 80,
                         ),
-                    
                         _name(),
                         SizedBox(
                           height: screenHeight * 0.05,
@@ -177,15 +175,6 @@ class _ForgetOTPPageState extends State<OTPPage> {
                                       formKey.currentState?.save();
                                       _forgot();
                                     }
-
-                                    Navigator.of(context).pushReplacement(
-                                      MaterialPageRoute(
-                                          builder: (BuildContext context) =>
-                                              ResetPassword(
-                                                email: widget.email,
-                                                title: '',
-                                              )),
-                                    );
                                   },
                                   textColor: Colors.white,
                                   padding: const EdgeInsets.all(0.0),
@@ -268,15 +257,16 @@ class _ForgetOTPPageState extends State<OTPPage> {
 
     try {
       var data = {
-        "otp": _nameController.text,
+        "email": email,
+        "resetotp": _nameController.text,
       };
-      var res = await CallApi().postData(data, 'otpVerify');
+      var res = await CallApi().postData(data, 'checkOTP');
       var body = json.decode(res.body);
       print(body);
 
-      bodyError = body['message'];
+      bodyError = body['user']['message'];
 
-      if (body['errorMessage'] == false) {
+      if (body['user']['match'] == true) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
               builder: (BuildContext context) => ResetPassword(

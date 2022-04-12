@@ -6,11 +6,11 @@ class CallApi {
   var baseurl = '';
   var token;
   // Auth Api
-  var _urlAuth = 'http://mangakiku-api.moodfor.codes/api/';
+  var _urlAuth = 'https://dcaapi.moodfor.codes/rider/';
 
 //post data
   postData(data, apiUrl) async {
-    var fullUrl = Uri.parse(baseurl + apiUrl);
+    var fullUrl = Uri.parse(_urlAuth + apiUrl);
     return await http.post(
       fullUrl,
       body: jsonEncode(data),

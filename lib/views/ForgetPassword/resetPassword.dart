@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/api/api.dart';
+import 'package:riders_app/views/ForgetPassword/forgotPassword.dart';
 import 'package:riders_app/views/Login/login.dart';
 
 class ResetPassword extends StatefulWidget {
@@ -54,21 +55,22 @@ class _ResetPasswordState extends State<ResetPassword> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => LoginScreen()),
+              MaterialPageRoute(builder: (context) => ForgetPassword()),
             );
           },
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Form(
+      body: 
+       Form(
         autovalidateMode: AutovalidateMode.always,
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
+            Text(
               'Reset Password',
               style: TextStyle(
                   fontSize: 20,
@@ -81,10 +83,12 @@ class _ResetPasswordState extends State<ResetPassword> {
             _confirmpassword(),
             SizedBox(height: screenHeight * (1 / 20)),
             _reset(),
-            SizedBox(height: screenHeight * (3/ 20)),
+            SizedBox(height: screenHeight * (2.5/ 20)),
           ],
         ),
       ),
+      
+      
     );
   }
 
@@ -114,7 +118,7 @@ class _ResetPasswordState extends State<ResetPassword> {
         decoration: InputDecoration(
           hintText: 'Password',
           focusedBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+              UnderlineInputBorder(borderSide: BorderSide(color: primaryColor)),
         ),
       ),
     );
@@ -124,7 +128,7 @@ class _ResetPasswordState extends State<ResetPassword> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
       child: TextFormField(
-        style: const TextStyle(fontSize: 14.0, color: kPrimaryWhiteColor),
+        style: const TextStyle(fontSize: 14.0, color: primaryColor),
         cursorColor: kPrimaryPurpleColor,
         keyboardType: TextInputType.text,
         obscureText: showconfirmPassword,
@@ -148,7 +152,7 @@ class _ResetPasswordState extends State<ResetPassword> {
         decoration: InputDecoration(
           hintText: 'Confirm Password',
           focusedBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
+              UnderlineInputBorder(borderSide: BorderSide(color: primaryColor)),
         ),
       ),
     );
@@ -189,18 +193,19 @@ class _ResetPasswordState extends State<ResetPassword> {
 
     try {
       var data = {
-        "email": widget.email,
-        "newPassword": _passwordController.text,
+        // "email": widget.email,
+        "password": _passwordController.text,
       };
-      var res = await CallApi().updatePassword(data, 'otpVerify');
+      print('resetpassword/'+widget.email);
+      var res = await CallApi().updatePassword(data, 'resetpassword/'+widget.email);
       var body = json.decode(res.body);
       print(body);
 
-      bodyError = body['message'];
+      bodyError = body["match"].toString();
 
-      if (body['errorMessage'] == false) {
+      if (body["match"] == true) {
         Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (BuildContext context) => LoginScreen()),
+          MaterialPageRoute(builder: (BuildContext context) =>  LoginScreen()),
         );
       } else {}
     } catch (e) {

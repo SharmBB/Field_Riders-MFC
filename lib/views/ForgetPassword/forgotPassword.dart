@@ -8,7 +8,6 @@ import 'package:riders_app/api/api.dart';
 import 'package:riders_app/views/ForgetPassword/OTP.dart';
 import 'package:riders_app/views/Login/login.dart';
 
-
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ForgetPassword extends StatefulWidget {
@@ -38,14 +37,14 @@ class _ResetPasswordState extends State<ForgetPassword> {
 
     return Scaffold(
         key: _scaffoldKey,
-            appBar: AppBar(
+        appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back_rounded, color: kPrimaryPurpleColor),
             onPressed: () {
-                 Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => LoginScreen()),
-            );
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginScreen()),
+              );
             },
           ),
           backgroundColor: Colors.transparent,
@@ -77,7 +76,7 @@ class _ResetPasswordState extends State<ForgetPassword> {
                 _email(),
                 SizedBox(height: screenHeight * (1 / 20)),
                 _reset(),
-                 SizedBox(height: screenHeight * (3 / 20)),
+                SizedBox(height: screenHeight * (3 / 20)),
               ],
             ),
           ),
@@ -107,11 +106,11 @@ class _ResetPasswordState extends State<ForgetPassword> {
           },
           controller: _emailController,
           textInputAction: TextInputAction.done,
-        decoration: InputDecoration(
-          hintText: 'Forget Password',
-          focusedBorder:
-              UnderlineInputBorder(borderSide: BorderSide(color: Colors.grey)),
-        ),
+          decoration: InputDecoration(
+            hintText: 'Forget Password',
+            focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey)),
+          ),
         ));
   }
 
@@ -130,12 +129,7 @@ class _ResetPasswordState extends State<ForgetPassword> {
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState?.save();
-                  // use the email provided here
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>  OTPPage(email:_emailController.text)),
-                  );
+                  _forgot();
                 }
               },
               child: const Text(
@@ -154,23 +148,27 @@ class _ResetPasswordState extends State<ForgetPassword> {
 
     try {
       var data = {
-        "email": _emailController.toString(),
+        "email": _emailController.text,
       };
-      var res = await CallApi().postData(data, '');
+      var res = await CallApi().postData(data, 'sendOTP');
       var body = json.decode(res.body);
       print(body);
 
       bodyError = body['message'];
+      print(bodyError);
 
-      if (body['errorMessage'] == false) {
-        if (body['token'] != null) {
-          SharedPreferences localStorage =
-              await SharedPreferences.getInstance();
-          var token = body['token'];
-          localStorage.setString('token', token);
+      if (body['match'] == true) {
+      
+        print(body);
+        print(bodyError);
 
-          print(bodyError);
-        }
+         Navigator.of(context).pushReplacement(
+          MaterialPageRoute(
+              builder: (BuildContext context) =>  OTPPage(email: _emailController.text)),
+        );
+
+         
+       
       } else {}
     } catch (e) {
       print(e);

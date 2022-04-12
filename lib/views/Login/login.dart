@@ -130,7 +130,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       : CupertinoActivityIndicator(
                           radius: 15,
                         ),
-                        
                 ],
               ),
             ),
@@ -245,41 +244,49 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
 //Login CAll API
+
   void _login() async {
     setState(() {
       _isLoading = true;
     });
+
     try {
       var data = {
         "email": _emailController.text,
         "password": _passwordController.text,
       };
+
       var res = await CallApi().authData(data, 'login');
       var body = json.decode(res.body);
       if (body["errorMessage"] == false) {
-        SharedPreferences localStorage = await SharedPreferences.getInstance();
+           if (body['message']['token'] != null) {
+        SharedPreferences localStorage =
+            await SharedPreferences.getInstance();
 
         var token = body['message']['token'];
         print(token);
 
-        var userId = body['message']["user"]["id"];
+        var userId = body['message']["id"];
         print(userId);
 
-        print("------------------------------------");
+       
         localStorage.setString('token', token);
-        print(token);
-        print(userId);
+     
 
         localStorage.setInt('userId', userId);
 
+        print(body['message']);
         print(body['message']);
 
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
         );
+        }
       } else {
+        // _showMsg(body['error']);
         setState(() {
           bodyError = body['message'];
+          //_isLoading = false;
         });
         print(bodyError);
       }
@@ -294,3 +301,54 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
+
+//   void _login() async {
+//     setState(() {
+//       _isLoading = true;
+//     });
+//     try {
+//       var data = {
+//         "email": _emailController.text,
+//         "password": _passwordController.text,
+//       };
+//       var res = await CallApi().authData(data, 'login');
+//       var body = json.decode(res.body);
+//         bodyError = body['message'];
+//       if (body["errorMessage"] == false) {
+//         SharedPreferences localStorage = await SharedPreferences.getInstance();
+
+//         var token = body['message']['token'];
+//         print(token);
+
+//         var userId = body['message']["id"];
+//         print(userId);
+
+//         print("------------------------------------");
+//         localStorage.setString('token', token);
+//         print(token);
+//         print(userId);
+
+//         localStorage.setInt('userId', userId);
+
+//         print(body['message']);
+
+//         Navigator.of(context).pushReplacement(
+//           MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
+//         );
+//       } else {
+//         setState(() {
+//           bodyError = body['message'];
+//         });
+//         print(bodyError);
+//       }
+//     } catch (e) {
+//       print(e);
+//     }
+
+//     setState(
+//       () {
+//         _isLoading = false;
+//       },
+//     );
+//   }
+// }
