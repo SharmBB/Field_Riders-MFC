@@ -41,7 +41,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
       'Status': 'Outstanding'
     },
     {
-      'Name': '10825',
+      'Name': '2',
       'SAN': '27933712',
       'Owner 1': 'ABIDEN BIN SABARI',
       "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
@@ -49,6 +49,24 @@ class __DeptAssignIDState extends State<DeptAssignID> {
       "Payment Update": "-",
       'Status': 'Outstanding'
     },
+    {
+      'Name': '3',
+      'SAN': '27933712',
+      'Owner 1': 'ABIDEN BIN SABARI',
+      "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
+      "Date Assign": '22/02/2022',
+      "Payment Update": "-",
+      'Status': 'Outstanding'
+    },
+    // {
+    //   'Name': '10825',
+    //   'SAN': '27933712',
+    //   'Owner 1': 'ABIDEN BIN SABARI',
+    //   "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
+    //   "Date Assign": '22/02/2022',
+    //   "Payment Update": "-",
+    //   'Status': 'Outstanding'
+    // },
   ];
 
   List<Map<String, dynamic>> _foundUsers = [];

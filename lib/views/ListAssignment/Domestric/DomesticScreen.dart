@@ -165,6 +165,16 @@ class _DomesticScreenState extends State<DomesticScreen> {
   // }
 
   @override
+  void initState() {
+  
+    super.initState();
+  }
+
+ 
+
+ final CustomTimerController _controller = CustomTimerController();
+
+  @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     var screenWidth = MediaQuery.of(context).size.width;
@@ -234,9 +244,10 @@ class _DomesticScreenState extends State<DomesticScreen> {
                             child: Padding(
                               padding: EdgeInsets.all(5),
                               child: CustomTimer(
+                                controller: _controller ,
                                 from: Duration(minutes: 05),
                                 to: Duration(hours: 0),
-                                onBuildAction: CustomTimerAction.auto_start,
+                                 onBuildAction: CustomTimerAction.auto_start,
                                 builder: (CustomTimerRemainingTime remaining) {
                                   return Text(
                                     "${remaining.minutes}:${remaining.seconds}",
@@ -326,8 +337,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
                       const Text(
                         "Range5: >120 months",
                         style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
                             color: kPrimaryPurpleColor),
                       ),
                       const SizedBox(
@@ -459,6 +470,46 @@ class _DomesticScreenState extends State<DomesticScreen> {
                       const SizedBox(
                         height: 20,
                       ),
+
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Stop/Start Timer",
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              FlatButton(
+                                child: Text("Start"),
+                                onPressed: () {
+                                  _controller.start();
+                                },
+                                color: kPrimaryPurpleColor,
+                              ),
+                              SizedBox(
+                                width: 50,
+                              ),
+                              FlatButton(
+                                child: Text("Pause"),
+                                onPressed: () {
+                                  _controller.pause();
+                                },
+                                color: kPrimaryPurpleColor,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+
                       // Occupier DropDown
 
                       Column(
@@ -594,7 +645,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               borderRadius: BorderRadius.circular(30)),
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                            openSubmit(context);
+                              openSubmit(context);
                             }
                           },
                           child: const Text(
@@ -610,7 +661,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
     );
   }
 
-  Future  openSubmit(BuildContext context) => showDialog(
+  Future openSubmit(BuildContext context) => showDialog(
         context: context,
         builder: (context) => StatefulBuilder(
             builder: (BuildContext context, StateSetter setState) {

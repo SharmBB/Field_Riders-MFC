@@ -194,6 +194,8 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
 
   var customFormat = DateFormat('dd-MM-yyyy');
 
+   final CustomTimerController _controller = CustomTimerController();
+
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -274,6 +276,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                             child: Padding(
                               padding: EdgeInsets.all(5),
                               child: CustomTimer(
+                                       controller: _controller ,
                                 from: Duration(minutes: 05),
                                 to: Duration(hours: 0),
                                 onBuildAction: CustomTimerAction.auto_start,
@@ -459,6 +462,51 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         ),
                       ],
                     ),
+                    const SizedBox(
+                            height: 40,
+                          ),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                            const Text("Timer",
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600)),
+                            const SizedBox(
+                            height: 20,
+                          ),
+                          Text(
+                            "Stop/Start Timer",
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              FlatButton(
+                                child: Text("Start"),
+                                onPressed: () {
+                                  _controller.start();
+                                },
+                                color: kPrimaryPurpleColor,
+                              ),
+                              SizedBox(
+                                width: 50,
+                              ),
+                              FlatButton(
+                                child: Text("Pause"),
+                                onPressed: () {
+                                  _controller.pause();
+                                },
+                                color: kPrimaryPurpleColor,
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
+                 
 //
                     const SizedBox(
                       height: 40,
