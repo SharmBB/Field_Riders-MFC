@@ -64,7 +64,7 @@ class _ResetPasswordState extends State<ResetPassword> {
       ),
       body: 
        Form(
-        autovalidateMode: AutovalidateMode.always,
+       // autovalidateMode: AutovalidateMode.always,
         key: _formKey,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -196,8 +196,8 @@ class _ResetPasswordState extends State<ResetPassword> {
         // "email": widget.email,
         "password": _passwordController.text,
       };
-      print('resetpassword/'+widget.email);
-      var res = await CallApi().updatePassword(data, 'resetpassword/'+widget.email);
+      print('forgetpassword/'+widget.email);
+      var res = await CallApi().updatePassword(data, 'forgetpassword/'+widget.email);
       var body = json.decode(res.body);
       print(body);
 

@@ -52,7 +52,7 @@ class _ResetPasswordState extends State<ForgetPassword> {
         ),
         body: Center(
           child: Form(
-            autovalidateMode: AutovalidateMode.always,
+         //   autovalidateMode: AutovalidateMode.always,
             key: _formKey,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,

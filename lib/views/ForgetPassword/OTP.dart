@@ -175,6 +175,15 @@ class _ForgetOTPPageState extends State<OTPPage> {
                                       formKey.currentState?.save();
                                       _forgot();
                                     }
+
+                                    // Navigator.of(context).pushReplacement(
+                                    //   MaterialPageRoute(
+                                    //       builder: (BuildContext context) =>
+                                    //           ResetPassword(
+                                    //             email: widget.email,
+                                    //             title: '',
+                                    //           )),
+                                    // );
                                   },
                                   textColor: Colors.white,
                                   padding: const EdgeInsets.all(0.0),
@@ -231,7 +240,7 @@ class _ForgetOTPPageState extends State<OTPPage> {
       child: TextFormField(
         style: const TextStyle(fontSize: 14, color: primaryColor),
         cursorColor: kPrimaryPurpleColor,
-        keyboardType: TextInputType.text,
+        keyboardType: TextInputType.number,
         validator: (value) {
           if (value!.length < 5) {
             return "OTP required";
@@ -264,9 +273,9 @@ class _ForgetOTPPageState extends State<OTPPage> {
       var body = json.decode(res.body);
       print(body);
 
-      bodyError = body['user']['message'];
+      bodyError = body['rider']['message'];
 
-      if (body['user']['match'] == true) {
+      if (body['rider']['match'] == true) {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
               builder: (BuildContext context) => ResetPassword(
