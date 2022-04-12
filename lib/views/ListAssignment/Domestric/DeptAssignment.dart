@@ -493,7 +493,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                                 color: kPrimaryPurpleColor,
                               ),
                               SizedBox(
-                                width: 50,
+                                width: 40,
                               ),
                               FlatButton(
                                 child: Text("Pause"),
