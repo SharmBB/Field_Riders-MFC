@@ -493,7 +493,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                 color: kPrimaryPurpleColor,
                               ),
                               SizedBox(
-                                width: 50,
+                                width: 60,
                               ),
                               FlatButton(
                                 child: Text("Pause"),
