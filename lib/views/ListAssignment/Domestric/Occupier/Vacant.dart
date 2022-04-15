@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_constructors
-
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -82,6 +80,8 @@ final drcodetype = [
   '5 DR05 VACANT PREMISE',
 ];
 
+  File? vacantimage;
+
 
 
 
@@ -102,7 +102,7 @@ final drcodetype = [
 //   }
 // }
 
-Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeinitvalue,vacantdrcodeinitvalue,vacantremarkcontroller,vacantselectedMeter,vacantimage,vacantwaterMetercontroller) {
+Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeinitvalue,vacantdrcodeinitvalue,vacantremarkcontroller,vacantselectedMeter,vacantwaterMetercontroller) {
   return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -396,7 +396,7 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
                           : Container(
                               decoration: BoxDecoration(
                                 color: Colors.grey[100],
-                                   image: DecorationImage(
+                                           image: DecorationImage(
                             image: AssetImage("assets/Meter.jpg"),
                             fit: BoxFit.cover,
                           ),

@@ -618,7 +618,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               vacantdrcodeinitvalue,
                               vacantremarkcontroller,
                               vacantselectedMeter,
-                              vacantimage,
+                        
                               vacantwaterMetercontroller)
                           : SizedBox(),
 
