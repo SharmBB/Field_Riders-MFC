@@ -394,8 +394,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                             color: Colors.grey[100],
                                             // borderRadius: BorderRadius.circular(50)
                                           ),
-                                          width: screenWidth * (10 / 20),
-                                          height: screenHeight * (10 / 20),
+                                        width: screenWidth * 0.9,
+                          height: screenHeight * 0.3,
                                           child: Icon(
                                             Icons.camera_alt,
                                             color: Colors.grey[400],

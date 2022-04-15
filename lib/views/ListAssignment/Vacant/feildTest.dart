@@ -47,6 +47,8 @@ class _FeildTestState extends State<FeildTest> {
 
   @override
   Widget build(BuildContext context) {
+        var screenHeight = MediaQuery.of(context).size.height;
+                var screenWidth= MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -354,11 +356,11 @@ class _FeildTestState extends State<FeildTest> {
                       Align(
                         alignment: Alignment.topLeft,
                         child: Container(
-                          width: 150,
-                          height: 150,
+                          width: screenWidth * 0.9,
+                          height: screenHeight * 0.3,
                           decoration: BoxDecoration(
                               image: DecorationImage(
-                                image: AssetImage("assets/meter.png"),
+                                image: AssetImage("assets/Meter.jpg"),
                                 fit: BoxFit.cover,
                               ),
                               borderRadius:
