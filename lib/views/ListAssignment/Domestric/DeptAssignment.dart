@@ -497,7 +497,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                               //     _controller.pause();
                               //   },
                               //   color: kPrimaryPurpleColor,
-                              // ),
+                              // 
                             ],
                           ),
                         ],

@@ -338,7 +338,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                       child: TextButton(
                                         onPressed: () {
                                           if (feild[index]['Type'] ==
-                                              'Domestric DR') {
+                                              'Vacant') {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -349,7 +349,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                               ),
                                             );
                                           } else if (feild[index]['Type'] ==
-                                              'Vacant') {
+                                              'Domestric DR') {
                                             Navigator.push(
                                               context,
                                               MaterialPageRoute(
