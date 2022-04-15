@@ -8,8 +8,6 @@ import 'package:riders_app/views/ListAssignment/Vacant/VacantID.dart';
 
 import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
 
-
-
 import 'package:toggle_switch/toggle_switch.dart';
 
 class FieldScreen extends StatefulWidget {
@@ -22,19 +20,27 @@ class FieldScreen extends StatefulWidget {
 class _FieldScreenState extends State<FieldScreen> {
   final List<Map> feild = [
     {
-      'Name': '20-2021-D-F28-RCF24F25-LND (SELANGOR)',
-      'Type': 'Domestric DR',
-      "Created": '2021-12-12',
-      "Due": '2021-12-12',
+      'Name': '20-2021-D-F28-RCF24F25-LND Selangor ',
+      'Type': 'Landed',
+      "Created": '01-01-2022',
+      "Due": '01-03-2022',
       "Task Assign": "3",
       'Progress': '10% Complete'
     },
     {
-      'Name': '20-2021-D-F28-RCF24F25-LND (SELANGOR)',
+      'Name': '20-2021-D-F28-RCF24F25-COM Johor',
+      'Type': 'Commercial',
+      "Created": '01-01-2022',
+      "Due": '01-03-2022',
+      "Task Assign": "4",
+      'Progress': '10% Complete'
+    },
+    {
+      'Name': '02-2022-VACANT-Melaka',
       'Type': 'Vacant',
-      "Created": '2021-12-12',
-      "Due": '2021-12-12',
-      "Task Assign": "3",
+      "Created": '01-01-2022',
+      "Due": '01-03-2022',
+      "Task Assign": "4",
       'Progress': '10% Complete'
     },
   ];
@@ -113,7 +119,7 @@ class _FieldScreenState extends State<FieldScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
-                        if (feild[index]['Type'] == 'Domestric DR') {
+                        if (feild[index]['Type'] == 'Vacant') {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -122,8 +128,7 @@ class _FieldScreenState extends State<FieldScreen> {
                               ),
                             ),
                           );
-                        }
-                         else if (feild[index]['Type'] == 'Vacant') {
+                        } else if (feild[index]['Type'] == 'Landed') {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -132,6 +137,16 @@ class _FieldScreenState extends State<FieldScreen> {
                               ),
                             ),
                           );
+                        }
+                        else if (feild[index]['Type'] == 'Commercial') {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => VacantID(
+                          //       type: '',
+                          //     ),
+                          //   ),
+                          // );
                         }
                       },
                       child: Column(

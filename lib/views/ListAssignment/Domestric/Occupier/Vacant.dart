@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:io';
 
 import 'package:flutter/material.dart';
@@ -394,16 +396,17 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
                           : Container(
                               decoration: BoxDecoration(
                                 color: Colors.grey[100],
+                                   image: DecorationImage(
+                            image: AssetImage("assets/Meter.jpg"),
+                            fit: BoxFit.cover,
+                          ),
                                 // borderRadius: BorderRadius.circular(50)
                               ),
                               width:
                                   MediaQuery.of(context).size.width * (10 / 20),
                               height: MediaQuery.of(context).size.height *
                                   (10 / 20),
-                              child: Icon(
-                                Icons.camera_alt,
-                                color: Colors.grey[400],
-                              ),
+                             
                             ),
                     )),
               ),

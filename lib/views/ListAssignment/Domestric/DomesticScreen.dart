@@ -166,13 +166,10 @@ class _DomesticScreenState extends State<DomesticScreen> {
 
   @override
   void initState() {
-  
     super.initState();
   }
 
- 
-
- final CustomTimerController _controller = CustomTimerController();
+  final CustomTimerController _controller = CustomTimerController();
 
   @override
   Widget build(BuildContext context) {
@@ -244,10 +241,10 @@ class _DomesticScreenState extends State<DomesticScreen> {
                             child: Padding(
                               padding: EdgeInsets.all(5),
                               child: CustomTimer(
-                                controller: _controller ,
+                                controller: _controller,
                                 from: Duration(minutes: 05),
                                 to: Duration(hours: 0),
-                                 onBuildAction: CustomTimerAction.auto_start,
+                                onBuildAction: CustomTimerAction.auto_start,
                                 builder: (CustomTimerRemainingTime remaining) {
                                   return Text(
                                     "${remaining.minutes}:${remaining.seconds}",
@@ -339,7 +336,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: kPrimaryPurpleColor),
+                            color: Colors.red),
                       ),
                       const SizedBox(
                         height: 20,
@@ -386,7 +383,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
                             child: Padding(
                               padding: EdgeInsets.all(10),
                               child: GestureDetector(
-                                onTap: () {
+                                onTap: () async {
+                                  _controller.pause();
                                   _getMultiFromCamera();
                                 },
                                 child: Container(
@@ -486,7 +484,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               FlatButton(
-                                child: Text("Start"),
+                                child: Text("Photo Upload"),
                                 onPressed: () {
                                   _controller.start();
                                 },
@@ -495,13 +493,13 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               SizedBox(
                                 width: 60,
                               ),
-                              FlatButton(
-                                child: Text("Pause"),
-                                onPressed: () {
-                                  _controller.pause();
-                                },
-                                color: kPrimaryPurpleColor,
-                              ),
+                              // FlatButton(
+                              //   child: Text("Pause"),
+                              //   onPressed: () {
+                              //     _controller.pause();
+                              //   },
+                              //   color: kPrimaryPurpleColor,
+                              // ),
                             ],
                           ),
                         ],

@@ -384,7 +384,8 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                           child: Padding(
                             padding: EdgeInsets.all(10),
                             child: GestureDetector(
-                              onTap: () {
+                              onTap: () async{
+                                 _controller.pause();
                                 _getMultiFromCamera();
                               },
                               child: Container(
@@ -469,12 +470,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                            const Text("Timer",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w600)),
-                            const SizedBox(
-                            height: 20,
-                          ),
+                        
                           Text(
                             "Stop/Start Timer",
                             style: TextStyle(fontSize: 12, color: Colors.grey),
@@ -486,7 +482,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               FlatButton(
-                                child: Text("Start"),
+                                child: Text("Photo Upload"),
                                 onPressed: () {
                                   _controller.start();
                                 },
@@ -495,13 +491,13 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                               SizedBox(
                                 width: 60,
                               ),
-                              FlatButton(
-                                child: Text("Pause"),
-                                onPressed: () {
-                                  _controller.pause();
-                                },
-                                color: kPrimaryPurpleColor,
-                              ),
+                              // FlatButton(
+                              //   child: Text("Pause"),
+                              //   onPressed: () {
+                              //     _controller.pause();
+                              //   },
+                              //   color: kPrimaryPurpleColor,
+                              // ),
                             ],
                           ),
                         ],
