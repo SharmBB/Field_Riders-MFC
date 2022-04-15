@@ -23,20 +23,20 @@ class _FieldScreenState extends State<FieldScreen> {
   final List<Map> feild = [
     {
       'Name': '20-2021-D-F28-RCF24F25-LND (SELANGOR)',
+      'Type': 'Domestric DR',
+      "Created": '2021-12-12',
+      "Due": '2021-12-12',
+      "Task Assign": "3",
+      'Progress': '10% Complete'
+    },
+    {
+      'Name': '20-2021-D-F28-RCF24F25-LND (SELANGOR)',
       'Type': 'Vacant',
       "Created": '2021-12-12',
       "Due": '2021-12-12',
       "Task Assign": "3",
       'Progress': '10% Complete'
     },
-    // {
-    //   'Name': '20-2021-D-F28-RCF24F25-LND (SELANGOR)',
-    //   'Type': 'Vacant',
-    //   "Created": '2021-12-12',
-    //   "Due": '2021-12-12',
-    //   "Task Assign": "3",
-    //   'Progress': '10% Complete'
-    // },
   ];
 
   @override
@@ -113,7 +113,7 @@ class _FieldScreenState extends State<FieldScreen> {
                   itemBuilder: (BuildContext context, int index) {
                     return GestureDetector(
                       onTap: () {
-                        if (feild[index]['Type'] == 'Vacant') {
+                        if (feild[index]['Type'] == 'Domestric DR') {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -123,16 +123,16 @@ class _FieldScreenState extends State<FieldScreen> {
                             ),
                           );
                         }
-                        //  else if (feild[index]['Type'] == 'Vacant') {
-                        //   Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //       builder: (context) => VacantID(
-                        //         type: '',
-                        //       ),
-                        //     ),
-                        //   );
-                        // }
+                         else if (feild[index]['Type'] == 'Vacant') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => VacantID(
+                                type: '',
+                              ),
+                            ),
+                          );
+                        }
                       },
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
