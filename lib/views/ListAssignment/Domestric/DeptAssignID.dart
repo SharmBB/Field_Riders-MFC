@@ -278,7 +278,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  DeptAssignmentScreen()));
+                                                  DomesticScreen()));
                                     }
                                   },
                                   child: Column(

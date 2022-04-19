@@ -13,6 +13,7 @@ import 'package:riders_app/views/Calendar/Calendar.dart';
 
 import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignID.dart';
 import 'package:riders_app/views/ListAssignment/reusabletextfield.dart';
+import 'package:riders_app/views/field/feild.dart';
 
 class DeptAssignmentScreen extends StatefulWidget {
   const DeptAssignmentScreen({Key? key}) : super(key: key);
@@ -56,6 +57,9 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
   final drcodetype = ['code 1', 'code 2', 'code 3', 'code 4', 'code 5'];
 
   TextEditingController imagecontroller = TextEditingController();
+
+   TextEditingController nameCompanycontroller = TextEditingController();
+    TextEditingController typebusinesscontroller = TextEditingController();
 
   TextEditingController excludecontroller = TextEditingController();
   TextEditingController iwkspecialcontroller = TextEditingController();
@@ -214,8 +218,8 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                  builder: (context) => DeptAssignID(
-                        type: '',
+                  builder: (context) => FieldScreen(
+                      
                       )),
             );
           },
@@ -502,6 +506,33 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                           ),
                         ],
                       ),
+
+                        const SizedBox(
+                      height: 40,
+                    ),
+                    const Text(
+                      "Company",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    //Re Usable Widget
+
+                    //1
+                    textField("Name of the Company", nameCompanycontroller),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                 
+
+                    //Re Usable Widget
+
+                    //1
+                    textField("Type Of Business", typebusinesscontroller),
+                 
                  
 //
                     const SizedBox(

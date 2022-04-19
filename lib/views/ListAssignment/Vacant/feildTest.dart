@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/ListAssignment/reusabletextfield.dart';
@@ -44,6 +45,8 @@ class _FeildTestState extends State<FeildTest> {
   String? _selectedType='';
   String? _selectedUsage='';
   String? _selectedConnect='';
+
+   final CustomTimerController _controller = CustomTimerController();
 
   @override
   Widget build(BuildContext context) {
@@ -100,8 +103,128 @@ class _FeildTestState extends State<FeildTest> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Container(
+                            width: 70,
+                            decoration: BoxDecoration(
+                                color: kPrimaryPurpleColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(20))),
+                            child: Padding(
+                              padding: EdgeInsets.all(5),
+                              child: CustomTimer(
+                                controller: _controller,
+                                from: Duration(minutes: 05),
+                                to: Duration(hours: 0),
+                                onBuildAction: CustomTimerAction.auto_start,
+                                builder: (CustomTimerRemainingTime remaining) {
+                                  return Text(
+                                    "${remaining.minutes}:${remaining.seconds}",
+                                    style: TextStyle(
+                                        fontSize: 14.0,
+                                        color: kPrimaryWhiteColor),
+                                  );
+                                },
+                              ),
+                            ),
+                          ),
+                          IconButton(
+                            icon: Icon(
+                              Icons.timer_outlined,
+                              color: kPrimaryPurpleColor,
+                            ),
+                            onPressed: () {},
+                          ),
+                        ],
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+
+                      const Text(
+                        "ID :1",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
+                      ),
                       const SizedBox(
                         height: 20,
+                      ),
+                      const Text(
+                        "Bill:X6356185",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        "SAN:41898081",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        "Owner1: Name1",
+                        // "@ NEW HOW . (If Owner 2 is available show else don't need )",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        "Owner2: Name 2",
+                        // "@ NEW HOW . (If Owner 2 is available show else don't need )",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
+                      ),
+                      // const SizedBox(
+                      //   height: 20,
+                      // ),
+                      // const Text(
+                      //   "(Address1,Address2,Address3,Address4) 4 JALAN TIMOR 12,TAMAN TIMOR,81300 JOHOR BAHRU,JOHOR",
+                      //   style: TextStyle(
+                      //       fontSize: 15,
+                      //       fontWeight: FontWeight.w600,
+                      //       color: kPrimaryPurpleColor),
+                      // ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        "Range5: >120 months",
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red),
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      const Text(
+                        "Arrears:1,226.25",
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                            color: kPrimaryPurpleColor),
+                      ),
+                     
+                      const SizedBox(
+                        height: 40,
                       ),
                       textField("Sila isikan ID untuk tugasan (JobId)",
                           jobIdcontroller),

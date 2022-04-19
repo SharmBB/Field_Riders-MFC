@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/HomeScreen/HomePage.dart';
 import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignID.dart';
+import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignment.dart';
 import 'package:riders_app/views/ListAssignment/Vacant/VacantID.dart';
+import 'package:riders_app/views/ListAssignment/Vacant/feildTest.dart';
 
 import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
 
@@ -61,7 +63,7 @@ class _FieldScreenState extends State<FieldScreen> {
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
+              MaterialPageRoute(builder: (context) => FeildTest()),
             );
           },
         ),
@@ -123,7 +125,7 @@ class _FieldScreenState extends State<FieldScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => DeptAssignID(
+                              builder: (context) => VacantID(
                                 type: '',
                               ),
                             ),
@@ -132,21 +134,18 @@ class _FieldScreenState extends State<FieldScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => VacantID(
+                              builder: (context) => DeptAssignID(
                                 type: '',
                               ),
                             ),
                           );
                         }
                         else if (feild[index]['Type'] == 'Commercial') {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => VacantID(
-                          //       type: '',
-                          //     ),
-                          //   ),
-                          // );
+                         Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DeptAssignmentScreen()));
                         }
                       },
                       child: Column(
@@ -337,29 +336,33 @@ class _FieldScreenState extends State<FieldScreen> {
                                       width: 100.0,
                                       child: TextButton(
                                         onPressed: () {
-                                          if (feild[index]['Type'] ==
-                                              'Vacant') {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) =>
-                                                    DeptAssignID(
-                                                  type: '',
-                                                ),
-                                              ),
-                                            );
-                                          } else if (feild[index]['Type'] ==
-                                              'Domestric DR') {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder: (context) => VacantID(
-                                                  type: '',
-                                                ),
-                                              ),
-                                            );
-                                          }
-                                        },
+                                            if (feild[index]['Type'] == 'Vacant') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => VacantID(
+                                type: '',
+                              ),
+                            ),
+                          );
+                        } else if (feild[index]['Type'] == 'Landed') {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DeptAssignID(
+                                type: '',
+                              ),
+                            ),
+                          );
+                        }
+                        else if (feild[index]['Type'] == 'Commercial') {
+                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DeptAssignmentScreen()));
+                        }
+                      },
                                         style: ButtonStyle(
                                             backgroundColor:
                                                 MaterialStateProperty.all(

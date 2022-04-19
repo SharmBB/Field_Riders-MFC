@@ -1,8 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/api/api.dart';
 import 'package:riders_app/views/HomeScreen/HomePage.dart';
 
 class LeaderBoardScreen extends StatefulWidget {
@@ -13,17 +17,17 @@ class LeaderBoardScreen extends StatefulWidget {
 }
 
 class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
+  // loader
+  bool _isLoading = true;
+  List _getLeaderBoard = [];
 
-
-
-    @override
+  @override
   void initState() {
- 
+    getLeaderBoard();
+
     _foundUsers = _LeaderBoard;
     super.initState();
   }
-
-
 
   final List<Map<String, dynamic>> _LeaderBoard = [
     {"id": "01", "name": "Andy", "Scores": "1500 points"},
@@ -34,15 +38,14 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
     {"id": "06", "name": "Colin", "Scores": "1500 points"},
   ];
 
- List<Map<String, dynamic>> _foundUsers = [];
+  List<Map<String, dynamic>> _foundUsers = [];
 
   void _runFilter(String enteredKeyword) {
     List<Map<String, dynamic>> results = [];
     if (enteredKeyword.isEmpty) {
       results = _LeaderBoard;
     } else {
-      results = _LeaderBoard
-          .where((user) =>
+      results = _LeaderBoard.where((user) =>
               user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
           .toList();
     }
@@ -52,6 +55,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
       _foundUsers = results;
     });
   }
+
   bool search = false;
 
   @override
@@ -70,7 +74,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
           },
         ),
         actions: [
-           search == true
+          search == true
               ? Container(
                   width: 300.0,
                   child: TextField(
@@ -138,55 +142,71 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                   width: screenWidth,
                   height: screenHeight * 0.8,
                   child: _foundUsers.isNotEmpty
-                        ? ListView.builder(
-                    itemCount: _foundUsers.length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(_foundUsers[index]["name"],
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: kPrimaryPurpleColor)),
-                              Text(_foundUsers[index]["id"].toString(),
-                                  style: TextStyle(
-                                      fontSize: 18,
-                                      color: kPrimaryPurpleColor)),
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20.0),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Scores",
-                                    style: TextStyle(
-                                        fontSize: 14, color: primaryColor)),
-                                Text(_foundUsers[index]["Scores"],
-                                    style: TextStyle(
-                                        fontSize: 12,
-                                        color: kPrimaryGreyColor)),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 20,
-                          ),
-                          Divider()
-                        ],
-                      );
-                    },
-                  ):  Text(
-                            'No search results found',
-                            style: TextStyle(fontSize: 16),
-                          ),
+                      ? _isLoading
+                          ? Center(
+                              child: Padding(
+                              padding: const EdgeInsets.all(18.0),
+                              child: CupertinoActivityIndicator(),
+                            ))
+                          : ListView.builder(
+                              itemCount: _getLeaderBoard.length,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text(
+                                            _getLeaderBoard[index]["fullName"]
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: kPrimaryPurpleColor)),
+                                        Text(
+                                            _getLeaderBoard[index]["id"]
+                                                .toString(),
+                                            style: TextStyle(
+                                                fontSize: 18,
+                                                color: kPrimaryPurpleColor)),
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 20.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Text("Scores",
+                                              style: TextStyle(
+                                                  fontSize: 14,
+                                                  color: primaryColor)),
+                                          Text(
+                                              _getLeaderBoard[index]["points"]
+                                                  .toString(),
+                                              style: TextStyle(
+                                                  fontSize: 12,
+                                                  color: kPrimaryGreyColor)),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    Divider()
+                                  ],
+                                );
+                              },
+                            )
+                      : Text(
+                          'No search results found',
+                          style: TextStyle(fontSize: 16),
+                        ),
                 ),
               ],
             ),
@@ -194,5 +214,27 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
         ),
       ),
     );
+  }
+
+  //get LeaderBoard details from api
+  void getLeaderBoard() async {
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      _getLeaderBoard.clear();
+
+      var bodyRoutes;
+      var res = await CallApi().getLeaderBoard('scoreboards');
+      bodyRoutes = json.decode(res.body);
+
+      _getLeaderBoard = bodyRoutes;
+      print(_getLeaderBoard);
+    } catch (e) {
+      print(e);
+    }
+    setState(() {
+      _isLoading = false;
+    });
   }
 }
