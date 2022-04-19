@@ -507,7 +507,33 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                         ],
                       ),
 
-                   
+                        const SizedBox(
+                      height: 40,
+                    ),
+                    const Text(
+                      "Company",
+                      style:
+                          TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    ),
+                    const SizedBox(
+                      height: 20,
+                    ),
+
+                    //Re Usable Widget
+
+                    //1
+                    textField("Name of the Company", nameCompanycontroller),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                 
+
+                    //Re Usable Widget
+
+                    //1
+                    textField("Type Of Business", typebusinesscontroller),
+                 
+                 
 //
                     const SizedBox(
                       height: 40,
