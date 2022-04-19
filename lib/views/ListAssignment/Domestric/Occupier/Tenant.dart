@@ -249,7 +249,7 @@ Widget Tenant(
               height: 10,
             ),
             Container(
-              padding: const EdgeInsets.only(left: 20, right: 10),
+              padding:  EdgeInsets.only(left: 20, right: 10),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.deepPurple),
                 borderRadius: BorderRadius.circular(25),

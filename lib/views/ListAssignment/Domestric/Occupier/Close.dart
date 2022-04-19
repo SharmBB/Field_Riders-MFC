@@ -93,11 +93,11 @@ Widget Close(context,closepropertyusageinitvalue,closepropertydomestictypeinitva
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
+             Text(
               "Property usage",
               style: TextStyle(color: Colors.grey, fontSize: 12),
             ),
-            const SizedBox(
+             SizedBox(
               height: 10,
             ),
             Container(

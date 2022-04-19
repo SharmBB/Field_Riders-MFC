@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class CallApi {
   var baseurl = '';
+   var baseur_1 = '';
   var token;
   // Auth Api
   var _urlAuth = 'https://dcaapi.moodfor.codes/rider/';

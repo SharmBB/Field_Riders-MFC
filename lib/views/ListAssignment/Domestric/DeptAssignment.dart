@@ -495,13 +495,7 @@ class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
                               SizedBox(
                                 width: 60,
                               ),
-                              // FlatButton(
-                              //   child: Text("Pause"),
-                              //   onPressed: () {
-                              //     _controller.pause();
-                              //   },
-                              //   color: kPrimaryPurpleColor,
-                              // 
+                          
                             ],
                           ),
                         ],

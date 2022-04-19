@@ -135,7 +135,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                       fontWeight: FontWeight.bold,
                       color: Colors.deepPurple),
                 ),
-                const SizedBox(
+                 SizedBox(
                   height: 15,
                 ),
                 SizedBox(
@@ -145,7 +145,7 @@ class _LeaderBoardScreenState extends State<LeaderBoardScreen> {
                       ? _isLoading
                           ? Center(
                               child: Padding(
-                              padding: const EdgeInsets.all(18.0),
+                              padding:  EdgeInsets.all(18.0),
                               child: CupertinoActivityIndicator(),
                             ))
                           : ListView.builder(

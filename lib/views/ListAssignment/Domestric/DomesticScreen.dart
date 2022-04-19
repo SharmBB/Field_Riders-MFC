@@ -514,11 +514,11 @@ class _DomesticScreenState extends State<DomesticScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                           Text(
                             "Occupier(Owner/Tenant )",
                             style: TextStyle(color: Colors.grey, fontSize: 12),
                           ),
-                          const SizedBox(
+                           SizedBox(
                             height: 10,
                           ),
                           Container(
@@ -631,7 +631,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               closeremarkcontroller)
                           : SizedBox(),
 
-                      const SizedBox(
+                       SizedBox(
                         height: 50,
                       ),
                       SizedBox(

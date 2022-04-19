@@ -133,7 +133,7 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
                   width: MediaQuery.of(context).size.width,
                   child: DropdownButton<String>(
                     underline: Container(),
-                    icon: const Icon(
+                    icon:  Icon(
                       Icons.keyboard_arrow_down,
                       color: Colors.deepPurple,
                     ),
@@ -169,7 +169,7 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
                   "Property Domestic",
                   style: TextStyle(color: Colors.grey, fontSize: 12),
                 ),
-                const SizedBox(
+                 SizedBox(
                   height: 10,
                 ),
                 Container(
@@ -181,7 +181,7 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
                   width: MediaQuery.of(context).size.width,
                   child: DropdownButton<String>(
                     underline: Container(),
-                    icon: const Icon(
+                    icon:  Icon(
                       Icons.keyboard_arrow_down,
                       color: Colors.deepPurple,
                     ),
