@@ -3,7 +3,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riders_app/_helpers/constants.dart';
-import 'package:riders_app/views/ListAssignment/reusabletextfield.dart';
+import 'package:riders_app/views/ResuableTextFormFeild/reusabletextfield.dart';
+
 
 
 final propertyusagetypeOwner = [

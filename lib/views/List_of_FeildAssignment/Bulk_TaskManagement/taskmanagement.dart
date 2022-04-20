@@ -1,8 +1,9 @@
 // ignore_for_file: prefer_const_constructors
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
-import 'package:riders_app/views/ListAssignment/reusabletextfield.dart';
+import 'package:riders_app/views/ResuableTextFormFeild/reusabletextfield.dart';
+import 'package:riders_app/views/Calendar/Calendar.dart';
+
 
 class TaskManagementScreen extends StatefulWidget {
   const TaskManagementScreen({Key? key}) : super(key: key);
@@ -425,7 +426,7 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
   final propertyusagepevalue = ['Select', 'C', 'D'];
 
   TextEditingController visitdatecontroller = TextEditingController();
-  TextEditingController updatecontroller = TextEditingController();
+  TextEditingController remindercontroller = TextEditingController();
   TextEditingController remarkcontroller = TextEditingController();
   TextEditingController fromcontroller = TextEditingController();
   TextEditingController tocontroller = TextEditingController();
@@ -465,8 +466,15 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
           return false;
         },
         child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 35),
+            child: Padding(
+            padding: EdgeInsets.symmetric(vertical: 20, horizontal: 15),
+            child: Padding(
+              padding: EdgeInsets.only(
+                left: 10,
+                top: 10.0,
+                right: 10.0,
+                bottom: 10,
+              ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.start,
@@ -765,126 +773,132 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
                 // Date
                 manageinitvalue == "Visit Date"
                     ? Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
                             height: 20,
                           ),
-                          const Text(
-                            "Visit Date",
-                            style: TextStyle(fontSize: 12, color: Colors.grey),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextFormField(
-                            readOnly: true,
-                            style: const TextStyle(
-                                fontSize: 16, color: Colors.black),
-                            cursorColor: kPrimaryPurpleColor,
-                            keyboardType: TextInputType.none,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Field Required';
-                              }
-                            },
-                            controller: visitdatecontroller,
-                            textInputAction: TextInputAction.none,
-                            decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.calendar_today_rounded,
-                                    color: kPrimaryPurpleColor,
-                                  )),
-                              focusedBorder: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25.0)),
-                                  borderSide:
-                                      BorderSide(color: kPrimaryPurpleColor)),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(25, 10, 10, 0),
-                              fillColor: kPrimaryWhiteColor,
-                              filled: true,
-                              enabledBorder: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25.0)),
-                                  borderSide:
-                                      BorderSide(color: kPrimaryPurpleColor)),
-                              border: const OutlineInputBorder(
+                        Text(
+                          "Visit Date",
+                          style: TextStyle(fontSize: 12, color: Colors.grey),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          style: TextStyle(fontSize: 16, color: Colors.black),
+                          cursorColor: kPrimaryPurpleColor,
+                          keyboardType: TextInputType.none,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Field Required';
+                            }
+                          },
+                          showCursor: false,
+                          controller: visitdatecontroller,
+                          textInputAction: TextInputAction.none,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                onPressed: () async {
+                                  await openDate(context, );
+                                  // showPicker(context);
+                                  visitdatecontroller.text =
+                                      customFormat.format(selectedDate);
+                                },
+                                icon: Icon(
+                                  Icons.calendar_today_rounded,
+                                  color: kPrimaryPurpleColor,
+                                )),
+                            focusedBorder: const OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0)),
                                 borderSide:
-                                    BorderSide(color: kPrimaryPurpleColor),
-                                gapPadding: 0,
-                              ),
+                                    BorderSide(color: kPrimaryPurpleColor)),
+                            contentPadding: EdgeInsets.fromLTRB(25, 10, 10, 0),
+                            fillColor: kPrimaryWhiteColor,
+                            filled: true,
+                            enabledBorder: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25.0)),
+                                borderSide:
+                                    BorderSide(color: kPrimaryPurpleColor)),
+                            border: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25.0)),
+                              borderSide:
+                                  BorderSide(color: kPrimaryPurpleColor),
+                              gapPadding: 0,
                             ),
-                          )
-                        ],
-                      )
+                          ),
+                        )
+                      ],
+                    )
                     : SizedBox(),
 // date 2
                 manageinitvalue == "Update Reminder"
                     ? Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const SizedBox(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const SizedBox(
                             height: 20,
                           ),
-                          const Text(
-                            "Update Reminder",
-                            style: TextStyle(fontSize: 12, color: Colors.grey),
-                          ),
-                          const SizedBox(
-                            height: 10,
-                          ),
-                          TextFormField(
-                            readOnly: true,
-                            style: const TextStyle(
-                                fontSize: 16, color: Colors.black),
-                            cursorColor: kPrimaryPurpleColor,
-                            keyboardType: TextInputType.none,
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Field Required';
-                              }
-                            },
-                            controller: updatecontroller,
-                            textInputAction: TextInputAction.none,
-                            decoration: InputDecoration(
-                              suffixIcon: IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.calendar_today_rounded,
-                                    color: kPrimaryPurpleColor,
-                                  )),
-                              focusedBorder: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25.0)),
-                                  borderSide:
-                                      BorderSide(color: kPrimaryPurpleColor)),
-                              contentPadding:
-                                  EdgeInsets.fromLTRB(25, 10, 10, 0),
-                              fillColor: kPrimaryWhiteColor,
-                              filled: true,
-                              enabledBorder: const OutlineInputBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(25.0)),
-                                  borderSide:
-                                      BorderSide(color: kPrimaryPurpleColor)),
-                              border: const OutlineInputBorder(
+                        Text(
+                          "Visit Date",
+                          style: TextStyle(fontSize: 12, color: Colors.grey),
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        TextFormField(
+                          style: TextStyle(fontSize: 16, color: Colors.black),
+                          cursorColor: kPrimaryPurpleColor,
+                          keyboardType: TextInputType.none,
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Field Required';
+                            }
+                          },
+                          showCursor: false,
+                          controller: remindercontroller,
+                          textInputAction: TextInputAction.none,
+                          decoration: InputDecoration(
+                            suffixIcon: IconButton(
+                                onPressed: () async {
+                                  await openDate(context, );
+                                  // showPicker(context);
+                                  remindercontroller.text =
+                                      customFormat.format(selectedDate);
+                                },
+                                icon: Icon(
+                                  Icons.calendar_today_rounded,
+                                  color: kPrimaryPurpleColor,
+                                )),
+                            focusedBorder: const OutlineInputBorder(
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(25.0)),
                                 borderSide:
-                                    BorderSide(color: kPrimaryPurpleColor),
-                                gapPadding: 0,
-                              ),
+                                    BorderSide(color: kPrimaryPurpleColor)),
+                            contentPadding: EdgeInsets.fromLTRB(25, 10, 10, 0),
+                            fillColor: kPrimaryWhiteColor,
+                            filled: true,
+                            enabledBorder: const OutlineInputBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(25.0)),
+                                borderSide:
+                                    BorderSide(color: kPrimaryPurpleColor)),
+                            border: const OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(25.0)),
+                              borderSide:
+                                  BorderSide(color: kPrimaryPurpleColor),
+                              gapPadding: 0,
                             ),
-                          )
-                        ],
-                      )
+                          ),
+                        )
+                      ],
+                    )
                     : SizedBox(),
                 // DropDown
                 manageinitvalue == "Complete Status"
@@ -1072,6 +1086,7 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
             ),
           ),
         ),
+      ),
       ),
     );
   }

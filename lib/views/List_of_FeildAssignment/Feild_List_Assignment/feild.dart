@@ -2,14 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
-import 'package:riders_app/views/ListAssignment/Commercial%20Assignment/ComAssignID.dart';
-import 'package:riders_app/views/ListAssignment/LandedAssignment/DeptAssignID.dart';
-import 'package:riders_app/views/ListAssignment/LandedAssignment/DeptAssignment.dart';
+import 'package:riders_app/views/Assignment/Commercial%20Assignment/ComAssignID.dart';
+import 'package:riders_app/views/Assignment/Commercial%20Assignment/ComDeptAssignment.dart';
+import 'package:riders_app/views/Assignment/LandedAssignment/DeptAssignID.dart';
+import 'package:riders_app/views/Assignment/Vacant/VacantID.dart';
+import 'package:riders_app/views/List_of_FeildAssignment/Bulk_TaskManagement/taskmanagement.dart';
 
-import 'package:riders_app/views/ListAssignment/Vacant/VacantID.dart';
-import 'package:riders_app/views/ListAssignment/Vacant/feildTest.dart';
 
-import 'package:riders_app/views/TaskManagement/taskmanagement.dart';
 
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -358,7 +357,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  DeptAssignmentScreen()));
+                                                  ComDeptAssignmentScreen()));
                         }
                       },
                                         style: ButtonStyle(

@@ -9,9 +9,10 @@ import 'package:flutter_rounded_date_picker/flutter_rounded_date_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/views/ResuableTextFormFeild/reusabletextfield.dart';
 import 'package:riders_app/views/Calendar/Calendar.dart';
-import 'package:riders_app/views/FeildAssignment/feild.dart';
-import 'package:riders_app/views/ListAssignment/reusabletextfield.dart';
+import 'package:riders_app/views/List_of_FeildAssignment/Feild_List_Assignment/feild.dart';
+
 
 
 class ComDeptAssignmentScreen extends StatefulWidget {
@@ -193,9 +194,6 @@ class _ComDeptAssignmentScreenState extends State<ComDeptAssignmentScreen> {
   //   });
   // }
 
-  DateTime selectedDate = DateTime.now();
-
-  var customFormat = DateFormat('dd-MM-yyyy');
 
    final CustomTimerController _controller = CustomTimerController();
 
@@ -764,7 +762,7 @@ class _ComDeptAssignmentScreenState extends State<ComDeptAssignmentScreen> {
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                                 onPressed: () async {
-                                  await openDate(context, selectedDate);
+                                  await openDate(context, );
                                   // showPicker(context);
                                   visitdatecontroller.text =
                                       customFormat.format(selectedDate);
@@ -827,7 +825,7 @@ class _ComDeptAssignmentScreenState extends State<ComDeptAssignmentScreen> {
                           decoration: InputDecoration(
                             suffixIcon: IconButton(
                                 onPressed: () async {
-                                  await openDate(context, selectedDate);
+                                  await openDate(context, );
                                   // showPicker(context);
                                   updateremindercontroller.text =
                                       customFormat.format(selectedDate);

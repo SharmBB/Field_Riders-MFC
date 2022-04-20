@@ -1,7 +1,13 @@
  import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-Future openDate(BuildContext context,selectedDate) async {
+
+  DateTime selectedDate = DateTime.now();
+
+  var customFormat = DateFormat('dd-MM-yyyy');
+
+Future openDate(BuildContext context) async {
     return showDialog(
       context: context,
       builder: (context) {
@@ -30,7 +36,7 @@ Future openDate(BuildContext context,selectedDate) async {
                       selectedDate = picked;
                       print(selectedDate);
                     });
-                  Navigator.of(context).pop();
+                  Navigator.pop(context,);
                 },
               ),
             ),
