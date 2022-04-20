@@ -4,23 +4,24 @@ import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
-import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignment.dart';
-import 'package:riders_app/views/ListAssignment/Domestric/DomesticScreen.dart';
+import 'package:riders_app/views/FeildAssignment/feild.dart';
+import 'package:riders_app/views/ListAssignment/Commercial%20Assignment/ComDeptAssignment.dart';
+import 'package:riders_app/views/ListAssignment/LandedAssignment/DomesticScreen.dart';
 
 import 'package:riders_app/views/Verification%20Screen/taskVerification.dart';
 import 'package:riders_app/views/check.dart';
 
-import 'package:riders_app/views/field/feild.dart';
 
-class DeptAssignID extends StatefulWidget {
+
+class ComAssignID extends StatefulWidget {
   final String type;
-  const DeptAssignID({Key? key, required this.type}) : super(key: key);
+  const ComAssignID({Key? key, required this.type}) : super(key: key);
 
   @override
-  State<DeptAssignID> createState() => __DeptAssignIDState();
+  State<ComAssignID> createState() => __ComAssignIDState();
 }
 
-class __DeptAssignIDState extends State<DeptAssignID> {
+class __ComAssignIDState extends State<ComAssignID> {
   late String type;
 
   @override
@@ -271,14 +272,14 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                DomesticScreen()),
+                                               ComDeptAssignmentScreen()),
                                       );
                                     } else {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  DomesticScreen()));
+                                                ComDeptAssignmentScreen()));
                                     }
                                   },
                                   child: Column(
@@ -733,7 +734,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => DeptAssignID(
+                            builder: (context) => ComAssignID(
                               type: Arr.reduce(
                                 (value, element) {
                                   return value + "," + element;
@@ -752,7 +753,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => DeptAssignID(type: '')),
+                              builder: (context) => ComAssignID(type: '')),
                         );
                       }),
                 ],

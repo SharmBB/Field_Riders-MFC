@@ -10,19 +10,18 @@ import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/Calendar/Calendar.dart';
-
-import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignID.dart';
+import 'package:riders_app/views/FeildAssignment/feild.dart';
 import 'package:riders_app/views/ListAssignment/reusabletextfield.dart';
-import 'package:riders_app/views/field/feild.dart';
 
-class DeptAssignmentScreen extends StatefulWidget {
-  const DeptAssignmentScreen({Key? key}) : super(key: key);
+
+class ComDeptAssignmentScreen extends StatefulWidget {
+  const ComDeptAssignmentScreen({Key? key}) : super(key: key);
 
   @override
-  State<DeptAssignmentScreen> createState() => _DeptAssignmentScreenState();
+  State<ComDeptAssignmentScreen> createState() => _ComDeptAssignmentScreenState();
 }
 
-class _DeptAssignmentScreenState extends State<DeptAssignmentScreen> {
+class _ComDeptAssignmentScreenState extends State<ComDeptAssignmentScreen> {
   final _formKey = GlobalKey<FormState>();
 
   String imginitvalue = 'Permise 1';

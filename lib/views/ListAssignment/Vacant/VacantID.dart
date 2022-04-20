@@ -4,14 +4,12 @@ import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
-import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignment.dart';
-import 'package:riders_app/views/ListAssignment/Domestric/DomesticScreen.dart';
+import 'package:riders_app/views/FeildAssignment/feild.dart';
 import 'package:riders_app/views/ListAssignment/Vacant/feildTest.dart';
 
 
 import 'package:riders_app/views/Verification%20Screen/taskVerification.dart';
 
-import 'package:riders_app/views/field/feild.dart';
 
 class VacantID extends StatefulWidget {
   final String type;

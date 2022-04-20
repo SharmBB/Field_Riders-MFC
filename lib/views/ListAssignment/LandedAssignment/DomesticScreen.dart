@@ -7,11 +7,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riders_app/_helpers/constants.dart';
-import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignID.dart';
-import 'package:riders_app/views/ListAssignment/Domestric/Occupier/Close.dart';
-import 'package:riders_app/views/ListAssignment/Domestric/Occupier/Owner.dart';
-import 'package:riders_app/views/ListAssignment/Domestric/Occupier/Tenant.dart';
-import 'package:riders_app/views/ListAssignment/Domestric/Occupier/Vacant.dart';
+import 'package:riders_app/views/ListAssignment/LandedAssignment/DeptAssignID.dart';
+import 'package:riders_app/views/ListAssignment/LandedAssignment/Occupier/Close.dart';
+import 'package:riders_app/views/ListAssignment/LandedAssignment/Occupier/Owner.dart';
+import 'package:riders_app/views/ListAssignment/LandedAssignment/Occupier/Tenant.dart';
+import 'package:riders_app/views/ListAssignment/LandedAssignment/Occupier/Vacant.dart';
 import 'package:riders_app/views/ListAssignment/reusabletextfield.dart';
 
 class DomesticScreen extends StatefulWidget {

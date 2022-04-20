@@ -153,11 +153,16 @@ class _ForgetOTPPageState extends State<OTPPage> {
                         Container(
                           margin: EdgeInsets.symmetric(horizontal: 50.0),
                           alignment: Alignment.center,
-                          child: Text(
-                            'Resend Code',
-                            style: TextStyle(
-                                color: kPrimaryPurpleColor, fontSize: 16),
-                            textAlign: TextAlign.center,
+                          child: GestureDetector(
+                            onTap: () async {
+                              _resedOTP();
+                            },
+                            child: Text(
+                              'Resend Code',
+                              style: TextStyle(
+                                  color: kPrimaryPurpleColor, fontSize: 16),
+                              textAlign: TextAlign.center,
+                            ),
                           ),
                         ),
                         SizedBox(
@@ -257,6 +262,31 @@ class _ForgetOTPPageState extends State<OTPPage> {
         ),
       ),
     );
+  }
+
+  void _resedOTP() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    try {
+      var data = {
+        "email": email,
+      };
+      var res = await CallApi().postData(data, 'sendOTP');
+      var body = json.decode(res.body);
+      print(body);
+
+      if (body['match'] == true) {
+        print(body);
+        print(bodyError);
+      } else {}
+    } catch (e) {
+      print(e);
+    }
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   void _forgot() async {

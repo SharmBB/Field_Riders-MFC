@@ -2,9 +2,10 @@
 
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
-import 'package:riders_app/views/HomeScreen/HomePage.dart';
-import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignID.dart';
-import 'package:riders_app/views/ListAssignment/Domestric/DeptAssignment.dart';
+import 'package:riders_app/views/ListAssignment/Commercial%20Assignment/ComAssignID.dart';
+import 'package:riders_app/views/ListAssignment/LandedAssignment/DeptAssignID.dart';
+import 'package:riders_app/views/ListAssignment/LandedAssignment/DeptAssignment.dart';
+
 import 'package:riders_app/views/ListAssignment/Vacant/VacantID.dart';
 import 'package:riders_app/views/ListAssignment/Vacant/feildTest.dart';
 
@@ -61,10 +62,7 @@ class _FieldScreenState extends State<FieldScreen> {
             size: 25.0,
           ),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => FeildTest()),
-            );
+            Navigator.pop(context);
           },
         ),
         leadingWidth: 60,
@@ -145,7 +143,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  DeptAssignmentScreen()));
+                                                  ComAssignID(type: '')));
                         }
                       },
                       child: Column(

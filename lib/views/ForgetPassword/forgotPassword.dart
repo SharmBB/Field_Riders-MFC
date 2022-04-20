@@ -66,7 +66,7 @@ class _ResetPasswordState extends State<ForgetPassword> {
                 ),
                 SizedBox(height: screenHeight * (0.7 / 20)),
                 const Text(
-                  'We will Send a link to recover password',
+                  'We will Send a OTP Number to the Mail',
                   style: TextStyle(
                     fontSize: 12,
                     color: kPrimaryPurpleColor,
@@ -107,7 +107,7 @@ class _ResetPasswordState extends State<ForgetPassword> {
           controller: _emailController,
           textInputAction: TextInputAction.done,
           decoration: InputDecoration(
-            hintText: 'Forget Password',
+            hintText: 'Email',
             focusedBorder: UnderlineInputBorder(
                 borderSide: BorderSide(color: Colors.grey)),
           ),
