@@ -465,10 +465,7 @@ class __VacantIDState extends State<VacantID> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
+                                   
                                           Text(
                                             "IWK Id: ",
                                             style: TextStyle(
@@ -485,48 +482,8 @@ class __VacantIDState extends State<VacantID> {
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),
-                                        ],
-                                      ),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Container(
-                                            width: 70,
-                                            decoration: BoxDecoration(
-                                                color: kPrimaryPurpleColor,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(20))),
-                                            child: Padding(
-                                              padding: EdgeInsets.all(5),
-                                              child: CustomTimer(
-                                                from: Duration(minutes: 05),
-                                                to: Duration(hours: 0),
-                                                onBuildAction: CustomTimerAction
-                                                    .auto_start,
-                                                builder:
-                                                    (CustomTimerRemainingTime
-                                                        remaining) {
-                                                  return Text(
-                                                    "${remaining.minutes}:${remaining.seconds}",
-                                                    style: TextStyle(
-                                                        fontSize: 14.0,
-                                                        color:
-                                                            kPrimaryWhiteColor),
-                                                  );
-                                                },
-                                              ),
-                                            ),
-                                          ),
-                                          IconButton(
-                                            icon: Icon(
-                                              Icons.timer_outlined,
-                                              color: kPrimaryPurpleColor,
-                                            ),
-                                            onPressed: () {},
-                                          ),
-                                        ],
-                                      ),
+                                     
+                                    
                                     ],
                                   ),
                                   Padding(
