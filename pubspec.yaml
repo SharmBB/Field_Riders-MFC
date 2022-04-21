@@ -48,8 +48,7 @@ dependencies:
   custom_timer: ^0.0.3
   pin_code_fields: ^7.3.0
   multi_image_picker2: ^5.0.2
-  flutter_rounded_date_picker: ^2.0.2
-  table_calendar: ^2.3.3
+  table_calendar: ^3.0.5
 
   
 

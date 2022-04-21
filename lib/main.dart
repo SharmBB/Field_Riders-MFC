@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'ProductSans',
         primaryColor: kPrimaryPurpleColor,
         buttonTheme: ButtonThemeData(
-          buttonColor: Colors.deepPurple,
+          buttonColor: kPrimaryPurpleColor,
           textTheme: ButtonTextTheme.primary,
         ),
         inputDecorationTheme: InputDecorationTheme(

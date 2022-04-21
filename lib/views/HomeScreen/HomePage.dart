@@ -5,6 +5,7 @@ import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/Leaderboard/Leaderboard.dart';
 import 'package:riders_app/views/List_of_FeildAssignment/Feild_List_Assignment/feild.dart';
 import 'package:riders_app/views/Login/login.dart';
+import 'package:riders_app/views/MyAttendence/Calendar/attendCalendar.dart';
 import 'package:riders_app/views/Profile/profile.dart';
 import 'package:riders_app/views/QR%20Screen/QR_scan.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -95,11 +96,11 @@ class _HomeScreenState extends State<HomeScreen> {
               HomePageButyton(
                 text: "myAttendance",
                 function: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //       builder: (context) => LeaderBoardScreen()),
-                  // );
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CalendarScreen()),
+                  );
                 },
               ),
               SizedBox(height: screenHeight * (3 / 20)),

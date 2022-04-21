@@ -125,13 +125,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.5"
-  flutter_rounded_date_picker:
-    dependency: "direct main"
-    description:
-      name: flutter_rounded_date_picker
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.2"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -365,7 +358,7 @@ packages:
       name: simple_gesture_detector
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.6"
+    version: "0.2.0"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -405,7 +398,7 @@ packages:
       name: table_calendar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.3"
+    version: "3.0.5"
   term_glyph:
     dependency: transitive
     description:
