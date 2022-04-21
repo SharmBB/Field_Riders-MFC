@@ -297,7 +297,7 @@ class _VacantAssignmentState extends State<VacantAssignment> {
                         height: 40,
                       ),
                       textField("Sila isikan ID untuk tugasan (JobId)",
-                          jobIdcontroller),
+                          jobIdcontroller,"Your Answer"),
                       const SizedBox(
                         height: 20,
                       ),
@@ -342,7 +342,7 @@ class _VacantAssignmentState extends State<VacantAssignment> {
                                 width: 10,
                               ),
                               const Text(
-                                "KOSONG (VACANT )",
+                                "KOSONG (VACANT)",
                                 style: TextStyle(
                                     fontSize: 12, color: primaryColor),
                               )
@@ -579,7 +579,7 @@ class _VacantAssignmentState extends State<VacantAssignment> {
                                   BorderRadius.all(Radius.circular(20.0))),
                         ),
                       ),
-                      textField("", metercontroller),
+                      textField("", metercontroller,"Your Answer"),
                       const SizedBox(
                         height: 20,
                       ),
@@ -588,12 +588,12 @@ class _VacantAssignmentState extends State<VacantAssignment> {
                       ),
                       textField(
                           "CATATAN ATAU PINDAAN KEPADA ALAMAT HARTA (REMARKS OR AMENDMENT TO THE PROPERTY ADDRESS)",
-                          catatancontroller),
+                          catatancontroller,"Your Answer"),
                       const SizedBox(
                         height: 20,
                       ),
                       textField(
-                          "Komen lain oleh Field Officer", komencontroller),
+                          "Komen lain oleh Field Officer", komencontroller,"Your Answer"),
                       const SizedBox(
                         height: 50,
                       ),

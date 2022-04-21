@@ -134,11 +134,11 @@ Widget Tenant(
         const SizedBox(
           height: 20,
         ),
-        textField("Tenant's name", tenantnamecontroller),
+        textField("Tenant's name", tenantnamecontroller,"Your Answer"),
         const SizedBox(
           height: 20,
         ),
-        textField("Tenant's tel no", tenanttelnocontroller),
+        textField("Tenant's tel no", tenanttelnocontroller,"Your Answer"),
         const SizedBox(
           height: 20,
         ),

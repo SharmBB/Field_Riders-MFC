@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
 
 
-Widget textField(title, controller) {
+Widget textField(title, controller,hintTitle) {
   return Column(
     mainAxisAlignment: MainAxisAlignment.start,
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,14 +20,14 @@ Widget textField(title, controller) {
         keyboardType: TextInputType.text,
         validator: (value) {
           if (value!.isEmpty) {
-            return title +' Required';
+            return hintTitle +' Required';
           }
         },
         
         controller: controller,
         textInputAction: TextInputAction.done,
         decoration:  InputDecoration(
-          hintText: title,
+          hintText: hintTitle,
           hintStyle: TextStyle(fontSize: 12, color: Colors.grey),
           focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.all(Radius.circular(25.0)),
