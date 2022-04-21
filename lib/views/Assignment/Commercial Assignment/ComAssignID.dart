@@ -254,9 +254,7 @@ class __ComAssignIDState extends State<ComAssignID> {
                           ),
                         ],
                       )),
-                  SizedBox(
-                    height: 30,
-                  ),
+                
                   SizedBox(
                     height: screenHeight * 0.6,
                     width: screenWidth,
@@ -485,7 +483,7 @@ class __ComAssignIDState extends State<ComAssignID> {
                                               ],
                                             ),
                                             SizedBox(
-                                              height: 30,
+                                              height: 20,
                                             ),
                                           ],
                                         ),
