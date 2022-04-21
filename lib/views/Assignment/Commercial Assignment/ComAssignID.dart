@@ -289,7 +289,9 @@ class __ComAssignIDState extends State<ComAssignID> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      
+                                       const SizedBox(
+                        height: 20,
+                      ),
                                           Row(
                                             crossAxisAlignment: CrossAxisAlignment.start,
                                             mainAxisAlignment:
