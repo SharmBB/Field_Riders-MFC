@@ -6,18 +6,44 @@ import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/ResuableTextFormFeild/reusabletextfield.dart';
 import 'package:riders_app/views/List_of_FeildAssignment/Feild_List_Assignment/feild.dart';
 
+class VacantAssignment extends StatefulWidget {
+  final String id;
+  final String sewacc;
+  final String owner;
+  final String propAdd;
+  final String currentClass;
 
-
-
-class FeildTest extends StatefulWidget {
-  const FeildTest({Key? key}) : super(key: key);
+  const VacantAssignment({
+    Key? key,
+    required this.id,
+    required this.sewacc,
+    required this.owner,
+    required this.propAdd,
+    required this.currentClass,
+  }) : super(key: key);
 
   @override
-  State<FeildTest> createState() => _FeildTestState();
+  State<VacantAssignment> createState() => _VacantAssignmentState();
 }
 
-class _FeildTestState extends State<FeildTest> {
+class _VacantAssignmentState extends State<VacantAssignment> {
   final _formKey = GlobalKey<FormState>();
+  String? id;
+  String? sewacc;
+  String? owner;
+  String? propAdd;
+  String? currentClass;
+
+  @override
+  void initState() {
+    id = widget.id;
+    sewacc = widget.sewacc;
+    owner = widget.owner;
+    propAdd = widget.propAdd;
+    currentClass = widget.currentClass;
+
+    super.initState();
+  }
 
   TextEditingController jobIdcontroller = TextEditingController();
   TextEditingController catatancontroller = TextEditingController();
@@ -44,16 +70,16 @@ class _FeildTestState extends State<FeildTest> {
     'Tempat ibadat',
   ];
 
-  String? _selectedType='';
-  String? _selectedUsage='';
-  String? _selectedConnect='';
+  String? _selectedType = '';
+  String? _selectedUsage = '';
+  String? _selectedConnect = '';
 
-   final CustomTimerController _controller = CustomTimerController();
+  final CustomTimerController _controller = CustomTimerController();
 
   @override
   Widget build(BuildContext context) {
-        var screenHeight = MediaQuery.of(context).size.height;
-                var screenWidth= MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+    var screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.transparent,
@@ -66,10 +92,10 @@ class _FeildTestState extends State<FeildTest> {
           ),
           onPressed: () {
             Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => FieldScreen(),)
-            );
+                context,
+                MaterialPageRoute(
+                  builder: (context) => FieldScreen(),
+                ));
           },
         ),
         actions: [
@@ -144,87 +170,133 @@ class _FeildTestState extends State<FeildTest> {
                       const SizedBox(
                         height: 10,
                       ),
-
-                      const Text(
-                        "ID :1",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryPurpleColor),
+                      Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "IWK Id: ",
+                                style: TextStyle(
+                                  color: primaryColor,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                id.toString(),
+                                style: TextStyle(
+                                  color: primaryColor,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "SEWACC",
+                                style: TextStyle(
+                                  color: primaryColor,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                sewacc.toString(),
+                                style: TextStyle(
+                                  color: kPrimaryGreyColor,
+                                  fontSize: 14.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "OWNER NAME",
+                                style: TextStyle(
+                                  color: primaryColor,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                owner.toString(),
+                                style: TextStyle(
+                                  color: kPrimaryGreyColor,
+                                  fontSize: 14.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "PROP_ADD",
+                                style: TextStyle(
+                                  color: primaryColor,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 200,
+                                child: Text(
+                                  propAdd.toString(),
+                                  textAlign: TextAlign.right,
+                                  style: TextStyle(
+                                    color: kPrimaryGreyColor,
+                                    fontSize: 14.0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "CURRENT CLASS",
+                                style: TextStyle(
+                                  color: primaryColor,
+                                  fontSize: 16.0,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text(
+                                currentClass.toString(),
+                                style: TextStyle(
+                                  color: kPrimaryGreyColor,
+                                  fontSize: 14.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        "Bill:X6356185",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryPurpleColor),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        "SAN:41898081",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryPurpleColor),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        "Owner1: Name1",
-                        // "@ NEW HOW . (If Owner 2 is available show else don't need )",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryPurpleColor),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        "Owner2: Name 2",
-                        // "@ NEW HOW . (If Owner 2 is available show else don't need )",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryPurpleColor),
-                      ),
-                      // const SizedBox(
-                      //   height: 20,
-                      // ),
-                      // const Text(
-                      //   "(Address1,Address2,Address3,Address4) 4 JALAN TIMOR 12,TAMAN TIMOR,81300 JOHOR BAHRU,JOHOR",
-                      //   style: TextStyle(
-                      //       fontSize: 15,
-                      //       fontWeight: FontWeight.w600,
-                      //       color: kPrimaryPurpleColor),
-                      // ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        "Range5: >120 months",
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.red),
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      const Text(
-                        "Arrears:1,226.25",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryPurpleColor),
-                      ),
-                     
                       const SizedBox(
                         height: 40,
                       ),
@@ -233,9 +305,7 @@ class _FeildTestState extends State<FeildTest> {
                       const SizedBox(
                         height: 20,
                       ),
-
-
-                       Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
@@ -255,7 +325,11 @@ class _FeildTestState extends State<FeildTest> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text("DIDUDUKI (OCCUPIED)",style: TextStyle(fontSize: 12, color: primaryColor),)
+                              Text(
+                                "DIDUDUKI (OCCUPIED)",
+                                style: TextStyle(
+                                    fontSize: 12, color: primaryColor),
+                              )
                             ],
                           ),
                           Row(
@@ -271,12 +345,15 @@ class _FeildTestState extends State<FeildTest> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              const Text("KOSONG (VACANT )",style: TextStyle(fontSize: 12, color: primaryColor),)
+                              const Text(
+                                "KOSONG (VACANT )",
+                                style: TextStyle(
+                                    fontSize: 12, color: primaryColor),
+                              )
                             ],
                           )
                         ],
                       ),
-                   
                       const SizedBox(
                         height: 20,
                       ),
@@ -329,7 +406,7 @@ class _FeildTestState extends State<FeildTest> {
                       const SizedBox(
                         height: 20,
                       ),
-                        Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
@@ -339,7 +416,8 @@ class _FeildTestState extends State<FeildTest> {
                           Row(
                             children: [
                               Radio<String>(
-                                  value: "PENGGUNAAN KOMERSIL (COMMERCIAL USAGE )",
+                                  value:
+                                      "PENGGUNAAN KOMERSIL (COMMERCIAL USAGE )",
                                   groupValue: _selectedUsage,
                                   onChanged: (value) {
                                     setState(() {
@@ -349,7 +427,11 @@ class _FeildTestState extends State<FeildTest> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text("PENGGUNAAN KOMERSIL (COMMERCIAL USAGE )",style: TextStyle(fontSize: 12, color: primaryColor),)
+                              Text(
+                                "PENGGUNAAN KOMERSIL (COMMERCIAL USAGE )",
+                                style: TextStyle(
+                                    fontSize: 12, color: primaryColor),
+                              )
                             ],
                           ),
                           Row(
@@ -365,13 +447,15 @@ class _FeildTestState extends State<FeildTest> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              const Text("PENGUNAAN DOMESTIK (DOMESTIC USAGE)",style: TextStyle(fontSize: 12, color: primaryColor),)
+                              const Text(
+                                "PENGUNAAN DOMESTIK (DOMESTIC USAGE)",
+                                style: TextStyle(
+                                    fontSize: 12, color: primaryColor),
+                              )
                             ],
                           )
                         ],
                       ),
-                   
-                  
                       const SizedBox(
                         height: 20,
                       ),
@@ -424,7 +508,7 @@ class _FeildTestState extends State<FeildTest> {
                       const SizedBox(
                         height: 20,
                       ),
-                            Column(
+                      Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           const Text(
@@ -444,13 +528,18 @@ class _FeildTestState extends State<FeildTest> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              Text("Ya - Bersambung (Yes - Connected)",style: TextStyle(fontSize: 12, color: primaryColor),)
+                              Text(
+                                "Ya - Bersambung (Yes - Connected)",
+                                style: TextStyle(
+                                    fontSize: 12, color: primaryColor),
+                              )
                             ],
                           ),
                           Row(
                             children: [
                               Radio<String>(
-                                  value: "Tidak - Terputus sambungan (No - Disconnected)",
+                                  value:
+                                      "Tidak - Terputus sambungan (No - Disconnected)",
                                   groupValue: _selectedConnect,
                                   onChanged: (value) {
                                     setState(() {
@@ -460,13 +549,15 @@ class _FeildTestState extends State<FeildTest> {
                               const SizedBox(
                                 width: 10,
                               ),
-                              const Text("Tidak - Terputus sambungan (No - Disconnected)",style: TextStyle(fontSize: 12, color: primaryColor),)
+                              const Text(
+                                "Tidak - Terputus sambungan (No - Disconnected)",
+                                style: TextStyle(
+                                    fontSize: 12, color: primaryColor),
+                              )
                             ],
                           )
                         ],
                       ),
-                   
-                   
                       const SizedBox(
                         height: 20,
                       ),

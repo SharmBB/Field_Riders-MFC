@@ -5,6 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/Assignment/Commercial%20Assignment/ComDeptAssignment.dart';
+import 'package:riders_app/views/Assignment/Commercial%20Assignment/ComDomesticScreen.dart';
 import 'package:riders_app/views/List_of_FeildAssignment/Feild_List_Assignment/feild.dart';
 
 
@@ -273,14 +274,14 @@ class __ComAssignIDState extends State<ComAssignID> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                               ComDeptAssignmentScreen()),
+                                                       ComDomesticScreen()),
                                       );
                                     } else {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                ComDeptAssignmentScreen()));
+                                                ComDomesticScreen()));
                                     }
                                   },
                                   child: Column(

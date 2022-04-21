@@ -333,7 +333,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                       width: 100.0,
                                       child: TextButton(
                                         onPressed: () {
-                                            if (feild[index]['Type'] == 'Vacant') {
+                                           if (feild[index]['Type'] == 'Vacant') {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -353,11 +353,11 @@ class _FieldScreenState extends State<FieldScreen> {
                           );
                         }
                         else if (feild[index]['Type'] == 'Commercial') {
-                        Navigator.push(
+                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  ComDeptAssignmentScreen()));
+                                                  ComAssignID(type: '')));
                         }
                       },
                                         style: ButtonStyle(

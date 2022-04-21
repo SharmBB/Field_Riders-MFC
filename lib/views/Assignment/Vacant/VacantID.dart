@@ -4,13 +4,10 @@ import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
-import 'package:riders_app/views/Assignment/Vacant/feildTest.dart';
+import 'package:riders_app/views/Assignment/Vacant/VacantAssignment.dart';
 import 'package:riders_app/views/List_of_FeildAssignment/Feild_List_Assignment/feild.dart';
 
-
-
 import 'package:riders_app/views/Verification%20Screen/taskVerification.dart';
-
 
 class VacantID extends StatefulWidget {
   final String type;
@@ -32,13 +29,25 @@ class __VacantIDState extends State<VacantID> {
 
   final List<Map> feild = [
     {
-      'Name': '99999',
-      'SAN': '27933712',
-      'Owner 1': 'ABIDEN BIN SABARI',
-      "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
-      "Date Assign": '22/02/2022',
-      "Payment Update": "-",
-      'Status': 'Outstanding'
+      "ID": "1",
+      "SEWACC": "91350488",
+      "OWNER NAME": "MD DAUD AWANG",
+      "PROP_ADD": "A-1-4 BLOCK PANGASPURI JAMBU 75150 MELAKA MELAKA",
+      "CURRENT CLASS": "DOMESTRIC",
+    },
+     {
+      "ID": "2",
+      "SEWACC": "9135077",
+      "OWNER NAME": "CHAI CHON JIN",
+      "PROP_ADD": "A-3-4 BLOCK PANGASPURI JAMBU 75150 MELAKA MELAKA",
+      "CURRENT CLASS": "DOMESTRIC",
+    },
+     {
+      "ID": "3",
+      "SEWACC": "91350793",
+      "OWNER NAME": "FAHRINA MAD ZIN",
+      "PROP_ADD": "A-3-3 BLOCK PANGASPURI JAMBU 75150 MELAKA MELAKA",
+      "CURRENT CLASS": "DOMESTRIC",
     },
   ];
 
@@ -435,9 +444,7 @@ class __VacantIDState extends State<VacantID> {
                           ),
                         ],
                       )),
-                  SizedBox(
-                    height: 30,
-                  ),
+               
                   SizedBox(
                     height: screenHeight * 0.6,
                     width: screenWidth,
@@ -450,41 +457,43 @@ class __VacantIDState extends State<VacantID> {
                           children: [
                             GestureDetector(
                               onTap: () {
-                                 if (feild[index]['Name'] == '99999') {
+                          
                                   Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => FeildTest()),
+                                        builder: (context) =>
+                                            VacantAssignment(id: feild[index]['ID'], sewacc:    feild[index]['SEWACC'], owner:   feild[index]['OWNER NAME'], propAdd: feild[index]['PROP_ADD'],currentClass:   feild[index]['CURRENT CLASS'])),
                                   );
-                                } 
+                                
                               },
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
+                                                     SizedBox(
+                    height: 30,
+                  ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                   
-                                          Text(
-                                            "IWK Id: ",
-                                            style: TextStyle(
-                                              color: kPrimaryPurpleColor,
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                          Text(
-                                            feild[index]['Name'],
-                                            style: TextStyle(
-                                              color: kPrimaryPurpleColor,
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                     
-                                    
+                     
+                                      Text(
+                                        "IWK Id: ",
+                                        style: TextStyle(
+                                          color: kPrimaryPurpleColor,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      Text(
+                                        feild[index]['ID'],
+                                        style: TextStyle(
+                                          color: kPrimaryPurpleColor,
+                                          fontSize: 18.0,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   Padding(
@@ -503,7 +512,7 @@ class __VacantIDState extends State<VacantID> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "SAN",
+                                              "SEWACC",
                                               style: TextStyle(
                                                 color: primaryColor,
                                                 fontSize: 16.0,
@@ -511,7 +520,7 @@ class __VacantIDState extends State<VacantID> {
                                               ),
                                             ),
                                             Text(
-                                              feild[index]['SAN'],
+                                              feild[index]['SEWACC'],
                                               style: TextStyle(
                                                 color: kPrimaryGreyColor,
                                                 fontSize: 14.0,
@@ -527,7 +536,7 @@ class __VacantIDState extends State<VacantID> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "Owner 1",
+                                              "OWNER NAME",
                                               style: TextStyle(
                                                 color: primaryColor,
                                                 fontSize: 16.0,
@@ -535,7 +544,7 @@ class __VacantIDState extends State<VacantID> {
                                               ),
                                             ),
                                             Text(
-                                              feild[index]['Owner 1'],
+                                              feild[index]['OWNER NAME'],
                                               style: TextStyle(
                                                 color: kPrimaryGreyColor,
                                                 fontSize: 14.0,
@@ -553,7 +562,7 @@ class __VacantIDState extends State<VacantID> {
                                               CrossAxisAlignment.start,
                                           children: [
                                             Text(
-                                              "Address",
+                                              "PROP_ADD",
                                               style: TextStyle(
                                                 color: primaryColor,
                                                 fontSize: 16.0,
@@ -563,7 +572,7 @@ class __VacantIDState extends State<VacantID> {
                                             SizedBox(
                                               width: 200,
                                               child: Text(
-                                                feild[index]['Address'],
+                                                feild[index]['PROP_ADD'],
                                                 textAlign: TextAlign.right,
                                                 style: TextStyle(
                                                   color: kPrimaryGreyColor,
@@ -581,7 +590,7 @@ class __VacantIDState extends State<VacantID> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              "Date Assign",
+                                              "CURRENT CLASS",
                                               style: TextStyle(
                                                 color: primaryColor,
                                                 fontSize: 16.0,
@@ -589,7 +598,7 @@ class __VacantIDState extends State<VacantID> {
                                               ),
                                             ),
                                             Text(
-                                              feild[index]['Date Assign'],
+                                              feild[index]['CURRENT CLASS'],
                                               style: TextStyle(
                                                 color: kPrimaryGreyColor,
                                                 fontSize: 14.0,
@@ -597,56 +606,9 @@ class __VacantIDState extends State<VacantID> {
                                             ),
                                           ],
                                         ),
+                                     
                                         SizedBox(
-                                          height: 30,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "Payment Update",
-                                              style: TextStyle(
-                                                color: primaryColor,
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            Text(
-                                              feild[index]['Payment Update'],
-                                              style: TextStyle(
-                                                color: kPrimaryGreyColor,
-                                                fontSize: 14.0,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 30,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "Status",
-                                              style: TextStyle(
-                                                color: primaryColor,
-                                                fontSize: 16.0,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            Text(
-                                              feild[index]['Status'],
-                                              style: TextStyle(
-                                                color: kPrimaryGreyColor,
-                                                fontSize: 14.0,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 30,
+                                          height: 20,
                                         ),
                                       ],
                                     ),
