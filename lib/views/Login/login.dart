@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/_helpers/sharedPreference.dart';
 import 'package:riders_app/api/api.dart';
 import 'package:riders_app/views/ForgetPassword/forgotPassword.dart';
 import 'package:riders_app/views/ForgetPassword/resetPassword.dart';
@@ -45,10 +46,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_rounded, color: kPrimaryPurpleColor),
-            onPressed: () {},
-          ),
+          // leading: IconButton(
+          //   icon: Icon(Icons.arrow_back_rounded, color: kPrimaryPurpleColor),
+          //   onPressed: () {},
+          // ),
           backgroundColor: Colors.transparent,
           elevation: 0,
         ),
@@ -214,7 +215,6 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
   }
-
 //Sign In Button
   _signIn() {
     return Container(
@@ -226,7 +226,7 @@ class _LoginScreenState extends State<LoginScreen> {
           borderRadius: BorderRadius.circular(30.0),
           side: BorderSide(color: kPrimaryGreyColor),
         ),
-        onPressed: () {
+        onPressed: () async {
           if (_formKey.currentState!.validate()) {
             _formKey.currentState?.save();
             _login();
@@ -259,28 +259,19 @@ class _LoginScreenState extends State<LoginScreen> {
       var res = await CallApi().authData(data, 'login');
       var body = json.decode(res.body);
       if (body["errorMessage"] == false) {
-           if (body['message']['token'] != null) {
-        SharedPreferences localStorage =
-            await SharedPreferences.getInstance();
+        if (body['message']['token'] != null) {
+          MySharedPreferences.instance
+              .setStringValue("token", body['message']['token']);
+          // SharedPreferences localStorage =
+          //     await SharedPreferences.getInstance();
 
-        var token = body['message']['token'];
-        print(token);
+          // var token = body['message']['token'];
+          // localStorage.setString('token', token);
+          // print(token);
 
-        var userId = body['message']["id"];
-        print(userId);
-
-       
-        localStorage.setString('token', token);
-     
-
-        localStorage.setInt('userId', userId);
-
-        print(body['message']);
-        print(body['message']);
-
-        Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
-        );
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(builder: (BuildContext context) => HomeScreen()),
+          );
         }
       } else {
         // _showMsg(body['error']);

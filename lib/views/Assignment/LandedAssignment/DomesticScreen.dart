@@ -31,7 +31,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
     'Choose',
     'Owner',
     'Tenant',
-    'Vacant**(please take photo for watermark)',
+    'Vacant',
     'Closed',
   ];
 

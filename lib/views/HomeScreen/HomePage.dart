@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/Components/HomePageButton.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/_helpers/sharedPreference.dart';
 
 import 'package:riders_app/views/Leaderboard/Leaderboard.dart';
 import 'package:riders_app/views/List_of_FeildAssignment/Feild_List_Assignment/feild.dart';
@@ -17,21 +18,16 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-
-
 class _HomeScreenState extends State<HomeScreen> {
-
-  
-
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
         appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back_rounded, color: kPrimaryPurpleColor),
-            onPressed: () {},
-          ),
+          // leading: IconButton(
+          //   icon: Icon(Icons.arrow_back_rounded, color: kPrimaryPurpleColor),
+          //   onPressed: () {},
+          // ),
           actions: [
             TextButton(
               onPressed: () {
@@ -66,8 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 function: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(
-                        builder: (context) => ProfilePage()),
+                    MaterialPageRoute(builder: (context) => ProfilePage()),
                   );
                 },
               ),
@@ -108,10 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 text: "Logout",
                 function: () async {
                   try {
-                    SharedPreferences localStorage =
-                        await SharedPreferences.getInstance();
-                    localStorage.remove('token');
-                    localStorage.remove('userId');
+                    MySharedPreferences.instance.removeAll();
 
                     Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) => LoginScreen()));

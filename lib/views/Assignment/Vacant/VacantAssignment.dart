@@ -1,7 +1,12 @@
 // ignore_for_file: prefer_const_constructors
 
+
+
+import 'dart:io';
+
 import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/ResuableTextFormFeild/reusabletextfield.dart';
 import 'package:riders_app/views/List_of_FeildAssignment/Feild_List_Assignment/feild.dart';
@@ -54,11 +59,12 @@ class _VacantAssignmentState extends State<VacantAssignment> {
   String otherinitvalue = 'Choose';
   final othertype = [
     'Choose',
-    'Terbaskar (Burnt)',
+    'Terbakar (Burnt)',
+    'Terbengkalai (Abandoned)'
     'Dirobhkan (Demolished)',
     'Digunakan untuk sarang burung (Used for bird nesting)',
     'Tanah kosong (Vacant Land)',
-    'Dalam pengubahsisaian (Under renovation)'
+    'Dalam pengubahsuaian (Under renovation)'
   ];
 
   String other1initvalue = 'Choose';
@@ -67,7 +73,7 @@ class _VacantAssignmentState extends State<VacantAssignment> {
     'Premis Kerajaan (Goverment Premise)',
     'Kuarters Kerajaan (Goverment Quarters)',
     'Industri (Industry)',
-    'Tempat ibadat',
+    'Tempat ibadat (Place of worship)',
   ];
 
   String? _selectedType = '';
@@ -76,6 +82,25 @@ class _VacantAssignmentState extends State<VacantAssignment> {
 
   final CustomTimerController _controller = CustomTimerController();
 
+
+   File? _image1;
+    List<File>? imageFileList = [];
+
+  _getMultiFromCamera() async {
+    PickedFile? pickedFile = await ImagePicker()
+        .getImage(source: ImageSource.camera, imageQuality: 50
+            // maxWidth: 1800,
+            // maxHeight: 1800,
+            );
+    if (pickedFile != null) {
+      setState(() {
+        _image1 = File(pickedFile.path);
+        //uploadFile();
+        imageFileList!.add(_image1!);
+      });
+    }
+    print(imageFileList);
+  }
   @override
   Widget build(BuildContext context) {
     var screenHeight = MediaQuery.of(context).size.height;
@@ -171,13 +196,13 @@ class _VacantAssignmentState extends State<VacantAssignment> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           SizedBox(
-                            height: 30,
+                            height: 20,
                           ),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Text(
-                                "IWK Id: ",
+                                "Id ",
                                 style: TextStyle(
                                   color: primaryColor,
                                   fontSize: 16.0,
@@ -296,8 +321,106 @@ class _VacantAssignmentState extends State<VacantAssignment> {
                       const SizedBox(
                         height: 40,
                       ),
-                      textField("Sila isikan ID untuk tugasan (JobId)",
-                          jobIdcontroller,"Your Answer"),
+                     Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Take Photo",
+                            style: TextStyle(fontSize: 12, color: Colors.grey),
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            height: 250,
+                            width: screenWidth,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.deepPurple),
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Padding(
+                              padding: EdgeInsets.all(10),
+                              child: GestureDetector(
+                                onTap: () async {
+                                  _controller.pause();
+                                  _getMultiFromCamera();
+                                },
+                                child: Container(
+                                  child: imageFileList!.isEmpty
+                                      ? Container(
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[100],
+                                            // borderRadius: BorderRadius.circular(50)
+                                          ),
+                                        width: screenWidth * 0.9,
+                          height: screenHeight * 0.3,
+                                          child: Icon(
+                                            Icons.camera_alt,
+                                            color: Colors.grey[400],
+                                          ),
+                                        )
+                                      : GridView.builder(
+                                          itemCount: imageFileList!.isEmpty
+                                              ? 1
+                                              : imageFileList!.length,
+                                          gridDelegate:
+                                              SliverGridDelegateWithFixedCrossAxisCount(
+                                            crossAxisCount: 2,
+                                            mainAxisSpacing: 20,
+                                            crossAxisSpacing: 20,
+                                            // width / height: fixed for *all* items
+                                            childAspectRatio: 0.75,
+                                          ),
+                                          itemBuilder: (context, index) =>
+                                              Stack(
+                                            children: <Widget>[
+                                              Container(
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white,
+                                                    border: Border.all(
+                                                        color: Colors.grey
+                                                            .withOpacity(0.5))),
+                                                child: Image.file(
+                                                  File(imageFileList![index]
+                                                      .path),
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                              Positioned(
+                                                right: -10,
+                                                top: -10,
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    setState(() {
+                                                      imageFileList!
+                                                          .removeAt(index);
+                                                    });
+                                                  },
+                                                  child: Container(
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              100),
+                                                    ),
+                                                    child: Icon(
+                                                      Icons.cancel,
+                                                      color:
+                                                          Colors.redAccent[400],
+                                                      size: 40,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                     ),
                       const SizedBox(
                         height: 20,
                       ),

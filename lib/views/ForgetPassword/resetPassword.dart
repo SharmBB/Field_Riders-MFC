@@ -96,7 +96,7 @@ class _ResetPasswordState extends State<ResetPassword> {
     return Padding(
       padding: const EdgeInsets.fromLTRB(25, 0, 25, 0),
       child: TextFormField(
-        style: TextStyle(fontSize: 16.0, color: primaryColor),
+        style: TextStyle(fontSize: 14.0, color: primaryColor),
         cursorColor: kPrimaryPurpleColor,
         keyboardType: TextInputType.text,
         obscureText: showPassword,
@@ -113,9 +113,15 @@ class _ResetPasswordState extends State<ResetPassword> {
         onSaved: (String? val) {
           password = val;
         },
+        
         controller: _passwordController,
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
+           suffixIcon: IconButton(
+            onPressed: () => setState(() => showPassword = !showPassword),
+            icon: Icon(showPassword ? Icons.visibility_off : Icons.visibility),
+            color: Colors.grey,
+          ),
           hintText: 'Password',
           focusedBorder:
               UnderlineInputBorder(borderSide: BorderSide(color: primaryColor)),
@@ -150,6 +156,11 @@ class _ResetPasswordState extends State<ResetPassword> {
         controller: _confirmpasswordController,
         textInputAction: TextInputAction.done,
         decoration: InputDecoration(
+           suffixIcon: IconButton(
+            onPressed: () => setState(() => showconfirmPassword = !showconfirmPassword),
+            icon: Icon(showPassword ? Icons.visibility_off : Icons.visibility),
+            color: Colors.grey,
+          ),
           hintText: 'Confirm Password',
           focusedBorder:
               UnderlineInputBorder(borderSide: BorderSide(color: primaryColor)),
