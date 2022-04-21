@@ -91,11 +91,7 @@ class _VacantAssignmentState extends State<VacantAssignment> {
             size: 25.0,
           ),
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => FieldScreen(),
-                ));
+                     Navigator.pop(context);
           },
         ),
         actions: [

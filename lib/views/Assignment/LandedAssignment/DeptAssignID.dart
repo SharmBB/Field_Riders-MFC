@@ -116,10 +116,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
             size: 25.0,
           ),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => FieldScreen()),
-            );
+            Navigator.pop(context);
           },
         ),
         actions: [

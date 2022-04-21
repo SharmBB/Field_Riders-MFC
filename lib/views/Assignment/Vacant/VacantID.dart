@@ -335,10 +335,7 @@ class __VacantIDState extends State<VacantID> {
             size: 25.0,
           ),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => FieldScreen()),
-            );
+                      Navigator.pop(context);
           },
         ),
         actions: [

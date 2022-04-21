@@ -341,13 +341,7 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
             size: 25.0,
           ),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DeptAssignID(
-                        type: '',
-                      )),
-            );
+                     Navigator.pop(context);
           },
         ),
         actions: [

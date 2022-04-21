@@ -187,13 +187,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
             size: 25.0,
           ),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => DeptAssignID(
-                        type: '',
-                      )),
-            );
+                      Navigator.pop(context);
           },
         ),
         actions: [

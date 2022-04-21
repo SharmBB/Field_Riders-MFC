@@ -363,13 +363,7 @@ class _ComDeptAssignmentScreenState extends State<ComDeptAssignmentScreen> {
             size: 25.0,
           ),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => FieldScreen(
-                      
-                      )),
-            );
+                   Navigator.pop(context);
           },
         ),
         actions: [
