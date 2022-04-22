@@ -142,6 +142,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
         //uploadFile();
         imageFileList!.add(_image1!);
       });
+      
     }
     print(imageFileList);
   }
@@ -187,7 +188,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
             size: 25.0,
           ),
           onPressed: () {
-                      Navigator.pop(context);
+            Navigator.pop(context);
           },
         ),
         actions: [
@@ -388,8 +389,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                             color: Colors.grey[100],
                                             // borderRadius: BorderRadius.circular(50)
                                           ),
-                                        width: screenWidth * 0.9,
-                          height: screenHeight * 0.3,
+                                          width: screenWidth * 0.9,
+                                          height: screenHeight * 0.3,
                                           child: Icon(
                                             Icons.camera_alt,
                                             color: Colors.grey[400],
@@ -422,27 +423,81 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
+                                              Stack(
+                                                children: <Widget>[
+                                                  Positioned(
+                                                    right: -10,
+                                                    top: -10,
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          imageFileList!
+                                                              .removeAt(index);
+                                                        });
+                                                      },
+                                                      child: Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                          left: 2,
+                                                          bottom: 2,
+                                                        ),
+                                                        height: 40,
+                                                        width: 40,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors
+                                                              .redAccent[400],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100),
+                                                        ),
+                                                        child: Align(
+                                                          alignment: Alignment
+                                                              .bottomLeft,
+                                                          child: Icon(
+                                                            Icons.cancel,
+                                                            color: Colors.white,
+                                                            size: 30,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                               Positioned(
-                                                right: -10,
+                                                left: -10,
                                                 top: -10,
                                                 child: GestureDetector(
                                                   onTap: () {
-                                                    setState(() {
-                                                      imageFileList!
-                                                          .removeAt(index);
-                                                    });
+                                                    print(index);
                                                   },
                                                   child: Container(
+                                                    padding: EdgeInsets.only(
+                                                      left: 5,
+                                                      bottom: 2,
+                                                    ),
+                                                    height: 40,
+                                                    width: 40,
                                                     decoration: BoxDecoration(
+                                                      color:
+                                                          Colors.redAccent[400],
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               100),
                                                     ),
-                                                    child: Icon(
-                                                      Icons.cancel,
-                                                      color:
-                                                          Colors.redAccent[400],
-                                                      size: 40,
+                                                    child: Align(
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      child: Text(
+                                                        (index+1).toString(),
+                                                        style: TextStyle(
+                                                          fontSize: 22,
+                                                          fontWeight: FontWeight.bold,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -508,11 +563,11 @@ class _DomesticScreenState extends State<DomesticScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                           Text(
+                          Text(
                             "Occupier(Owner/Tenant )",
                             style: TextStyle(color: Colors.grey, fontSize: 12),
                           ),
-                           SizedBox(
+                          SizedBox(
                             height: 10,
                           ),
                           Container(
@@ -612,7 +667,6 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               vacantdrcodeinitvalue,
                               vacantremarkcontroller,
                               vacantselectedMeter,
-                        
                               vacantwaterMetercontroller)
                           : SizedBox(),
 
@@ -625,7 +679,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                               closeremarkcontroller)
                           : SizedBox(),
 
-                       SizedBox(
+                      SizedBox(
                         height: 50,
                       ),
                       SizedBox(

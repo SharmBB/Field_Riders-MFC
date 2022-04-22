@@ -1,108 +1,193 @@
-// main.dart
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_watermark/image_watermark.dart';
+//import 'package:example/image_watermark.dart';
 
-
-
-
-class searchPage extends StatefulWidget {
-  const searchPage({Key? key}) : super(key: key);
+class HomeScreen1 extends StatefulWidget {
+  const HomeScreen1({Key? key}) : super(key: key);
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomeScreen1State createState() => _HomeScreen1State();
 }
 
-class _HomePageState extends State<searchPage> {
-  // This holds a list of fiction users
-  // You can use data fetched from a database or a server as well
-  final List<Map<String, dynamic>> _allUsers = [
-    {"id": 1, "name": "Andy", "age": 29},
-    {"id": 2, "name": "Aragon", "age": 40},
-    {"id": 3, "name": "Bob", "age": 5},
-    {"id": 4, "name": "Barbara", "age": 35},
-    {"id": 5, "name": "Candy", "age": 21},
-    {"id": 6, "name": "Colin", "age": 55},
-    {"id": 7, "name": "Audra", "age": 30},
-    {"id": 8, "name": "Banana", "age": 14},
-    {"id": 9, "name": "Caversky", "age": 100},
-    {"id": 10, "name": "Becky", "age": 32},
-  ];
+class _HomeScreen1State extends State<HomeScreen1> {
+  final ImagePicker _picker = ImagePicker();
+  var imgBytes;
+  var imgBytes2;
+  var _image;
+  var watermarkedImgBytes;
+  bool isLoading = false;
+  String watermarkText = "", imgname = "image not selected";
+  List<bool> textOrImage = [true, false];
 
-  // This list holds the data for the list view
-  List<Map<String, dynamic>> _foundUsers = [];
-  @override
-  initState() {
-    // at the beginning, all users are shown
-    _foundUsers = _allUsers;
-    super.initState();
+  pickImage() async {
+    XFile? image = await _picker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (image != null) {
+      _image = image;
+      var t = await image.readAsBytes();
+      imgBytes = Uint8List.fromList(t);
+    }
+    setState(() {});
   }
 
-  // This function is called whenever the text field changes
-  void _runFilter(String enteredKeyword) {
-    List<Map<String, dynamic>> results = [];
-    if (enteredKeyword.isEmpty) {
-      // if the search field is empty or only contains white-space, we'll display all users
-      results = _allUsers;
-    } else {
-      results = _allUsers
-          .where((user) =>
-              user["name"].toLowerCase().contains(enteredKeyword.toLowerCase()))
-          .toList();
-      // we use the toLowerCase() method to make it case-insensitive
+  pickImage2() async {
+    XFile? image = await _picker.pickImage(
+      source: ImageSource.gallery,
+    );
+    if (image != null) {
+      _image = image;
+      imgname = image.name;
+      var t = await image.readAsBytes();
+      imgBytes2 = Uint8List.fromList(t);
     }
-
-    // Refresh the UI
-    setState(() {
-      _foundUsers = results;
-    });
+    setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kindacode.com'),
+        title: Text('image_watermark'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 20,
-            ),
-            TextField(
-              onChanged: (value) => _runFilter(value),
-              decoration: const InputDecoration(
-                  labelText: 'Search', suffixIcon: Icon(Icons.search)),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Expanded(
-              child: _foundUsers.isNotEmpty
-                  ? ListView.builder(
-                      itemCount: _foundUsers.length,
-                      itemBuilder: (context, index) => Card(
-                        // key: ValueKey(_foundUsers[index]["id"]),
-                        color: Colors.amberAccent,
-                        elevation: 4,
-                        margin: const EdgeInsets.symmetric(vertical: 10),
-                        child: ListTile(
-                          leading: Text(
-                            _foundUsers[index]["id"].toString(),
-                            style: const TextStyle(fontSize: 24),
-                          ),
-                          title: Text(_foundUsers[index]['name']),
-                          subtitle: Text(
-                              '${_foundUsers[index]["age"].toString()} years old'),
-                        ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Center(
+          child: Container(
+            width: 600,
+            child: Column(
+              children: [
+                GestureDetector(
+                  onTap: pickImage,
+                  child: Container(
+                      margin: EdgeInsets.all(15),
+                      decoration: BoxDecoration(
+                          border: Border.all(),
+                          borderRadius: BorderRadius.all(Radius.circular(5))),
+                      width: 600,
+                      height: 250,
+                      child: _image == null
+                          ? Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.add_a_photo),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Text('Click here to choose image')
+                              ],
+                            )
+                          : Image.memory(imgBytes,
+                              width: 600, height: 200, fit: BoxFit.fitHeight)),
+                ),
+                ToggleButtons(
+                  fillColor: Colors.blue,
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
+                  borderWidth: 3,
+                  borderColor: Colors.black26,
+                  selectedBorderColor: Colors.black54,
+                  selectedColor: Colors.black,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        '  Text  ',
                       ),
-                    )
-                  : const Text(
-                      'No results found',
-                      style: TextStyle(fontSize: 24),
                     ),
+                    // second toggle button
+                    Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          '  Image  ',
+                        ))
+                  ],
+                  onPressed: (index) {
+                    textOrImage = [false, false];
+                    setState(() {
+                      textOrImage[index] = true;
+                    });
+                  },
+                  isSelected: textOrImage,
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                textOrImage[0]
+                    ? Padding(
+                        padding: EdgeInsets.all(15),
+                        child: Container(
+                          width: 600,
+                          child: TextField(
+                            onChanged: (val) {
+                              watermarkText = val;
+                            },
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Watermark Text',
+                              hintText: 'Watermark Text',
+                            ),
+                          ),
+                        ),
+                      )
+                    : Row(
+                        children: [
+                          ElevatedButton(
+                              onPressed: pickImage2,
+                              child: Text('Select Watermark image')),
+                          Text(imgname)
+                        ],
+                      ),
+                SizedBox(
+                  height: 10,
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    setState(() {
+                      isLoading = true;
+                    });
+                    if (textOrImage[0]) {
+                      watermarkedImgBytes =
+                          await image_watermark.addTextWatermark(
+                        imgBytes,
+
+                        ///image bytes
+                        watermarkText, //watermark text
+                        20, //
+                        30,
+                        color: Colors.black, //default : Colors.white
+                      );
+
+                      /// default : imageWidth/2
+                    } else {
+                      watermarkedImgBytes =
+                          await image_watermark.addImageWatermark(
+                              imgBytes, //image bytes
+                              imgBytes2,
+                              imgHeight: 200,
+                              imgWidth: 200,
+                              dstY: 400,
+                              dstX: 400);
+                    }
+
+                    setState(() {
+                      isLoading = false;
+                    });
+                  },
+                  child: Text('Add Watermark'),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                isLoading ? CircularProgressIndicator() : Container(),
+                watermarkedImgBytes == null
+                    ? Container()
+                    : Image.memory(watermarkedImgBytes),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

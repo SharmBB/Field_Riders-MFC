@@ -576,27 +576,81 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
+                                               Stack(
+                                                children: <Widget>[
+                                                  Positioned(
+                                                    right: -10,
+                                                    top: -10,
+                                                    child: GestureDetector(
+                                                      onTap: () {
+                                                        setState(() {
+                                                          imageFileList!
+                                                              .removeAt(index);
+                                                        });
+                                                      },
+                                                      child: Container(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                          left: 2,
+                                                          bottom: 2,
+                                                        ),
+                                                        height: 40,
+                                                        width: 40,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Colors
+                                                              .redAccent[400],
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      100),
+                                                        ),
+                                                        child: Align(
+                                                          alignment: Alignment
+                                                              .bottomLeft,
+                                                          child: Icon(
+                                                            Icons.cancel,
+                                                            color: Colors.white,
+                                                            size: 30,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                               Positioned(
-                                                right: -10,
+                                               left: -10,
                                                 top: -10,
                                                 child: GestureDetector(
                                                   onTap: () {
-                                                    setState(() {
-                                                      imageFileList!
-                                                          .removeAt(index);
-                                                    });
+                                                    print(index);
                                                   },
                                                   child: Container(
+                                                    padding: EdgeInsets.only(
+                                                      left: 5,
+                                                      bottom: 2,
+                                                    ),
+                                                    height: 40,
+                                                    width: 40,
                                                     decoration: BoxDecoration(
+                                                      color:
+                                                          Colors.redAccent[400],
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               100),
                                                     ),
-                                                    child: Icon(
-                                                      Icons.cancel,
-                                                      color:
-                                                          Colors.redAccent[400],
-                                                      size: 40,
+                                                    child: Align(
+                                                      alignment: Alignment
+                                                          .bottomCenter,
+                                                      child: Text(
+                                                        (index+1).toString(),
+                                                        style: TextStyle(
+                                                          fontSize: 22,
+                                                          fontWeight: FontWeight.bold,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
