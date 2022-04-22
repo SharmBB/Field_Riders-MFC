@@ -269,17 +269,14 @@ class __ComAssignIDState extends State<ComAssignID> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                       ComDomesticScreen(name:  _foundUsers[index]['Name'], san:  _foundUsers[index]['SAN'], owner: _foundUsers[index]['Owner 1'], add:   _foundUsers[index]
-                                                        ['Address'], date:   _foundUsers[index]
-                                                      ['Date Assign'], payment: _foundUsers[index]
-                                                      ['Payment Update'], status: _foundUsers[index]['Status'],)),
+                                                       ComDomesticScreen()),
                                       );
                                     } else {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                      ComDomesticScreen(name: '', san: '', owner: '', add: '', date: '', payment: '', status: '',)));
+                                                ComDomesticScreen()));
                                     }
                                   },
                                   child: Column(

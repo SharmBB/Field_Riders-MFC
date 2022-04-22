@@ -15,14 +15,6 @@ import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Vacant.dar
 import 'package:riders_app/views/ResuableTextFormFeild/reusabletextfield.dart';
 
 class ComDomesticScreen extends StatefulWidget {
- final String name;
-  final String san;
-  final String owner;
-  final String add;
-  final String date;
-  final String payment;
-  final String status;
-  const ComDomesticScreen({Key? key, required this.name, required this.san, required this.owner, required this.add, required this.date, required this.payment, required this.status,}) : super(key: key);
 
 
   @override
