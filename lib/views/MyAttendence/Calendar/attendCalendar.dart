@@ -98,18 +98,18 @@ class _CalendarScreenState extends State<CalendarScreen> {
                               color: Colors.green.shade50,
                               shape: BoxShape.circle),
                           selectedTextStyle:
-                              TextStyle(color: Colors.green.shade700),
+                              TextStyle(color: Colors.green.shade600),
                           todayDecoration: BoxDecoration(
-                            color: Colors.blue.shade50,
+                            color: Colors.grey.shade200,
                             shape: BoxShape.circle,
                           ),
                           todayTextStyle:
-                              TextStyle(color: Colors.blue.shade700),
+                              TextStyle(color: Colors.grey.shade600),
                           holidayDecoration: BoxDecoration(
-                            color: Colors.pink.shade50,
+                            color: Colors.pink.shade100,
                             shape: BoxShape.circle,
                           ),
-                          holidayTextStyle: TextStyle(color: Colors.pink),
+                          holidayTextStyle: TextStyle(color: Colors.pink.shade600),
                         ),
                         headerStyle: HeaderStyle(
                           formatButtonVisible: false,
@@ -147,21 +147,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         },
                         calendarStyle: CalendarStyle(
                           isTodayHighlighted: true,
-                          selectedDecoration: BoxDecoration(
-                              color: Colors.yellow.shade50,
+                             todayDecoration: BoxDecoration(
+                              color: Colors.transparent,
                               shape: BoxShape.circle),
-                          selectedTextStyle:
-                              TextStyle(color: Colors.yellow.shade700),
-                          todayDecoration: BoxDecoration(
+                           todayTextStyle:
+                              TextStyle(color: Colors.yellow.shade600),
+                          selectedDecoration: BoxDecoration(
                             color: Colors.red.shade50,
                             shape: BoxShape.circle,
                           ),
-                          todayTextStyle: TextStyle(color: Colors.red.shade700),
+                           selectedTextStyle: TextStyle(color: Colors.red.shade600),
                           holidayDecoration: BoxDecoration(
-                            color: Colors.pink.shade50,
+                            color: Colors.pink.shade100,
                             shape: BoxShape.circle,
                           ),
-                          holidayTextStyle: TextStyle(color: Colors.pink),
+                          holidayTextStyle: TextStyle(color: Colors.pink.shade600),
                         ),
                         headerStyle: HeaderStyle(
                           formatButtonVisible: false,

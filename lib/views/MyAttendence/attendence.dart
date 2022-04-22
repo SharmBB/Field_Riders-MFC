@@ -78,24 +78,25 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
                         calendarStyle: CalendarStyle(
                             isTodayHighlighted: true,
                             selectedDecoration: BoxDecoration(
-                                color: Colors.red.shade100,
+                                color: Colors.red.shade50,
                              
                                 shape: BoxShape.circle),
                             selectedTextStyle: TextStyle(
                                 color: Colors.red.shade600),
                             todayDecoration: BoxDecoration(
-                              color: Colors.lightBlue,
+                              color: Colors.transparent,
                               shape: BoxShape.circle,
                             ),
                             todayTextStyle: TextStyle(
-                                color: Colors.blue),
+                                color: Colors.purple.shade600),
                             holidayTextStyle: TextStyle(
                                 color: Colors.pink)),
                         headerStyle: const HeaderStyle(
                           formatButtonVisible: false,
                           formatButtonShowsNext: true,
                         ),
-                      )),
+                      ),
+                      ),
                   SizedBox(
                     height: 10,
                   ),
