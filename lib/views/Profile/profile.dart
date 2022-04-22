@@ -35,7 +35,7 @@ class _ProfilePageState extends State<ProfilePage> {
             color: Colors.deepPurple,
             size: 30.0,
           ),
-          onPressed: () {},
+          onPressed: () { Navigator.pop(context);},
         ),
       ),
       body: NotificationListener<OverscrollIndicatorNotification>(
