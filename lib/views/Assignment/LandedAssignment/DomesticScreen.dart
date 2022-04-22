@@ -260,21 +260,21 @@ class _DomesticScreenState extends State<DomesticScreen> {
                           ),
                         ],
                       ),
-                      const SizedBox(
+                     SizedBox(
                         height: 10,
                       ),
 
-                      const Text(
+                     Text(
                         "ID :1",
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
                             color: kPrimaryPurpleColor),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 20,
                       ),
-                      const Text(
+                    Text(
                         "Bill:X6356185",
                         style: TextStyle(
                             fontSize: 15,
@@ -284,17 +284,17 @@ class _DomesticScreenState extends State<DomesticScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
+                      Text(
                         "SAN:41898081",
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
                             color: kPrimaryPurpleColor),
                       ),
-                      const SizedBox(
+                     SizedBox(
                         height: 20,
                       ),
-                      const Text(
+                   Text(
                         "Owner1: Name1",
                         // "@ NEW HOW . (If Owner 2 is available show else don't need )",
                         style: TextStyle(
@@ -302,10 +302,10 @@ class _DomesticScreenState extends State<DomesticScreen> {
                             fontWeight: FontWeight.w600,
                             color: kPrimaryPurpleColor),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 20,
                       ),
-                      const Text(
+                    Text(
                         "Owner2: Name 2",
                         // "@ NEW HOW . (If Owner 2 is available show else don't need )",
                         style: TextStyle(
@@ -323,10 +323,10 @@ class _DomesticScreenState extends State<DomesticScreen> {
                       //       fontWeight: FontWeight.w600,
                       //       color: kPrimaryPurpleColor),
                       // ),
-                      const SizedBox(
+                    SizedBox(
                         height: 20,
                       ),
-                      const Text(
+                     Text(
                         "Range5: >120 months",
                         style: TextStyle(
                             fontSize: 18,
@@ -336,24 +336,24 @@ class _DomesticScreenState extends State<DomesticScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
+                    Text(
                         "Arrears:1,226.25",
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
                             color: kPrimaryPurpleColor),
                       ),
-                      const SizedBox(
+                     SizedBox(
                         height: 20,
                       ),
-                      const Text(
+                      Text(
                         "Total Payable Amount:1,317.85",
                         style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.w600,
                             color: kPrimaryPurpleColor),
                       ),
-                      const SizedBox(
+                      SizedBox(
                         height: 30,
                       ),
                       // Take Photo DropDown
