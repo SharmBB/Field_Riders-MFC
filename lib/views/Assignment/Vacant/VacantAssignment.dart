@@ -8,6 +8,7 @@ import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riders_app/_helpers/constants.dart';
+import 'package:riders_app/views/QR%20Screen/QR_scan.dart';
 import 'package:riders_app/views/ResuableTextFormFeild/reusabletextfield.dart';
 import 'package:riders_app/views/List_of_FeildAssignment/Feild_List_Assignment/feild.dart';
 
@@ -113,7 +114,7 @@ class _VacantAssignmentState extends State<VacantAssignment> {
           icon: const Icon(
             Icons.arrow_back_rounded,
             color: kPrimaryPurpleColor,
-            size: 25.0,
+            size: 25.0
           ),
           onPressed: () {
                      Navigator.pop(context);
@@ -121,20 +122,18 @@ class _VacantAssignmentState extends State<VacantAssignment> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.search_sharp),
+            icon: const Icon(Icons.qr_code_scanner),
             color: Colors.deepPurple,
-            onPressed: () {},
+            onPressed: () {
+              
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                           QRScanPage(),)
+                                  );
+            },
           ),
-          IconButton(
-            icon: const Icon(Icons.add_box),
-            color: Colors.deepPurple,
-            onPressed: () {},
-          ),
-          IconButton(
-            icon: const Icon(Icons.download_sharp),
-            color: Colors.deepPurple,
-            onPressed: () {},
-          )
         ],
       ),
       body: NotificationListener<OverscrollIndicatorNotification>(

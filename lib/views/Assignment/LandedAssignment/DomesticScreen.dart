@@ -11,6 +11,7 @@ import 'package:riders_app/views/Assignment/LandedAssignment/DeptAssignID.dart';
 import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Close.dart';
 import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Owner.dart';
 import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Tenant.dart';
+import 'package:riders_app/views/QR%20Screen/QR_scan.dart';
 
 import 'Occupier/Vacant.dart';
 
@@ -193,15 +194,23 @@ class _DomesticScreenState extends State<DomesticScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.add_box),
+            icon: const Icon(Icons.qr_code_scanner),
             color: Colors.deepPurple,
-            onPressed: () {},
+            onPressed: () {
+              
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                           QRScanPage(),)
+                                  );
+            },
           ),
-          IconButton(
-            icon: const Icon(Icons.download_sharp),
-            color: Colors.deepPurple,
-            onPressed: () {},
-          )
+          // IconButton(
+          //   icon: const Icon(Icons.download_sharp),
+          //   color: Colors.deepPurple,
+          //   onPressed: () {},
+          // )
         ],
       ),
       body: NotificationListener<OverscrollIndicatorNotification>(

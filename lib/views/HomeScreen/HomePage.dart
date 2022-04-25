@@ -29,25 +29,25 @@ class _HomeScreenState extends State<HomeScreen> {
           //   onPressed: () {},
           // ),
           actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => QRScanPage()),
-                );
-              },
-              child: Text(
-                'Scan',
-                style: TextStyle(color: Colors.deepPurple),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(right: 10),
-              child: Icon(
-                Icons.qr_code_scanner,
-                color: Colors.deepPurple,
-              ),
-            ),
+            // TextButton(
+            //   onPressed: () {
+            //     Navigator.push(
+            //       context,
+            //       MaterialPageRoute(builder: (context) => QRScanPage()),
+            //     );
+            //   },
+            //   child: Text(
+            //     'Scan',
+            //     style: TextStyle(color: Colors.deepPurple),
+            //   ),
+            // ),
+            // Padding(
+            //   padding: EdgeInsets.only(right: 10),
+            //   child: Icon(
+            //     Icons.qr_code_scanner,
+            //     color: Colors.deepPurple,
+            //   ),
+            // ),
           ],
           backgroundColor: Colors.transparent,
           elevation: 0,
