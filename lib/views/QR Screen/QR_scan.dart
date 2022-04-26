@@ -1,8 +1,10 @@
+// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 import 'package:riders_app/_helpers/Components/QRCodeButton.dart';
+import 'package:riders_app/_helpers/constants.dart';
 
 class QRScanPage extends StatefulWidget {
   @override
@@ -17,7 +19,7 @@ class _QRScanPageState extends State<QRScanPage> {
         appBar: AppBar(
           backgroundColor: Colors.transparent,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.deepPurple),
+            icon: Icon(Icons.arrow_back, color:kPrimaryPurpleColor),
             onPressed: () => Navigator.of(context).pop(),
           ),
           elevation: 0,
@@ -46,9 +48,10 @@ class _QRScanPageState extends State<QRScanPage> {
                   ),
                 ),
               ),
+                SizedBox(height: 20),
               QRCodeButton(
                 function: () => scanQRCode(),
-                text: 'Place Code',
+                text: 'Click to Scan',
                 // onClicked: () => scanQRCode(),
               ),
             ],

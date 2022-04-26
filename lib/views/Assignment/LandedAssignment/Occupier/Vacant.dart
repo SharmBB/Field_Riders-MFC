@@ -5,8 +5,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/ResuableTextFormFeild/reusabletextfield.dart';
 
-
-
 final propertyusagetypeOwner = [
   'Choose',
   '(D)Domestic',
@@ -16,9 +14,6 @@ final propertyusagetypeOwner = [
   '(GP)Government Premise'
 ];
 
-
-
-
 final propertyusagetype = [
   'Choose',
   '(D)Domestic',
@@ -27,7 +22,6 @@ final propertyusagetype = [
   '(GQ)Government Quaters',
   '(GP)Government Premise'
 ];
-
 
 final propertydomestictype = [
   'Choose',
@@ -75,18 +69,12 @@ final propertydomestictype = [
   'D44 One and Half Storey Bungalow'
 ];
 
-
-
 final drcodetype = [
+    'Choose',
   '5 DR05 VACANT PREMISE',
 ];
 
-  File? vacantimage;
-
-
-
-
-
+//File? vacantimage;
 
 // _getFromCamera() async {
 //   PickedFile? pickedFile =
@@ -103,7 +91,14 @@ final drcodetype = [
 //   }
 // }
 
-Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeinitvalue,vacantdrcodeinitvalue,vacantremarkcontroller,vacantselectedMeter,vacantwaterMetercontroller) {
+Widget Vacant(
+  context,
+  propertyusageinitvalue,
+  propertydomestictypeinitvalue,
+  drcodeinitvalue,
+  remarkcontroller,
+  vacantselectedMeter,
+) {
   return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -134,11 +129,11 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
                   width: MediaQuery.of(context).size.width,
                   child: DropdownButton<String>(
                     underline: Container(),
-                    icon:  Icon(
+                    icon: Icon(
                       Icons.keyboard_arrow_down,
                       color: Colors.deepPurple,
                     ),
-                    value: vacantpropertyusageinitvalue,
+                    value: propertyusageinitvalue,
                     isExpanded: true,
                     items: propertyusagetype.map((String value) {
                       return DropdownMenuItem<String>(
@@ -150,7 +145,7 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
                     }).toList(),
                     onChanged: (String? value) {
                       setState(() {
-                        vacantpropertyusageinitvalue = value!;
+                        propertyusageinitvalue = value!;
                       });
                     },
                   ),
@@ -167,10 +162,10 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  "Property Domestic",
+                  "Property Type",
                   style: TextStyle(color: Colors.grey, fontSize: 12),
                 ),
-                 SizedBox(
+                SizedBox(
                   height: 10,
                 ),
                 Container(
@@ -182,11 +177,11 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
                   width: MediaQuery.of(context).size.width,
                   child: DropdownButton<String>(
                     underline: Container(),
-                    icon:  Icon(
+                    icon: Icon(
                       Icons.keyboard_arrow_down,
                       color: Colors.deepPurple,
                     ),
-                    value: vacantpropertydomestictypeinitvalue,
+                    value: propertydomestictypeinitvalue,
                     isExpanded: true,
                     items: propertydomestictype.map((String value) {
                       return DropdownMenuItem<String>(
@@ -198,7 +193,7 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
                     }).toList(),
                     onChanged: (String? value) {
                       setState(() {
-                        vacantpropertydomestictypeinitvalue = value!;
+                        propertydomestictypeinitvalue = value!;
                       });
                     },
                   ),
@@ -234,7 +229,7 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
                       Icons.keyboard_arrow_down,
                       color: Colors.deepPurple,
                     ),
-                    value: vacantdrcodeinitvalue,
+                    value: drcodeinitvalue,
                     isExpanded: true,
                     items: drcodetype.map((String value) {
                       return DropdownMenuItem<String>(
@@ -246,7 +241,7 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
                     }).toList(),
                     onChanged: (String? value) {
                       setState(() {
-                        vacantdrcodeinitvalue = value!;
+                        drcodeinitvalue = value!;
                       });
                     },
                   ),
@@ -277,7 +272,7 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
                       return 'Remark Required';
                     }
                   },
-                  controller: vacantremarkcontroller,
+                  controller: remarkcontroller,
                   maxLines: 5,
                   textInputAction: TextInputAction.done,
                   decoration: InputDecoration(
@@ -348,73 +343,6 @@ Widget Vacant(context,vacantpropertyusageinitvalue,vacantpropertydomestictypeini
         SizedBox(
           height: 20,
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Meter Number",
-              style: const TextStyle(fontSize: 12, color: Colors.grey),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            Container(
-              height: 250,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                border: Border.all(color: Colors.deepPurple),
-                borderRadius: BorderRadius.circular(25),
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(10),
-                child: GestureDetector(
-                    onTap: () {
-                      setState(() async {
-                        PickedFile? pickedFile = await ImagePicker().getImage(
-                            source: ImageSource.camera, imageQuality: 50
-                            // maxWidth: 1800,
-                            // maxHeight: 1800,
-                            );
-                        if (pickedFile != null) {
-                          setState(() {
-                            vacantimage = File(pickedFile.path);
-                       
-                          
-                          });
-                        }
-                      });
-                    },
-                    child: Container(
-                      child: vacantimage != null
-                          ? ClipRRect(
-                              // borderRadius: BorderRadius.circular(5),
-                              child: Image.file(
-                                vacantimage!,
-                                fit: BoxFit.contain,
-                              ),
-                            )
-                          : Container(
-                              decoration: BoxDecoration(
-                                color: Colors.grey[100],
-                                           image: DecorationImage(
-                            image: AssetImage("assets/Meter.jpg"),
-                            fit: BoxFit.cover,
-                          ),
-                                // borderRadius: BorderRadius.circular(50)
-                              ),
-                              width:
-                                  MediaQuery.of(context).size.width * (10 / 20),
-                              height: MediaQuery.of(context).size.height *
-                                  (10 / 20),
-                             
-                            ),
-                    )),
-              ),
-            ),
-          ],
-        ),
-        textField("", vacantwaterMetercontroller,"Your Answer"),
       ],
     );
   });

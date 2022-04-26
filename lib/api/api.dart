@@ -10,6 +10,7 @@ class CallApi {
   var _urlAuth = 'https://dcaapi.moodfor.codes/rider/';
   var _urlLeaderBoard = 'https://dcaapi.moodfor.codes/';
 
+
 //post data
   postData(data, apiUrl) async {
     var fullUrl = Uri.parse(_urlAuth + apiUrl);
@@ -53,6 +54,8 @@ class CallApi {
       fullUrl,
     );
   }
+
+
 
 //   _getToken() async {
 //     SharedPreferences localStorage = await SharedPreferences.getInstance();

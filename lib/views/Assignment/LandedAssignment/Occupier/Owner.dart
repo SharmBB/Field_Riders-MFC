@@ -115,8 +115,9 @@ final propertyusagetype = [
 
   
 
-Widget Owner(context, ownernamecorrectinitvalue, ownertelnocontroller,
-    correctownernamecontroller, _selectedNationality,ownerpropertyusageinitvalue,ownerpropertydomestictypeinitvalue,ownerdrcodeinitvalue, ownerremarkcontroller) {
+Widget Owner(BuildContext context, ownernamecorrectinitvalue, ownertelnocontroller,
+    correctownernamecontroller, _selectedNationality,propertyusageinitvalue,
+propertydomestictypeinitvalue,drcodeinitvalue, remarkcontroller) {
   return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -174,11 +175,11 @@ Widget Owner(context, ownernamecorrectinitvalue, ownertelnocontroller,
           height: 20,
         ),
         textField(
-            "Please specify correct ownername", correctownernamecontroller,"Your Answer"),
+            "Please specify correct ownername", correctownernamecontroller,"Your Answer",""),
         const SizedBox(
           height: 20,
         ),
-        textField("Owner's tel no", ownertelnocontroller,"Your Answer"),
+        textField("Owner's tel no", ownertelnocontroller,"Your Answer","number"),
         SizedBox(
           height: 20,
         ),
@@ -254,7 +255,7 @@ Widget Owner(context, ownernamecorrectinitvalue, ownertelnocontroller,
                   Icons.keyboard_arrow_down,
                   color: Colors.deepPurple,
                 ),
-                value: ownerpropertyusageinitvalue,
+                value: propertyusageinitvalue,
                 isExpanded: true,
                 items: propertyusagetype.map((String value) {
                   return DropdownMenuItem<String>(
@@ -265,7 +266,7 @@ Widget Owner(context, ownernamecorrectinitvalue, ownertelnocontroller,
                 }).toList(),
                 onChanged: (String? value) {
                   setState(() {
-                    ownerpropertyusageinitvalue = value!;
+                    propertyusageinitvalue = value!;
                   });
                 },
               ),
@@ -281,7 +282,7 @@ Widget Owner(context, ownernamecorrectinitvalue, ownertelnocontroller,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "Property Domestic",
+              "Property Type",
               style: TextStyle(color: Colors.grey, fontSize: 12),
             ),
             const SizedBox(
@@ -300,7 +301,7 @@ Widget Owner(context, ownernamecorrectinitvalue, ownertelnocontroller,
                   Icons.keyboard_arrow_down,
                   color: Colors.deepPurple,
                 ),
-                value: ownerpropertydomestictypeinitvalue,
+                value: propertydomestictypeinitvalue,
                 isExpanded: true,
                 items: propertydomestictype.map((String value) {
                   return DropdownMenuItem<String>(
@@ -311,7 +312,7 @@ Widget Owner(context, ownernamecorrectinitvalue, ownertelnocontroller,
                 }).toList(),
                 onChanged: (String? value) {
                   setState(() {
-                    ownerpropertydomestictypeinitvalue = value!;
+                    propertydomestictypeinitvalue = value!;
                   });
                 },
               ),
@@ -347,7 +348,7 @@ Widget Owner(context, ownernamecorrectinitvalue, ownertelnocontroller,
                   Icons.keyboard_arrow_down,
                   color: Colors.deepPurple,
                 ),
-                value: ownerdrcodeinitvalue,
+                value: drcodeinitvalue,
                 isExpanded: true,
                 items: drcodetype.map((String value) {
                   return DropdownMenuItem<String>(
@@ -358,7 +359,7 @@ Widget Owner(context, ownernamecorrectinitvalue, ownertelnocontroller,
                 }).toList(),
                 onChanged: (String? value) {
                   setState(() {
-                    ownerdrcodeinitvalue = value!;
+                   drcodeinitvalue = value!;
                   });
                 },
               ),
@@ -389,7 +390,7 @@ Widget Owner(context, ownernamecorrectinitvalue, ownertelnocontroller,
                   return 'Remark Required';
                 }
               },
-              controller: ownerremarkcontroller,
+              controller:remarkcontroller,
               maxLines: 5,
               textInputAction: TextInputAction.done,
               decoration: InputDecoration(

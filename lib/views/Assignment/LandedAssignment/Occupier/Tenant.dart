@@ -121,11 +121,11 @@ Widget Tenant(
     context,
     tenantnamecontroller,
     tenanttelnocontroller,
-    tenantselectedNationality,
-    tenantpropertyusageinitvalue,
-    tenantpropertydomestictypeinitvalue,
-    tenantdrcodeinitvalue,
-    tenantremarkcontroller) {
+    selectedNationality,
+    propertyusageinitvalue,
+    propertydomestictypeinitvalue,
+    drcodeinitvalue,
+    remarkcontroller) {
   return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -134,11 +134,11 @@ Widget Tenant(
         const SizedBox(
           height: 20,
         ),
-        textField("Tenant's name", tenantnamecontroller,"Your Answer"),
+        textField("Tenant's name", tenantnamecontroller,"Your Answer",""),
         const SizedBox(
           height: 20,
         ),
-        textField("Tenant's tel no", tenanttelnocontroller,"Your Answer"),
+        textField("Tenant's tel no", tenanttelnocontroller,"Your Answer","number"),
         const SizedBox(
           height: 20,
         ),
@@ -153,10 +153,10 @@ Widget Tenant(
               children: [
                 Radio<String>(
                     value: "Malaysian",
-                    groupValue: tenantselectedNationality,
+                    groupValue: selectedNationality,
                     onChanged: (value) {
                       setState(() {
-                        tenantselectedNationality = value!;
+                        selectedNationality = value!;
                       });
                     }),
                 const SizedBox(
@@ -172,10 +172,10 @@ Widget Tenant(
               children: [
                 Radio<String>(
                     value: "Foreigner",
-                    groupValue: tenantselectedNationality,
+                    groupValue: selectedNationality,
                     onChanged: (value) {
                       setState(() {
-                        tenantselectedNationality = value!;
+                        selectedNationality = value!;
                       });
                     }),
                 const SizedBox(
@@ -216,7 +216,7 @@ Widget Tenant(
                   Icons.keyboard_arrow_down,
                   color: Colors.deepPurple,
                 ),
-                value: tenantpropertyusageinitvalue,
+                value: propertyusageinitvalue,
                 isExpanded: true,
                 items: propertyusagetype.map((String value) {
                   return DropdownMenuItem<String>(
@@ -227,7 +227,7 @@ Widget Tenant(
                 }).toList(),
                 onChanged: (String? value) {
                   setState(() {
-                    tenantpropertyusageinitvalue = value!;
+                    propertyusageinitvalue = value!;
                   });
                 },
               ),
@@ -243,7 +243,7 @@ Widget Tenant(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "Property Domestic",
+              "Property Type",
               style: TextStyle(color: Colors.grey, fontSize: 12),
             ),
             const SizedBox(
@@ -262,7 +262,7 @@ Widget Tenant(
                   Icons.keyboard_arrow_down,
                   color: Colors.deepPurple,
                 ),
-                value: tenantpropertydomestictypeinitvalue,
+                value: propertydomestictypeinitvalue,
                 isExpanded: true,
                 items: propertydomestictype.map((String value) {
                   return DropdownMenuItem<String>(
@@ -273,7 +273,7 @@ Widget Tenant(
                 }).toList(),
                 onChanged: (String? value) {
                   setState(() {
-                    tenantpropertydomestictypeinitvalue = value!;
+                    propertydomestictypeinitvalue = value!;
                   });
                 },
               ),
@@ -309,7 +309,7 @@ Widget Tenant(
                   Icons.keyboard_arrow_down,
                   color: Colors.deepPurple,
                 ),
-                value: tenantdrcodeinitvalue,
+                value: drcodeinitvalue,
                 isExpanded: true,
                 items: drcodetype.map((String value) {
                   return DropdownMenuItem<String>(
@@ -320,7 +320,7 @@ Widget Tenant(
                 }).toList(),
                 onChanged: (String? value) {
                   setState(() {
-                    tenantdrcodeinitvalue = value!;
+                    drcodeinitvalue = value!;
                   });
                 },
               ),
@@ -351,7 +351,7 @@ Widget Tenant(
                   return 'Remark Required';
                 }
               },
-              controller: tenantremarkcontroller,
+              controller: remarkcontroller,
               maxLines: 5,
               textInputAction: TextInputAction.done,
               decoration: InputDecoration(

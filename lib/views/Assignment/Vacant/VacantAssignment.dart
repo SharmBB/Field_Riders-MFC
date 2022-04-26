@@ -755,7 +755,7 @@ class _VacantAssignmentState extends State<VacantAssignment> {
                                   BorderRadius.all(Radius.circular(20.0))),
                         ),
                       ),
-                      textField("", metercontroller,"Your Answer"),
+                      textField("", metercontroller,"Your Answer","number"),
                       const SizedBox(
                         height: 20,
                       ),
@@ -764,12 +764,12 @@ class _VacantAssignmentState extends State<VacantAssignment> {
                       ),
                       textField(
                           "CATATAN ATAU PINDAAN KEPADA ALAMAT HARTA (REMARKS OR AMENDMENT TO THE PROPERTY ADDRESS)",
-                          catatancontroller,"Your Answer"),
+                          catatancontroller,"Your Answer",""),
                       const SizedBox(
                         height: 20,
                       ),
                       textField(
-                          "Komen lain oleh Field Officer", komencontroller,"Your Answer"),
+                          "Komen lain oleh Field Officer", komencontroller,"Your Answer",""),
                       const SizedBox(
                         height: 50,
                       ),

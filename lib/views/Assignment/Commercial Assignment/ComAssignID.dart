@@ -40,7 +40,7 @@ class __ComAssignIDState extends State<ComAssignID> {
       'Owner 1': 'ABIDEN BIN SABARI',
       "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
       "Date Assign": '22/02/2022',
-      "Payment Update": "-",
+      "Payment Update": "1,317.85",
       'Status': 'Outstanding'
     },
     {
@@ -58,7 +58,7 @@ class __ComAssignIDState extends State<ComAssignID> {
       'Owner 1': 'ABIDEN BIN SABARI',
       "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
       "Date Assign": '22/02/2022',
-      "Payment Update": "-",
+      "Payment Update": "1,317.85",
       'Status': 'Outstanding'
     },
     // {

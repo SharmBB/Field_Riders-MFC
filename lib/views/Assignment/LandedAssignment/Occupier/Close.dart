@@ -74,13 +74,16 @@ final propertydomestictype = [
 
 
 final drcodetype = [
+  'Choose',
   '22 DR22 CLOSED (PLEASE INSERT TOTAL OF VISITATION INTO COLUMN "NUMBER OF VISITATION")',
- 
 ];
 
 
 
-Widget Close(context,closepropertyusageinitvalue,closepropertydomestictypeinitvalue,closedrcodeinitvalue,closeremarkcontroller) {
+Widget Close(context,propertyusageinitvalue,
+                              propertydomestictypeinitvalue,
+                              drcodeinitvalue,
+                              remarkcontroller) {
   return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -113,7 +116,7 @@ Widget Close(context,closepropertyusageinitvalue,closepropertydomestictypeinitva
                   Icons.keyboard_arrow_down,
                   color: Colors.deepPurple,
                 ),
-                value: closepropertyusageinitvalue,
+                value: propertyusageinitvalue,
                 isExpanded: true,
                 items: propertyusagetype.map((String value) {
                   return DropdownMenuItem<String>(
@@ -124,7 +127,7 @@ Widget Close(context,closepropertyusageinitvalue,closepropertydomestictypeinitva
                 }).toList(),
                 onChanged: (String? value) {
                   setState(() {
-                    closepropertyusageinitvalue = value!;
+                    propertyusageinitvalue = value!;
                   });
                 },
               ),
@@ -140,7 +143,7 @@ Widget Close(context,closepropertyusageinitvalue,closepropertydomestictypeinitva
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "Property Domestic",
+              "Property Type",
               style: TextStyle(color: Colors.grey, fontSize: 12),
             ),
             const SizedBox(
@@ -159,7 +162,7 @@ Widget Close(context,closepropertyusageinitvalue,closepropertydomestictypeinitva
                   Icons.keyboard_arrow_down,
                   color: Colors.deepPurple,
                 ),
-                value: closepropertydomestictypeinitvalue,
+                value: propertydomestictypeinitvalue,
                 isExpanded: true,
                 items: propertydomestictype.map((String value) {
                   return DropdownMenuItem<String>(
@@ -170,7 +173,7 @@ Widget Close(context,closepropertyusageinitvalue,closepropertydomestictypeinitva
                 }).toList(),
                 onChanged: (String? value) {
                   setState(() {
-                    closepropertydomestictypeinitvalue = value!;
+                    propertydomestictypeinitvalue = value!;
                   });
                 },
               ),
@@ -206,7 +209,7 @@ Widget Close(context,closepropertyusageinitvalue,closepropertydomestictypeinitva
                   Icons.keyboard_arrow_down,
                   color: Colors.deepPurple,
                 ),
-                value: closedrcodeinitvalue,
+                value: drcodeinitvalue,
                 isExpanded: true,
                 items: drcodetype.map((String value) {
                   return DropdownMenuItem<String>(
@@ -217,7 +220,7 @@ Widget Close(context,closepropertyusageinitvalue,closepropertydomestictypeinitva
                 }).toList(),
                 onChanged: (String? value) {
                   setState(() {
-                    closedrcodeinitvalue = value!;
+                    drcodeinitvalue = value!;
                   });
                 },
               ),
@@ -248,7 +251,7 @@ Widget Close(context,closepropertyusageinitvalue,closepropertydomestictypeinitva
                   return 'Remark Required';
                 }
               },
-              controller: closeremarkcontroller,
+              controller: remarkcontroller,
               maxLines: 5,
               textInputAction: TextInputAction.done,
               decoration: InputDecoration(

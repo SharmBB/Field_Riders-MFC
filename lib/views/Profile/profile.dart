@@ -11,6 +11,7 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   List field = [
     {
+      "id":"01",
       "image": "assets/lonewolf.png",
       "name": "Ali Bin Abu",
       "description": "Rider from Kuala Lumpur",
@@ -101,6 +102,25 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               ),
                               SizedBox(height: 80),
+                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text(
+                                    "Id",
+                                    style: TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  Text(
+                                    field[index]["id"],
+                                    style: TextStyle(
+                                        fontSize: 13,
+                                        fontWeight: FontWeight.w300),
+                                  )
+                                ],
+                              ),
+                              SizedBox(height: 30),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,

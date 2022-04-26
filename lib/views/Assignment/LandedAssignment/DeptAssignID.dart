@@ -7,11 +7,8 @@ import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/Assignment/LandedAssignment/DomesticScreen.dart';
 import 'package:riders_app/views/List_of_FeildAssignment/Feild_List_Assignment/feild.dart';
 
-
-
 import 'package:riders_app/views/Verification%20Screen/taskVerification.dart';
 import 'package:riders_app/views/check.dart';
-
 
 class DeptAssignID extends StatefulWidget {
   final String type;
@@ -33,7 +30,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
 
   final List<Map<String, dynamic>> feild = [
     {
-      'Name': '1',
+      'id': '1',
       'SAN': '27933712',
       'Owner 1': 'ABIDEN BIN SABARI',
       "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
@@ -42,7 +39,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
       'Status': 'Outstanding'
     },
     {
-      'Name': '2',
+      'id': '2',
       'SAN': '27933712',
       'Owner 1': 'ABIDEN BIN SABARI',
       "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
@@ -51,7 +48,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
       'Status': 'Outstanding'
     },
     {
-      'Name': '3',
+      'id': '3',
       'SAN': '27933712',
       'Owner 1': 'ABIDEN BIN SABARI',
       "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
@@ -144,7 +141,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                   ),
                 )
               : IconButton(
-                  icon:  Icon(Icons.search_sharp),
+                  icon: Icon(Icons.search_sharp),
                   color: Colors.deepPurple,
                   onPressed: () {
                     setState(() {
@@ -153,7 +150,7 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                   },
                 ),
           IconButton(
-            icon:  Icon(Icons.add_box),
+            icon: Icon(Icons.add_box),
             color: Colors.deepPurple,
             onPressed: () {
               openDialog(context);
@@ -268,15 +265,38 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                DomesticScreen()),
+                                          builder: (context) => DomesticScreen(
+                                            add: _foundUsers[index]['Address'],
+                                            date: _foundUsers[index]
+                                                ['Date Assign'],
+                                            id: _foundUsers[index]['id'],
+                                            owner: _foundUsers[index]
+                                                ['Owner 1'],
+                                            payment: _foundUsers[index]
+                                                ['Payment Update'],
+                                            san: _foundUsers[index]['SAN'],
+                                            status: _foundUsers[index]['Status'],
+                                          ),
+                                        ),
                                       );
                                     } else {
                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  DomesticScreen()));
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => DomesticScreen(
+                                            add: _foundUsers[index]['Address'],
+                                            date: _foundUsers[index]
+                                                ['Date Assign'],
+                                            id: _foundUsers[index]['id'],
+                                            owner: _foundUsers[index]
+                                                ['Owner 1'],
+                                            payment: _foundUsers[index]
+                                                ['Payment Update'],
+                                            san: _foundUsers[index]['SAN'],
+                                            status: _foundUsers[index]['Status'],
+                                          ),
+                                        ),
+                                      );
                                     }
                                   },
                                   child: Column(
@@ -284,32 +304,30 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      
-                                          Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "IWK Id: ",
-                                                style: TextStyle(
-                                                  color: kPrimaryPurpleColor,
-                                                  fontSize: 18.0,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                              Text(
-                                                _foundUsers[index]['Name'],
-                                                style: TextStyle(
-                                                  color: kPrimaryPurpleColor,
-                                                  fontSize: 18.0,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ],
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "IWK Id: ",
+                                            style: TextStyle(
+                                              color: kPrimaryPurpleColor,
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
-                                         
-                                       
+                                          Text(
+                                            _foundUsers[index]['id'],
+                                            style: TextStyle(
+                                              color: kPrimaryPurpleColor,
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                       Padding(
                                         padding: EdgeInsets.only(
                                           top: 20,

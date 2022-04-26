@@ -725,7 +725,7 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                       //Re Usable Widget
 
                       //1
-                      textField("Name of the Company", nameCompanycontroller,"Your Answer"),
+                      textField("Name of the Company", nameCompanycontroller,"Your Answer",""),
                       const SizedBox(
                         height: 20,
                       ),
@@ -827,7 +827,7 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
 
                                   occupierinitvalue = value!;
                                   if (occupierinitvalue ==
-                                      'Vacant**(please take photo for watermark)') {
+                                      'Vacant') {
                                     close = false;
                                     occupier = true;
                                     tenant = false;
@@ -894,7 +894,8 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                               vacantdrcodeinitvalue,
                               vacantremarkcontroller,
                               vacantselectedMeter,
-                              vacantwaterMetercontroller)
+                          
+                              )
                           : SizedBox(),
 
                       close == true

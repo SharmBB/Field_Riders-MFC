@@ -1,3 +1,4 @@
+// ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures
 import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 

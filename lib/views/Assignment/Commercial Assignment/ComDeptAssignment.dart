@@ -655,7 +655,7 @@ class _ComDeptAssignmentScreenState extends State<ComDeptAssignmentScreen> {
                     //Re Usable Widget
 
                     //1
-                    textField("Name of the Company", nameCompanycontroller,"Your Answer"),
+                    textField("Name of the Company", nameCompanycontroller,"Your Answer",""),
                     const SizedBox(
                       height: 20,
                     ),
@@ -721,197 +721,197 @@ class _ComDeptAssignmentScreenState extends State<ComDeptAssignmentScreen> {
                     //Re Usable Widget
 
                     //1
-                    textField("Exclude", excludecontroller,"Your Answer"),
+                    textField("Exclude", excludecontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //2
-                    textField("IWK Special Instruction", iwkspecialcontroller,"Your Answer"),
+                    textField("IWK Special Instruction", iwkspecialcontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //3
-                    textField("DCA File Type", dcafilecontroller,"Your Answer"),
+                    textField("DCA File Type", dcafilecontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //4
-                    textField("DCA Name", dcanamecontroller,"Your Answer"),
+                    textField("DCA Name", dcanamecontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //5
-                    textField("DCA Code", dcacodecontroller,"Your Answer"),
+                    textField("DCA Code", dcacodecontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //6
-                    textField("State", statecontroller,"Your Answer"),
+                    textField("State", statecontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //7
-                    textField("Cost State", coststatecontroller,"Your Answer"),
+                    textField("Cost State", coststatecontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //8
-                    textField("UO", uocontroller,"Your Answer"),
+                    textField("UO", uocontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //9
-                    textField("La Name", lanamecontroller,"Your Answer"),
+                    textField("La Name", lanamecontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //10
-                    textField("Bil No", bilnocontroller,"Your Answer"),
+                    textField("Bil No", bilnocontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //11
-                    textField("San", sancontroller,"Your Answer"),
+                    textField("San", sancontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //12
-                    textField("Range Due", rangeduecontroller,"Your Answer"),
+                    textField("Range Due", rangeduecontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //13
                     textField(
-                        "Customer Telephone Number", custelephonenocontroller,"Your Answer"),
+                        "Customer Telephone Number", custelephonenocontroller,"Your Answer","number"),
                     const SizedBox(
                       height: 30,
                     ),
                     //14
-                    textField("Customer Mobile Number", cusmobilenocontroller,"Your Answer"),
+                    textField("Customer Mobile Number", cusmobilenocontroller,"Your Answer","number"),
                     const SizedBox(
                       height: 30,
                     ),
                     //15
-                    textField("Customer Fax Number", cusfaxnocontroller,"Your Answer"),
+                    textField("Customer Fax Number", cusfaxnocontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //16
-                    textField("Customer Email", cusemailcontroller,"Your Answer"),
+                    textField("Customer Email", cusemailcontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //17
-                    textField("Owner 1", owner1controller,"Your Answer"),
+                    textField("Owner 1", owner1controller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //18
-                    textField("Owner 2", owner2controller,"Your Answer"),
+                    textField("Owner 2", owner2controller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //19
-                    textField("Prop Address 1", propaddr1controller,"Your Answer"),
+                    textField("Prop Address 1", propaddr1controller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //20
-                    textField("Prop Address 2", propaddr2controller,"Your Answer"),
+                    textField("Prop Address 2", propaddr2controller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //21
-                    textField("Prop Address 3", propaddr3controller,"Your Answer"),
+                    textField("Prop Address 3", propaddr3controller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //22
-                    textField("Prop Address 4", propaddr4controller,"Your Answer"),
+                    textField("Prop Address 4", propaddr4controller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //23
-                    textField("Prop Address 5", propaddr5controller,"Your Answer"),
+                    textField("Prop Address 5", propaddr5controller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //24
-                    textField("Building", buildingcontroller,"Your Answer"),
+                    textField("Building", buildingcontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //25
-                    textField("Building Id", buildingidcontroller,"Your Answer"),
+                    textField("Building Id", buildingidcontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //26
-                    textField("Road Name", roadnamecontroller,"Your Answer"),
+                    textField("Road Name", roadnamecontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //27
-                    textField("Taman", tamancontroller,"Your Answer"),
+                    textField("Taman", tamancontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //28
-                    textField("PostCode", postcodecontroller,"Your Answer"),
+                    textField("PostCode", postcodecontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //29
-                    textField("Suburb", suburbcontroller,"Your Answer"),
+                    textField("Suburb", suburbcontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //30
-                    textField("Mail Name 1 Bill", mailname1bilcontroller,"Your Answer"),
+                    textField("Mail Name 1 Bill", mailname1bilcontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //31
-                    textField("Mail Name 2 Bill", mailname2bilcontroller,"Your Answer"),
+                    textField("Mail Name 2 Bill", mailname2bilcontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //32
-                    textField("Mail Address 1 Bill", mailaddr1bilcontroller,"Your Answer"),
+                    textField("Mail Address 1 Bill", mailaddr1bilcontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //33
-                    textField("Mail Address 2 Bill", mailaddr2bilcontroller,"Your Answer"),
+                    textField("Mail Address 2 Bill", mailaddr2bilcontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //34
-                    textField("Mail Address 3 Bill", mailaddr3bilcontroller,"Your Answer"),
+                    textField("Mail Address 3 Bill", mailaddr3bilcontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //35
-                    textField("Mail Address 4 Bill", mailaddr4bilcontroller,"Your Answer"),
+                    textField("Mail Address 4 Bill", mailaddr4bilcontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //36
                     textField(
-                        "Balance Amount At Date", balanceamountdatecontroller,"Your Answer"),
+                        "Balance Amount At Date", balanceamountdatecontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //37
                     textField("Balance Amout As Copy Bill ",
-                        balanceamountcopybilcontroller,"Your Answer"),
+                        balanceamountcopybilcontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //38
                     textField(
                         "Difference Between Balance As Copy Bill And Balance At Date",
-                        differencebetweenbalancecontroller,"Your Answer"),
+                        differencebetweenbalancecontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
@@ -1040,7 +1040,7 @@ class _ComDeptAssignmentScreenState extends State<ComDeptAssignmentScreen> {
                       height: 30,
                     ),
                     //41
-                    textField("Occupier", occupiercontroller,""),
+                    textField("Occupier", occupiercontroller,"",""),
                     const SizedBox(
                       height: 30,
                     ),
@@ -1088,75 +1088,75 @@ class _ComDeptAssignmentScreenState extends State<ComDeptAssignmentScreen> {
                     ),
                     //43
                     textField("Specify Correct Owner Name",
-                        specifycorrectownernamecontroller,""),
+                        specifycorrectownernamecontroller,"",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //44
                     textField(
-                        "Owner Telephone Number", ownertelephonenocontroller,""),
+                        "Owner Telephone Number", ownertelephonenocontroller,"","number"),
                     const SizedBox(
                       height: 30,
                     ),
                     //45
-                    textField("Owner Mobile Number", ownermobilenocontroller,""),
+                    textField("Owner Mobile Number", ownermobilenocontroller,"","number"),
                     const SizedBox(
                       height: 30,
                     ),
                     //46
-                    textField("Owner Fax Number", ownerfaxnocontroller,""),
+                    textField("Owner Fax Number", ownerfaxnocontroller,"","number"),
                     const SizedBox(
                       height: 30,
                     ),
                     //47
-                    textField("Owner Email", owneremailcontroller,""),
+                    textField("Owner Email", owneremailcontroller,"",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //48
-                    textField("Tenant Name", tenantnamecontroller,""),
+                    textField("Tenant Name", tenantnamecontroller,"",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //49
                     textField(
-                        "Tenant Telephone Number", tenanttelephonenocontroller,""),
+                        "Tenant Telephone Number", tenanttelephonenocontroller,"","number"),
                     const SizedBox(
                       height: 30,
                     ),
                     //50
-                    textField("Tenant Mobile Number", tenantmobilenocontroller,""),
+                    textField("Tenant Mobile Number", tenantmobilenocontroller,"","number"),
                     const SizedBox(
                       height: 30,
                     ),
                     //51
-                    textField("Tenant Fax Number", tenantfaxcontroller,""),
+                    textField("Tenant Fax Number", tenantfaxcontroller,"","number"),
                     const SizedBox(
                       height: 30,
                     ),
                     //52
-                    textField("Tenant Email", tenantemailcontroller,""),
+                    textField("Tenant Email", tenantemailcontroller,"",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //53
                     textField(
-                        "Occupier Nationality", occupiernationalitycontroller,""),
+                        "Occupier Nationality", occupiernationalitycontroller,"",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //54
-                    textField("No Of Visitation", noofvisitationcontroller,""),
+                    textField("No Of Visitation", noofvisitationcontroller,"",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //55
-                    textField("No of Follow Up", nooffollowupcontroller,""),
+                    textField("No of Follow Up", nooffollowupcontroller,"",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //56
-                    textField("Property Usage", propertyusagecontroller,""),
+                    textField("Property Usage", propertyusagecontroller,"",""),
                     const SizedBox(
                       height: 30,
                     ),
@@ -1206,7 +1206,7 @@ class _ComDeptAssignmentScreenState extends State<ComDeptAssignmentScreen> {
                     //58
 
                     textField(
-                        "Name Of Shop Company", nameofshopcompanycontroller,"Your Answer"),
+                        "Name Of Shop Company", nameofshopcompanycontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
@@ -1297,17 +1297,17 @@ class _ComDeptAssignmentScreenState extends State<ComDeptAssignmentScreen> {
                       height: 30,
                     ),
                     //61
-                    textField("Black Area", blackareacontroller,"Your Answer"),
+                    textField("Black Area", blackareacontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //62
-                    textField("Reason Customer", reasoncustomercontroller,"Your Answer"),
+                    textField("Reason Customer", reasoncustomercontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
                     //63
-                    textField("Business Close Down", businessclosecontroller,"Your Answer"),
+                    textField("Business Close Down", businessclosecontroller,"Your Answer",""),
                     const SizedBox(
                       height: 30,
                     ),
