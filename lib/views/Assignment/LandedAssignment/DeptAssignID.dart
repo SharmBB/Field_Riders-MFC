@@ -275,7 +275,8 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                             payment: _foundUsers[index]
                                                 ['Payment Update'],
                                             san: _foundUsers[index]['SAN'],
-                                            status: _foundUsers[index]['Status'],
+                                            status: _foundUsers[index]
+                                                ['Status'],
                                           ),
                                         ),
                                       );
@@ -293,7 +294,8 @@ class __DeptAssignIDState extends State<DeptAssignID> {
                                             payment: _foundUsers[index]
                                                 ['Payment Update'],
                                             san: _foundUsers[index]['SAN'],
-                                            status: _foundUsers[index]['Status'],
+                                            status: _foundUsers[index]
+                                                ['Status'],
                                           ),
                                         ),
                                       );

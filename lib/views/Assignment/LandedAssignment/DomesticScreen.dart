@@ -2,20 +2,23 @@
 
 import 'dart:convert';
 import 'dart:io';
-
+import 'dart:typed_data';
 import 'package:custom_timer/custom_timer.dart';
-
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Close.dart';
 import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Owner.dart';
 import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Tenant.dart';
+import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Vacant.dart';
 import 'package:riders_app/views/QR%20Screen/QR_scan.dart';
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
 import 'package:riders_app/views/ResuableTextFormFeild/reusabletextfield.dart';
-import 'Occupier/Vacant.dart';
+import 'package:image_watermark/image_watermark.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
+
 
 class DomesticScreen extends StatefulWidget {
   final String id;
@@ -60,7 +63,6 @@ class _DomesticScreenState extends State<DomesticScreen> {
     date = widget.date;
     payment = widget.payment;
     status = widget.status;
-
     super.initState();
   }
 
@@ -105,13 +107,15 @@ class _DomesticScreenState extends State<DomesticScreen> {
   TextEditingController vacantwaterMetercontroller = TextEditingController();
 
   File? vacantimage;
+  File? vacantimageMeter;
   var vacantImageS;
+  
 
   _getFromCamera() async {
     PickedFile? pickedFile = await ImagePicker()
         .getImage(source: ImageSource.camera, imageQuality: 50
-            //  maxWidth: 600,
-            //   maxHeight: 600,
+             maxWidth: 600,
+              maxHeight: 600,
             );
     if (pickedFile != null) {
       setState(() {
@@ -121,68 +125,52 @@ class _DomesticScreenState extends State<DomesticScreen> {
         //uploadFile();
       });
     }
+
+    var t = await vacantimage!.readAsBytes();
+    imgBytes = Uint8List.fromList(t);
+
+    watermarkedImgBytes = await image_watermark.addTextWatermark(
+      
+      imgBytes,
+
+      ///image bytes
+      watermarkText, //watermark text
+      20, //
+      30,
+
+      color: Colors.white, //default : Colors.white
+    );
+
+       // String string_water = base64Encode(watermarkedImgBytes);
+        final dir = await getTemporaryDirectory();
+        await dir.create(recursive: true);
+         tempFile = File(path.join(dir.path, pickedFile!.path));
+        await tempFile!.writeAsBytes(base64.decode(base64Encode(watermarkedImgBytes)));
+
+  setState(() {
+         vacantimageMeter = tempFile!;
+              });
   }
 
 
 
-  // File? _image;
-  // bool image = false;
 
-  // _getFromCamera() async {
-  //   PickedFile? pickedFile = await ImagePicker()
-  //       .getImage(source: ImageSource.camera, imageQuality: 50
-  //           // maxWidth: 1800,
-  //           // maxHeight: 1800,
-  //           );
-  //   if (pickedFile != null) {
-  //     setState(() {
-  //       _image = File(pickedFile.path);
-  //       //uploadFile();
-  //       image = true;
-  //     });
-  //   }
-  // }
 
-  // actionsheetTakePhoto(BuildContext context) {
-  //   showCupertinoModalPopup(
-  //     context: context,
-  //     builder: (context) {
-  //       return CupertinoActionSheet(
-  //         actions: [
-  //           CupertinoActionSheetAction(
-  //               onPressed: () async {
-  //                 _camera = true;
-  //                 _getMultiFromCamera();
-  //                 Navigator.of(context).pop();
-  //               },
-  //               child: const Align(
-  //                   alignment: Alignment.topLeft, child: Text("Camera"))),
-  //           CupertinoActionSheetAction(
-  //               onPressed: () async {
-  //                 // _getFromGallery();
-  //                 getMultiImages();
-  //                 Navigator.of(context).pop();
-  //               },
-  //               child: const Align(
-  //                   alignment: Alignment.topLeft, child: Text("Upload"))),
-  //         ],
-  //         cancelButton: CupertinoActionSheetAction(
-  //           child: const Text("Cancel"),
-  //           onPressed: () => Navigator.of(context).pop(),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
-
-  File? _image1;
+    File? _image1;
   List<File>? imageFileList = [];
+  List<File>? imageFileListWater = [];
+
+  var imgBytes;
+  var watermarkedImgBytes;
+
+  String watermarkText = "FO_Rider";
+  File? tempFile;
 
   _getMultiFromCamera() async {
     PickedFile? pickedFile = await ImagePicker()
         .getImage(source: ImageSource.camera, imageQuality: 50
-            // maxWidth: 1800,
-            // maxHeight: 1800,
+            maxWidth: 600,
+             maxHeight: 600,
             );
     if (pickedFile != null) {
       setState(() {
@@ -192,8 +180,40 @@ class _DomesticScreenState extends State<DomesticScreen> {
         imageFileList!.add(_image1!);
       });
     }
+
+    var t = await _image1!.readAsBytes();
+    imgBytes = Uint8List.fromList(t);
+
+    watermarkedImgBytes = await image_watermark.addTextWatermark(
+      
+      imgBytes,
+
+      ///image bytes
+      watermarkText, //watermark text
+      20, //
+      30,
+
+      color: Colors.white, //default : Colors.white
+    );
+
+       // String string_water = base64Encode(watermarkedImgBytes);
+        final dir = await getTemporaryDirectory();
+        await dir.create(recursive: true);
+         tempFile = File(path.join(dir.path, pickedFile!.path));
+        await tempFile!.writeAsBytes(base64.decode(base64Encode(watermarkedImgBytes)));
+
+  setState(() {
+         imageFileListWater!.add(tempFile!);
+              });
+    
+
     print(imageFileList);
   }
+
+  
+
+
+  
 
   // final multiPicker = ImagePicker();
   // List<File>? imageFileList = [];
@@ -495,7 +515,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                   _getMultiFromCamera();
                                 },
                                 child: Container(
-                                  child: imageFileList!.isEmpty
+                                  child: imageFileListWater!.isEmpty
                                       ? Container(
                                           decoration: BoxDecoration(
                                             color: Colors.grey[100],
@@ -509,9 +529,9 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                           ),
                                         )
                                       : GridView.builder(
-                                          itemCount: imageFileList!.isEmpty
+                                          itemCount: imageFileListWater!.isEmpty
                                               ? 1
-                                              : imageFileList!.length,
+                                              : imageFileListWater!.length,
                                           gridDelegate:
                                               SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
@@ -530,7 +550,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                                         color: Colors.grey
                                                             .withOpacity(0.5))),
                                                 child: Image.file(
-                                                  File(imageFileList![index]
+                                                  File(imageFileListWater![index]
                                                       .path),
                                                   fit: BoxFit.cover,
                                                 ),
@@ -543,7 +563,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                                     child: GestureDetector(
                                                       onTap: () {
                                                         setState(() {
-                                                          imageFileList!
+                                                          imageFileListWater!
                                                               .removeAt(index);
                                                         });
                                                       },
@@ -580,7 +600,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                               ),
                                               Positioned(
                                                 left: -10,
-                                                top: -10,
+                                                bottom: -10,
                                                 child: GestureDetector(
                                                   onTap: () {
                                                     print(index);
@@ -588,7 +608,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                                   child: Container(
                                                     padding: EdgeInsets.only(
                                                       left: 5,
-                                                      bottom: 2,
+                                                      bottom: 10,
                                                     ),
                                                     height: 40,
                                                     width: 40,
@@ -820,11 +840,11 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                                 });
                                               },
                                               child: Container(
-                                                child: vacantimage != null
+                                                child: vacantimageMeter != null
                                                     ? ClipRRect(
                                                         // borderRadius: BorderRadius.circular(5),
                                                         child: Image.file(
-                                                          vacantimage!,
+                                                          vacantimageMeter!,
                                                           fit: BoxFit.contain,
                                                         ),
                                                       )
@@ -918,40 +938,36 @@ class _DomesticScreenState extends State<DomesticScreen> {
       "Content-type": "multipart/form-data",
       'Accept': "multipart/form-data",
     };
-    // request.files.add(
-    //   http.MultipartFile(
-    //     'multifiles',
-    //     file!.readAsBytes().asStream(),
-    //     file.lengthSync(),
-    //     filename: filename,
-    //     contentType: MediaType('image', 'jpeg'),
-    //   ),
-    // );
 
-// for (var i = 0; i < imageFileList!.length; i++) {
-//   print("kITHU::::" + imageFileList![i].path.split("/").last,);
-//       request.files.add(
-//       http.MultipartFile(
-//         'multifiles',
-//         imageFileList![i].readAsBytes().asStream(),
-//         imageFileList![i].lengthSync(),
 
-//         filename: imageFileList![i].path.split("/").last,
-//         contentType: MediaType('image', 'jpg'),
-//       ),
-//     );
+    
 
-// }
 
     request.files.add(
       http.MultipartFile(
         'WatermeterNumber',
-        vacantimage!.readAsBytes().asStream(),
-        vacantimage!.lengthSync(),
-        filename: vacantImageS,
+        vacantimageMeter!.readAsBytes().asStream(),
+        vacantimageMeter!.lengthSync(),
+        filename: vacantimageMeter!.path.split("/").last,
         contentType: MediaType('image', 'jpg'),
       ),
     );
+    
+       for (var i = 0; i < imageFileListWater!.length; i++) {
+  print("kITHU::::" + imageFileListWater![i].path.split("/").last,);
+      request.files.add(
+      http.MultipartFile(
+        'multifiles',
+        imageFileListWater![i].readAsBytes().asStream(),
+        imageFileListWater![i].lengthSync(),
+
+        filename: imageFileListWater![i].path.split("/").last,
+        contentType: MediaType('image', 'jpg'),
+      ),
+    );
+
+}
+
 
     print(occupierinitvalue);
     request.headers.addAll(headers);

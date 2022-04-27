@@ -3,6 +3,8 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image_watermark/image_watermark.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
 //import 'package:example/image_watermark.dart';
 
 class HomeScreen1 extends StatefulWidget {
@@ -21,6 +23,79 @@ class _HomeScreen1State extends State<HomeScreen1> {
   bool isLoading = false;
   String watermarkText = "", imgname = "image not selected";
   List<bool> textOrImage = [true, false];
+
+  
+  // File? _image1;
+  // List<File>? imageFileList = [];
+
+  // _getMultiFromCamera() async {
+  //   PickedFile? pickedFile = await ImagePicker()
+  //       .getImage(source: ImageSource.camera, imageQuality: 50
+  //           // maxWidth: 1800,
+  //           // maxHeight: 1800,
+  //           );
+  //   if (pickedFile != null) {
+  //     setState(() {
+  //       _image1 = File(pickedFile.path);
+  //       //uploadFile();
+
+  //       imageFileList!.add(_image1!);
+  //     });
+  //   }
+  //   print(imageFileList);
+  // }
+
+  // File? _image1;
+  // List<File>? imageFileList = [];
+  //  List<File>? imageFileListWater = [];
+
+  // var imgBytes;
+  // var watermarkedImgBytes;
+  // bool isLoading = false;
+  // String watermarkText = "FO_Riders";
+  // File? tempFile;
+
+  // _getMultiFromCamera() async {
+  //   PickedFile? pickedFile = await ImagePicker()
+  //       .getImage(source: ImageSource.camera, imageQuality: 50
+  //           // maxWidth: 1800,
+  //           // maxHeight: 1800,
+  //           );
+  //   if (pickedFile != null) {
+  //     setState(() async {
+  //       _image1 = File(pickedFile.path);
+  //       //uploadFile();
+
+  //       imageFileList!.add(_image1!);
+
+  //       var t = await _image1!.readAsBytes();
+  //       imgBytes = Uint8List.fromList(t);
+
+  //       watermarkedImgBytes = await image_watermark.addTextWatermark(
+  //         imgBytes,
+
+  //         ///image bytes
+  //         watermarkText, //watermark text
+  //         20, //
+  //         30,
+  //         color: Colors.white, //default : Colors.white
+  //       );
+   
+  //       final dir = await getTemporaryDirectory();
+  //       await dir.create(recursive: true);
+  //       tempFile = File(path.join(dir.path, pickedFile.path));
+  //       await tempFile?.writeAsBytes(base64.decode(watermarkedImgBytes));
+
+  //       print("Kithu12" + _image1.toString());
+  //       print("Kithu" + tempFile.toString());
+
+  //       imageFileListWater!.add(tempFile!);
+  //       print(imageFileListWater);
+  //     });
+
+  //   }
+  //   print(imageFileList);
+  // }
 
   pickImage() async {
     XFile? image = await _picker.pickImage(

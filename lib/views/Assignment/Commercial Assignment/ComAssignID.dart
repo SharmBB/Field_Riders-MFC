@@ -8,12 +8,8 @@ import 'package:riders_app/views/Assignment/Commercial%20Assignment/ComDeptAssig
 import 'package:riders_app/views/Assignment/Commercial%20Assignment/ComDomesticScreen.dart';
 import 'package:riders_app/views/List_of_FeildAssignment/Feild_List_Assignment/feild.dart';
 
-
-
 import 'package:riders_app/views/Verification%20Screen/taskVerification.dart';
 import 'package:riders_app/views/check.dart';
-
-
 
 class ComAssignID extends StatefulWidget {
   final String type;
@@ -118,7 +114,7 @@ class __ComAssignIDState extends State<ComAssignID> {
             size: 25.0,
           ),
           onPressed: () {
-                      Navigator.pop(context);
+            Navigator.pop(context);
           },
         ),
         actions: [
@@ -146,7 +142,7 @@ class __ComAssignIDState extends State<ComAssignID> {
                   ),
                 )
               : IconButton(
-                  icon:  Icon(Icons.search_sharp),
+                  icon: Icon(Icons.search_sharp),
                   color: Colors.deepPurple,
                   onPressed: () {
                     setState(() {
@@ -155,7 +151,7 @@ class __ComAssignIDState extends State<ComAssignID> {
                   },
                 ),
           IconButton(
-            icon:  Icon(Icons.add_box),
+            icon: Icon(Icons.add_box),
             color: Colors.deepPurple,
             onPressed: () {
               openDialog(context);
@@ -251,7 +247,6 @@ class __ComAssignIDState extends State<ComAssignID> {
                           ),
                         ],
                       )),
-                
                   SizedBox(
                     height: screenHeight * 0.6,
                     width: screenWidth,
@@ -269,14 +264,14 @@ class __ComAssignIDState extends State<ComAssignID> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                       ComDomesticScreen()),
+                                                ComDomesticScreen()),
                                       );
                                     } else {
                                       Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                ComDomesticScreen()));
+                                                  ComDomesticScreen()));
                                     }
                                   },
                                   child: Column(
@@ -284,34 +279,33 @@ class __ComAssignIDState extends State<ComAssignID> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                       const SizedBox(
-                        height: 20,
-                      ),
-                                          Row(
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.start,
-                                            children: [
-                                              Text(
-                                                "IWK Id: ",
-                                                style: TextStyle(
-                                                  color: kPrimaryPurpleColor,
-                                                  fontSize: 18.0,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                              Text(
-                                                _foundUsers[index]['Name'],
-                                                style: TextStyle(
-                                                  color: kPrimaryPurpleColor,
-                                                  fontSize: 18.0,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                            ],
+                                      const SizedBox(
+                                        height: 20,
+                                      ),
+                                      Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            "IWK Id: ",
+                                            style: TextStyle(
+                                              color: kPrimaryPurpleColor,
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
-                                         
-                                       
+                                          Text(
+                                            _foundUsers[index]['Name'],
+                                            style: TextStyle(
+                                              color: kPrimaryPurpleColor,
+                                              fontSize: 18.0,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                       Padding(
                                         padding: EdgeInsets.only(
                                           top: 20,
