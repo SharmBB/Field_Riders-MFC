@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
 
-
-
 final propertyusagetypeOwner = [
   'Choose',
   '(D)Domestic',
@@ -12,9 +10,6 @@ final propertyusagetypeOwner = [
   '(GP)Government Premise'
 ];
 
-
-
-
 final propertyusagetype = [
   'Choose',
   '(D)Domestic',
@@ -23,7 +18,6 @@ final propertyusagetype = [
   '(GQ)Government Quaters',
   '(GP)Government Premise'
 ];
-
 
 final propertydomestictype = [
   'Choose',
@@ -71,19 +65,13 @@ final propertydomestictype = [
   'D44 One and Half Storey Bungalow'
 ];
 
-
-
 final drcodetype = [
   'Choose',
   '22 DR22 CLOSED (PLEASE INSERT TOTAL OF VISITATION INTO COLUMN "NUMBER OF VISITATION")',
 ];
 
-
-
-Widget Close(context,propertyusageinitvalue,
-                              propertydomestictypeinitvalue,
-                              drcodeinitvalue,
-                              remarkcontroller) {
+Widget Close(context, propertyusageinitvalue, propertydomestictypeinitvalue,
+    drcodeinitvalue, remarkcontroller) {
   return StatefulBuilder(builder: (BuildContext context, StateSetter setState) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -92,15 +80,15 @@ Widget Close(context,propertyusageinitvalue,
         SizedBox(
           height: 20,
         ),
-                Column(
+        Column(
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Text(
+            Text(
               "Property usage",
               style: TextStyle(color: Colors.grey, fontSize: 12),
             ),
-             SizedBox(
+            SizedBox(
               height: 10,
             ),
             Container(

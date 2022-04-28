@@ -70,7 +70,7 @@ final propertydomestictype = [
 ];
 
 final drcodetype = [
-    'Choose',
+  'Choose',
   '5 DR05 VACANT PREMISE',
 ];
 

@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-
 class AttendanceDetails extends StatefulWidget {
   const AttendanceDetails({Key? key}) : super(key: key);
 
@@ -25,7 +24,9 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
               color: Colors.deepPurple,
               size: 25.0,
             ),
-            onPressed: () {              Navigator.of(context).pop();},
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
           ),
         ),
         body: NotificationListener<OverscrollIndicatorNotification>(
@@ -52,51 +53,47 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
                     height: 30,
                   ),
                   Container(
-                      height: MediaQuery.of(context).size.height * 0.2,
-                      width: MediaQuery.of(context).size.width * 1,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.all(Radius.circular(20)),
+                    height: MediaQuery.of(context).size.height * 0.2,
+                    width: MediaQuery.of(context).size.width * 1,
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: BorderRadius.all(Radius.circular(20)),
+                    ),
+                    child: TableCalendar(
+                      focusedDay: selectedDay,
+                      firstDay: DateTime(1990),
+                      lastDay: DateTime(2030),
+                      calendarFormat: CalendarFormat.week,
+                      daysOfWeekVisible: true,
+                      onDaySelected: (DateTime selectDay, DateTime focusDay) {
+                        setState(() {
+                          selectedDay = selectDay;
+                          focusedDay = focusDay;
+                        });
+                      },
+                      selectedDayPredicate: (DateTime date) {
+                        return isSameDay(selectedDay, date);
+                      },
+                      calendarStyle: CalendarStyle(
+                          isTodayHighlighted: true,
+                          selectedDecoration: BoxDecoration(
+                              color: Colors.red.shade50,
+                              shape: BoxShape.circle),
+                          selectedTextStyle:
+                              TextStyle(color: Colors.red.shade600),
+                          todayDecoration: BoxDecoration(
+                            color: Colors.transparent,
+                            shape: BoxShape.circle,
+                          ),
+                          todayTextStyle:
+                              TextStyle(color: Colors.purple.shade600),
+                          holidayTextStyle: TextStyle(color: Colors.pink)),
+                      headerStyle: const HeaderStyle(
+                        formatButtonVisible: false,
+                        formatButtonShowsNext: true,
                       ),
-                      child: TableCalendar(
-                        
-                        focusedDay: selectedDay,
-                        firstDay: DateTime(1990),
-                        lastDay: DateTime(2030),
-                        calendarFormat: CalendarFormat.week,
-                        daysOfWeekVisible: true,
-                        onDaySelected: (DateTime selectDay, DateTime focusDay) {
-                          setState(() {
-                            selectedDay = selectDay;
-                            focusedDay = focusDay;
-                            
-                          });
-                        },
-                        selectedDayPredicate: (DateTime date) {
-                          return isSameDay(selectedDay, date);
-                        },
-                        calendarStyle: CalendarStyle(
-                            isTodayHighlighted: true,
-                            selectedDecoration: BoxDecoration(
-                                color: Colors.red.shade50,
-                             
-                                shape: BoxShape.circle),
-                            selectedTextStyle: TextStyle(
-                                color: Colors.red.shade600),
-                            todayDecoration: BoxDecoration(
-                              color: Colors.transparent,
-                              shape: BoxShape.circle,
-                            ),
-                            todayTextStyle: TextStyle(
-                                color: Colors.purple.shade600),
-                            holidayTextStyle: TextStyle(
-                                color: Colors.pink)),
-                        headerStyle: const HeaderStyle(
-                          formatButtonVisible: false,
-                          formatButtonShowsNext: true,
-                        ),
-                      ),
-                      ),
+                    ),
+                  ),
                   SizedBox(
                     height: 10,
                   ),

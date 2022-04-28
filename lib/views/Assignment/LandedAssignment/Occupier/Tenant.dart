@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/ResuableTextFormFeild/reusabletextfield.dart';
 
-
 final propertyusagetypeOwner = [
   'Choose',
   '(D)Domestic',
@@ -134,11 +133,12 @@ Widget Tenant(
         const SizedBox(
           height: 20,
         ),
-        textField("Tenant's name", tenantnamecontroller,"Your Answer",""),
+        textField("Tenant's name", tenantnamecontroller, "Your Answer", ""),
         const SizedBox(
           height: 20,
         ),
-        textField("Tenant's tel no", tenanttelnocontroller,"Your Answer","number"),
+        textField(
+            "Tenant's tel no", tenanttelnocontroller, "Your Answer", "number"),
         const SizedBox(
           height: 20,
         ),
@@ -250,7 +250,7 @@ Widget Tenant(
               height: 10,
             ),
             Container(
-              padding:  EdgeInsets.only(left: 20, right: 10),
+              padding: EdgeInsets.only(left: 20, right: 10),
               decoration: BoxDecoration(
                 border: Border.all(color: Colors.deepPurple),
                 borderRadius: BorderRadius.circular(25),
