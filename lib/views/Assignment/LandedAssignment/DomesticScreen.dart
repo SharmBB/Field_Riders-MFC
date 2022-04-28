@@ -857,7 +857,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                                               DecorationImage(
                                                             image: AssetImage(
                                                                 "assets/Meter.jpg"),
-                                                            fit: BoxFit.cover,
+                                                            fit: BoxFit.fitHeight,
                                                           ),
                                                           // borderRadius: BorderRadius.circular(50)
                                                         ),

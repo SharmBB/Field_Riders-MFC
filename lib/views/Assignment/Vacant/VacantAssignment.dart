@@ -744,12 +744,12 @@ class _VacantAssignmentState extends State<VacantAssignment> {
                       Align(
                         alignment: Alignment.topLeft,
                         child: Container(
-                          width: screenWidth * 0.9,
+                          width: screenWidth * 1,
                           height: screenHeight * 0.3,
                           decoration: BoxDecoration(
                               image: DecorationImage(
                                 image: AssetImage("assets/Meter.jpg"),
-                                fit: BoxFit.cover,
+                                fit: BoxFit.fitHeight,
                               ),
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0))),

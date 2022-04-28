@@ -444,12 +444,12 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
         actions: [
           TextButton(
             onPressed: () {},
-            child: const Text(
+            child:  Text(
               'Scan',
               style: TextStyle(color: Colors.deepPurple),
             ),
           ),
-          const Padding(
+           Padding(
             padding: EdgeInsets.only(right: 10),
             child: Icon(
               Icons.qr_code_scanner,

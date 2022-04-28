@@ -1,22 +1,43 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:convert';
 import 'dart:io';
-
+import 'dart:typed_data';
 import 'package:custom_timer/custom_timer.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riders_app/_helpers/constants.dart';
-import 'package:riders_app/views/Assignment/LandedAssignment/DeptAssignID.dart';
 import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Close.dart';
 import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Owner.dart';
 import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Tenant.dart';
 import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Vacant.dart';
 import 'package:riders_app/views/QR%20Screen/QR_scan.dart';
+import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 import 'package:riders_app/views/ResuableTextFormFeild/reusabletextfield.dart';
+import 'package:image_watermark/image_watermark.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:path/path.dart' as path;
+
 
 class ComDomesticScreen extends StatefulWidget {
-
+  final String id;
+  final String san;
+  final String owner;
+  final String add;
+  final String date;
+  final String payment;
+  final String status;
+  const ComDomesticScreen(
+      {Key? key,
+      required this.id,
+      required this.san,
+      required this.owner,
+      required this.add,
+      required this.date,
+      required this.payment,
+      required this.status})
+      : super(key: key);
 
   @override
   State<ComDomesticScreen> createState() => _ComDomesticScreenState();
@@ -25,17 +46,27 @@ class ComDomesticScreen extends StatefulWidget {
 class _ComDomesticScreenState extends State<ComDomesticScreen> {
   final _formKey = GlobalKey<FormState>();
 
-  TextEditingController imagecontroller = TextEditingController();
+  late String id;
+  late String san;
+  late String owner1;
+  late String add;
+  late String date;
+  late String payment;
+  late String status;
 
-  String occupierinitvalue = 'Choose';
-  final occupiertype = [
-    'Choose',
-    'Owner',
-    'Tenant',
-    'Vacant',
-    'Closed',
-  ];
+  @override
+  void initState() {
+    id = widget.id;
+    san = widget.san;
+    owner1 = widget.owner;
+    add = widget.add;
+    date = widget.date;
+    payment = widget.payment;
+    status = widget.status;
+    super.initState();
+  }
 
+  bool _isLoading = false;
   bool occupier = false;
   bool owner = false;
   bool tenant = false;
@@ -195,111 +226,148 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
     '19	WORKSHOP'
   ];
 
+//Common Inputs
+  TextEditingController imagecontroller = TextEditingController();
+
+  String occupierinitvalue = 'Choose';
+  final occupiertype = [
+    'Choose',
+    'Owner',
+    'Tenant',
+    'Vacant',
+    'Closed',
+  ];
+  String? selectedNationality = '';
+  String propertydomestictypeinitvalue = 'Choose';
+  String propertyusageinitvalue = 'Choose';
+  String drcodeinitvalue = 'Choose';
+  TextEditingController remarkcontroller = TextEditingController();
+
+
   //OWNER INPUTS
   String ownernamecorrectinitvalue = 'Yes';
   TextEditingController correctownernamecontroller = TextEditingController();
   TextEditingController ownertelnocontroller = TextEditingController();
-  String ownerpropertyusageinitvalue = 'Choose';
-  String? ownerselectedNationality = '';
-  String ownerpropertydomestictypeinitvalue = 'Choose';
-  String ownerdrcodeinitvalue = 'Choose';
-  TextEditingController ownerremarkcontroller = TextEditingController();
 
   //Tenant Inputs
   String tenantpropertyusageinitvalueOwner = 'Choose';
-  String? tenantselectedNationality = '';
-  String tenantpropertyusageinitvalue = 'Choose';
-  String tenantpropertydomestictypeinitvalue = 'Choose';
-  String tenantdrcodeinitvalue = 'Choose';
   TextEditingController tenantnamecontroller = TextEditingController();
   TextEditingController tenanttelnocontroller = TextEditingController();
-  TextEditingController tenantremarkcontroller = TextEditingController();
+
 
   //Vacant Inputs
   String? vacantselectedMeter = '';
-  String vacantpropertyusageinitvalue = 'Choose';
-  String vacantpropertydomestictypeinitvalue = 'Choose';
-  String vacantdrcodeinitvalue = '5 DR05 VACANT PREMISE';
   TextEditingController vacantremarkcontroller = TextEditingController();
   TextEditingController vacantwaterMetercontroller = TextEditingController();
+
   File? vacantimage;
+  File? vacantimageMeter;
+  var vacantImageS;
+  
 
-  //Close Inputs
-  String closepropertyusageinitvalueOwner = 'Choose';
-  String closepropertyusageinitvalue = 'Choose';
-  String closepropertydomestictypeinitvalue = 'Choose';
-  String closedrcodeinitvalue =
-      '22 DR22 CLOSED (PLEASE INSERT TOTAL OF VISITATION INTO COLUMN "NUMBER OF VISITATION")';
-  TextEditingController closeremarkcontroller = TextEditingController();
+  _getFromCamera() async {
+    PickedFile? pickedFile = await ImagePicker()
+        .getImage(source: ImageSource.camera, imageQuality: 50
+             maxWidth: 600,
+              maxHeight: 600,
+            );
+    if (pickedFile != null) {
+      setState(() {
+        vacantimage = File(pickedFile.path);
+        vacantImageS = pickedFile.path;
+        print(vacantImageS);
+        //uploadFile();
+      });
+    }
 
-  // File? _image;
-  // bool image = false;
+    var t = await vacantimage!.readAsBytes();
+    imgBytes = Uint8List.fromList(t);
 
-  // _getFromCamera() async {
-  //   PickedFile? pickedFile = await ImagePicker()
-  //       .getImage(source: ImageSource.camera, imageQuality: 50
-  //           // maxWidth: 1800,
-  //           // maxHeight: 1800,
-  //           );
-  //   if (pickedFile != null) {
-  //     setState(() {
-  //       _image = File(pickedFile.path);
-  //       //uploadFile();
-  //       image = true;
-  //     });
-  //   }
-  // }
+    watermarkedImgBytes = await image_watermark.addTextWatermark(
+      
+      imgBytes,
 
-  // actionsheetTakePhoto(BuildContext context) {
-  //   showCupertinoModalPopup(
-  //     context: context,
-  //     builder: (context) {
-  //       return CupertinoActionSheet(
-  //         actions: [
-  //           CupertinoActionSheetAction(
-  //               onPressed: () async {
-  //                 _camera = true;
-  //                 _getMultiFromCamera();
-  //                 Navigator.of(context).pop();
-  //               },
-  //               child: const Align(
-  //                   alignment: Alignment.topLeft, child: Text("Camera"))),
-  //           CupertinoActionSheetAction(
-  //               onPressed: () async {
-  //                 // _getFromGallery();
-  //                 getMultiImages();
-  //                 Navigator.of(context).pop();
-  //               },
-  //               child: const Align(
-  //                   alignment: Alignment.topLeft, child: Text("Upload"))),
-  //         ],
-  //         cancelButton: CupertinoActionSheetAction(
-  //           child: const Text("Cancel"),
-  //           onPressed: () => Navigator.of(context).pop(),
-  //         ),
-  //       );
-  //     },
-  //   );
-  // }
+      ///image bytes
+      watermarkText, //watermark text
+      20, //
+      30,
 
-  File? _image1;
+      color: Colors.white, //default : Colors.white
+    );
+
+       // String string_water = base64Encode(watermarkedImgBytes);
+        final dir = await getTemporaryDirectory();
+        await dir.create(recursive: true);
+         tempFile = File(path.join(dir.path, pickedFile!.path));
+        await tempFile!.writeAsBytes(base64.decode(base64Encode(watermarkedImgBytes)));
+
+  setState(() {
+         vacantimageMeter = tempFile!;
+              });
+  }
+
+
+
+
+
+    File? _image1;
   List<File>? imageFileList = [];
+  List<File>? imageFileListWater = [];
+
+  var imgBytes;
+  var watermarkedImgBytes;
+
+  String watermarkText = "FO_Rider";
+  File? tempFile;
 
   _getMultiFromCamera() async {
     PickedFile? pickedFile = await ImagePicker()
         .getImage(source: ImageSource.camera, imageQuality: 50
-            // maxWidth: 1800,
-            // maxHeight: 1800,
+            maxWidth: 600,
+             maxHeight: 600,
             );
     if (pickedFile != null) {
       setState(() {
         _image1 = File(pickedFile.path);
         //uploadFile();
+
         imageFileList!.add(_image1!);
       });
     }
+
+    var t = await _image1!.readAsBytes();
+    imgBytes = Uint8List.fromList(t);
+
+    watermarkedImgBytes = await image_watermark.addTextWatermark(
+      
+      imgBytes,
+
+      ///image bytes
+      watermarkText, //watermark text
+      20, //
+      30,
+
+      color: Colors.white, //default : Colors.white
+    );
+
+       // String string_water = base64Encode(watermarkedImgBytes);
+        final dir = await getTemporaryDirectory();
+        await dir.create(recursive: true);
+         tempFile = File(path.join(dir.path, pickedFile!.path));
+        await tempFile!.writeAsBytes(base64.decode(base64Encode(watermarkedImgBytes)));
+
+  setState(() {
+         imageFileListWater!.add(tempFile!);
+              });
+    
+
     print(imageFileList);
   }
+
+  
+
+
+  
 
   // final multiPicker = ImagePicker();
   // List<File>? imageFileList = [];
@@ -319,11 +387,6 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
   //   });
   // }
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
   final CustomTimerController _controller = CustomTimerController();
 
   @override
@@ -342,23 +405,26 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
             size: 25.0,
           ),
           onPressed: () {
-                     Navigator.pop(context);
+            Navigator.pop(context);
           },
         ),
         actions: [
-           IconButton(
+          IconButton(
             icon: const Icon(Icons.qr_code_scanner),
             color: Colors.deepPurple,
             onPressed: () {
-              
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                           QRScanPage(),)
-                                  );
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => QRScanPage(),
+                  ));
             },
           ),
+          // IconButton(
+          //   icon: const Icon(Icons.download_sharp),
+          //   color: Colors.deepPurple,
+          //   onPressed: () {},
+          // )
         ],
       ),
       body: NotificationListener<OverscrollIndicatorNotification>(
@@ -420,14 +486,31 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-
-                      const Text(
-                        "ID :1",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryPurpleColor),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "ID: ",
+                            style: TextStyle(
+                              color: kPrimaryPurpleColor,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            id,
+                            style: TextStyle(
+                              color: kPrimaryPurpleColor,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
+
                       const SizedBox(
                         height: 20,
                       ),
@@ -441,24 +524,60 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
-                        "SAN:41898081",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryPurpleColor),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "SAN: ",
+                            style: TextStyle(
+                              color: kPrimaryPurpleColor,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            san,
+                            style: TextStyle(
+                              color: kPrimaryPurpleColor,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
+
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
-                        "Owner1: Name1",
-                        // "@ NEW HOW . (If Owner 2 is available show else don't need )",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryPurpleColor),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Owner1: ",
+                            style: TextStyle(
+                              color: kPrimaryPurpleColor,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            owner1,
+                            style: TextStyle(
+                              color: kPrimaryPurpleColor,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
+
                       const SizedBox(
                         height: 20,
                       ),
@@ -470,16 +589,7 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                             fontWeight: FontWeight.w600,
                             color: kPrimaryPurpleColor),
                       ),
-                      // const SizedBox(
-                      //   height: 20,
-                      // ),
-                      // const Text(
-                      //   "(Address1,Address2,Address3,Address4) 4 JALAN TIMOR 12,TAMAN TIMOR,81300 JOHOR BAHRU,JOHOR",
-                      //   style: TextStyle(
-                      //       fontSize: 15,
-                      //       fontWeight: FontWeight.w600,
-                      //       color: kPrimaryPurpleColor),
-                      // ),
+
                       const SizedBox(
                         height: 20,
                       ),
@@ -503,13 +613,32 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                       const SizedBox(
                         height: 20,
                       ),
-                      const Text(
-                        "Total Payable Amount:1,317.85",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: kPrimaryPurpleColor),
+
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Total Payable Amount: ",
+                            style: TextStyle(
+                              color: kPrimaryPurpleColor,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            payment,
+                            style: TextStyle(
+                              color: kPrimaryPurpleColor,
+                              fontSize: 16.0,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
                       ),
+
                       const SizedBox(
                         height: 30,
                       ),
@@ -540,7 +669,7 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                                   _getMultiFromCamera();
                                 },
                                 child: Container(
-                                  child: imageFileList!.isEmpty
+                                  child: imageFileListWater!.isEmpty
                                       ? Container(
                                           decoration: BoxDecoration(
                                             color: Colors.grey[100],
@@ -554,9 +683,9 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                                           ),
                                         )
                                       : GridView.builder(
-                                          itemCount: imageFileList!.isEmpty
+                                          itemCount: imageFileListWater!.isEmpty
                                               ? 1
-                                              : imageFileList!.length,
+                                              : imageFileListWater!.length,
                                           gridDelegate:
                                               SliverGridDelegateWithFixedCrossAxisCount(
                                             crossAxisCount: 2,
@@ -575,12 +704,12 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                                                         color: Colors.grey
                                                             .withOpacity(0.5))),
                                                 child: Image.file(
-                                                  File(imageFileList![index]
+                                                  File(imageFileListWater![index]
                                                       .path),
                                                   fit: BoxFit.cover,
                                                 ),
                                               ),
-                                               Stack(
+                                              Stack(
                                                 children: <Widget>[
                                                   Positioned(
                                                     right: -10,
@@ -588,7 +717,7 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                                                     child: GestureDetector(
                                                       onTap: () {
                                                         setState(() {
-                                                          imageFileList!
+                                                          imageFileListWater!
                                                               .removeAt(index);
                                                         });
                                                       },
@@ -624,8 +753,8 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                                                 ],
                                               ),
                                               Positioned(
-                                               left: -10,
-                                                top: -10,
+                                                left: -10,
+                                                bottom: -10,
                                                 child: GestureDetector(
                                                   onTap: () {
                                                     print(index);
@@ -633,7 +762,7 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                                                   child: Container(
                                                     padding: EdgeInsets.only(
                                                       left: 5,
-                                                      bottom: 2,
+                                                      bottom: 10,
                                                     ),
                                                     height: 40,
                                                     width: 40,
@@ -648,10 +777,11 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                                                       alignment: Alignment
                                                           .bottomCenter,
                                                       child: Text(
-                                                        (index+1).toString(),
+                                                        (index + 1).toString(),
                                                         style: TextStyle(
                                                           fontSize: 22,
-                                                          fontWeight: FontWeight.bold,
+                                                          fontWeight:
+                                                              FontWeight.bold,
                                                           color: Colors.white,
                                                         ),
                                                       ),
@@ -777,19 +907,10 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
 
                       // Occupier DropDown
 
-                      const Text(
-                        "Occupier",
-                        style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.w600),
-                      ),
-
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const SizedBox(
-                            height: 20,
-                          ),
                           Text(
                             "Occupier(Owner/Tenant )",
                             style: TextStyle(color: Colors.grey, fontSize: 12),
@@ -826,8 +947,8 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                                   //  print( ownernamecorrectinitvalue, ownertelnocontroller, correctownernamecontroller, _selectedNationality, propertydomestictypeinitvalue, drcodeinitvalue, remarkcontroller);
 
                                   occupierinitvalue = value!;
-                                  if (occupierinitvalue ==
-                                      'Vacant') {
+                                  print(occupierinitvalue);
+                                  if (occupierinitvalue == 'Vacant') {
                                     close = false;
                                     occupier = true;
                                     tenant = false;
@@ -866,11 +987,11 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                               ownernamecorrectinitvalue,
                               ownertelnocontroller,
                               correctownernamecontroller,
-                              ownerselectedNationality,
-                              ownerpropertyusageinitvalue,
-                              ownerpropertydomestictypeinitvalue,
-                              ownerdrcodeinitvalue,
-                              ownerremarkcontroller)
+                              selectedNationality,
+                              propertyusageinitvalue,
+                              propertydomestictypeinitvalue,
+                              drcodeinitvalue,
+                              remarkcontroller)
                           : SizedBox(),
 
                       tenant == true
@@ -878,33 +999,113 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                               context,
                               tenantnamecontroller,
                               tenanttelnocontroller,
-                              tenantselectedNationality,
-                              tenantpropertyusageinitvalue,
-                              tenantpropertydomestictypeinitvalue,
-                              tenantdrcodeinitvalue,
-                              tenantremarkcontroller)
+                              selectedNationality,
+                              propertyusageinitvalue,
+                              propertydomestictypeinitvalue,
+                              drcodeinitvalue,
+                              remarkcontroller)
                           : SizedBox(),
 
                       // Property Usage DropDown
                       occupier == true
-                          ? Vacant(
-                              context,
-                              vacantpropertyusageinitvalue,
-                              vacantpropertydomestictypeinitvalue,
-                              vacantdrcodeinitvalue,
-                              vacantremarkcontroller,
-                              vacantselectedMeter,
-                          
-                              )
+                          ? StatefulBuilder(builder:
+                              (BuildContext context, StateSetter setState) {
+                              return Column(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Vacant(
+                                    context,
+                                 propertyusageinitvalue,
+                              propertydomestictypeinitvalue,
+                              drcodeinitvalue,
+                                    remarkcontroller,
+                                    vacantselectedMeter,
+                               
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        "Meter Number",
+                                        style: const TextStyle(
+                                            fontSize: 12, color: Colors.grey),
+                                      ),
+                                      const SizedBox(
+                                        height: 10,
+                                      ),
+                                      Container(
+                                        height: 250,
+                                        width:
+                                            MediaQuery.of(context).size.width,
+                                        decoration: BoxDecoration(
+                                          border: Border.all(
+                                              color: Colors.deepPurple),
+                                          borderRadius:
+                                              BorderRadius.circular(25),
+                                        ),
+                                        child: Padding(
+                                          padding: EdgeInsets.all(10),
+                                          child: GestureDetector(
+                                              onTap: () {
+                                                setState(() async {
+                                                  _getFromCamera();
+                                                });
+                                              },
+                                              child: Container(
+                                                child: vacantimageMeter != null
+                                                    ? ClipRRect(
+                                                        // borderRadius: BorderRadius.circular(5),
+                                                        child: Image.file(
+                                                          vacantimageMeter!,
+                                                          fit: BoxFit.contain,
+                                                        ),
+                                                      )
+                                                    : Container(
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color:
+                                                              Colors.grey[100],
+                                                          image:
+                                                              DecorationImage(
+                                                            image: AssetImage(
+                                                                "assets/Meter.jpg"),
+                                                            fit: BoxFit.cover,
+                                                          ),
+                                                          // borderRadius: BorderRadius.circular(50)
+                                                        ),
+                                                        width: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .width *
+                                                            (10 / 20),
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            (10 / 20),
+                                                      ),
+                                              )),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  textField("", vacantwaterMetercontroller,
+                                      "Your Answer", ""),
+                                ],
+                              );
+                            })
                           : SizedBox(),
 
                       close == true
                           ? Close(
                               context,
-                              closepropertyusageinitvalue,
-                              closepropertydomestictypeinitvalue,
-                              closedrcodeinitvalue,
-                              closeremarkcontroller)
+                              propertyusageinitvalue,
+                              propertydomestictypeinitvalue,
+                              drcodeinitvalue,
+                              remarkcontroller)
                           : SizedBox(),
 
                       SizedBox(
@@ -917,10 +1118,12 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                           color: Colors.deepPurple,
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(30)),
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              openSubmit(context);
-                            }
+                          onPressed: () async {
+                            // if (_formKey.currentState!.validate()) {
+                            //   openSubmit(context);
+                            // }
+
+                            submitSubscription();
                           },
                           child: const Text(
                             "Submit",
@@ -933,6 +1136,106 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
             ),
           )),
     );
+  }
+
+  Future<int> submitSubscription() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    ///MultiPart request
+    var request = http.MultipartRequest(
+      //   var auth ="http://api.mangakiku.com/api/addUser",
+      'PUT',
+      Uri.parse("https://dcaapi.moodfor.codes/domestics/" + id),
+    );
+    Map<String, String> headers = {
+      "Content-type": "multipart/form-data",
+      'Accept': "multipart/form-data",
+    };
+
+
+    
+
+
+    request.files.add(
+      http.MultipartFile(
+        'WatermeterNumber',
+        vacantimageMeter!.readAsBytes().asStream(),
+        vacantimageMeter!.lengthSync(),
+        filename: vacantimageMeter!.path.split("/").last,
+        contentType: MediaType('image', 'jpg'),
+      ),
+    );
+    
+       for (var i = 0; i < imageFileListWater!.length; i++) {
+  print("kITHU::::" + imageFileListWater![i].path.split("/").last,);
+      request.files.add(
+      http.MultipartFile(
+        'multifiles',
+        imageFileListWater![i].readAsBytes().asStream(),
+        imageFileListWater![i].lengthSync(),
+
+        filename: imageFileListWater![i].path.split("/").last,
+        contentType: MediaType('image', 'jpg'),
+      ),
+    );
+
+}
+
+
+    print(occupierinitvalue);
+    request.headers.addAll(headers);
+    request.fields.addAll({
+      "bill": "shan 32",
+      "san": san,
+      "Owner1": owner1,
+      "Address": add,
+      "Range5": "",
+      "Arrears": "",
+      "TotalPayableAmount": "21.2121",
+      "Occupier": occupierinitvalue,
+      "Ownernamecorrect": ownernamecorrectinitvalue,
+      "correctownername": correctownernamecontroller.text,
+      "OwnerTelno": ownertelnocontroller.text,
+      "Tenantname": tenantnamecontroller.text,
+      "TenantTelno": tenanttelnocontroller.text,
+      "OccupierNationality": selectedNationality.toString(),
+      "PropertyUsage": propertyusageinitvalue,
+      "PropertytypeDomestic": propertydomestictypeinitvalue,
+      "DRCode": drcodeinitvalue,
+      "Remarks": remarkcontroller.text,
+      "DR05VACANTPREMISE": vacantselectedMeter.toString(),
+
+   
+      // "WatermeterNumber": "WatermeterNumber_domestic_1650011410833.jpg",
+      // "multifiles": "img1.jpg",
+      // "multifiles": "img2.jpg",
+      // "multifiles": "img3.jpg",
+    });
+    // print("request: " + request.toString());
+    var res = await request.send();
+    // print("This is response:" + res.toString());
+
+    final respStr = await res.stream.bytesToString();
+    // print(respStr);
+
+    final body = json.decode(respStr);
+    print(body);
+
+    // bodyError = body['message'];
+
+    if (body["errorMessage"] == false) {
+      // Navigator.of(context).pushReplacement(
+      //   MaterialPageRoute(builder: (BuildContext context) => HomePage()),
+      // );
+    } else {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+
+    return res.statusCode;
   }
 
   Future openSubmit(BuildContext context) => showDialog(
