@@ -134,7 +134,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                     height: 30,
                   ),
                   Container(
-                      height: MediaQuery.of(context).size.height * 0.4,
+                      height: MediaQuery.of(context).size.height * 0.45,
                       width: MediaQuery.of(context).size.width * 1,
                       decoration: BoxDecoration(
                         color: Colors.white,
@@ -222,7 +222,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                   // Calendar 2
 
                   Container(
-                      height: MediaQuery.of(context).size.height * 0.4,
+                      height: MediaQuery.of(context).size.height * 0.45,
                       width: MediaQuery.of(context).size.width * 1,
                       decoration: BoxDecoration(
                         color: Colors.white,
