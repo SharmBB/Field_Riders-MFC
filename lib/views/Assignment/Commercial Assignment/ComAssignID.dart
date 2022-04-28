@@ -1,25 +1,22 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
-import 'package:custom_timer/custom_timer.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
-import 'package:riders_app/views/Assignment/Commercial%20Assignment/ComDeptAssignment.dart';
 import 'package:riders_app/views/Assignment/Commercial%20Assignment/ComDomesticScreen.dart';
-import 'package:riders_app/views/List_of_FeildAssignment/Feild_List_Assignment/feild.dart';
-
 import 'package:riders_app/views/Verification%20Screen/taskVerification.dart';
-import 'package:riders_app/views/check.dart';
 
-class ComAssignID extends StatefulWidget {
+
+class ComDeptAssignID extends StatefulWidget {
   final String type;
-  const ComAssignID({Key? key, required this.type}) : super(key: key);
+  const ComDeptAssignID({Key? key, required this.type}) : super(key: key);
 
   @override
-  State<ComAssignID> createState() => __ComAssignIDState();
+  State<ComDeptAssignID> createState() => __ComDeptAssignIDState();
 }
 
-class __ComAssignIDState extends State<ComAssignID> {
+class __ComDeptAssignIDState extends State<ComDeptAssignID> {
   late String type;
 
   @override
@@ -31,16 +28,7 @@ class __ComAssignIDState extends State<ComAssignID> {
 
   final List<Map<String, dynamic>> feild = [
     {
-      'Name': '1',
-      'SAN': '27933712',
-      'Owner 1': 'ABIDEN BIN SABARI',
-      "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
-      "Date Assign": '22/02/2022',
-      "Payment Update": "1,317.85",
-      'Status': 'Outstanding'
-    },
-    {
-      'Name': '2',
+      'id': '1',
       'SAN': '27933712',
       'Owner 1': 'ABIDEN BIN SABARI',
       "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
@@ -49,12 +37,21 @@ class __ComAssignIDState extends State<ComAssignID> {
       'Status': 'Outstanding'
     },
     {
-      'Name': '3',
+      'id': '2',
       'SAN': '27933712',
       'Owner 1': 'ABIDEN BIN SABARI',
       "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
       "Date Assign": '22/02/2022',
-      "Payment Update": "1,317.85",
+      "Payment Update": "-",
+      'Status': 'Outstanding'
+    },
+    {
+      'id': '3',
+      'SAN': '27933712',
+      'Owner 1': 'ABIDEN BIN SABARI',
+      "Address": '25 JALAN 24/22 SEKSYEN 24 40300 SHAH ALAM SELANGOR',
+      "Date Assign": '22/02/2022',
+      "Payment Update": "-",
       'Status': 'Outstanding'
     },
     // {
@@ -248,6 +245,9 @@ class __ComAssignIDState extends State<ComAssignID> {
                         ],
                       )),
                   SizedBox(
+                    height: 30,
+                  ),
+                  SizedBox(
                     height: screenHeight * 0.6,
                     width: screenWidth,
                     child: _foundUsers.isNotEmpty
@@ -263,15 +263,40 @@ class __ComAssignIDState extends State<ComAssignID> {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (context) =>
-                                                ComDomesticScreen()),
+                                          builder: (context) => ComDomesticScreen(
+                                            add: _foundUsers[index]['Address'],
+                                            date: _foundUsers[index]
+                                                ['Date Assign'],
+                                            id: _foundUsers[index]['id'],
+                                            owner: _foundUsers[index]
+                                                ['Owner 1'],
+                                            payment: _foundUsers[index]
+                                                ['Payment Update'],
+                                            san: _foundUsers[index]['SAN'],
+                                            status: _foundUsers[index]
+                                                ['Status'],
+                                          ),
+                                        ),
                                       );
                                     } else {
                                       Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ComDomesticScreen()));
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ComDomesticScreen(
+                                            add: _foundUsers[index]['Address'],
+                                            date: _foundUsers[index]
+                                                ['Date Assign'],
+                                            id: _foundUsers[index]['id'],
+                                            owner: _foundUsers[index]
+                                                ['Owner 1'],
+                                            payment: _foundUsers[index]
+                                                ['Payment Update'],
+                                            san: _foundUsers[index]['SAN'],
+                                            status: _foundUsers[index]
+                                                ['Status'],
+                                          ),
+                                        ),
+                                      );
                                     }
                                   },
                                   child: Column(
@@ -279,9 +304,6 @@ class __ComAssignIDState extends State<ComAssignID> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const SizedBox(
-                                        height: 20,
-                                      ),
                                       Row(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -297,7 +319,7 @@ class __ComAssignIDState extends State<ComAssignID> {
                                             ),
                                           ),
                                           Text(
-                                            _foundUsers[index]['Name'],
+                                            _foundUsers[index]['id'],
                                             style: TextStyle(
                                               color: kPrimaryPurpleColor,
                                               fontSize: 18.0,
@@ -474,7 +496,7 @@ class __ComAssignIDState extends State<ComAssignID> {
                                               ],
                                             ),
                                             SizedBox(
-                                              height: 20,
+                                              height: 30,
                                             ),
                                           ],
                                         ),
@@ -727,7 +749,7 @@ class __ComAssignIDState extends State<ComAssignID> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => ComAssignID(
+                            builder: (context) => ComDeptAssignID(
                               type: Arr.reduce(
                                 (value, element) {
                                   return value + "," + element;
@@ -746,7 +768,7 @@ class __ComAssignIDState extends State<ComAssignID> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ComAssignID(type: '')),
+                              builder: (context) =>ComDeptAssignID(type: '')),
                         );
                       }),
                 ],

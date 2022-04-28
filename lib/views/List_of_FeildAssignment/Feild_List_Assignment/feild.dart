@@ -141,7 +141,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  ComAssignID(type: '')));
+                                                  ComDeptAssignID(type: '')));
                         }
                       },
                       child: Column(
@@ -356,7 +356,7 @@ class _FieldScreenState extends State<FieldScreen> {
                                           context,
                                           MaterialPageRoute(
                                               builder: (context) =>
-                                                  ComAssignID(type: '')));
+                                                 ComDeptAssignID(type: '')));
                         }
                       },
                                         style: ButtonStyle(

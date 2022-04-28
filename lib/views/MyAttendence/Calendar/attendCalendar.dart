@@ -235,8 +235,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             if (day.day == d.day) {
                                 return Container(
                                 height: 40,
-                                width: 30,
-                                margin: const EdgeInsets.all(6),
+                                width: 40,
+                  
                                 decoration: BoxDecoration(
                                     color:
                                         d.day == 10 ? Colors.black : Colors.transparent,
