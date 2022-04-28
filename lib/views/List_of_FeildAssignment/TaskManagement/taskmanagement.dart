@@ -444,7 +444,7 @@ class _TaskManagementScreenState extends State<TaskManagementScreen> {
         actions: [
           TextButton(
             onPressed: () {},
-            child: const Text(
+            child:  Text(
               'Scan',
               style: TextStyle(color: Colors.deepPurple),
             ),
