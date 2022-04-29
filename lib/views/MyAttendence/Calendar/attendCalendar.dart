@@ -11,6 +11,8 @@ class CalendarScreen extends StatefulWidget {
   final List<DateTime> highLights = [
     DateTime(2022, DateTime.april, 10),
     DateTime(2022, DateTime.april, 25),
+    DateTime(2022, DateTime.april, 10),
+    DateTime(2022, DateTime.april, 25),
    
   ];
 
