@@ -61,7 +61,7 @@ class _VacantAssignmentState extends State<VacantAssignment> {
   final othertype = [
     'Choose',
     'Terbakar (Burnt)',
-    'Terbengkalai (Abandoned)'
+    'Terbengkalai (Abandoned)',
     'Dirobhkan (Demolished)',
     'Digunakan untuk sarang burung (Used for bird nesting)',
     'Tanah kosong (Vacant Land)',

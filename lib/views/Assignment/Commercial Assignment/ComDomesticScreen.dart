@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 import 'package:custom_timer/custom_timer.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:riders_app/_helpers/constants.dart';
@@ -870,42 +871,32 @@ class _ComDomesticScreenState extends State<ComDomesticScreen> {
                       const SizedBox(
                         height: 10,
                       ),
-                      Container(
-                        padding: const EdgeInsets.only(left: 20, right: 10),
-                        decoration: BoxDecoration(
-                          border: Border.all(color: Colors.deepPurple),
-                          borderRadius: BorderRadius.circular(25),
-                        ),
-                        height: 45,
-                        width: MediaQuery.of(context).size.width,
-                        child: DropdownButton<String>(
-                          underline: Container(),
-                          icon: const Icon(
-                            Icons.keyboard_arrow_down,
-                            color: Colors.deepPurple,
-                          ),
-                          value: typeofbusinessinitvalue,
-                          isExpanded: true,
-                          items: typeofbusinesstype.map((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value,
-                                  style: TextStyle(
-                                      fontSize: 14, color: primaryColor)),
-                            );
-                          }).toList(),
-                          onChanged: (String? value) {
-                            setState(() {
-                              typeofbusinessinitvalue = value!;
-                            });
-                          },
-                        ),
-                      ),
+
+                      DropdownSearch<String>(
+                         mode: Mode.MENU,
+                          //to show search box
+                          showSearchBox: true,
+                        dropdownSearchDecoration: InputDecoration(
+                            contentPadding: EdgeInsets.fromLTRB(20, 10, 10, 0),
+                         hintText: 'choose',       
+                        focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(40.0)),
+                       borderSide: BorderSide(color: kPrimaryPurpleColor,),
+            ),
+                      enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color:kPrimaryPurpleColor, ),
+                 
+            borderRadius: BorderRadius.all(Radius.circular(40.0)),
+
+            gapPadding: 0,
+          ),    
+    ),
+            items:typeofbusinesstype,
+            onChanged: print,
+          ),
                       SizedBox(
                         height: 40,
                       ),
-
-                      // Occupier DropDown
 
                       Column(
                         mainAxisAlignment: MainAxisAlignment.start,
