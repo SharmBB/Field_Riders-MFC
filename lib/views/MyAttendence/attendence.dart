@@ -16,6 +16,7 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
@@ -28,6 +29,7 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
               Navigator.of(context).pop();
             },
           ),
+          
         ),
         body: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
@@ -102,7 +104,7 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
                     height: 15,
                   ),
                   Text(
-                    "Ansence",
+                    "Absence(0 Hours)",
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                   ),
                   SizedBox(

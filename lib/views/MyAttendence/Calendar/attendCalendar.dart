@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/MyAttendence/Calendar/event.dart';
 import 'package:riders_app/views/MyAttendence/attendence.dart';
+import 'package:riders_app/views/QR%20Screen/QR_scan.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class CalendarScreen extends StatefulWidget {
@@ -10,10 +11,10 @@ class CalendarScreen extends StatefulWidget {
 
   final List<DateTime> highLights = [
     DateTime(2022, DateTime.april, 10),
+    DateTime(2022, DateTime.april, 5),
+    DateTime(2022, DateTime.april, 20),
     DateTime(2022, DateTime.april, 25),
-    DateTime(2022, DateTime.april, 10),
-    DateTime(2022, DateTime.april, 25),
-   
+    DateTime(2022, DateTime.april, 14)
   ];
 
   @override
@@ -50,6 +51,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
   void _onDaySelected(DateTime selectedDay, DateTime focusedDay) {
     if (!isSameDay(_selectedDay, selectedDay)) {
       setState(() {
+        print(selectedDay);
         _selectedDay = selectedDay;
         _focusedDay = focusedDay;
         _rangeStart = null; // Important to clean those
@@ -98,20 +100,38 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: kPrimaryPurpleColor,
-              size: 25.0,
-            ),
+         appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back_rounded,
+            color: kPrimaryPurpleColor,
+            size: 25.0,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.qr_code_scanner),
+            color: Colors.deepPurple,
             onPressed: () {
-              Navigator.of(context).pop();
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => QRScanPage(),
+                  ));
             },
           ),
-        ),
+          // IconButton(
+          //   icon: const Icon(Icons.download_sharp),
+          //   color: Colors.deepPurple,
+          //   onPressed: () {},
+          // )
+        ],
+      ),
         body: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
             // ignore: deprecated_member_use
@@ -154,16 +174,40 @@ class _CalendarScreenState extends State<CalendarScreen> {
                               return Container(
                                 height: 40,
                                 width: 40,
-                           
                                 decoration: BoxDecoration(
-                                    color:
-                                        d.day == 10 ? Colors.blue.shade50 : Colors.green.shade50,
+                                    color: d.day == 10
+                                        ? Colors.blue
+                                        : d.day == 5
+                                            ? Colors.yellow
+                                            : d.day == 20
+                                                ? Colors.grey
+                                                : d.day == 25
+                                                    ? Colors.red
+                                                    : Colors.green.shade50,
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(100.0))),
                                 child: Center(
                                   child: Text(
                                     '${daypar.day}',
-                                    style:    d.day == 10 ? TextStyle(color: Colors.blue.shade600,fontSize: 16):TextStyle(color: Colors.green.shade500,fontSize: 16),
+                                    style: d.day == 10
+                                        ? TextStyle(
+                                            color: Colors.black, fontSize: 16)
+                                        : d.day == 5
+                                            ? TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 16)
+                                            : d.day == 20
+                                                ? TextStyle(
+                                                    color: Colors.black,
+                                                    fontSize: 16)
+                                                : d.day == 25
+                                                    ? TextStyle(
+                                                        color: Colors.black,
+                                                        fontSize: 16)
+                                                    : TextStyle(
+                                                        color: Colors
+                                                            .green.shade500,
+                                                        fontSize: 16),
                                   ),
                                 ),
                               );
@@ -197,8 +241,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                           selectedDecoration: BoxDecoration(
                               color: Colors.grey.shade100,
                               shape: BoxShape.circle),
-                          selectedTextStyle:
-                              TextStyle(color: Colors.grey.shade600,fontSize: 16),
+                          selectedTextStyle: TextStyle(
+                              color: Colors.grey.shade600, fontSize: 16),
                           todayDecoration: BoxDecoration(
                             color: Colors.transparent,
                             shape: BoxShape.circle,
@@ -215,7 +259,6 @@ class _CalendarScreenState extends State<CalendarScreen> {
                         headerStyle: HeaderStyle(
                           formatButtonVisible: false,
                           formatButtonShowsNext: true,
-                          
                         ),
                       )),
                   SizedBox(
@@ -235,19 +278,23 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             defaultBuilder: (context, day, focusedDay2) {
                           for (DateTime d in widget.highLights) {
                             if (day.day == d.day) {
-                                return Container(
+                              return Container(
                                 height: 40,
                                 width: 40,
-                  
                                 decoration: BoxDecoration(
-                                    color:
-                                        d.day == 10 ? Colors.black : Colors.transparent,
+                                    color: d.day == 10
+                                        ? Colors.black
+                                        : Colors.transparent,
                                     borderRadius: BorderRadius.all(
                                         Radius.circular(100.0))),
                                 child: Center(
                                   child: Text(
                                     '${day.day}',
-                                    style:    d.day == 10 ? TextStyle(color: Colors.white,fontSize: 16):TextStyle(color: Colors.black,fontSize: 16),
+                                    style: d.day == 10
+                                        ? TextStyle(
+                                            color: Colors.white, fontSize: 16)
+                                        : TextStyle(
+                                            color: Colors.black, fontSize: 16),
                                   ),
                                 ),
                               );
@@ -287,8 +334,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             color: Colors.red.shade50,
                             shape: BoxShape.circle,
                           ),
-                          selectedTextStyle:
-                              TextStyle(color: Colors.red.shade600,fontSize: 16),
+                          selectedTextStyle: TextStyle(
+                              color: Colors.red.shade600, fontSize: 16),
                           holidayDecoration: BoxDecoration(
                             color: Colors.pink.shade100,
                             shape: BoxShape.circle,

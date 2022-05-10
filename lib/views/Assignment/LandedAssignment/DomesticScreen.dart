@@ -6,6 +6,7 @@ import 'dart:typed_data';
 import 'package:custom_timer/custom_timer.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:intl/intl.dart';
 import 'package:riders_app/_helpers/constants.dart';
 import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Close.dart';
 import 'package:riders_app/views/Assignment/LandedAssignment/Occupier/Owner.dart';
@@ -54,6 +55,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
   late String payment;
   late String status;
 
+  late DateTime today;
+
   @override
   void initState() {
     id = widget.id;
@@ -63,6 +66,7 @@ class _DomesticScreenState extends State<DomesticScreen> {
     date = widget.date;
     payment = widget.payment;
     status = widget.status;
+      today = DateTime.now();
     super.initState();
   }
 
@@ -109,6 +113,8 @@ class _DomesticScreenState extends State<DomesticScreen> {
   File? vacantimage;
   File? vacantimageMeter;
   var vacantImageS;
+
+  
   
 
   _getFromCamera() async {
@@ -163,14 +169,14 @@ class _DomesticScreenState extends State<DomesticScreen> {
   var imgBytes;
   var watermarkedImgBytes;
 
-  String watermarkText = "FO_Rider";
+  String watermarkText = "FO_Rider "+ DateFormat("dd MMMM yyyy").format(DateTime.now()).toString();
   File? tempFile;
 
   _getMultiFromCamera() async {
     PickedFile? pickedFile = await ImagePicker()
         .getImage(source: ImageSource.camera, imageQuality: 50
-            maxWidth: 600,
-             maxHeight: 600,
+            maxWidth: 640,
+             maxHeight: 480,
             );
     if (pickedFile != null) {
       setState(() {
@@ -849,36 +855,24 @@ class _DomesticScreenState extends State<DomesticScreen> {
                                                         ),
                                                       )
                                                     : Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                          color:
-                                                              Colors.grey[100],
-                                                          image:
-                                                              DecorationImage(
-                                                            image: AssetImage(
-                                                                "assets/Meter.jpg"),
-                                                            fit: BoxFit.fitHeight,
-                                                          ),
-                                                          // borderRadius: BorderRadius.circular(50)
-                                                        ),
-                                                        width: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .width *
-                                                            (10 / 20),
-                                                        height: MediaQuery.of(
-                                                                    context)
-                                                                .size
-                                                                .height *
-                                                            (10 / 20),
-                                                      ),
+                                          decoration: BoxDecoration(
+                                            color: Colors.grey[100],
+                                            // borderRadius: BorderRadius.circular(50)
+                                          ),
+                                          width: screenWidth * 0.9,
+                                          height: screenHeight * 0.3,
+                                          child: Icon(
+                                            Icons.camera_alt,
+                                            color: Colors.grey[400],
+                                          ),
+                                        )
                                               )),
                                         ),
                                       ),
                                     ],
                                   ),
-                                  textField("", vacantwaterMetercontroller,
-                                      "Your Answer", ""),
+                                  // textField("", vacantwaterMetercontroller,
+                                  //     "Your Answer", ""),
                                 ],
                               );
                             })
