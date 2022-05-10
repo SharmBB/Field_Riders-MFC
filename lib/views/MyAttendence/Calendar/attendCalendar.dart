@@ -13,7 +13,7 @@ class CalendarScreen extends StatefulWidget {
     DateTime(2022, DateTime.april, 10),
     DateTime(2022, DateTime.april, 5),
     DateTime(2022, DateTime.april, 20),
-    DateTime(2022, DateTime.april, 25),
+    DateTime(2022, DateTime.april, 22),
     DateTime(2022, DateTime.april, 14)
   ];
 
@@ -58,8 +58,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
         _rangeEnd = null;
         _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => AttendanceDetails()));
+      // Navigator.of(context)
+      //     .push(MaterialPageRoute(builder: (context) => AttendanceDetails()));
     }
   }
 
@@ -82,8 +82,8 @@ class _CalendarScreenState extends State<CalendarScreen> {
         _rangeEnd = null;
         _rangeSelectionMode = RangeSelectionMode.toggledOff;
       });
-      Navigator.of(context)
-          .push(MaterialPageRoute(builder: (context) => AttendanceDetails()));
+      // Navigator.of(context)
+      //     .push(MaterialPageRoute(builder: (context) => AttendanceDetails()));
     }
   }
 
@@ -100,38 +100,38 @@ class _CalendarScreenState extends State<CalendarScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-         appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_rounded,
-            color: kPrimaryPurpleColor,
-            size: 25.0,
-          ),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.qr_code_scanner),
-            color: Colors.deepPurple,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          elevation: 0,
+          leading: IconButton(
+            icon: const Icon(
+              Icons.arrow_back_rounded,
+              color: kPrimaryPurpleColor,
+              size: 25.0,
+            ),
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => QRScanPage(),
-                  ));
+              Navigator.pop(context);
             },
           ),
-          // IconButton(
-          //   icon: const Icon(Icons.download_sharp),
-          //   color: Colors.deepPurple,
-          //   onPressed: () {},
-          // )
-        ],
-      ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.qr_code_scanner),
+              color: Colors.deepPurple,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => QRScanPage(),
+                    ));
+              },
+            ),
+            // IconButton(
+            //   icon: const Icon(Icons.download_sharp),
+            //   color: Colors.deepPurple,
+            //   onPressed: () {},
+            // )
+          ],
+        ),
         body: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
             // ignore: deprecated_member_use
@@ -169,48 +169,85 @@ class _CalendarScreenState extends State<CalendarScreen> {
                             if (daypar.day == d.day) {
                               // print('daypar-------------');
                               // print(daypar);
-                              // print(daypar.day);
+                              //  print(daypar.day);
+                              print(widget.highLights[1]);
                               // print(d);
+                              // print(d.day);
                               return Container(
-                                height: 40,
-                                width: 40,
-                                decoration: BoxDecoration(
-                                    color: d.day == 10
-                                        ? Colors.blue
-                                        : d.day == 5
-                                            ? Colors.yellow
-                                            : d.day == 20
-                                                ? Colors.grey
-                                                : d.day == 25
-                                                    ? Colors.red
-                                                    : Colors.green.shade50,
-                                    borderRadius: BorderRadius.all(
-                                        Radius.circular(100.0))),
-                                child: Center(
-                                  child: Text(
-                                    '${daypar.day}',
-                                    style: d.day == 10
-                                        ? TextStyle(
-                                            color: Colors.black, fontSize: 16)
-                                        : d.day == 5
+                                  height: 40,
+                                  width: 40,
+                                  decoration: BoxDecoration(
+                                      color: d.day == 10
+                                          ? Colors.blue
+                                          : d.day == 5
+                                              ? Colors.yellow
+                                              : d.day == 20
+                                                  ? Colors.grey
+                                                  : d.day == 22
+                                                      ? Colors.red
+                                                      : Colors.green,
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(100.0))),
+                                  child: Center(
+                                    child: InkWell(
+                                      onTap: () {
+                                        if (d.day == 10) {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AttendanceDetails(
+                                                          title: "Leave")));
+                                        } else if (d.day == 5) {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AttendanceDetails(
+                                                          title: "Half Day")));
+                                        } else if (d.day == 20) {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AttendanceDetails(
+                                                          title:
+                                                              "Medical Leave")));
+                                        } else if (d.day == 22) {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AttendanceDetails(
+                                                          title: "Absence")));
+                                        } else if (d.day == 14) {
+                                          Navigator.of(context).push(
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AttendanceDetails(
+                                                          title: "Full Day")));
+                                        }
+                                      },
+                                      child: Text(
+                                        '${daypar.day}',
+                                        style: d.day == 10
                                             ? TextStyle(
                                                 color: Colors.black,
                                                 fontSize: 16)
-                                            : d.day == 20
+                                            : d.day == 5
                                                 ? TextStyle(
                                                     color: Colors.black,
                                                     fontSize: 16)
-                                                : d.day == 25
+                                                : d.day == 20
                                                     ? TextStyle(
                                                         color: Colors.black,
                                                         fontSize: 16)
-                                                    : TextStyle(
-                                                        color: Colors
-                                                            .green.shade500,
-                                                        fontSize: 16),
-                                  ),
-                                ),
-                              );
+                                                    : d.day == 22
+                                                        ? TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 16)
+                                                        : TextStyle(
+                                                            color: Colors.black,
+                                                            fontSize: 16),
+                                      ),
+                                    ),
+                                  ));
                             }
                           }
                         }),
@@ -282,7 +319,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                 height: 40,
                                 width: 40,
                                 decoration: BoxDecoration(
-                                    color: d.day == 10
+                                    color: d.day == 9
                                         ? Colors.black
                                         : Colors.transparent,
                                     borderRadius: BorderRadius.all(
@@ -290,7 +327,7 @@ class _CalendarScreenState extends State<CalendarScreen> {
                                 child: Center(
                                   child: Text(
                                     '${day.day}',
-                                    style: d.day == 10
+                                    style: d.day == 9
                                         ? TextStyle(
                                             color: Colors.white, fontSize: 16)
                                         : TextStyle(

@@ -3,20 +3,32 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class AttendanceDetails extends StatefulWidget {
-  const AttendanceDetails({Key? key}) : super(key: key);
+  final String title;
+  const AttendanceDetails({Key? key, required this.title}) : super(key: key);
 
   @override
   State<AttendanceDetails> createState() => _AttendanceDetailsState();
 }
 
 class _AttendanceDetailsState extends State<AttendanceDetails> {
+   late String title;
+
+
+     @override
+  void initState() {
+    title = widget.title;
+    print(title);
+ 
+    super.initState();
+  }
+
+  
   DateTime selectedDay = DateTime.now();
   DateTime focusedDay = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          
           backgroundColor: Colors.transparent,
           elevation: 0,
           leading: IconButton(
@@ -29,7 +41,6 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
               Navigator.of(context).pop();
             },
           ),
-          
         ),
         body: NotificationListener<OverscrollIndicatorNotification>(
           onNotification: (OverscrollIndicatorNotification overscroll) {
@@ -104,7 +115,7 @@ class _AttendanceDetailsState extends State<AttendanceDetails> {
                     height: 15,
                   ),
                   Text(
-                    "Absence(0 Hours)",
+                    title.toString(),
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
                   ),
                   SizedBox(
